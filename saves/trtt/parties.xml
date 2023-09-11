@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Pyne</partyName>
+        <members>66802</members>
+        <membersTargetedAge>87</membersTargetedAge>
+        <membersTargetedWealth>86</membersTargetedWealth>
+        <wealth>13894816</wealth>
+        <conservatismScore>80</conservatismScore>
+        <nationalismScore>63</nationalismScore>
+        <ecologismScore>15</ecologismScore>
+        <feminismScore>95</feminismScore>
+        <anarchismScore>13</anarchismScore>
+        <populismScore>71</populismScore>
+        <ideologicalCode>1-3-1-4-3-4</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Dayne of Starfall</partyName>
+        <members>30207</members>
+        <membersTargetedAge>38</membersTargetedAge>
+        <membersTargetedWealth>47</membersTargetedWealth>
+        <wealth>5799744</wealth>
+        <conservatismScore>45</conservatismScore>
+        <nationalismScore>13</nationalismScore>
+        <ecologismScore>68</ecologismScore>
+        <feminismScore>2</feminismScore>
+        <anarchismScore>71</anarchismScore>
+        <populismScore>75</populismScore>
+        <ideologicalCode>3-3-3-1-1-2</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Saltcliffe of Saltcliffe</partyName>
+        <members>107432</members>
+        <membersTargetedAge>24</membersTargetedAge>
+        <membersTargetedWealth>36</membersTargetedWealth>
+        <wealth>28362048</wealth>
+        <conservatismScore>32</conservatismScore>
+        <nationalismScore>29</nationalismScore>
+        <ecologismScore>74</ecologismScore>
+        <feminismScore>84</feminismScore>
+        <anarchismScore>75</anarchismScore>
+        <populismScore>77</populismScore>
+        <ideologicalCode>3-4-3-4-2-2</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Swann of Stonehelm</partyName>
+        <members>86230</members>
+        <membersTargetedAge>35</membersTargetedAge>
+        <membersTargetedWealth>57</membersTargetedWealth>
+        <wealth>33198550</wealth>
+        <conservatismScore>7</conservatismScore>
+        <nationalismScore>24</nationalismScore>
+        <ecologismScore>97</ecologismScore>
+        <feminismScore>58</feminismScore>
+        <anarchismScore>86</anarchismScore>
+        <populismScore>93</populismScore>
+        <ideologicalCode>4-4-4-3-1-1</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Yarwyck</partyName>
+        <members>12937</members>
+        <membersTargetedAge>56</membersTargetedAge>
+        <membersTargetedWealth>58</membersTargetedWealth>
+        <wealth>6015705</wealth>
+        <conservatismScore>92</conservatismScore>
+        <nationalismScore>79</nationalismScore>
+        <ecologismScore>28</ecologismScore>
+        <feminismScore>63</feminismScore>
+        <anarchismScore>5</anarchismScore>
+        <populismScore>78</populismScore>
+        <ideologicalCode>1-4-2-3-4-4</ideologicalCode>
+    </party>
+</parties>

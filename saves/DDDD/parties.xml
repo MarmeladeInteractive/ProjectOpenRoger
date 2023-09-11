@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Drox</partyName>
+        <members>70840</members>
+        <membersTargetedAge>77</membersTargetedAge>
+        <membersTargetedWealth>18</membersTargetedWealth>
+        <wealth>3046120</wealth>
+        <conservatismScore>22</conservatismScore>
+        <nationalismScore>6</nationalismScore>
+        <ecologismScore>92</ecologismScore>
+        <feminismScore>18</feminismScore>
+        <anarchismScore>77</anarchismScore>
+        <populismScore>97</populismScore>
+        <ideologicalCode>4-4-4-1-1-1</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Baelish of the Fingers</partyName>
+        <members>45140</members>
+        <membersTargetedAge>62</membersTargetedAge>
+        <membersTargetedWealth>74</membersTargetedWealth>
+        <wealth>17062920</wealth>
+        <conservatismScore>84</conservatismScore>
+        <nationalismScore>86</nationalismScore>
+        <ecologismScore>13</ecologismScore>
+        <feminismScore>12</feminismScore>
+        <anarchismScore>12</anarchismScore>
+        <populismScore>67</populismScore>
+        <ideologicalCode>1-3-1-1-4-4</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Durwell</partyName>
+        <members>101917</members>
+        <membersTargetedAge>44</membersTargetedAge>
+        <membersTargetedWealth>27</membersTargetedWealth>
+        <wealth>17733558</wealth>
+        <conservatismScore>48</conservatismScore>
+        <nationalismScore>64</nationalismScore>
+        <ecologismScore>65</ecologismScore>
+        <feminismScore>46</feminismScore>
+        <anarchismScore>19</anarchismScore>
+        <populismScore>57</populismScore>
+        <ideologicalCode>1-3-3-2-3-2</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Santagar of Spottswood</partyName>
+        <members>48224</members>
+        <membersTargetedAge>60</membersTargetedAge>
+        <membersTargetedWealth>90</membersTargetedWealth>
+        <wealth>14322528</wealth>
+        <conservatismScore>31</conservatismScore>
+        <nationalismScore>34</nationalismScore>
+        <ecologismScore>93</ecologismScore>
+        <feminismScore>13</feminismScore>
+        <anarchismScore>56</anarchismScore>
+        <populismScore>68</populismScore>
+        <ideologicalCode>3-3-4-1-2-2</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Netley</partyName>
+        <members>116871</members>
+        <membersTargetedAge>85</membersTargetedAge>
+        <membersTargetedWealth>80</membersTargetedWealth>
+        <wealth>14959488</wealth>
+        <conservatismScore>92</conservatismScore>
+        <nationalismScore>92</nationalismScore>
+        <ecologismScore>21</ecologismScore>
+        <feminismScore>94</feminismScore>
+        <anarchismScore>3</anarchismScore>
+        <populismScore>81</populismScore>
+        <ideologicalCode>1-4-1-4-4-4</ideologicalCode>
+    </party>
+</parties>

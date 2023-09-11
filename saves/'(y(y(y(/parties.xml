@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Frey of the Crossing</partyName>
+        <members>99150</members>
+        <membersTargetedAge>58</membersTargetedAge>
+        <membersTargetedWealth>32</membersTargetedWealth>
+        <wealth>9220950</wealth>
+        <conservatismScore>45</conservatismScore>
+        <nationalismScore>46</nationalismScore>
+        <ecologismScore>58</ecologismScore>
+        <feminismScore>99</feminismScore>
+        <anarchismScore>40</anarchismScore>
+        <populismScore>92</populismScore>
+        <ideologicalCode>2-4-3-4-2-2</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Lydden of Deep Den</partyName>
+        <members>73626</members>
+        <membersTargetedAge>44</membersTargetedAge>
+        <membersTargetedWealth>55</membersTargetedWealth>
+        <wealth>27609750</wealth>
+        <conservatismScore>36</conservatismScore>
+        <nationalismScore>29</nationalismScore>
+        <ecologismScore>86</ecologismScore>
+        <feminismScore>52</feminismScore>
+        <anarchismScore>88</anarchismScore>
+        <populismScore>79</populismScore>
+        <ideologicalCode>4-4-4-3-2-2</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Whitehill</partyName>
+        <members>51463</members>
+        <membersTargetedAge>39</membersTargetedAge>
+        <membersTargetedWealth>49</membersTargetedWealth>
+        <wealth>2264372</wealth>
+        <conservatismScore>2</conservatismScore>
+        <nationalismScore>7</nationalismScore>
+        <ecologismScore>91</ecologismScore>
+        <feminismScore>66</feminismScore>
+        <anarchismScore>83</anarchismScore>
+        <populismScore>79</populismScore>
+        <ideologicalCode>4-4-4-3-1-1</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Bolton of the Dreadfort</partyName>
+        <members>101683</members>
+        <membersTargetedAge>33</membersTargetedAge>
+        <membersTargetedWealth>80</membersTargetedWealth>
+        <wealth>20336600</wealth>
+        <conservatismScore>90</conservatismScore>
+        <nationalismScore>91</nationalismScore>
+        <ecologismScore>95</ecologismScore>
+        <feminismScore>57</feminismScore>
+        <anarchismScore>10</anarchismScore>
+        <populismScore>14</populismScore>
+        <ideologicalCode>1-1-4-3-4-4</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Varner</partyName>
+        <members>47242</members>
+        <membersTargetedAge>89</membersTargetedAge>
+        <membersTargetedWealth>19</membersTargetedWealth>
+        <wealth>3921086</wealth>
+        <conservatismScore>78</conservatismScore>
+        <nationalismScore>94</nationalismScore>
+        <ecologismScore>11</ecologismScore>
+        <feminismScore>77</feminismScore>
+        <anarchismScore>13</anarchismScore>
+        <populismScore>86</populismScore>
+        <ideologicalCode>1-4-1-4-4-4</ideologicalCode>
+    </party>
+</parties>

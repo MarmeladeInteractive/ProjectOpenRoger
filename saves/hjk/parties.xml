@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Borrell of Sweetsister</partyName>
+        <members>19703</members>
+        <membersTargetedAge>86</membersTargetedAge>
+        <membersTargetedWealth>57</membersTargetedWealth>
+        <wealth>7093080</wealth>
+        <conservatismScore>22</conservatismScore>
+        <nationalismScore>16</nationalismScore>
+        <ecologismScore>70</ecologismScore>
+        <feminismScore>98</feminismScore>
+        <anarchismScore>87</anarchismScore>
+        <populismScore>89</populismScore>
+        <ideologicalCode>4-4-3-4-1-1</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Vikary</partyName>
+        <members>99379</members>
+        <membersTargetedAge>49</membersTargetedAge>
+        <membersTargetedWealth>47</membersTargetedWealth>
+        <wealth>19875800</wealth>
+        <conservatismScore>70</conservatismScore>
+        <nationalismScore>81</nationalismScore>
+        <ecologismScore>86</ecologismScore>
+        <feminismScore>66</feminismScore>
+        <anarchismScore>57</anarchismScore>
+        <populismScore>80</populismScore>
+        <ideologicalCode>3-4-4-3-4-3</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Caron of Nightsong</partyName>
+        <members>46120</members>
+        <membersTargetedAge>54</membersTargetedAge>
+        <membersTargetedWealth>26</membersTargetedWealth>
+        <wealth>6641280</wealth>
+        <conservatismScore>61</conservatismScore>
+        <nationalismScore>79</nationalismScore>
+        <ecologismScore>62</ecologismScore>
+        <feminismScore>80</feminismScore>
+        <anarchismScore>15</anarchismScore>
+        <populismScore>53</populismScore>
+        <ideologicalCode>1-3-3-4-4-3</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Cressey</partyName>
+        <members>66838</members>
+        <membersTargetedAge>34</membersTargetedAge>
+        <membersTargetedWealth>52</membersTargetedWealth>
+        <wealth>16709500</wealth>
+        <conservatismScore>19</conservatismScore>
+        <nationalismScore>32</nationalismScore>
+        <ecologismScore>95</ecologismScore>
+        <feminismScore>34</feminismScore>
+        <anarchismScore>90</anarchismScore>
+        <populismScore>89</populismScore>
+        <ideologicalCode>4-4-4-2-2-1</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Cerwyn of Cerwyn</partyName>
+        <members>98084</members>
+        <membersTargetedAge>65</membersTargetedAge>
+        <membersTargetedWealth>35</membersTargetedWealth>
+        <wealth>3236772</wealth>
+        <conservatismScore>99</conservatismScore>
+        <nationalismScore>83</nationalismScore>
+        <ecologismScore>31</ecologismScore>
+        <feminismScore>51</feminismScore>
+        <anarchismScore>1</anarchismScore>
+        <populismScore>49</populismScore>
+        <ideologicalCode>1-2-2-3-4-4</ideologicalCode>
+    </party>
+</parties>

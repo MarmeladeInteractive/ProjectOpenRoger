@@ -1,0 +1,12 @@
+<player>
+    <player id="player">
+        <playerName>Michel</playerName>
+        <money>1000</money>
+        <speed>2</speed>
+        <step>10</step>
+        <playerSize>100</playerSize>
+        <chunk>{0,0}</chunk>
+        <isInsideBuildingInt>0</isInsideBuildingInt>
+        <wasteCollected>0</wasteCollected>
+    </player>
+</player>
