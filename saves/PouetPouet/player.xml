@@ -8,5 +8,6 @@
         <chunk>{0,0}</chunk>
         <isInsideBuildingInt>0</isInsideBuildingInt>
         <wasteCollected>0</wasteCollected>
+        <partyID>1</partyID>
     </player>
 </player>

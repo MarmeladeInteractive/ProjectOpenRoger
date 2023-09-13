@@ -47,6 +47,8 @@ public class Player{
 
     public long wasteCollected = 0;
 
+    public int partyID = 1;
+
 
     public Player(String gameName){
   
@@ -101,6 +103,10 @@ public class Player{
         element.appendChild(doc.createTextNode(String.valueOf(0)));
         playerElement.appendChild(element);
 
+        element = doc.createElement("partyID");
+        element.appendChild(doc.createTextNode(String.valueOf(partyID)));
+        playerElement.appendChild(element);
+
         doc.getDocumentElement().appendChild(playerElement);
     }
 
@@ -133,6 +139,7 @@ public class Player{
         this.chunk[1] = c[1];
 
         this.wasteCollected = Integer.parseInt(save.getChildFromMapElements(allElements,"wasteCollected"));
+        this.partyID = Integer.parseInt(save.getChildFromMapElements(allElements,"partyID"));
 
     }
 
@@ -332,6 +339,10 @@ public class Player{
 
     public void saveWasteCollected(){        
         savePlayerValue("wasteCollected",String.valueOf(wasteCollected));
+    }
+
+    public void savePartyID(){        
+        savePlayerValue("partyID",String.valueOf(partyID));
     }
 
 
