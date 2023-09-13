@@ -1,0 +1,72 @@
+<chunks>
+    <chunk id="0_0">
+        <cell>{0,0}</cell>
+        <biome>6</biome>
+        <backPic>demo\img\back\pave02.jpg</backPic>
+        <number>2</number>
+        <buildingsCellsX>{0,2}</buildingsCellsX>
+        <buildingsCellsY>{2,0}</buildingsCellsY>
+        <buildingsTypes>{0,7}</buildingsTypes>
+        <completedCell>{0,1,1,0}</completedCell>
+    </chunk>
+    <chunk id="-1_0">
+        <cell>{-1,0}</cell>
+        <biome>5</biome>
+        <backPic>demo\img\back\pave.jpg</backPic>
+        <number>2</number>
+        <buildingsCellsX>{0,0}</buildingsCellsX>
+        <buildingsCellsY>{0,2}</buildingsCellsY>
+        <buildingsTypes>{5,7}</buildingsTypes>
+        <completedCell>{1,1,0,0}</completedCell>
+    </chunk>
+    <chunk id="-2_0">
+        <cell>{-2,0}</cell>
+        <biome>4</biome>
+        <backPic>demo\img\back\herbe.jpg</backPic>
+        <number>2</number>
+        <buildingsCellsX>{0,2}</buildingsCellsX>
+        <buildingsCellsY>{2,0}</buildingsCellsY>
+        <buildingsTypes>{7,7}</buildingsTypes>
+        <completedCell>{0,1,1,0}</completedCell>
+    </chunk>
+    <chunk id="-3_0">
+        <cell>{-3,0}</cell>
+        <biome>0</biome>
+        <backPic>demo\img\back\herbe02.jpg</backPic>
+        <number>0</number>
+        <buildingsCellsX>{}</buildingsCellsX>
+        <buildingsCellsY>{}</buildingsCellsY>
+        <buildingsTypes>{}</buildingsTypes>
+        <completedCell>{0,0,0,1}</completedCell>
+    </chunk>
+    <chunk id="-2_1">
+        <cell>{-2,1}</cell>
+        <biome>4</biome>
+        <backPic>demo\img\back\herbe.jpg</backPic>
+        <number>2</number>
+        <buildingsCellsX>{2,0}</buildingsCellsX>
+        <buildingsCellsY>{0,2}</buildingsCellsY>
+        <buildingsTypes>{2,7}</buildingsTypes>
+        <completedCell>{0,1,1,0}</completedCell>
+    </chunk>
+    <chunk id="-3_1">
+        <cell>{-3,1}</cell>
+        <biome>4</biome>
+        <backPic>demo\img\back\herbe.jpg</backPic>
+        <number>2</number>
+        <buildingsCellsX>{2,2}</buildingsCellsX>
+        <buildingsCellsY>{2,0}</buildingsCellsY>
+        <buildingsTypes>{7,7}</buildingsTypes>
+        <completedCell>{0,0,1,1}</completedCell>
+    </chunk>
+    <chunk id="-4_1">
+        <cell>{-4,1}</cell>
+        <biome>2</biome>
+        <backPic>demo\img\back\herbe.jpg</backPic>
+        <number>1</number>
+        <buildingsCellsX>{0}</buildingsCellsX>
+        <buildingsCellsY>{2}</buildingsCellsY>
+        <buildingsTypes>{7}</buildingsTypes>
+        <completedCell>{0,1,0,0}</completedCell>
+    </chunk>
+</chunks>
