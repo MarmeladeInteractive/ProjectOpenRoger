@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Upcliff</partyName>
+        <members>24362</members>
+        <membersTargetedAge>81</membersTargetedAge>
+        <membersTargetedWealth>83</membersTargetedWealth>
+        <wealth>16176368</wealth>
+        <conservatismScore>26</conservatismScore>
+        <nationalismScore>37</nationalismScore>
+        <ecologismScore>69</ecologismScore>
+        <feminismScore>26</feminismScore>
+        <anarchismScore>87</anarchismScore>
+        <populismScore>98</populismScore>
+        <ideologicalCode>4-4-3-2-2-2</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Bole</partyName>
+        <members>78425</members>
+        <membersTargetedAge>26</membersTargetedAge>
+        <membersTargetedWealth>31</membersTargetedWealth>
+        <wealth>6587700</wealth>
+        <conservatismScore>12</conservatismScore>
+        <nationalismScore>2</nationalismScore>
+        <ecologismScore>82</ecologismScore>
+        <feminismScore>66</feminismScore>
+        <anarchismScore>88</anarchismScore>
+        <populismScore>91</populismScore>
+        <ideologicalCode>4-4-4-3-1-1</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Wensington</partyName>
+        <members>64649</members>
+        <membersTargetedAge>53</membersTargetedAge>
+        <membersTargetedWealth>61</membersTargetedWealth>
+        <wealth>6594198</wealth>
+        <conservatismScore>71</conservatismScore>
+        <nationalismScore>74</nationalismScore>
+        <ecologismScore>63</ecologismScore>
+        <feminismScore>58</feminismScore>
+        <anarchismScore>64</anarchismScore>
+        <populismScore>92</populismScore>
+        <ideologicalCode>3-4-3-3-3-3</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Graves</partyName>
+        <members>30681</members>
+        <membersTargetedAge>89</membersTargetedAge>
+        <membersTargetedWealth>84</membersTargetedWealth>
+        <wealth>11536056</wealth>
+        <conservatismScore>87</conservatismScore>
+        <nationalismScore>82</nationalismScore>
+        <ecologismScore>4</ecologismScore>
+        <feminismScore>84</feminismScore>
+        <anarchismScore>11</anarchismScore>
+        <populismScore>89</populismScore>
+        <ideologicalCode>1-4-1-4-4-4</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Harlaw of Harlaw</partyName>
+        <members>26384</members>
+        <membersTargetedAge>23</membersTargetedAge>
+        <membersTargetedWealth>11</membersTargetedWealth>
+        <wealth>870672</wealth>
+        <conservatismScore>83</conservatismScore>
+        <nationalismScore>94</nationalismScore>
+        <ecologismScore>96</ecologismScore>
+        <feminismScore>88</feminismScore>
+        <anarchismScore>10</anarchismScore>
+        <populismScore>34</populismScore>
+        <ideologicalCode>1-2-4-4-4-4</ideologicalCode>
+    </party>
+</parties>

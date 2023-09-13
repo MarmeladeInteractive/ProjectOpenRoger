@@ -1,8 +1,0 @@
-<inventory>
-    <inventory id="inventory">
-        <wastes>10</wastes>
-        <apples>4</apples>
-        <maxWastes>100</maxWastes>
-        <maxApples>100</maxApples>
-    </inventory>
-</inventory>
