@@ -83,9 +83,8 @@ public class Game{
         generateParties();
 
         loadingScreen.closeLoadingScreen();
-        startGame();
-        
-   
+        //startGame();
+        CustomizePartyScreen customizePartyScreen = new CustomizePartyScreen(name);
     }
 
     public  Element createGameElement(Document doc){
