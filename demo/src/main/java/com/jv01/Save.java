@@ -137,7 +137,6 @@ public class Save {
         return element;
     }
 
-
     public Element getElementById(Document doc, String elementName,String id) {
         NodeList characterNodes = doc.getElementsByTagName(elementName);
         for (int i = 0; i < characterNodes.getLength(); i++) {
@@ -207,9 +206,6 @@ public class Save {
             System.out.println("An error occurred during XML modification.");
         }
     }
-    
-
-
 
     public int[] stringToIntArray(String arrayString) {
         String cleanedString = arrayString.replace("{", "").replace("}", "");
