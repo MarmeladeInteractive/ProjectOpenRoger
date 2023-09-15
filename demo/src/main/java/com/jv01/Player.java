@@ -75,7 +75,7 @@ public class Player{
         int isInsideBuildingInt = Integer.parseInt(save.getChildFromMapElements(allElements,"isInsideBuildingInt"));
         if(isInsideBuildingInt == 1)isInsideBuilding = true;
 
-        int[] c = save.stringToArray(save.getChildFromMapElements(allElements,"chunk"));
+        int[] c = save.stringToIntArray(save.getChildFromMapElements(allElements,"chunk"));
         this.chunk[0] = c[0];
         this.chunk[1] = c[1];
 

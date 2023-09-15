@@ -1,7 +1,7 @@
 <partyHouse>
     <partyHouse id="partyHouse">
         <printerLevel>0</printerLevel>
-        <ovenLevel>1</ovenLevel>
+        <ovenLevel>0</ovenLevel>
         <transportationLevel>0</transportationLevel>
     </partyHouse>
 </partyHouse>

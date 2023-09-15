@@ -126,8 +126,8 @@ public class Inventory {
     }
 
     private Objects addObject(int[] position, int type){
-        Items item = new Items(type);
-        Objects obj = new Objects(cellSize[0]/2 + position[0]*(cellSize[0]), cellSize[1]/2 + position[1]*(cellSize[1]), new int[]{cellSize[0],cellSize[1]}, item.imagesUrls[item.type][0], 0, inventoryPanel);
+        Items item = new Items(gameName,type);
+        Objects obj = new Objects(cellSize[0]/2 + position[0]*(cellSize[0]), cellSize[1]/2 + position[1]*(cellSize[1]), new int[]{cellSize[0],cellSize[1]}, item.defaultImageUrl, 0, inventoryPanel);
         return obj;
     }
 

@@ -1,7 +1,7 @@
 <player>
     <player id="player">
         <playerName>Michel</playerName>
-        <money>850</money>
+        <money>1000</money>
         <speed>2</speed>
         <step>10</step>
         <playerSize>100</playerSize>

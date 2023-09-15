@@ -225,7 +225,7 @@ public class MainGameWindow {
 
         String spam = "";
         Tools tool = new Tools(0, 0);
-        Items item = new Items(0);
+        Items item = new Items(gameName,0);
 
         if(!isInsideBuilding){
             for(Buildings b : chunk.triggerableBuilding){

@@ -211,7 +211,7 @@ public class Save {
 
 
 
-    public int[] stringToArray(String arrayString) {
+    public int[] stringToIntArray(String arrayString) {
         String cleanedString = arrayString.replace("{", "").replace("}", "");
         
         String[] valueStrings = cleanedString.split(",");
@@ -222,6 +222,23 @@ public class Save {
             array[i] = Integer.parseInt(valueStrings[i]);
         }    
         return array;
+    }
+
+    public String[] stringToStringArray(String arrayString) {
+        String cleanedString = arrayString.replace("{", "").replace("}", "");
+        
+        String[] valueStrings = cleanedString.split(",");
+        
+        String[] array = new String[valueStrings.length];
+
+        for (int i = 0; i < valueStrings.length; i++) {
+            array[i] = valueStrings[i];
+        }    
+        return array;
+    }
+
+    public String stringToLink(String link){
+        return link.replaceAll("\\s", "");
     }
 
     public void changeChunkBuildingType(String gameName, long[] chunk, int newBuildingType){
