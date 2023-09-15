@@ -185,8 +185,13 @@ public class Game{
         }
     }
 
-    private  void startGame(){
+    private void startGame(){
         MainGameWindow mainGameWindow = new MainGameWindow(name, seed);
+        mainGameWindow.showMainGameWindow();
+    }
+
+    public void startGame(String gamename){
+        MainGameWindow mainGameWindow = new MainGameWindow(gamename, seed);
         mainGameWindow.showMainGameWindow();
     }
 }
