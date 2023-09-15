@@ -51,46 +51,7 @@ public class Inventory {
     public Inventory(String gameName){
         this.gameName = gameName;
 
-        Document doc = save.getDocumentXml(gameName, "inventory");
-        Element element = save.getElementById(doc, "inventory", "inventory");
-        if(element == null){
-            saveInventory();
-        }else{
-            getInventoryValues();  
-        }
-    }
-
-    public void createInventoryElement(Document doc){
-        Element inventoryElement = doc.createElement("inventory");
-
-        inventoryElement.setAttribute("id", "inventory");
-
-        Element element = doc.createElement("wastes");
-        element.appendChild(doc.createTextNode("0"));
-        inventoryElement.appendChild(element);
-
-        element = doc.createElement("apples");
-        element.appendChild(doc.createTextNode("0"));
-        inventoryElement.appendChild(element);
-
-
-        element = doc.createElement("maxWastes");
-        element.appendChild(doc.createTextNode(String.valueOf(maxWastes)));
-        inventoryElement.appendChild(element);
-
-        element = doc.createElement("maxApples");
-        element.appendChild(doc.createTextNode(String.valueOf(maxApples)));
-        inventoryElement.appendChild(element);
-
-        doc.getDocumentElement().appendChild(inventoryElement);
-    }
-
-    public void saveInventory(){
-        Document doc = save.getDocumentXml(gameName, "inventory");
-
-        createInventoryElement(doc);
-
-        save.saveXmlFile(doc, gameName, "inventory");
+        getInventoryValues();  
     }
 
     public void createInventoryPanel(JFrame frame){

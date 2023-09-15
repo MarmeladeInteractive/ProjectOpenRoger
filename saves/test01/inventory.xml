@@ -1,0 +1,8 @@
+<inventory>
+    <inventory id="inventory">
+        <wastes>1</wastes>
+        <apples>3</apples>
+        <maxWastes>10</maxWastes>
+        <maxApples>10</maxApples>
+    </inventory>
+</inventory>

@@ -53,69 +53,10 @@ public class Player{
     public Player(String gameName){
   
         this.gameName = gameName; 
-
-        Document doc = save.getDocumentXml(gameName, "player");
-        Element element = save.getElementById(doc, "player", "player");
-        if(element == null){
-            savePlayer();
-        }else{
-            getPlayerValues();
-            
-        }
+        
+        getPlayerValues();
 
         initializePlayer();   
-    }
-
-    public void createPlayerElement(Document doc){
-        Element playerElement = doc.createElement("player");
-
-        playerElement.setAttribute("id", "player");
-
-        Element element = doc.createElement("playerName");
-        element.appendChild(doc.createTextNode(playerName));
-        playerElement.appendChild(element);
-
-        element = doc.createElement("money");
-        element.appendChild(doc.createTextNode(String.valueOf(money)));
-        playerElement.appendChild(element);
-
-        element = doc.createElement("speed");
-        element.appendChild(doc.createTextNode(String.valueOf(speed)));
-        playerElement.appendChild(element);
-
-        element = doc.createElement("step");
-        element.appendChild(doc.createTextNode(String.valueOf(step)));
-        playerElement.appendChild(element);
-
-        element = doc.createElement("playerSize");
-        element.appendChild(doc.createTextNode(String.valueOf(playerSize)));
-        playerElement.appendChild(element);
-
-        element = doc.createElement("chunk");
-        element.appendChild(doc.createTextNode("{0,0}"));
-        playerElement.appendChild(element);
-
-        element = doc.createElement("isInsideBuildingInt");
-        element.appendChild(doc.createTextNode(String.valueOf(0)));
-        playerElement.appendChild(element);
-
-        element = doc.createElement("wasteCollected");
-        element.appendChild(doc.createTextNode(String.valueOf(0)));
-        playerElement.appendChild(element);
-
-        element = doc.createElement("partyID");
-        element.appendChild(doc.createTextNode(String.valueOf(partyID)));
-        playerElement.appendChild(element);
-
-        doc.getDocumentElement().appendChild(playerElement);
-    }
-
-    public void savePlayer(){
-        Document doc = save.getDocumentXml(gameName, "Player");
-
-        createPlayerElement(doc);
-
-        save.saveXmlFile(doc, gameName, "Player");
     }
 
     public void getPlayerValues(){
