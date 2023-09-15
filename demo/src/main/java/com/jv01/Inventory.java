@@ -51,46 +51,7 @@ public class Inventory {
     public Inventory(String gameName){
         this.gameName = gameName;
 
-        Document doc = save.getDocumentXml(gameName, "inventory");
-        Element element = save.getElementById(doc, "inventory", "inventory");
-        if(element == null){
-            saveInventory();
-        }else{
-            getInventoryValues();  
-        }
-    }
-
-    public void createInventoryElement(Document doc){
-        Element inventoryElement = doc.createElement("inventory");
-
-        inventoryElement.setAttribute("id", "inventory");
-
-        Element element = doc.createElement("wastes");
-        element.appendChild(doc.createTextNode("0"));
-        inventoryElement.appendChild(element);
-
-        element = doc.createElement("apples");
-        element.appendChild(doc.createTextNode("0"));
-        inventoryElement.appendChild(element);
-
-
-        element = doc.createElement("maxWastes");
-        element.appendChild(doc.createTextNode(String.valueOf(maxWastes)));
-        inventoryElement.appendChild(element);
-
-        element = doc.createElement("maxApples");
-        element.appendChild(doc.createTextNode(String.valueOf(maxApples)));
-        inventoryElement.appendChild(element);
-
-        doc.getDocumentElement().appendChild(inventoryElement);
-    }
-
-    public void saveInventory(){
-        Document doc = save.getDocumentXml(gameName, "inventory");
-
-        createInventoryElement(doc);
-
-        save.saveXmlFile(doc, gameName, "inventory");
+        getInventoryValues();  
     }
 
     public void createInventoryPanel(JFrame frame){
@@ -165,8 +126,8 @@ public class Inventory {
     }
 
     private Objects addObject(int[] position, int type){
-        Items item = new Items(type);
-        Objects obj = new Objects(cellSize[0]/2 + position[0]*(cellSize[0]), cellSize[1]/2 + position[1]*(cellSize[1]), new int[]{cellSize[0],cellSize[1]}, item.imagesUrls[item.type][0], 0, inventoryPanel);
+        Items item = new Items(gameName,type);
+        Objects obj = new Objects(cellSize[0]/2 + position[0]*(cellSize[0]), cellSize[1]/2 + position[1]*(cellSize[1]), new int[]{cellSize[0],cellSize[1]}, item.defaultImageUrl, 0, inventoryPanel);
         return obj;
     }
 

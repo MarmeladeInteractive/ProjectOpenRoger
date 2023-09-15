@@ -44,63 +44,9 @@ public class KeyBord {
     public KeyBord(String gameName){
         this.gameName = gameName;
 
-        Document doc = save.getDocumentXml(gameName, "keyBoard");
-        Element element = save.getElementById(doc, "keyBoard", "keyBoard");
-        if(element == null){
-            saveKeyBoard();
-        }else{
-            getKeyBoardValues();  
-        }
+        getKeyBoardValues();  
 
         initializeKeyListener();
-    }
-
-    public void createKeyBoardElement(Document doc){
-        Element keyBoardElement = doc.createElement("keyBoard");
-
-        keyBoardElement.setAttribute("id", "keyBoard");
-
-        Element element = doc.createElement("rightKey");
-        element.appendChild(doc.createTextNode(String.valueOf(rightKey)));
-        keyBoardElement.appendChild(element);
-
-        element = doc.createElement("leftKey");
-        element.appendChild(doc.createTextNode(String.valueOf(leftKey)));
-        keyBoardElement.appendChild(element);
-
-        element = doc.createElement("upKey");
-        element.appendChild(doc.createTextNode(String.valueOf(upKey)));
-        keyBoardElement.appendChild(element);
-
-        element = doc.createElement("downKey");
-        element.appendChild(doc.createTextNode(String.valueOf(downKey)));
-        keyBoardElement.appendChild(element);
-
-        element = doc.createElement("runKey");
-        element.appendChild(doc.createTextNode(String.valueOf(runKey)));
-        keyBoardElement.appendChild(element);
-
-        element = doc.createElement("mapKey");
-        element.appendChild(doc.createTextNode(String.valueOf(mapKey)));
-        keyBoardElement.appendChild(element);
-
-        element = doc.createElement("intercatKey");
-        element.appendChild(doc.createTextNode(String.valueOf(intercatKey)));
-        keyBoardElement.appendChild(element);
-
-        element = doc.createElement("upgradeKey");
-        element.appendChild(doc.createTextNode(String.valueOf(upgradeKey)));
-        keyBoardElement.appendChild(element);
-
-        doc.getDocumentElement().appendChild(keyBoardElement);
-    }
-
-    public void saveKeyBoard(){
-        Document doc = save.getDocumentXml(gameName, "keyBoard");
-
-        createKeyBoardElement(doc);
-
-        save.saveXmlFile(doc, gameName, "keyBoard");
     }
 
     public void getKeyBoardValues(){

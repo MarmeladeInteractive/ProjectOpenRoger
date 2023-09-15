@@ -35,48 +35,24 @@ public class PartieHouse {
 
         this.backgroundPanel = backgroundPanel;
 
+        getPartieHouseValue();
+
+        initializePartieHouse();
+    }
+
+    public void getPartieHouseValue(){
         this.doc = save.getDocumentXml(gameName,"partyHouse");
         this.element = save.getElementById(doc, "partyHouse", "partyHouse");
 
-        if(element == null){
-            savePartyHouse();
-        }else{
-            Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
+        Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
 
-            this.printerLevel = Integer.parseInt(save.getChildFromMapElements(allElements,"printerLevel"));
-            this.ovenLevel = Integer.parseInt(save.getChildFromMapElements(allElements,"ovenLevel"));
-            this.transportationLevel = Integer.parseInt(save.getChildFromMapElements(allElements,"transportationLevel"));
-        }
+        this.printerLevel = Integer.parseInt(save.getChildFromMapElements(allElements,"printerLevel"));
+        this.ovenLevel = Integer.parseInt(save.getChildFromMapElements(allElements,"ovenLevel"));
+        this.transportationLevel = Integer.parseInt(save.getChildFromMapElements(allElements,"transportationLevel"));
+    }
 
+    private void initializePartieHouse(){
         addTools();
-    }
-
-    public void createPartyHouseElement(Document doc){
-        Element partyHouseElement = doc.createElement("partyHouse");
-
-        partyHouseElement.setAttribute("id", "partyHouse");
-
-        Element element = doc.createElement("printerLevel");
-        element.appendChild(doc.createTextNode(String.valueOf(printerLevel)));
-        partyHouseElement.appendChild(element);
-        
-        element = doc.createElement("ovenLevel");
-        element.appendChild(doc.createTextNode(String.valueOf(ovenLevel)));
-        partyHouseElement.appendChild(element);
-
-        element = doc.createElement("transportationLevel");
-        element.appendChild(doc.createTextNode(String.valueOf(transportationLevel)));
-        partyHouseElement.appendChild(element);
-
-        doc.getDocumentElement().appendChild(partyHouseElement);
-    }
-
-    public void savePartyHouse(){
-        Document doc = save.getDocumentXml(gameName, "partyHouse");
-
-        createPartyHouseElement(doc);
-
-        save.saveXmlFile(doc, gameName, "partyHouse");
     }
 
     public void addTools(){

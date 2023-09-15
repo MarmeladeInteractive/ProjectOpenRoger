@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 
+import org.apache.commons.io.FileUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -65,15 +66,14 @@ public class Save {
 
     public void createAllFiles(String gameName) {
         createSaveFolder();
-        createSaveFile(gameName, "game");
-        createSaveFile(gameName, "player");
-        createSaveFile(gameName, "inventory");
-        createSaveFile(gameName, "characters");
-        createSaveFile(gameName, "parties");
-        createSaveFile(gameName, "chunks");
-        createSaveFile(gameName, "keyBoard");
-        
-        createSaveFile(gameName, "partyHouse");
+
+        File source = new File("demo/xml/save");
+        File dest = new File("saves/" + gameName);
+        try {
+            FileUtils.copyDirectory(source, dest);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Document getDocumentXml(String gameName, String fileName) {
@@ -127,6 +127,14 @@ public class Save {
         String filePath = "saves/" + gameName + "/" + name + ".xml";
         File file = new File(filePath);
         return file.exists();
+    }
+
+    public Element createXmlElement(Element element, Document doc, String childName, String value){
+        Element newElement = doc.createElement(childName);
+        newElement.appendChild(doc.createTextNode(value));
+        element.appendChild(newElement);
+
+        return element;
     }
 
 
@@ -203,7 +211,7 @@ public class Save {
 
 
 
-    public int[] stringToArray(String arrayString) {
+    public int[] stringToIntArray(String arrayString) {
         String cleanedString = arrayString.replace("{", "").replace("}", "");
         
         String[] valueStrings = cleanedString.split(",");
@@ -214,6 +222,23 @@ public class Save {
             array[i] = Integer.parseInt(valueStrings[i]);
         }    
         return array;
+    }
+
+    public String[] stringToStringArray(String arrayString) {
+        String cleanedString = arrayString.replace("{", "").replace("}", "");
+        
+        String[] valueStrings = cleanedString.split(",");
+        
+        String[] array = new String[valueStrings.length];
+
+        for (int i = 0; i < valueStrings.length; i++) {
+            array[i] = valueStrings[i];
+        }    
+        return array;
+    }
+
+    public String stringToLink(String link){
+        return link.replaceAll("\\s", "");
     }
 
     public void changeChunkBuildingType(String gameName, long[] chunk, int newBuildingType){

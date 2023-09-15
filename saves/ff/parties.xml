@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Brownhill</partyName>
+        <members>40536</members>
+        <membersTargetedAge>52</membersTargetedAge>
+        <membersTargetedWealth>92</membersTargetedWealth>
+        <wealth>19700496</wealth>
+        <conservatismScore>10</conservatismScore>
+        <nationalismScore>21</nationalismScore>
+        <ecologismScore>89</ecologismScore>
+        <feminismScore>59</feminismScore>
+        <anarchismScore>70</anarchismScore>
+        <populismScore>88</populismScore>
+        <ideologicalCode>3-4-4-3-1-1</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Karstark of Karhold</partyName>
+        <members>52785</members>
+        <membersTargetedAge>58</membersTargetedAge>
+        <membersTargetedWealth>75</membersTargetedWealth>
+        <wealth>22908690</wealth>
+        <conservatismScore>73</conservatismScore>
+        <nationalismScore>70</nationalismScore>
+        <ecologismScore>45</ecologismScore>
+        <feminismScore>14</feminismScore>
+        <anarchismScore>31</anarchismScore>
+        <populismScore>80</populismScore>
+        <ideologicalCode>2-4-2-1-3-3</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Tarbeck of Tarbeck Hall</partyName>
+        <members>18860</members>
+        <membersTargetedAge>42</membersTargetedAge>
+        <membersTargetedWealth>88</membersTargetedWealth>
+        <wealth>12070400</wealth>
+        <conservatismScore>30</conservatismScore>
+        <nationalismScore>43</nationalismScore>
+        <ecologismScore>96</ecologismScore>
+        <feminismScore>47</feminismScore>
+        <anarchismScore>63</anarchismScore>
+        <populismScore>71</populismScore>
+        <ideologicalCode>3-3-4-2-2-2</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Blackmyre</partyName>
+        <members>117857</members>
+        <membersTargetedAge>31</membersTargetedAge>
+        <membersTargetedWealth>45</membersTargetedWealth>
+        <wealth>43842804</wealth>
+        <conservatismScore>75</conservatismScore>
+        <nationalismScore>62</nationalismScore>
+        <ecologismScore>66</ecologismScore>
+        <feminismScore>98</feminismScore>
+        <anarchismScore>27</anarchismScore>
+        <populismScore>19</populismScore>
+        <ideologicalCode>2-1-3-4-3-3</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Woodwright</partyName>
+        <members>94051</members>
+        <membersTargetedAge>34</membersTargetedAge>
+        <membersTargetedWealth>86</membersTargetedWealth>
+        <wealth>24829464</wealth>
+        <conservatismScore>93</conservatismScore>
+        <nationalismScore>93</nationalismScore>
+        <ecologismScore>76</ecologismScore>
+        <feminismScore>79</feminismScore>
+        <anarchismScore>19</anarchismScore>
+        <populismScore>7</populismScore>
+        <ideologicalCode>1-1-4-4-4-4</ideologicalCode>
+    </party>
+</parties>

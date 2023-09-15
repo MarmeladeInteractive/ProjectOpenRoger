@@ -88,9 +88,9 @@ public class Chunks {
                 this.number = Integer.parseInt(save.getChildFromMapElements(allElements,"number"));
 
                 if(number>0){
-                    this.bCellX = save.stringToArray(save.getChildFromMapElements(allElements,"buildingsCellsX"));
-                    this.bCellY = save.stringToArray(save.getChildFromMapElements(allElements,"buildingsCellsY"));
-                    this.bType = save.stringToArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
+                    this.bCellX = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsCellsX"));
+                    this.bCellY = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsCellsY"));
+                    this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
 
                     
                     for(int i=0; i <number; i++){
@@ -98,7 +98,7 @@ public class Chunks {
                         createBuilding(number, cell, bType[i]);
                     }
 
-                    int[] completedCellInt = save.stringToArray(save.getChildFromMapElements(allElements,"completedCell"));
+                    int[] completedCellInt = save.stringToIntArray(save.getChildFromMapElements(allElements,"completedCell"));
                     for(int i=0; i<4; i++){
                         if(completedCellInt[i]==1){
                             completedCell[i] = true;
@@ -110,7 +110,7 @@ public class Chunks {
                 addDecorations();
                 //addItems();
             }else{
-                this.bType = save.stringToArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
+                this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
                 addInsideBuildings();
             }
         }   
@@ -652,7 +652,7 @@ public class Chunks {
     }
 
     public void createItem(int x, int y, int type){
-        Items item = new Items(type);
+        Items item = new Items(gameName,type);
         Object[] obj = item.addItem(x,y,backgroundPanel);
 
         trigerEvents.add(obj);

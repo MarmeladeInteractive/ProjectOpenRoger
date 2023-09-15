@@ -1,8 +1,8 @@
 <chunks>
     <chunk id="0_0">
         <cell>{0,0}</cell>
-        <biome>0</biome>
-        <backPic>demo\img\back\herbe02.jpg</backPic>
+        <biome>2</biome>
+        <backPic>demo\img\back\herbe.jpg</backPic>
         <number>1</number>
         <buildingsCellsX>{0}</buildingsCellsX>
         <buildingsCellsY>{0}</buildingsCellsY>

@@ -74,12 +74,12 @@ class GameMap extends JPanel {
             if (chunkNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element chunkElement = (Element) chunkNodes.item(i);
 
-                int[] cellCoords = save.stringToArray(save.getChildFromElement(chunkElement, "cell"));
+                int[] cellCoords = save.stringToIntArray(save.getChildFromElement(chunkElement, "cell"));
                 int biome01 = Integer.parseInt(save.getChildFromElement(chunkElement, "biome"));
                 int number = Integer.parseInt(save.getChildFromElement(chunkElement, "number"));
                 int buildingType = -1;
                 if(number > 0){
-                    int[] buildingsType = save.stringToArray(save.getChildFromElement(chunkElement, "buildingsTypes"));
+                    int[] buildingsType = save.stringToIntArray(save.getChildFromElement(chunkElement, "buildingsTypes"));
                     buildingType = buildingsType[0];
                 }
                 

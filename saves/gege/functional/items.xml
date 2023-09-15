@@ -1,0 +1,34 @@
+<items>
+    <item id="0">
+        <name>Waste</name>
+        <size>{50,50}</size>
+        <description></description>
+        <purchasePrice>0</purchasePrice>
+        <sellingPrice>1</sellingPrice>
+        <imagesUrls>
+            {
+                demo/img/items/waste01.png,
+                demo/img/items/waste02.png,
+                demo/img/items/waste03.png,
+                demo/img/items/waste04.png,
+            }
+        </imagesUrls>
+        <interactsSpam>pour ramasser les déchets</interactsSpam>
+    </item>
+    <item id="1">
+        <name>Apple</name>
+        <size>{50,50}</size>
+        <description></description>
+        <purchasePrice>8</purchasePrice>
+        <sellingPrice>4</sellingPrice>
+        <imagesUrls>
+            {
+                demo/img/items/apple01.png,
+                demo/img/items/apple02.png,
+                demo/img/items/apple03.png,
+                demo/img/items/apple04.png,
+            }
+        </imagesUrls>
+        <interactsSpam>pour ramasser la pomme</interactsSpam>
+    </item>
+</items>

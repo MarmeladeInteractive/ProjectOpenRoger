@@ -5,15 +5,24 @@ import java.util.List;
 import java.util.Random;
 
 import javax.swing.JPanel;
+
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import javax.swing.JLabel;
 
 public class Items {
+    private Save save = new Save();
+    public String gameName;
+
     public String name;
+    public int id;
     public int type;
     public int price;
     public String description;
     public int[] size;
     public String imageUrl;
+    public String defaultImageUrl;
     public String spam;
 
     public int offsetX;
@@ -28,56 +37,33 @@ public class Items {
     public boolean refreshDisplay = false;
     public boolean isExist = false;
 
-    private String[] names = {
-        "Waste",
-        "Apple"
-    };
-    private int[][] sizes = {
-        {50,50},
-        {50,50},
-    };
-    private String[] descriptions = {
-        "",
-        ""
-    };
-    private int[] prices = {
-        0,
-        0,
-    };
-    public String[][] imagesUrls = {
-        {
-            "demo\\img\\items\\waste01.png",
-            "demo\\img\\items\\waste02.png",
-            "demo\\img\\items\\waste03.png",
-            "demo\\img\\items\\waste04.png",
-        },
-        {
-            "demo\\img\\items\\apple01.png",
-            "demo\\img\\items\\apple02.png",
-            "demo\\img\\items\\apple03.png",
-            "demo\\img\\items\\apple04.png",
-        },
-    };
-
-    private String[] interactsSpams = {
-        "'e' pour ramasser les déchets",
-        "'e' pour ramasser la pomme",
-    };
-
     private Random random = new Random();
 
-    public Items(int type){
-        this.type = type;
-        this.name = this.names[type];
-        this.price = this.prices[type];
-        this.description = this.descriptions[type];
-        this.size = this.sizes[type];
+    public Items(String gameName, int id){
+        this.gameName = gameName;
+        this.id = id;
 
-        this.imageUrl = this.imagesUrls[type][random.nextInt(4)];
-
-        this.spam = interactsSpams[type];
+        getItemsValues();
 
         getOffset();
+    }
+
+    private void getItemsValues(){
+        Document doc = save.getDocumentXml(gameName,"functional/items");
+        Element element = save.getElementById(doc, "item", String.valueOf(id));
+
+        this.name = save.getChildFromElement(element, "name");
+        this.price = Integer.parseInt(save.getChildFromElement(element, "purchasePrice"));
+        this.description = save.getChildFromElement(element, "description");
+        this.size = save.stringToIntArray(save.getChildFromElement(element, "size"));
+
+        this.imageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[random.nextInt(4)];
+        this.imageUrl = save.stringToLink(this.imageUrl);
+
+        this.defaultImageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[0];
+        this.defaultImageUrl = save.stringToLink(this.imageUrl);
+
+        this.spam = save.getChildFromElement(element, "interactsSpam");
     }
 
     public Object[] addItem(int x, int y, JPanel backgroundPanel){
@@ -106,7 +92,7 @@ public class Items {
     public void interact(Player player){
         if(player.keyBord.interactKeyPressed){
  
-            switch (type) {
+            switch (id) {
                 case 0:
                     if(player.inventory.wastes < player.inventory.maxWastes){
                         removeItem();
@@ -154,4 +140,5 @@ public class Items {
         this.offsetX = random.nextInt(20 + 20) - 20;
         this.offsetY = random.nextInt(20 + 20) - 20;
     }
+
 }
