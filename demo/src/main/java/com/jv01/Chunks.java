@@ -194,33 +194,9 @@ public class Chunks {
 
 
     public void createBiome(){
-        char key1 = key.charAt(0);
-        
-        if (key1 >= '0' && key1 <= '1') {
-            backPic = "demo\\img\\back\\herbe02.jpg";
-            biome = 0;
-        }else if (key1 >= '2' && key1 <= '3') {
-            backPic = "demo\\img\\back\\herbe02.jpg";
-            biome = 1;
-        }else if (key1 >= '4' && key1 <= '5') {
-            backPic = "demo\\img\\back\\herbe.jpg";
-            biome = 2;
-        }else if (key1 >= '6' && key1 <= '7') {
-            backPic = "demo\\img\\back\\herbe.jpg";
-            biome = 3;
-        }else if (key1 >= '8' && key1 <= '9') {
-            backPic = "demo\\img\\back\\herbe.jpg";
-            biome = 4;
-        }else if (key1 >= 'a' && key1 <= 'b') {
-            backPic = "demo\\img\\back\\pave.jpg";
-            biome = 5;
-        }else if (key1 >= 'c' && key1 <= 'd') {
-            backPic = "demo\\img\\back\\pave02.jpg";
-            biome = 6;
-        }else if (key1 >= 'e' && key1 <= 'f') {
-            backPic = "demo\\img\\back\\pave03.jpg";
-            biome = 7;
-        }
+        Biomes biome = new Biomes(gameName, key);
+        backPic = biome.imageUrl;
+        this.biome = biome.biomeType;
     }
     public void changeBiome(int type, String imgUrl){
         backPic = imgUrl;
