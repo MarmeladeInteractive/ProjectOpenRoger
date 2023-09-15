@@ -56,7 +56,7 @@ public class PartieHouse {
     }
 
     public void addTools(){
-        Tools printer = new Tools(0, printerLevel);
+        Tools printer = new Tools(gameName, 0, printerLevel);
         Objects obj = new Objects(printer.size[0]/2 + 50, boxSize-printer.size[1]/2 - 150, printer.size, printer.imageUrl, 1, backgroundPanel);
         
         restrictedAreas.add(new int[][]{ 
@@ -75,7 +75,7 @@ public class PartieHouse {
         };
         trigerEvents.add(item);
         
-        Tools transportation = new Tools(2, transportationLevel);
+        Tools transportation = new Tools(gameName, 2, transportationLevel);
         obj = new Objects(boxSize - transportation.size[0]/2 - 50 -50 , boxSize-transportation.size[1]/2 - 50 - 50, transportation.size, transportation.imageUrl, 1, backgroundPanel);
         restrictedAreas.add(new int[][]{ 
             {boxSize-50-50-transportation.size[0],boxSize-50-50-transportation.size[1]},
@@ -93,7 +93,7 @@ public class PartieHouse {
         };
         trigerEvents.add(item2);
         
-        Tools oven = new Tools(1, ovenLevel);
+        Tools oven = new Tools(gameName, 1, ovenLevel);
         obj = new Objects(oven.size[0]/2 + 150 , oven.size[1]/2 + 150, oven.size, oven.imageUrl, 1, backgroundPanel);
         restrictedAreas.add(new int[][]{ 
             {150,150},
@@ -111,7 +111,7 @@ public class PartieHouse {
         };
         trigerEvents.add(item3);
 
-        Tools dump = new Tools(5, 0);
+        Tools dump = new Tools(gameName, 5, 0);
         obj = new Objects(dump.size[0]/2 + boxSize/2 -150 , boxSize - 80 - dump.size[1]/2, dump.size, dump.imageUrl, 0, backgroundPanel);
         
         Object[] item4 = {

@@ -26,7 +26,7 @@ public class Bakery {
     }
 
     public void addTools(){
-        Tools appleStand = new Tools(6, 0);
+        Dealers appleStand = new Dealers(gameName, 0);
         Objects obj = new Objects(boxSize /2 -120, appleStand.size[1] + 225, appleStand.size, appleStand.imageUrl, 1, backgroundPanel);
 
         Object[] item = {
@@ -34,13 +34,13 @@ public class Bakery {
                 obj.position[0],
                 obj.position[1],
             },
-            "tool",
+            "dealer",
             appleStand,
             50
         };
         trigerEvents.add(item);
 
-        Tools chocoStand = new Tools(7, 0);
+        Dealers chocoStand = new Dealers(gameName, 1);
         obj = new Objects(boxSize /2 + 60, chocoStand.size[1] + 225, chocoStand.size, chocoStand.imageUrl, 1, backgroundPanel);
 
         Object[] item01 = {
@@ -48,13 +48,13 @@ public class Bakery {
                 obj.position[0],
                 obj.position[1],
             },
-            "tool",
+            "dealer",
             chocoStand,
             50
         };
         trigerEvents.add(item01);
 
-        Tools croissantStand = new Tools(8, 0);
+        Dealers croissantStand = new Dealers(gameName, 2);
         obj = new Objects(boxSize /2 + 155, croissantStand.size[1] + 225, croissantStand.size, croissantStand.imageUrl, 1, backgroundPanel);
 
         Object[] item02 = {
@@ -62,13 +62,13 @@ public class Bakery {
                 obj.position[0],
                 obj.position[1],
             },
-            "tool",
+            "dealer",
             croissantStand,
             50
         };
         trigerEvents.add(item02);
 
-        Tools dump = new Tools(5, 0);
+        Tools dump = new Tools(gameName, 5, 0);
         obj = new Objects(dump.size[0]/2 + boxSize/2 -150 , boxSize - 80 - dump.size[1]/2, dump.size, dump.imageUrl, 0, backgroundPanel);
         
         Object[] item4 = {

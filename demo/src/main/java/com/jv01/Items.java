@@ -18,7 +18,10 @@ public class Items {
     public String name;
     public int id;
     public int type;
-    public int price;
+
+    public int buyPrice;
+    public int sellPrice;
+
     public String description;
     public int[] size;
     public String imageUrl;
@@ -53,15 +56,18 @@ public class Items {
         Element element = save.getElementById(doc, "item", String.valueOf(id));
 
         this.name = save.getChildFromElement(element, "name");
-        this.price = Integer.parseInt(save.getChildFromElement(element, "purchasePrice"));
+
+        this.buyPrice = Integer.parseInt(save.getChildFromElement(element, "purchasePrice"));
+        this.sellPrice = Integer.parseInt(save.getChildFromElement(element, "sellingPrice"));
+
         this.description = save.getChildFromElement(element, "description");
         this.size = save.stringToIntArray(save.getChildFromElement(element, "size"));
 
         this.imageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[random.nextInt(4)];
-        this.imageUrl = save.stringToLink(this.imageUrl);
+        this.imageUrl = save.dropSpaceFromString(this.imageUrl);
 
         this.defaultImageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[0];
-        this.defaultImageUrl = save.stringToLink(this.imageUrl);
+        this.defaultImageUrl = save.dropSpaceFromString(this.defaultImageUrl);
 
         this.spam = save.getChildFromElement(element, "interactsSpam");
     }

@@ -68,4 +68,117 @@
             }
         </imagesUrls>
     </tool>
+
+    <tool id="2">
+        <name>Véhicule</name>
+        <size>{200,200}</size>
+        <description></description>
+        <level>0</level>
+        <upgradeable>1</upgradeable>
+        <upgradeSpam>améliorer le Véhicule</upgradeSpam>
+        <useSpam>utiliser le Véhicule</useSpam>
+        <buySpam>acheter un Véhicule</buySpam>
+        <prices>
+            {
+                400,
+                1000,
+                3000,
+                10000
+            }
+        </prices>
+        <usePrices>
+            {
+                0,
+                1,
+                2,
+                3
+            }
+        </usePrices>
+        <imagesUrls>
+            {
+                demo/img/achat.png,
+                demo/img/tools/velo01.png,
+                demo/img/tools/moto01.png,
+                demo/img/tools/voiture01.png,
+            }
+        </imagesUrls>
+    </tool>
+
+    <tool id="3">
+        <name>Maison abandonee</name>
+        <size>{150,150}</size>
+        <description></description>
+        <level>0</level>
+        <upgradeable>0</upgradeable>
+        <upgradeSpam></upgradeSpam>
+        <useSpam></useSpam>
+        <buySpam>renover la maison</buySpam>
+        <prices>
+            {
+                1000
+            }
+        </prices>
+        <usePrices>
+            {
+                0
+            }
+        </usePrices>
+        <imagesUrls>
+            {
+                demo/img/achat.png
+            }
+        </imagesUrls>
+    </tool>
+
+    <tool id="4">
+        <name>Maison vide</name>
+        <size>{150,150}</size>
+        <description></description>
+        <level>0</level>
+        <upgradeable>0</upgradeable>
+        <upgradeSpam></upgradeSpam>
+        <useSpam></useSpam>
+        <buySpam>acheter la maison</buySpam>
+        <prices>
+            {
+                2000
+            }
+        </prices>
+        <usePrices>
+            {
+                0
+            }
+        </usePrices>
+        <imagesUrls>
+            {
+                demo/img/achat.png
+            }
+        </imagesUrls>
+    </tool>
+
+    <tool id="5">
+        <name>Poubelle</name>
+        <size>{80,80}</size>
+        <description></description>
+        <level>0</level>
+        <upgradeable>0</upgradeable>
+        <upgradeSpam></upgradeSpam>
+        <useSpam>utiliser la poubelle</useSpam>
+        <buySpam></buySpam>
+        <prices>
+            {
+                0
+            }
+        </prices>
+        <usePrices>
+            {
+                0
+            }
+        </usePrices>
+        <imagesUrls>
+            {
+                demo/img/tools/poubelle01.png
+            }
+        </imagesUrls>
+    </tool>
 </tools>
