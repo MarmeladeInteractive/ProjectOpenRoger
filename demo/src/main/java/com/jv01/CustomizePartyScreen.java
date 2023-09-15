@@ -42,16 +42,18 @@ class CustomizePartyScreen extends JPanel {
     public int pointBank = 60;
 
     public String conservatismScore;
-
     public String nationalismScore;
-        
     public String ecologismScore;
-                
     public String feminismScore;
-       
     public String anarchismScore;
-          
     public String populismScore;
+
+    public JSlider conservatismSlider;
+    public JSlider nationalismSlider;
+    public JSlider ecologismSlider;
+    public JSlider feminismSlider;
+    public JSlider anarchismSlider;
+    public JSlider populismSlider;
 
     public CustomizePartyScreen(String gameName) {
         this.gameName = gameName;
@@ -88,9 +90,9 @@ class CustomizePartyScreen extends JPanel {
         JLabel partyNameLabel = new JLabel(partyName);
         panel.add(partyNameLabel, constraints);
         
-        String members = party.get("members").get(0);
+        /*String members = party.get("members").get(0);
         JLabel membersLabel = new JLabel("Members's number: " + members);
-        panel.add(membersLabel, constraints);
+        panel.add(membersLabel, constraints);*/
 
         String membersTargetedAge = party.get("membersTargetedAge").get(0);
         JLabel membersTargetedAgeLabel = new JLabel("Targeted Age: " + membersTargetedAge);
@@ -100,39 +102,39 @@ class CustomizePartyScreen extends JPanel {
         JLabel membersTargetedWealthLabel = new JLabel("Targeted Wealth: " + membersTargetedWealth);
         panel.add(membersTargetedWealthLabel, constraints);
 
-        String wealth = party.get("wealth").get(0);
+        /*String wealth = party.get("wealth").get(0);
         JLabel wealthLabel = new JLabel("Party Wealth: " + wealth);
-        panel.add(wealthLabel, constraints);
+        panel.add(wealthLabel, constraints);*/
         
         conservatismScore = party.get("conservatismScore").get(0);
         JLabel partyconservatismScore = new JLabel("Conservatism Score: " + conservatismScore);
         panel.add(partyconservatismScore, constraints);
-        createScoreSlider("Conservatism", conservatismScore, constraints, partyconservatismScore);
+        conservatismSlider = createScoreSlider("Conservatism", conservatismScore, constraints, partyconservatismScore);
 
         nationalismScore = party.get("nationalismScore").get(0);
         JLabel nationalismScoreLabel = new JLabel("Nationalism Score: " + nationalismScore);
         panel.add(nationalismScoreLabel, constraints);
-        createScoreSlider("Nationalism", nationalismScore, constraints, nationalismScoreLabel);
+        nationalismSlider = createScoreSlider("Nationalism", nationalismScore, constraints, nationalismScoreLabel);
 
         ecologismScore = party.get("ecologismScore").get(0);
         JLabel ecologismScoreLabel = new JLabel("Ecologism Score: " + ecologismScore);
         panel.add(ecologismScoreLabel, constraints);
-        createScoreSlider("Ecologism", ecologismScore, constraints, ecologismScoreLabel);
+        ecologismSlider = createScoreSlider("Ecologism", ecologismScore, constraints, ecologismScoreLabel);
         
         feminismScore = party.get("feminismScore").get(0);
         JLabel feminismScoreLabel = new JLabel("Feminism Score: " + feminismScore);
         panel.add(feminismScoreLabel, constraints);        
-        createScoreSlider("Feminism", feminismScore, constraints, feminismScoreLabel);
+        feminismSlider = createScoreSlider("Feminism", feminismScore, constraints, feminismScoreLabel);
 
         anarchismScore = party.get("anarchismScore").get(0);
         JLabel anarchismScoreLabel = new JLabel("Anarchism Score: " + anarchismScore);
         panel.add(anarchismScoreLabel, constraints);      
-        createScoreSlider("Anarchism", anarchismScore, constraints, anarchismScoreLabel);
+        anarchismSlider = createScoreSlider("Anarchism", anarchismScore, constraints, anarchismScoreLabel);
   
         populismScore = party.get("populismScore").get(0);
         JLabel populismScoreLabel = new JLabel("Populism Score: " + populismScore);
         panel.add(populismScoreLabel, constraints);
-        createScoreSlider("Populism", populismScore, constraints, populismScoreLabel);
+        populismSlider = createScoreSlider("Populism", populismScore, constraints, populismScoreLabel);
 
         JButton nextParty = new JButton(">");
 
@@ -202,8 +204,8 @@ class CustomizePartyScreen extends JPanel {
         frame.setLocationRelativeTo(null);
     }
 
-    private void createScoreSlider(final String scoreName, String scoreValue, GridBagConstraints constraints, final JLabel scoreLabelToUpdate) {
-        scoreLabelToUpdate.setText(scoreName + " Score: " + scoreValue); // Mettez à jour le texte du JLabel
+    private JSlider createScoreSlider(final String scoreName, String scoreValue, GridBagConstraints constraints, final JLabel scoreLabelToUpdate) {
+        scoreLabelToUpdate.setText(scoreName + " Score: " + scoreValue); 
         
         JSlider scoreSlider = new JSlider(JSlider.HORIZONTAL, 0, 100, Integer.parseInt(scoreValue));
         scoreSlider.setMajorTickSpacing(10);
@@ -215,15 +217,24 @@ class CustomizePartyScreen extends JPanel {
                 JSlider source = (JSlider) e.getSource();
                 if (!source.getValueIsAdjusting()) {
                     int newScoreValue = source.getValue();
-                    scoreLabelToUpdate.setText(scoreName + " Score: " + newScoreValue); // Mettez à jour le texte du JLabel
-                    // Mettez à jour la valeur du score dans votre modèle de données
-                    // (par exemple, party.get(scoreName + "Score").set(0, String.valueOf(newScoreValue)))
+                    scoreLabelToUpdate.setText(scoreName + " Score: " + newScoreValue); 
+                    sliderChanged();
                 }
             }
         });
     
         panel.add(scoreLabelToUpdate, constraints);
         panel.add(scoreSlider, constraints);
+        return scoreSlider;
+    }
+
+    public void sliderChanged(){
+        conservatismScore = String.valueOf(conservatismSlider.getValue());
+        nationalismScore = String.valueOf(nationalismSlider.getValue());
+        ecologismScore = String.valueOf(ecologismSlider.getValue());           
+        feminismScore = String.valueOf(feminismSlider.getValue());
+        anarchismScore = String.valueOf(anarchismSlider.getValue());         
+        populismScore = String.valueOf(populismSlider.getValue());
     }
         
     public void changeParty(int direction){
