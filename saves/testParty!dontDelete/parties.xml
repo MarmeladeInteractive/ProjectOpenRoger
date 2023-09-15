@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Meadows of Grassy Vale</partyName>
+        <members>28697</members>
+        <membersTargetedAge>74</membersTargetedAge>
+        <membersTargetedWealth>88</membersTargetedWealth>
+        <wealth>14463288</wealth>
+        <conservatismScore>55</conservatismScore>
+        <nationalismScore>42</nationalismScore>
+        <ecologismScore>53</ecologismScore>
+        <feminismScore>56</feminismScore>
+        <anarchismScore>16</anarchismScore>
+        <populismScore>94</populismScore>
+        <ideologicalCode>1-4-3-3-2-3</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Dustin of Barrowton</partyName>
+        <members>28838</members>
+        <membersTargetedAge>22</membersTargetedAge>
+        <membersTargetedWealth>63</membersTargetedWealth>
+        <wealth>15745548</wealth>
+        <conservatismScore>35</conservatismScore>
+        <nationalismScore>27</nationalismScore>
+        <ecologismScore>98</ecologismScore>
+        <feminismScore>42</feminismScore>
+        <anarchismScore>97</anarchismScore>
+        <populismScore>87</populismScore>
+        <ideologicalCode>4-4-4-2-2-2</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Royce of Runestone</partyName>
+        <members>110727</members>
+        <membersTargetedAge>50</membersTargetedAge>
+        <membersTargetedWealth>94</membersTargetedWealth>
+        <wealth>88692327</wealth>
+        <conservatismScore>49</conservatismScore>
+        <nationalismScore>24</nationalismScore>
+        <ecologismScore>77</ecologismScore>
+        <feminismScore>92</feminismScore>
+        <anarchismScore>91</anarchismScore>
+        <populismScore>87</populismScore>
+        <ideologicalCode>4-4-4-4-1-2</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Ryger of Willow Wood</partyName>
+        <members>41355</members>
+        <membersTargetedAge>64</membersTargetedAge>
+        <membersTargetedWealth>85</membersTargetedWealth>
+        <wealth>20842920</wealth>
+        <conservatismScore>99</conservatismScore>
+        <nationalismScore>98</nationalismScore>
+        <ecologismScore>13</ecologismScore>
+        <feminismScore>11</feminismScore>
+        <anarchismScore>7</anarchismScore>
+        <populismScore>61</populismScore>
+        <ideologicalCode>1-3-1-1-4-4</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Bulwer of Blackcrown</partyName>
+        <members>64546</members>
+        <membersTargetedAge>34</membersTargetedAge>
+        <membersTargetedWealth>61</membersTargetedWealth>
+        <wealth>6583692</wealth>
+        <conservatismScore>96</conservatismScore>
+        <nationalismScore>100</nationalismScore>
+        <ecologismScore>59</ecologismScore>
+        <feminismScore>99</feminismScore>
+        <anarchismScore>0</anarchismScore>
+        <populismScore>40</populismScore>
+        <ideologicalCode>1-2-3-4-4-4</ideologicalCode>
+    </party>
+</parties>

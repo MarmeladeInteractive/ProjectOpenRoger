@@ -1,101 +1,150 @@
 package com.jv01;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.Node;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
-public class CustomizePartyScreen {
+import java.awt.event.KeyListener;
 
-    public Game game;
+class CustomizePartyScreen extends JPanel {
+    public static Save save = new Save();
+    public Document doc;
 
-    public String gameTitle = "Jeux";
-    private JFrame frame = new JFrame("Party Customization");
+    public String gameName;
 
-    public JTextField partyIDTextField = new JTextField(20);
-    public JTextField seedTextField = new JTextField(20);
+    public int currentParty = 1;
 
-    public JButton chooseSeedButton;
+    private static final int BOXE_SIZE = 800;
+
+    public JFrame frame = new JFrame("Customize party screen");
 
     public JPanel panel;
-    public JList<String> gameNamesJList;
-    public GridBagConstraints constraints;
 
-    public String gameName = "";
+    public JTextField nameTextField = new JTextField(20);
 
-    public Save save;
+    public CustomizePartyScreen(String gameName) {
+        this.gameName = gameName;
 
-    public String choosenParty = "1";
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(BOXE_SIZE, BOXE_SIZE);
+        
+        ChangeComponents(currentParty);
 
-    public CustomizePartyScreen(Game runningGame){
-        this.game = runningGame;
-
-        this.gameTitle = "Jeux";
-        this.frame = new JFrame("Party Customization");
-
-        this.partyIDTextField = new JTextField(20);
-        this.seedTextField = new JTextField(20);
-        this.gameName = "";
-
-        this.choosenParty = "1";
+        frame.add(this);
+        frame.setVisible(true);
     }
 
-    public void openCustomizePartyScreen() {
+    public void ChangeComponents(int idParty){
         frame.getContentPane().removeAll();
         frame.repaint();
 
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(BOXE_SIZE, BOXE_SIZE);
 
         panel = new JPanel(new GridBagLayout());
-        constraints = new GridBagConstraints();
+        GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = GridBagConstraints.RELATIVE;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.insets = new Insets(5, 10, 5, 10);
 
-        JLabel titleLabel = new JLabel("Choose and customize a party :");
+        doc = save.getDocumentXml(gameName,"parties");
+        Element element = save.getElementById(doc, "party", String.valueOf(idParty));
+        
+
+        Map<String, List<String>> party = save.getAllChildsFromElement(element);
+
+        String partyName = party.get("partyName").get(0);
+
+        JLabel partyNameLabel = new JLabel(partyName);
+        panel.add(partyNameLabel, constraints);
+
+        String conservatismScore = party.get("conservatismScore").get(0);
+
+        JLabel partyconservatismScore = new JLabel("conservatismScore: " + conservatismScore);
+        panel.add(partyconservatismScore, constraints);
+
+
+        JButton nextParty = new JButton(">");
+        panel.add(nextParty, constraints);
+
+        nextParty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               changeParty(1);
+            }
+        });
+
+        JButton previewParty = new JButton("<");
+        panel.add(previewParty, constraints);
+
+        previewParty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               changeParty(-1);
+            }
+        });
+
+
+        /*JLabel titleLabel = new JLabel("Entrez le nom de la nouvelle partie:");
         panel.add(titleLabel, constraints);
 
-        panel.add(partyIDTextField, constraints);
+        panel.add(nameTextField, constraints);
 
-        //JLabel titleLabelPartyId = new JLabel("Type the party ID you want : ");
-        //panel.add(titleLabelPartyId, constraints);
+        JButton chooseSeedButton = new JButton("Choisir une seed");
+        panel.add(chooseSeedButton, constraints);
 
-        //panel.add(seedTextField, constraints);
-        
-        JButton partyIDButton = new JButton("Select chose ID");
-        panel.add(partyIDButton, constraints);
-
-        partyIDButton.addActionListener(new ActionListener() {
+        chooseSeedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                choosenParty = partyIDTextField.getText();
+               
             }
-        });
+        });*/
 
-        JButton cancelButton = new JButton("Cancel");
-        panel.add(cancelButton, constraints);
 
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+        frame.add(panel);
+        frame.setVisible(true);  
+        frame.setLocationRelativeTo(null);
+    }
+
+    public void changeParty(int direction){
+        if(direction > 0){
+            if(currentParty < 5){
+                currentParty++;
+            }else{
+                currentParty = 1;
             }
-        });
+        }else{
+            if(currentParty > 1){
+                currentParty--;
+            }else{
+                currentParty = 5;
+            }
+        }
 
-        JButton savePartyButton = new JButton("Save Changes");
-        panel.add(savePartyButton, constraints);
+        ChangeComponents(currentParty);
 
-        savePartyButton.addActionListener(new ActionListener() {
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                save.changeElementChildValue(game.name,"saves/" + gameName + "/" + "parties" + ".xml","party",choosenParty,"partyID",choosenParty+'1');
+            public void run() {
+                CustomizePartyScreen customizePartyScreen = new CustomizePartyScreen("testParty!dontDelete");
             }
         });
     }
