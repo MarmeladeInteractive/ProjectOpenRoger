@@ -82,7 +82,7 @@ public class Dealers {
                     case 0:
                         if(player.inventory.apples >= 0){
                             
-                            player.money += player.inventory.apples*4;
+                            player.money += player.inventory.apples * sellPrice;
 
                             player.inventory.apples = 0;
 
@@ -94,6 +94,39 @@ public class Dealers {
                             player.keyBord.interactKeyPressed = false;
                         }
                         break;
+
+                    case 1:
+                        if(player.inventory.chocolatines >= 0){
+                            
+                            player.money += player.inventory.chocolatines * sellPrice;
+
+                            player.inventory.chocolatines = 0;
+
+                            player.save();
+                            player.inventory.saveChocolatines();
+
+                            refreshDisplay = true;
+                                                      
+                            player.keyBord.interactKeyPressed = false;
+                        }
+                        break;
+
+                    case 2:
+                        if(player.inventory.croissants >= 0){
+                            
+                            player.money += player.inventory.croissants * sellPrice;
+
+                            player.inventory.croissants = 0;
+
+                            player.save();
+                            player.inventory.saveCroissants();
+
+                            refreshDisplay = true;
+                                                      
+                            player.keyBord.interactKeyPressed = false;
+                        }
+                        break;
+                        
                 
                     default:
                         break;
@@ -101,13 +134,40 @@ public class Dealers {
 
         }else if(player.keyBord.upgradeKeyPressed){
 
+                if(player.isEnoughMoney(buyPrice,false))
                 switch (id) {
                     case 0:
                         if(player.inventory.apples < player.inventory.maxApples){
                             player.inventory.apples ++;
-                            player.money -= 8;
+                            player.money -= buyPrice;
                             player.save();
                             player.inventory.saveApples();
+
+                            refreshDisplay = true;
+                                                                       
+                            player.keyBord.upgradeKeyPressed = false;
+                        }
+                        break;
+
+                    case 1:
+                        if(player.inventory.chocolatines < player.inventory.maxChocolatines){
+                            player.inventory.chocolatines ++;
+                            player.money -= buyPrice;
+                            player.save();
+                            player.inventory.saveChocolatines();
+
+                            refreshDisplay = true;
+                                                                       
+                            player.keyBord.upgradeKeyPressed = false;
+                        }
+                        break;
+
+                    case 2:
+                        if(player.inventory.croissants < player.inventory.maxCroissants){
+                            player.inventory.croissants ++;
+                            player.money -= buyPrice;
+                            player.save();
+                            player.inventory.saveCroissants();
 
                             refreshDisplay = true;
                                                                        
