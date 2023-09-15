@@ -28,6 +28,8 @@ public class Inventory {
 
     public int wastes = 0;
     public int apples = 0;
+    public int chocolatines = 0;
+    public int croissants = 0;
 
     public int maxWastes = 10;
     private JLabel wastesLabel;
@@ -40,6 +42,18 @@ public class Inventory {
     private Objects applesObj;
     private boolean isApple = false;
     private int[] applePosition;
+
+    public int maxChocolatines = 10;
+    private JLabel chocolatinesLabel;
+    private Objects chocolatinesObj;
+    private boolean isChocolatine = false;
+    private int[] chocolatinePosition;
+
+    public int maxCroissants = 10;
+    private JLabel croissantsLabel;
+    private Objects croissantsObj;
+    private boolean isCroissant = false;
+    private int[] croissantPosition;
 
     private boolean[][] cell = {
         {false,false,false},
@@ -85,6 +99,8 @@ public class Inventory {
     private void addItems(){
         if(wastes > 0){addWasteItem();}
         if(apples > 0){addAppleItem();}
+        if(chocolatines > 0){addChocolatineItem();}
+        if(croissants > 0){addCroissantItem();}
     }
 
     private void addWasteItem(){
@@ -111,6 +127,32 @@ public class Inventory {
         }
         applesObj = addObject(position,1);
         applesLabel = addLabel(applesLabel,position, String.valueOf(apples) + '/' + String.valueOf(maxApples));
+    }
+
+    private void addChocolatineItem(){
+        int[] position;
+        if(isChocolatine){
+            position = chocolatinePosition;
+        }else{
+            position = getPosition();
+            chocolatinePosition = position;
+            isChocolatine = true;
+        }
+        chocolatinesObj = addObject(position,2);
+        chocolatinesLabel = addLabel(chocolatinesLabel,position, String.valueOf(chocolatines) + '/' + String.valueOf(maxChocolatines));
+    }
+
+    private void addCroissantItem(){
+        int[] position;
+        if(isCroissant){
+            position = croissantPosition;
+        }else{
+            position = getPosition();
+            croissantPosition = position;
+            isCroissant = true;
+        }
+        croissantsObj = addObject(position,3);
+        croissantsLabel = addLabel(croissantsLabel,position, String.valueOf(croissants) + '/' + String.valueOf(maxCroissants));
     }
 
     private int[] getPosition(){
@@ -164,9 +206,13 @@ public class Inventory {
 
         this.wastes = Integer.parseInt(save.getChildFromMapElements(allElements,"wastes"));
         this.apples = Integer.parseInt(save.getChildFromMapElements(allElements,"apples"));
+        this.chocolatines = Integer.parseInt(save.getChildFromMapElements(allElements,"chocolatines"));
+        this.croissants = Integer.parseInt(save.getChildFromMapElements(allElements,"croissants"));
 
         this.maxWastes = Integer.parseInt(save.getChildFromMapElements(allElements,"maxWastes"));
         this.maxApples = Integer.parseInt(save.getChildFromMapElements(allElements,"maxApples"));
+        this.maxChocolatines = Integer.parseInt(save.getChildFromMapElements(allElements,"maxChocolatines"));
+        this.maxCroissants = Integer.parseInt(save.getChildFromMapElements(allElements,"maxCroissants"));
     }
 
     public void saveInventoryValue( String childName, String newValue){
@@ -183,6 +229,16 @@ public class Inventory {
         updateLables();
     }
 
+    public void saveChocolatines(){
+        saveInventoryValue("chocolatines",String.valueOf(chocolatines));
+        updateLables();
+    }
+
+    public void saveCroissants(){
+        saveInventoryValue("croissants",String.valueOf(croissants));
+        updateLables();
+    }
+
     public void updateWastesLabel(){
         wastesLabel.setText(
             "<html>"+
@@ -195,6 +251,22 @@ public class Inventory {
         applesLabel.setText(
             "<html>"+
                 apples + '/' + maxApples+
+            "</html>"
+        );
+    }
+
+    public void updateChocolatinesLabel(){
+        chocolatinesLabel.setText(
+            "<html>"+
+                chocolatines + '/' + maxChocolatines+
+            "</html>"
+        );
+    }
+
+    public void updateCroissantsLabel(){
+        croissantsLabel.setText(
+            "<html>"+
+                croissants + '/' + maxCroissants+
             "</html>"
         );
     }
@@ -227,6 +299,36 @@ public class Inventory {
                 inventoryPanel.remove(applesObj.objectLabel);
                 cell[applePosition[0]][applePosition[1]] = false;
                 isApple = false;
+            }
+        }
+
+        if(chocolatines > 0){
+            if(!isChocolatine){
+                addChocolatineItem();
+                isChocolatine = true;
+            }
+            updateChocolatinesLabel();
+        }else{
+            if(isChocolatine){
+                inventoryPanel.remove(chocolatinesLabel);
+                inventoryPanel.remove(chocolatinesObj.objectLabel);
+                cell[chocolatinePosition[0]][chocolatinePosition[1]] = false;
+                isChocolatine = false;
+            }
+        }
+
+        if(croissants > 0){
+            if(!isCroissant){
+                addCroissantItem();
+                isCroissant = true;
+            }
+            updateCroissantsLabel();
+        }else{
+            if(isCroissant){
+                inventoryPanel.remove(croissantsLabel);
+                inventoryPanel.remove(croissantsObj.objectLabel);
+                cell[croissantPosition[0]][croissantPosition[1]] = false;
+                isCroissant = false;
             }
         }
     }
