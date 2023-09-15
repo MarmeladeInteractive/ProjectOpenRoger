@@ -17,7 +17,7 @@
     <dealer id="1">
         <name>stand de chocolatines</name>
         <itemSoldName>chocolatine</itemSoldName>
-        <itemSoldId>1</itemSoldId>
+        <itemSoldId>2</itemSoldId>
         <size>{50,50}</size>
         <description></description>
         <buySpam>acheter une chocolatine</buySpam>
@@ -32,7 +32,7 @@
     <dealer id="2">
         <name>stand de croissants</name>
         <itemSoldName>croissant</itemSoldName>
-        <itemSoldId>1</itemSoldId>
+        <itemSoldId>3</itemSoldId>
         <size>{50,50}</size>
         <description></description>
         <buySpam>acheter un croissant</buySpam>
