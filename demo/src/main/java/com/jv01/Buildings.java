@@ -1,9 +1,18 @@
 package com.jv01;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 public class Buildings {
+    public Save save = new Save();
+    public String gameName;
+
     public String name;
+    public int id;
     public int type;
     public String imageUrl;
+    public String defaultImageUrl;
+    public String description;
     public long[] chunk;
     public int[] cell;
     public int[] dimension;
@@ -15,82 +24,37 @@ public class Buildings {
     public String seed;
     public String mapKey;
 
-    public String[][] imagesUrl = {
-        {
-            "demo\\img\\buildings\\partyHouse01.png",
-            "demo\\img\\buildings\\emptyProperty01.png",
-            "demo\\img\\buildings\\cityHall01.png",
-            "demo\\img\\buildings\\printingPress01.png",
-            "demo\\img\\buildings\\bakery01.png",
-            "demo\\img\\buildings\\store01.png",
-            "demo\\img\\buildings\\abandonedHouse01.png",
-            "demo\\img\\buildings\\house01.png",
-        },
-        {
-            "demo\\img\\buildings\\partyHouse02.png",
-            "demo\\img\\buildings\\emptyProperty02.png",
-            "demo\\img\\buildings\\cityHall02.png",
-            "demo\\img\\buildings\\printingPress02.png",
-            "demo\\img\\buildings\\bakery02.png",
-            "demo\\img\\buildings\\store02.png",
-            "demo\\img\\buildings\\abandonedHouse02.png",
-            "demo\\img\\buildings\\house02.png",
-        },
-        {
-            "demo\\img\\buildings\\partyHouse03.png",
-            "demo\\img\\buildings\\emptyProperty03.png",
-            "demo\\img\\buildings\\cityHall03.png",
-            "demo\\img\\buildings\\printingPress03.png",
-            "demo\\img\\buildings\\bakery03.png",
-            "demo\\img\\buildings\\store03.png",
-            "demo\\img\\buildings\\abandonedHouse03.png",
-            "demo\\img\\buildings\\house03.png",
-        },
-        {
-            "demo\\img\\buildings\\partyHouse04.png",
-            "demo\\img\\buildings\\emptyProperty04.png",
-            "demo\\img\\buildings\\cityHall04.png",
-            "demo\\img\\buildings\\printingPress04.png",
-            "demo\\img\\buildings\\bakery04.png",
-            "demo\\img\\buildings\\store04.png",
-            "demo\\img\\buildings\\abandonedHouse04.png",
-            "demo\\img\\buildings\\house04.png",
-        },
-};
+    public Buildings(String gameName, int id, long[] chunk, int[] cell, String buildingKey){
+        this.gameName = gameName;
 
-    public String[] names = {
-        "Maison du parti",
-        "Maison vide",
-        "Mairie",
-        "Imprimerie",
-        "Boulangerie",
-        "Magasin",
-        "Maison abandonnee",
-        "Maison",
-    };
-    public int[][] dimensions = {
-        {200,200},
-        {200,200},
-        {200,200},
-        {200,200},
-        {200,200},
-        {200,200},
-        {200,200},
-        {200,200},
-    };
+        this.id = id;
 
-    public Buildings(int type, long[] chunk, int[] cell, String buildingKey){
-        this.type = type;
-        this.name = names[type];
         this.buildingKey = buildingKey;
-        this.imageUrl = imagesUrl[getBuildingVariety()][type];
         this.chunk = chunk;
         this.cell = cell;
-        this.dimension = dimensions[type];
+
+        this.type = getBuildingVariety();
+
+        getBuildingValues();
     }
 
     public Buildings(){
 
+    }
+
+    private void getBuildingValues(){
+        Document doc = save.getDocumentXml(gameName,"functional/buildings");
+        Element element = save.getElementById(doc, "building", String.valueOf(id));
+
+        this.name = save.getChildFromElement(element, "name");
+        this.description = save.getChildFromElement(element, "description");
+        this.dimension = save.stringToIntArray(save.getChildFromElement(element, "size"));
+
+        this.imageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[type];
+        this.imageUrl = save.stringToLink(this.imageUrl);
+
+        this.defaultImageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[0];
+        this.defaultImageUrl = save.stringToLink(this.imageUrl);
     }
 
     public int getBuildingVariety(){

@@ -416,7 +416,7 @@ public class Chunks {
         int[] code = {(number)*(cell[0]+1),(number)*(cell[1]+1)};
         String buildingKey = getObjectKey(code);
 
-        Buildings building01 = new Buildings(buildingType, chunk, cell, buildingKey);
+        Buildings building01 = new Buildings(gameName, buildingType, chunk, cell, buildingKey);
 
         Objects obj = new Objects(cell[0]*cellSize+(cellSize/2)+building01.offsetX, cell[1]*cellSize+(cellSize/2)+ building01.offsetY, building01.dimension, building01.imageUrl, 1, backgroundPanel);         
         restrictedAreas.add(obj.restrictedAreas);
@@ -480,7 +480,7 @@ public class Chunks {
                                 position[0]=0;
                                 position[1]=0;
 
-                                Buildings building01 = new Buildings(6, chunk, cell, decorationKey);
+                                Buildings building01 = new Buildings(gameName, 6, chunk, cell, decorationKey);
 
                                 Objects obj = new Objects(cell[0]*cellSize+(cellSize/2)+building01.offsetX, cell[1]*cellSize+(cellSize/2)+ building01.offsetY, building01.dimension, building01.imageUrl, 1, backgroundPanel);         
                                 restrictedAreas.add(obj.restrictedAreas);
