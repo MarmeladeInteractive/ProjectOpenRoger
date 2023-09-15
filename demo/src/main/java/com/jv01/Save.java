@@ -219,7 +219,7 @@ public class Save {
         int[] array = new int[valueStrings.length];
 
         for (int i = 0; i < valueStrings.length; i++) {
-            array[i] = Integer.parseInt(valueStrings[i]);
+            array[i] = Integer.parseInt(dropSpaceFromString(valueStrings[i]));
         }    
         return array;
     }
@@ -237,7 +237,7 @@ public class Save {
         return array;
     }
 
-    public String stringToLink(String link){
+    public String dropSpaceFromString(String link){
         return link.replaceAll("\\s", "");
     }
 

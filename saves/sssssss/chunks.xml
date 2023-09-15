@@ -1,0 +1,12 @@
+<chunks>
+    <chunk id="0_0">
+        <cell>{0,0}</cell>
+        <biome>4</biome>
+        <backPic>demo\img\back\herbe.jpg</backPic>
+        <number>2</number>
+        <buildingsCellsX>{2,0}</buildingsCellsX>
+        <buildingsCellsY>{2,2}</buildingsCellsY>
+        <buildingsTypes>{0,7}</buildingsTypes>
+        <completedCell>{0,1,0,1}</completedCell>
+    </chunk>
+</chunks>

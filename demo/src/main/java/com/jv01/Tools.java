@@ -5,10 +5,12 @@ import org.w3c.dom.Element;
 
 public class Tools {
     public Save save = new Save();
+    public String gameName;
+
     public boolean refresh = false;
     public boolean refreshDisplay = false;
 
-    public int type;
+    public int id;
     public int level;
 
     public String name;
@@ -26,280 +28,51 @@ public class Tools {
     public Document doc;
     public Element element;
 
-    
+    public Tools(String gameName, int id, int level){
+        this.gameName = gameName;
 
-    public String[] toolsNames = {
-        "Imprimante",
-        "Four",
-        "Véhicule",
-
-        "Maison abandonee",
-        "Maison vide",
-
-        "Poubelle",
-
-        "Stand de pomme",
-        "Stand de chocolatines",
-        "Stand de croissants",
-    };
-
-    public String[][] toolsPics = {
-        {
-            "demo\\img\\achat.png",
-            "demo\\img\\tools\\imprimante01.png",
-            "demo\\img\\tools\\imprimante01.png",
-            "demo\\img\\tools\\imprimante01.png",
-        },
-        {
-            "demo\\img\\achat.png",
-            "demo\\img\\tools\\four01.png",
-            "demo\\img\\tools\\four01.png",
-            "demo\\img\\tools\\four01.png",
-        },
-        {
-            "demo\\img\\achat.png",
-            "demo\\img\\tools\\velo01.png",
-            "demo\\img\\tools\\moto01.png",
-            "demo\\img\\tools\\voiture01.png",
-        },
-
-        {
-            "demo\\img\\achat.png",
-            "demo\\img\\achat.png",
-            "demo\\img\\achat.png",
-            "demo\\img\\achat.png",
-        },
-        {
-            "demo\\img\\achat.png",
-            "demo\\img\\achat.png",
-            "demo\\img\\achat.png",
-            "demo\\img\\achat.png",
-        },
-        {
-            "demo\\img\\tools\\poubelle01.png",
-            "demo\\img\\tools\\poubelle01.png",
-            "demo\\img\\tools\\poubelle01.png",
-            "demo\\img\\tools\\poubelle01.png",
-        },
-        {
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-        },
-        {
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-        },
-        {
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-            "demo\\img\\null.png",
-        }
-    };
-
-    public int[][] toolsPrices = {
-        {
-            100,
-            500,
-            800,
-            1000
-        },
-        {
-            150,
-            600,
-            850,
-            1100
-        },
-        {
-            400,
-            1000,
-            3000,
-            10000
-        },
-
-        {
-            1000,
-            1000,
-            1000,
-            1000
-        },
-        {
-            2000,
-            2000,
-            2000,
-            2000
-        },
-        {
-            0,
-            0,
-            0,
-            0
-        },
-        {
-            8,
-            8,
-            8,
-            8
-        },
-        {
-            3,
-            3,
-            3,
-            3
-        },
-        {
-            2,
-            2,
-            2,
-            2
-        }
-    };
-
-     public int[][] toolsUsePrices = {
-        {
-            10,
-            15,
-            30,
-            50
-        },
-        {
-            20,
-            30,
-            45,
-            50
-        },
-        {
-            0,
-            1,
-            2,
-            3
-        },
-
-        {
-            0,
-            0,
-            0,
-            0
-        },
-        {
-            0,
-            0,
-            0,
-            0
-        },
-        {
-            0,
-            0,
-            0,
-            0
-        },
-        {
-            0,
-            0,
-            0,
-            0
-        },
-        {
-            0,
-            0,
-            0,
-            0
-        },
-        {
-            0,
-            0,
-            0,
-            0
-        }
-    };
-
-    public int[][] toolsSizes = {
-        {150,150},
-        {150,150},
-        {200,200},
-
-        {150,150},
-        {150,150},
-        {80,80},
-        {50,50},
-        {50,50},
-        {50,50},
-    };
-
-    public String[] toolsbuySpams = {
-        "acheter une imprimante",
-        "acheter un four",
-        "acheter un véhicule",
-
-        "renover la maison",
-        "acheter la maison",
-        "",
-        "acheter une pomme",
-        "acheter une chocolatine",
-        "acheter un croissant"
-    };
-
-    public String[] toolsUpdateSpams = {
-        "amélirer l'imprimante",
-        "amélirer le four",
-        "amélirer le véhicule",
-
-        "",
-        "",
-        "",
-        "",
-        "",
-        ""
-    };
-
-    public String[] toolsUseSpams = {
-        "utiliser l'imprimante",
-        "utiliser le four",
-        "utiliser le véhicule",
-
-        "",
-        "",
-        "utiliser la poubelle",
-        "vendre des pommes",
-        "vendre des chocolatines",
-        "vendre des croissants"
-    };
-
-    public Tools(int type, int level){
-        this.type = type;
+        this.id = id;
         this.level = level;
 
-        this.name = toolsNames[type];
-        this.imageUrl = toolsPics[type][level];
-        this.size = toolsSizes[type];
-        this.price = toolsPrices[type][level];
-        this.usePrice = toolsUsePrices[type][level];
 
-        this.updateSpam = toolsUpdateSpams[type];
-        this.useSpam = toolsUseSpams[type];
-        this.buySpam = toolsbuySpams[type];
+        getToolValues();
 
-        if((type != 6)&&(type != 7)&&(type != 8)){
-            if(level==0){
-                if(buySpam != ""){
-                    this.spam = "'e' pour "+ buySpam + " " + price + "€"; 
-                }else{
-                    this.spam = "'e' pour "+ useSpam + " " + price + "€";
-                }   
-            }else if(level < 3){
-                this.spam = "'e' pour "+ useSpam + " " + usePrice + "€"+ "<br>"+
-                            "'u' pour "+ updateSpam  + " " + price + "€";
+
+        if(level==0){
+            if(buySpam != ""){
+                this.spam = "'e' pour "+ buySpam + " " + price + "€"; 
             }else{
-                this.spam = "'e' pour "+ useSpam + " " + usePrice + "€";
-            }
+                this.spam = "'e' pour "+ useSpam + " " + price + "€";
+            }   
+        }else if(level < 3){
+            this.spam = "'e' pour "+ useSpam + " " + usePrice + "€"+ "<br>"+
+                        "'u' pour "+ updateSpam  + " " + price + "€";
         }else{
-            this.spam = "'e' pour "+ useSpam + " " + String.valueOf(price/2) + "€"+ "<br>"+
-                        "'u' pour "+ buySpam  + " " + String.valueOf(price) + "€";
+            this.spam = "'e' pour "+ useSpam + " " + usePrice + "€";
         }
+
+    }
+
+    public void getToolValues(){
+        Document doc = save.getDocumentXml(gameName,"functional/tools");
+        Element element = save.getElementById(doc, "tool", String.valueOf(id));
+
+        this.name = save.getChildFromElement(element, "name");
+
+        this.imageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[level];
+        this.imageUrl = save.dropSpaceFromString(this.imageUrl);
+
+        this.size = save.stringToIntArray(save.getChildFromElement(element, "size"));
+
+        String pricesString = save.getChildFromElement(element, "prices");
+        this.price = save.stringToIntArray(pricesString)[level];
+
+        String usePriceString = save.getChildFromElement(element, "usePrices");
+        this.usePrice = save.stringToIntArray(usePriceString)[level];
+
+        this.updateSpam = save.getChildFromElement(element, "upgradeable");
+        this.useSpam = save.getChildFromElement(element, "useSpam");
+        this.buySpam = save.getChildFromElement(element, "buySpam");
     }
 
     public void interact(Player player){
@@ -307,7 +80,7 @@ public class Tools {
 
         if(player.keyBord.interactKeyPressed){
             if(level==0){
-                switch (type) {
+                switch (id) {
                     case 0:
                         if(player.isEnoughMoney(price,true)){
                             
@@ -366,21 +139,6 @@ public class Tools {
                             player.keyBord.interactKeyPressed = false;
                         }
                         break;
-                    case 6:
-                        if(player.inventory.apples >= 0){
-                            
-                            player.money += player.inventory.apples*4;
-
-                            player.inventory.apples = 0;
-
-                            player.save();
-                            player.inventory.saveApples();
-
-                            refreshDisplay = true;
-                                                      
-                            player.keyBord.interactKeyPressed = false;
-                        }
-                        break;
                 
                     default:
                         break;
@@ -390,7 +148,7 @@ public class Tools {
             }
         }else if(player.keyBord.upgradeKeyPressed){
             if(level<3){
-                switch (type) {
+                switch (id) {
                     case 0:
                         if(player.isEnoughMoney(price,true)){
                             level++;
@@ -416,19 +174,6 @@ public class Tools {
                             save.changeElementChildValue(player.gameName, "partyHouse", "partyHouse", "partyHouse", "transportationLevel", String.valueOf(level));
                             player.keyBord.upgradeKeyPressed = false;
                             refresh = true;
-                        }
-                        break;
-
-                    case 6:
-                        if(player.inventory.apples < player.inventory.maxApples){
-                            player.inventory.apples ++;
-                            player.money -= 8;
-                            player.save();
-                            player.inventory.saveApples();
-
-                            refreshDisplay = true;
-                                                                       
-                            player.keyBord.upgradeKeyPressed = false;
                         }
                         break;
                 

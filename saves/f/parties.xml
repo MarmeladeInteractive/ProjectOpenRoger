@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Varner</partyName>
+        <members>114082</members>
+        <membersTargetedAge>58</membersTargetedAge>
+        <membersTargetedWealth>35</membersTargetedWealth>
+        <wealth>24641712</wealth>
+        <conservatismScore>81</conservatismScore>
+        <nationalismScore>70</nationalismScore>
+        <ecologismScore>76</ecologismScore>
+        <feminismScore>31</feminismScore>
+        <anarchismScore>56</anarchismScore>
+        <populismScore>84</populismScore>
+        <ideologicalCode>3-4-4-2-3-4</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Dalt of Lemonwood</partyName>
+        <members>28605</members>
+        <membersTargetedAge>35</membersTargetedAge>
+        <membersTargetedWealth>73</membersTargetedWealth>
+        <wealth>7809165</wealth>
+        <conservatismScore>8</conservatismScore>
+        <nationalismScore>4</nationalismScore>
+        <ecologismScore>86</ecologismScore>
+        <feminismScore>23</feminismScore>
+        <anarchismScore>76</anarchismScore>
+        <populismScore>84</populismScore>
+        <ideologicalCode>4-4-4-1-1-1</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Yronwood of Yronwood</partyName>
+        <members>32606</members>
+        <membersTargetedAge>21</membersTargetedAge>
+        <membersTargetedWealth>63</membersTargetedWealth>
+        <wealth>6847260</wealth>
+        <conservatismScore>77</conservatismScore>
+        <nationalismScore>81</nationalismScore>
+        <ecologismScore>96</ecologismScore>
+        <feminismScore>97</feminismScore>
+        <anarchismScore>16</anarchismScore>
+        <populismScore>48</populismScore>
+        <ideologicalCode>1-2-4-4-4-4</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Dargood</partyName>
+        <members>20975</members>
+        <membersTargetedAge>87</membersTargetedAge>
+        <membersTargetedWealth>37</membersTargetedWealth>
+        <wealth>3901350</wealth>
+        <conservatismScore>4</conservatismScore>
+        <nationalismScore>9</nationalismScore>
+        <ecologismScore>86</ecologismScore>
+        <feminismScore>90</feminismScore>
+        <anarchismScore>63</anarchismScore>
+        <populismScore>87</populismScore>
+        <ideologicalCode>3-4-4-4-1-1</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Lipps</partyName>
+        <members>62717</members>
+        <membersTargetedAge>32</membersTargetedAge>
+        <membersTargetedWealth>20</membersTargetedWealth>
+        <wealth>6898870</wealth>
+        <conservatismScore>99</conservatismScore>
+        <nationalismScore>92</nationalismScore>
+        <ecologismScore>96</ecologismScore>
+        <feminismScore>82</feminismScore>
+        <anarchismScore>18</anarchismScore>
+        <populismScore>13</populismScore>
+        <ideologicalCode>1-1-4-4-4-4</ideologicalCode>
+    </party>
+</parties>

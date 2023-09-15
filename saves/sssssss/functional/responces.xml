@@ -1,0 +1,130 @@
+<responses>
+    <accepted id="accepted">
+        <res1>Votre parti est la lueur d'espoir dont notre pays a besoin. Je suis prêt à m'engager pour un avenir meilleur.</res1>
+        <res2>Je vois en vous un véritable leader, et je suis honoré de rejoindre votre parti politique.</res2>
+        <res3>Je suis convaincu que votre parti est la voie à suivre pour créer un monde plus juste. Je suis prêt à me battre à vos côtés.</res3>
+        <res4>Vos idées m'ont convaincu que vous êtes la personne qu'il nous faut. Je suis fier de faire partie de votre équipe.</res4>
+        <res5>J'ai confiance en votre capacité à apporter des changements significatifs. Je suis prêt à tout pour soutenir votre parti politique.</res5>
+        <res6>Votre engagement envers les valeurs que je chéris est incontestable. Je suis honoré de rejoindre votre parti.</res6>
+        <res7>Votre parti représente l'avenir que je veux pour nos enfants. Je suis prêt à travailler dur pour le réaliser.</res7>
+        <res8>Je suis excité de contribuer à la concrétisation de votre vision pour notre pays. Comptez sur moi à 100 %.</res8>
+        <res9>Je suis prêt à mettre mes compétences et mon énergie au service de votre parti. Ensemble, nous pouvons changer le monde.</res9>
+        <res10>Votre parti est la meilleure option pour un avenir prospère. Je suis déterminé à y contribuer pleinement.</res10>
+        <res11>Je partage vos valeurs profondément et je suis honoré de rejoindre votre parti.</res11>
+        <res12>Votre vision m'enthousiasme vraiment. Je suis prêt à m'investir à fond dans votre parti.</res12>
+        <res13>Votre dévouement à notre nation est admirable. Je suis prêt à tout pour soutenir votre parti.</res13>
+        <res14>Votre leadership est inspirant. Je suis totalement dévoué à votre cause.</res14>
+        <res15>Je crois sincèrement que votre parti est la meilleure option pour notre avenir. Je suis à bord à 100 %.</res15>
+        <res16>J'ai suivi votre carrière depuis longtemps, et je suis excité de faire partie de votre parti. Ensemble, nous pouvons accomplir de grandes choses.</res16>
+        <res17>Votre programme politique aligne parfaitement avec mes convictions les plus profondes. Je suis heureux de contribuer.</res17>
+        <res18>Je suis convaincu que vous êtes la personne qui peut apporter des changements positifs. Je suis prêt à soutenir votre parti de toutes les manières possibles.</res18>
+        <res19>Je suis fatigué du statu quo, et je crois fermement que vous êtes la clé du changement dont nous avons besoin. Je suis engagé à fond.</res19>
+        <res20>Vos idées sont novatrices et inspirantes. Je suis prêt à me mettre au travail pour faire avancer votre vision pour notre pays.</res20>
+        <res21>Votre parti représente l'avenir que je souhaite pour notre nation. Je suis prêt à tout pour soutenir votre cause et défendre nos valeurs.</res21>
+        <res22>Votre engagement envers un avenir meilleur est contagieux. Je suis heureux de me joindre à votre parti.</res22>
+        <res23>Je suis convaincu que votre leadership nous guidera vers des jours meilleurs. Je suis fier de faire partie de votre équipe.</res23>
+        <res24>Votre programme politique est le plus prometteur pour notre pays. Je suis prêt à travailler dur pour sa réussite.</res24>
+        <res25>Je suis inspiré par votre détermination à faire de notre nation un endroit meilleur. Je suis à vos côtés à 100 %.</res25>
+        <res26>Votre parti est le seul qui réellement comprend les besoins du peuple. Je suis fier de rejoindre vos rangs.</res26>
+        <res27>Je crois que votre parti a les meilleures solutions pour les défis auxquels nous sommes confrontés. Je suis prêt à m'engager pleinement.</res27>
+        <res28>Votre intégrité et votre engagement pour le bien commun me poussent à vous rejoindre. Je suis enthousiaste à l'idée de contribuer.</res28>
+        <res29>Je suis convaincu que votre parti peut faire une différence réelle. Je suis honoré de me joindre à votre lutte pour le progrès.</res29>
+        <res30>Votre parti incarne les valeurs qui sont chères à mon cœur. Je suis prêt à m'impliquer activement pour les faire avancer.</res30>
+    </accepted>
+    <denied id="denied">
+        <res1>Je préfère garder ma liberté de pensée et rester en dehors de tout parti politique pour le moment.</res1>
+        <res2>Je respecte votre parti, mais je ne pense pas que vous soyez la meilleure option pour moi en ce moment.</res2>
+        <res3>Mes priorités politiques sont ailleurs, et je ne pense pas que votre parti puisse les représenter.</res3>
+        <res4>Je suis déjà affilié à un autre parti politique qui correspond mieux à mes valeurs. Je vais continuer avec eux.</res4>
+        <res5>Je ne suis pas convaincu que votre parti puisse réellement apporter les changements dont notre pays a besoin.</res5>
+        <res6>Je préfère ne pas m'engager activement en politique en ce moment de ma vie.</res6>
+        <res7>Certaines de vos positions clés ne correspondent pas aux miennes, ce qui rend difficile pour moi de rejoindre votre parti.</res7>
+        <res8>Je ne suis pas d'accord avec certaines de vos politiques et préfère ne pas m'associer à votre parti politique.</res8>
+        <res9>Je préfère me concentrer sur d'autres domaines de la société où je pense pouvoir faire une plus grande différence.</res9>
+        <res10>Je crois que d'autres domaines nécessitent davantage mon implication. Je vais décliner votre offre.</res10>
+        <res11>Je respecte vos idées, mais je ne pense pas que votre parti soit la meilleure option pour moi.</res11>
+        <res12>Je préfère rester indépendant et ne pas m'engager dans un parti politique pour le moment.</res12>
+        <res13>Je soutiens d'autres valeurs et priorités politiques qui ne correspondent pas à celles de votre parti.</res13>
+        <res14>Je suis déjà affilié à un autre parti politique et je préfère continuer à travailler avec eux.</res14>
+        <res15>Je ne suis pas convaincu que votre parti puisse réellement apporter des changements significatifs.</res15>
+        <res16>Je préfère ne pas m'impliquer activement dans la politique en ce moment.</res16>
+        <res17>Je pense que votre parti manque de clarté sur certaines questions importantes qui me tiennent à cœur.</res17>
+        <res18>Je ne suis pas d'accord avec certaines de vos positions clés, ce qui rend difficile pour moi de rejoindre votre parti.</res18>
+        <res19>Je ne suis tout simplement pas intéressé par la politique et je préfère rester en dehors de tout parti.</res19>
+        <res20>Je pense que ma contribution serait plus utile dans d'autres domaines de la société, donc je vais poursuivre d'autres intérêts.</res20>
+        <res21>Je suis déjà engagé dans des causes qui me tiennent à cœur, et je préfère les poursuivre plutôt que de rejoindre votre parti.</res21>
+        <res22>Je respecte votre parti, mais je ne pense pas que je puisse apporter une contribution significative à votre cause.</res22>
+        <res23>Je ne suis pas sûr que votre parti puisse réellement répondre à mes préoccupations. Je préfère attendre et voir.</res23>
+        <res24>Je suis préoccupé par certaines décisions passées de votre parti. Je ne peux pas le soutenir en toute conscience.</res24>
+        <res25>Je crois en d'autres moyens de faire avancer notre société que ceux proposés par votre parti. Je vais suivre ma propre voie.</res25>
+        <res26>Je préfère garder un esprit ouvert et explorer toutes les possibilités avant de m'engager dans un parti politique.</res26>
+        <res27>Je ne suis pas convaincu que vous puissiez vraiment réaliser ce que vous promettez. Je préfère ne pas m'engager.</res27>
+        <res28>Je préfère ne pas être affilié à un parti politique en ce moment. Je veux garder ma liberté de pensée.</res28>
+        <res29>Je ne me sens pas vraiment connecté(e) à votre parti. Je vais chercher d'autres options politiques.</res29>
+        <res30>Je pense que mon temps et mes ressources seraient mieux utilisés ailleurs. Je vais poursuivre d'autres intérêts.</res30>
+    </denied>
+    <undecided id="undecided">
+        <res1>Je suis en train d'explorer toutes les options politiques avant de prendre une décision définitive.</res1>
+        <res2>Je suis dans une période de recherche et de réflexion. Je vais prendre le temps nécessaire pour prendre une décision éclairée.</res2>
+        <res3>Je veux être sûr de faire le choix qui correspond le mieux à mes valeurs et convictions. Laissez-moi du temps pour réfléchir.</res3>
+        <res4>Je me tiens au milieu d'un carrefour politique, et j'ai besoin de temps pour déterminer la bonne voie à suivre.</res4>
+        <res5>La politique est complexe, et je veux prendre le temps d'examiner toutes les options avant de prendre une décision.</res5>
+        <res6>Je suis ouvert à l'idée de rejoindre un parti politique, mais je veux m'assurer que c'est le bon choix pour moi.</res6>
+        <res7>Je ne veux pas me précipiter dans une décision. Je vais prendre le temps de réfléchir à toutes les implications.</res7>
+        <res8>Je préfère garder un esprit ouvert et explorer toutes les possibilités avant de m'engager dans un parti politique.</res8>
+        <res9>Je suis dans une phase de recherche approfondie pour comprendre les différentes plateformes politiques.</res9>
+        <res10>Je veux être sûr de prendre une décision éclairée. Laissez-moi un peu plus de temps pour évaluer toutes les options.</res10>
+        <res11>Je suis vraiment indécis en ce moment. J'ai besoin de plus d'informations sur votre parti et ses positions avant de prendre une décision.</res11>
+        <res12>Je suis tiraillé entre plusieurs partis politiques en ce moment. J'ai besoin de temps pour réfléchir.</res12>
+        <res13>Je ne suis pas sûr de la direction que je veux prendre en politique. Pouvez-vous me donner plus de détails sur votre programme ?</res13>
+        <res14>Je suis en train de peser le pour et le contre de chaque parti politique. J'espère pouvoir prendre une décision bientôt.</res14>
+        <res15>J'ai entendu des choses positives et négatives sur votre parti, et cela me rend indécis quant à mon choix.</res15>
+        <res16>Mon cœur me dit une chose, mais ma tête me dit autre chose. C'est difficile de prendre une décision.</res16>
+        <res17>Je suis inquiet de faire le mauvais choix, alors je préfère attendre et réfléchir davantage.</res17>
+        <res18>Je suis ouvert à l'idée de rejoindre un parti politique, mais je ne suis pas encore sûr duquel.</res18>
+        <res19>Il y a tellement d'options politiques, et je me sens un peu perdu en ce moment.</res19>
+        <res20>Je suis un électeur indécis en ce moment, mais je suis ouvert à être persuadé par un parti qui répond à mes préoccupations.</res20>
+        <res21>J'essaie de comprendre les nuances de chaque parti politique avant de prendre une décision éclairée.</res21>
+        <res22>Je veux être certain de faire le bon choix. Donnez-moi un peu de temps pour y réfléchir davantage.</res22>
+        <res23>Je cherche à en savoir plus sur les priorités de chaque parti politique avant de m'engager.</res23>
+        <res24>La politique est un terrain compliqué. Je vais prendre le temps de bien comprendre avant de me décider.</res24>
+        <res25>Je ne suis pas encore prêt à faire un choix. Je vais m'informer davantage sur votre parti et les autres options disponibles.</res25>
+        <res26>Je préfère garder un esprit ouvert et explorer toutes les possibilités avant de prendre une décision.</res26>
+        <res27>Je suis dans une période de réflexion. Je ne suis pas pressé de prendre une décision.</res27>
+        <res28>Je suis encore en train d'examiner toutes les options politiques. Je ne suis pas encore décidé.</res28>
+        <res29>Je veux être sûr de faire le choix qui correspond le mieux à mes valeurs. Laissez-moi du temps pour réfléchir.</res29>
+        <res30>Je suis dans une phase de recherche et d'analyse. Je prendrai ma décision lorsque je me sentirai prêt.</res30>
+    </undecided>
+    <angry id="angry">
+        <res1>Je suis furieux que vous ayez même envisagé que je pourrais rejoindre votre parti. C'est une insulte.</res1>
+        <res2>Vos politiques sont une farce totale. Je ne peux pas croire que vous essayiez de me recruter.</res2>
+        <res3>Je n'ai aucune intention de vous rejoindre, point final. Laissez-moi tranquille.</res3>
+        <res4>Je ne vous soutiendrai jamais, et je n'ai aucune patience pour cette discussion.</res4>
+        <res5>Je préfère marcher sur des charbons ardents que de me joindre à votre parti politique. C'est inimaginable.</res5>
+        <res6>Je ne veux même pas entendre parler de vous ou de votre parti. C'est une perte de temps totale.</res6>
+        <res7>Vos politiques sont une insulte à l'intelligence des gens. Vous ne méritez pas mon soutien.</res7>
+        <res8>Je suis en colère contre vous et votre parti pour toutes les promesses non tenues. Vous ne méritez aucune confiance.</res8>
+        <res9>Je ne vous rejoindrais même pas si vous m'offriez des montagnes d'or. Vous êtes hors de question.</res9>
+        <res10>Je préfère subir une opération sans anesthésie que de me joindre à votre parti politique. Oubliez ça.</res10>
+        <res11>Franchement, vous m'agacez. J'ai mieux à faire que de perdre mon temps avec vous.</res11>
+        <res12>Je ne peux même pas croire que vous m'ayez demandé ça. C'est une perte totale de temps.</res12>
+        <res13>Pourquoi devrais-je vous rejoindre ? Votre parti ne fait que promettre et ne jamais tenir ses engagements.</res13>
+        <res14>Vous et votre parti politique, vous ne comprenez rien à la vraie vie des gens.</res14>
+        <res15>Je ne veux même pas entendre parler de votre parti. Allez voir ailleurs si j'y suis.</res15>
+        <res16>Vos politiques sont une insulte à l'intelligence des gens. Vous me dégoûtez.</res16>
+        <res17>Vous êtes tout ce qui ne va pas avec la politique. Laissez-moi tranquille.</res17>
+        <res18>Je ne perdrai pas mon temps à discuter avec quelqu'un comme vous.</res18>
+        <res19>Je préfère me couper la langue que de vous rejoindre. C'est hors de question.</res19>
+        <res20>Vous pensez vraiment que je vais rejoindre votre parti ? Vous rêvez en couleur.</res20>
+        <res21>Vous êtes la dernière personne que je voudrais avoir dans mon parti. Oubliez ça.</res21>
+        <res22>Je ne vais même pas perdre une seconde à réfléchir à votre offre. C'est une perte de temps.</res22>
+        <res23>Votre parti ne mérite même pas d'être considéré. Je suis complètement en colère contre vos politiques.</res23>
+        <res24>Je ne peux pas vous prendre au sérieux. Vous êtes tout ce qui ne va pas dans la politique.</res24>
+        <res25>Je préfère mettre le feu à mon argent que de le dépenser pour soutenir votre parti.</res25>
+        <res26>Votre parti est une blague. Je ne suis même pas sûr que vous croyez en ce que vous dites.</res26>
+        <res27>Je n'ai aucun respect pour vous ni pour votre parti. Restez loin de moi.</res27>
+        <res28>Je ne vais même pas perdre mon souffle à vous dire à quel point je suis en colère contre votre parti.</res28>
+        <res29>Je n'ai pas de temps à perdre avec vous. Foutez le camp de ma vue.</res29>
+        <res30>Je ne vous rejoindrais même pas si vous étiez le dernier parti politique sur Terre.</res30>
+    </angry>
+</responses>

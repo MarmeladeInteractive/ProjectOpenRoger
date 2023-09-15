@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Dustin of Barrowton</partyName>
+        <members>53737</members>
+        <membersTargetedAge>24</membersTargetedAge>
+        <membersTargetedWealth>83</membersTargetedWealth>
+        <wealth>39550432</wealth>
+        <conservatismScore>83</conservatismScore>
+        <nationalismScore>87</nationalismScore>
+        <ecologismScore>86</ecologismScore>
+        <feminismScore>57</feminismScore>
+        <anarchismScore>16</anarchismScore>
+        <populismScore>16</populismScore>
+        <ideologicalCode>1-1-4-3-4-4</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Elesham of the Paps</partyName>
+        <members>115963</members>
+        <membersTargetedAge>33</membersTargetedAge>
+        <membersTargetedWealth>71</membersTargetedWealth>
+        <wealth>62504057</wealth>
+        <conservatismScore>39</conservatismScore>
+        <nationalismScore>14</nationalismScore>
+        <ecologismScore>70</ecologismScore>
+        <feminismScore>61</feminismScore>
+        <anarchismScore>51</anarchismScore>
+        <populismScore>90</populismScore>
+        <ideologicalCode>3-4-3-3-1-2</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Magnar of Kingshouse</partyName>
+        <members>47732</members>
+        <membersTargetedAge>33</membersTargetedAge>
+        <membersTargetedWealth>41</membersTargetedWealth>
+        <wealth>15083312</wealth>
+        <conservatismScore>32</conservatismScore>
+        <nationalismScore>3</nationalismScore>
+        <ecologismScore>90</ecologismScore>
+        <feminismScore>12</feminismScore>
+        <anarchismScore>78</anarchismScore>
+        <populismScore>81</populismScore>
+        <ideologicalCode>4-4-4-1-1-2</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Bulwer of Blackcrown</partyName>
+        <members>14253</members>
+        <membersTargetedAge>89</membersTargetedAge>
+        <membersTargetedWealth>14</membersTargetedWealth>
+        <wealth>1182999</wealth>
+        <conservatismScore>34</conservatismScore>
+        <nationalismScore>49</nationalismScore>
+        <ecologismScore>67</ecologismScore>
+        <feminismScore>73</feminismScore>
+        <anarchismScore>41</anarchismScore>
+        <populismScore>83</populismScore>
+        <ideologicalCode>2-4-3-3-2-2</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Hamell</partyName>
+        <members>95711</members>
+        <membersTargetedAge>88</membersTargetedAge>
+        <membersTargetedWealth>17</membersTargetedWealth>
+        <wealth>5934082</wealth>
+        <conservatismScore>93</conservatismScore>
+        <nationalismScore>89</nationalismScore>
+        <ecologismScore>15</ecologismScore>
+        <feminismScore>78</feminismScore>
+        <anarchismScore>12</anarchismScore>
+        <populismScore>73</populismScore>
+        <ideologicalCode>1-3-1-4-4-4</ideologicalCode>
+    </party>
+</parties>

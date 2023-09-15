@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Bar Emmon of Sharp Point</partyName>
+        <members>101421</members>
+        <membersTargetedAge>23</membersTargetedAge>
+        <membersTargetedWealth>92</membersTargetedWealth>
+        <wealth>48377817</wealth>
+        <conservatismScore>65</conservatismScore>
+        <nationalismScore>79</nationalismScore>
+        <ecologismScore>69</ecologismScore>
+        <feminismScore>57</feminismScore>
+        <anarchismScore>39</anarchismScore>
+        <populismScore>72</populismScore>
+        <ideologicalCode>2-3-3-3-4-3</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Sarsfield of Sarsfield</partyName>
+        <members>72005</members>
+        <membersTargetedAge>34</membersTargetedAge>
+        <membersTargetedWealth>23</membersTargetedWealth>
+        <wealth>6048420</wealth>
+        <conservatismScore>43</conservatismScore>
+        <nationalismScore>14</nationalismScore>
+        <ecologismScore>82</ecologismScore>
+        <feminismScore>38</feminismScore>
+        <anarchismScore>61</anarchismScore>
+        <populismScore>74</populismScore>
+        <ideologicalCode>3-3-4-2-1-2</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Appleton of Appleton</partyName>
+        <members>96931</members>
+        <membersTargetedAge>34</membersTargetedAge>
+        <membersTargetedWealth>79</membersTargetedWealth>
+        <wealth>40032503</wealth>
+        <conservatismScore>19</conservatismScore>
+        <nationalismScore>1</nationalismScore>
+        <ecologismScore>99</ecologismScore>
+        <feminismScore>37</feminismScore>
+        <anarchismScore>88</anarchismScore>
+        <populismScore>96</populismScore>
+        <ideologicalCode>4-4-4-2-1-1</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Drinkwater</partyName>
+        <members>82939</members>
+        <membersTargetedAge>57</membersTargetedAge>
+        <membersTargetedWealth>82</membersTargetedWealth>
+        <wealth>57062032</wealth>
+        <conservatismScore>99</conservatismScore>
+        <nationalismScore>86</nationalismScore>
+        <ecologismScore>35</ecologismScore>
+        <feminismScore>8</feminismScore>
+        <anarchismScore>21</anarchismScore>
+        <populismScore>50</populismScore>
+        <ideologicalCode>1-2-2-1-4-4</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Holt</partyName>
+        <members>83237</members>
+        <membersTargetedAge>35</membersTargetedAge>
+        <membersTargetedWealth>64</membersTargetedWealth>
+        <wealth>9489018</wealth>
+        <conservatismScore>93</conservatismScore>
+        <nationalismScore>93</nationalismScore>
+        <ecologismScore>66</ecologismScore>
+        <feminismScore>68</feminismScore>
+        <anarchismScore>2</anarchismScore>
+        <populismScore>13</populismScore>
+        <ideologicalCode>1-1-3-3-4-4</ideologicalCode>
+    </party>
+</parties>

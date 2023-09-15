@@ -26,7 +26,7 @@ public class AbandonedHouse{
     }
 
     public void addTools(){
-        Tools house = new Tools(3, 0);
+        Tools house = new Tools(gameName, 3, 0);
         Objects obj = new Objects(boxSize /2 , house.size[1] + 50, house.size, house.imageUrl, 1, backgroundPanel);
         
         restrictedAreas.add(new int[][]{ 
@@ -45,7 +45,7 @@ public class AbandonedHouse{
         };
         trigerEvents.add(item);
 
-        Tools dump = new Tools(5, 0);
+        Tools dump = new Tools(gameName, 5, 0);
         obj = new Objects(dump.size[0]/2 + boxSize/2 -150 , boxSize - 80 - dump.size[1]/2, dump.size, dump.imageUrl, 0, backgroundPanel);
         
         Object[] item4 = {

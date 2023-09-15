@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>Karstark of Karhold</partyName>
+        <members>65124</members>
+        <membersTargetedAge>66</membersTargetedAge>
+        <membersTargetedWealth>42</membersTargetedWealth>
+        <wealth>14587776</wealth>
+        <conservatismScore>47</conservatismScore>
+        <nationalismScore>61</nationalismScore>
+        <ecologismScore>50</ecologismScore>
+        <feminismScore>61</feminismScore>
+        <anarchismScore>30</anarchismScore>
+        <populismScore>67</populismScore>
+        <ideologicalCode>2-3-2-3-3-2</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Risley</partyName>
+        <members>68850</members>
+        <membersTargetedAge>87</membersTargetedAge>
+        <membersTargetedWealth>90</membersTargetedWealth>
+        <wealth>30982500</wealth>
+        <conservatismScore>21</conservatismScore>
+        <nationalismScore>26</nationalismScore>
+        <ecologismScore>98</ecologismScore>
+        <feminismScore>65</feminismScore>
+        <anarchismScore>89</anarchismScore>
+        <populismScore>78</populismScore>
+        <ideologicalCode>4-4-4-3-2-1</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Moore</partyName>
+        <members>73200</members>
+        <membersTargetedAge>61</membersTargetedAge>
+        <membersTargetedWealth>27</membersTargetedWealth>
+        <wealth>2635200</wealth>
+        <conservatismScore>45</conservatismScore>
+        <nationalismScore>28</nationalismScore>
+        <ecologismScore>69</ecologismScore>
+        <feminismScore>47</feminismScore>
+        <anarchismScore>81</anarchismScore>
+        <populismScore>77</populismScore>
+        <ideologicalCode>4-4-3-2-2-2</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Edgerton</partyName>
+        <members>50982</members>
+        <membersTargetedAge>88</membersTargetedAge>
+        <membersTargetedWealth>89</membersTargetedWealth>
+        <wealth>11827824</wealth>
+        <conservatismScore>80</conservatismScore>
+        <nationalismScore>76</nationalismScore>
+        <ecologismScore>5</ecologismScore>
+        <feminismScore>68</feminismScore>
+        <anarchismScore>1</anarchismScore>
+        <populismScore>83</populismScore>
+        <ideologicalCode>1-4-1-3-4-4</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Flint of Widow's Watch</partyName>
+        <members>61007</members>
+        <membersTargetedAge>34</membersTargetedAge>
+        <membersTargetedWealth>36</membersTargetedWealth>
+        <wealth>14641680</wealth>
+        <conservatismScore>96</conservatismScore>
+        <nationalismScore>97</nationalismScore>
+        <ecologismScore>49</ecologismScore>
+        <feminismScore>77</feminismScore>
+        <anarchismScore>7</anarchismScore>
+        <populismScore>25</populismScore>
+        <ideologicalCode>1-1-2-4-4-4</ideologicalCode>
+    </party>
+</parties>

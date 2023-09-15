@@ -51,10 +51,10 @@ public class Buildings {
         this.dimension = save.stringToIntArray(save.getChildFromElement(element, "size"));
 
         this.imageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[type];
-        this.imageUrl = save.stringToLink(this.imageUrl);
+        this.imageUrl = save.dropSpaceFromString(this.imageUrl);
 
         this.defaultImageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[0];
-        this.defaultImageUrl = save.stringToLink(this.imageUrl);
+        this.defaultImageUrl = save.dropSpaceFromString(this.imageUrl);
     }
 
     public int getBuildingVariety(){
