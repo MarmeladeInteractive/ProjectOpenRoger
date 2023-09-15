@@ -26,7 +26,7 @@ public class Bakery {
     }
 
     public void addTools(){
-        Dealer appleStand = new Dealer(0);
+        Dealers appleStand = new Dealers(gameName, 0);
         Objects obj = new Objects(boxSize /2 -120, appleStand.size[1] + 225, appleStand.size, appleStand.imageUrl, 1, backgroundPanel);
 
         Object[] item = {
@@ -40,7 +40,7 @@ public class Bakery {
         };
         trigerEvents.add(item);
 
-        Dealer chocoStand = new Dealer(1);
+        Dealers chocoStand = new Dealers(gameName, 1);
         obj = new Objects(boxSize /2 + 60, chocoStand.size[1] + 225, chocoStand.size, chocoStand.imageUrl, 1, backgroundPanel);
 
         Object[] item01 = {
@@ -54,7 +54,7 @@ public class Bakery {
         };
         trigerEvents.add(item01);
 
-        Dealer croissantStand = new Dealer(2);
+        Dealers croissantStand = new Dealers(gameName, 2);
         obj = new Objects(boxSize /2 + 155, croissantStand.size[1] + 225, croissantStand.size, croissantStand.imageUrl, 1, backgroundPanel);
 
         Object[] item02 = {

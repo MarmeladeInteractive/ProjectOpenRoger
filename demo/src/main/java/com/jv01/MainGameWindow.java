@@ -227,7 +227,7 @@ public class MainGameWindow {
         String spam = "";
         Tools tool = new Tools(gameName, 0, 0);
         Items item = new Items(gameName,0);
-        Dealer dealer = new Dealer(0);
+        Dealers dealer = new Dealers(gameName, 0);
 
         if(!isInsideBuilding){
             for(Buildings b : chunk.triggerableBuilding){
@@ -284,7 +284,7 @@ public class MainGameWindow {
                         //displaySpam = false;
                     }
                 }else if(trigEvent[1] == "dealer" && !displaySpam){
-                    dealer = (Dealer) trigEvent[2];
+                    dealer = (Dealers) trigEvent[2];
 
                     int distance = getDistanceFromPlayer(position[0], position[1]);
 
