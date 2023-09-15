@@ -37,9 +37,13 @@ class CustomizePartyScreen extends JPanel {
 
     public JPanel panel;
 
-    public JTextField nameTextField = new JTextField(20);
-
     public int pointBank = 60;
+    
+    public JTextField ageTargetTextField = new JTextField(20);
+    public JTextField wealthTargetTextField = new JTextField(20); 
+
+    public String targetedAge;
+    public String targetedWeatlh;
 
     public String conservatismScore;
     public String nationalismScore;
@@ -54,6 +58,8 @@ class CustomizePartyScreen extends JPanel {
     public JSlider feminismSlider;
     public JSlider anarchismSlider;
     public JSlider populismSlider;
+
+    
 
     public CustomizePartyScreen(String gameName) {
         this.gameName = gameName;
@@ -97,10 +103,12 @@ class CustomizePartyScreen extends JPanel {
         String membersTargetedAge = party.get("membersTargetedAge").get(0);
         JLabel membersTargetedAgeLabel = new JLabel("Targeted Age: " + membersTargetedAge);
         panel.add(membersTargetedAgeLabel, constraints);
+        panel.add(ageTargetTextField,constraints);
 
         String membersTargetedWealth = party.get("membersTargetedWealth").get(0);
         JLabel membersTargetedWealthLabel = new JLabel("Targeted Wealth: " + membersTargetedWealth);
         panel.add(membersTargetedWealthLabel, constraints);
+        panel.add(wealthTargetTextField,constraints);
 
         /*String wealth = party.get("wealth").get(0);
         JLabel wealthLabel = new JLabel("Party Wealth: " + wealth);
@@ -141,7 +149,9 @@ class CustomizePartyScreen extends JPanel {
         nextParty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               changeParty(1);
+                changeParty(1);
+                ageTargetTextField.setText("");
+                wealthTargetTextField.setText("");
             }
         });
 
@@ -150,7 +160,9 @@ class CustomizePartyScreen extends JPanel {
         previewParty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               changeParty(-1);
+                changeParty(-1);
+                ageTargetTextField.setText("");
+                wealthTargetTextField.setText("");
             }
         });
 
@@ -174,25 +186,31 @@ class CustomizePartyScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Modifier les champs conservatismScore, nationalismScore, ecologismScore, 
                 // feminismScore, populismScore, anarchismScore dans le XML saves\[gameName]\parties.xml
+                String wealth = wealthTargetTextField.getText();
+                String age = ageTargetTextField.getText();
+                
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "conservatismScore", String.valueOf(conservatismScore));
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "nationalismScore", String.valueOf(nationalismScore));
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "ecologismScore", String.valueOf(ecologismScore));
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "feminismScore", String.valueOf(feminismScore));
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "populismScore", String.valueOf(populismScore));
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "anarchismScore", String.valueOf(anarchismScore));
-
+                save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "membersTargetedWealth", String.valueOf(wealth));
+                save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "membersTargetedAge", String.valueOf(age));    
             }
         });
 
-        JButton cancel = new JButton("Choose this party and start now");
-        panel.add(cancel, constraints);
+        JButton startButton = new JButton("Choose this party and start now");
+        panel.add(startButton, constraints);
 
-        cancel.addActionListener(new ActionListener() {
+        startButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Modifier le partyID du joueur pour qu'il corresponde à celui choisi et 
                 // enregistrer dans le XML saves\[gameName]\player.xml
                 save.changeElementChildValue(gameName, "player", "player", "player", "partyID", String.valueOf(currentParty));
+                save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "members", String.valueOf(1));
+                save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "wealth", String.valueOf(0));    
                 frame.dispose();
                 Game game = new Game();
                 game.startGame(gameName);
@@ -236,6 +254,10 @@ class CustomizePartyScreen extends JPanel {
         anarchismScore = String.valueOf(anarchismSlider.getValue());         
         populismScore = String.valueOf(populismSlider.getValue());
     }
+
+    public void saveIsClicked(){
+        
+    }
         
     public void changeParty(int direction){
         if(direction > 0){
@@ -259,7 +281,7 @@ class CustomizePartyScreen extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CustomizePartyScreen customizePartyScreen = new CustomizePartyScreen("cdf");
+                CustomizePartyScreen customizePartyScreen = new CustomizePartyScreen("aboieaboiechieng");
             }
         });
     }
