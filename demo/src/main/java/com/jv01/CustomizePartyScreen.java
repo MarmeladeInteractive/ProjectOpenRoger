@@ -42,8 +42,8 @@ class CustomizePartyScreen extends JPanel {
     public JTextField ageTargetTextField = new JTextField(20);
     public JTextField wealthTargetTextField = new JTextField(20); 
 
-    public String targetedAge;
-    public String targetedWeatlh;
+    public String membersTargetedAge;
+    public String membersTargetedWealth;
 
     public String conservatismScore;
     public String nationalismScore;
@@ -100,12 +100,12 @@ class CustomizePartyScreen extends JPanel {
         JLabel membersLabel = new JLabel("Members's number: " + members);
         panel.add(membersLabel, constraints);*/
 
-        String membersTargetedAge = party.get("membersTargetedAge").get(0);
+        membersTargetedAge = party.get("membersTargetedAge").get(0);
         JLabel membersTargetedAgeLabel = new JLabel("Targeted Age: " + membersTargetedAge);
         panel.add(membersTargetedAgeLabel, constraints);
         panel.add(ageTargetTextField,constraints);
 
-        String membersTargetedWealth = party.get("membersTargetedWealth").get(0);
+        membersTargetedWealth = party.get("membersTargetedWealth").get(0);
         JLabel membersTargetedWealthLabel = new JLabel("Targeted Wealth: " + membersTargetedWealth);
         panel.add(membersTargetedWealthLabel, constraints);
         panel.add(wealthTargetTextField,constraints);
@@ -146,12 +146,14 @@ class CustomizePartyScreen extends JPanel {
 
         JButton nextParty = new JButton(">");
 
+        ageTargetTextField.setText(membersTargetedAge);
+        wealthTargetTextField.setText(membersTargetedWealth);
+
         nextParty.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeParty(1);
-                ageTargetTextField.setText("");
-                wealthTargetTextField.setText("");
+
             }
         });
 
@@ -161,8 +163,7 @@ class CustomizePartyScreen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 changeParty(-1);
-                ageTargetTextField.setText("");
-                wealthTargetTextField.setText("");
+
             }
         });
 
@@ -186,8 +187,13 @@ class CustomizePartyScreen extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 // Modifier les champs conservatismScore, nationalismScore, ecologismScore, 
                 // feminismScore, populismScore, anarchismScore dans le XML saves\[gameName]\parties.xml
-                String wealth = wealthTargetTextField.getText();
-                String age = ageTargetTextField.getText();
+                if (isIntegerInRange(wealthTargetTextField.getText(), 0, 100)) {
+                    membersTargetedWealth = wealthTargetTextField.getText();
+                }
+
+                if (isIntegerInRange(ageTargetTextField.getText(), 0, 100)) {
+                    membersTargetedAge = ageTargetTextField.getText();
+                }
                 
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "conservatismScore", String.valueOf(conservatismScore));
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "nationalismScore", String.valueOf(nationalismScore));
@@ -195,8 +201,8 @@ class CustomizePartyScreen extends JPanel {
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "feminismScore", String.valueOf(feminismScore));
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "populismScore", String.valueOf(populismScore));
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "anarchismScore", String.valueOf(anarchismScore));
-                save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "membersTargetedWealth", String.valueOf(wealth));
-                save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "membersTargetedAge", String.valueOf(age));    
+                save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "membersTargetedWealth", String.valueOf(membersTargetedWealth));
+                save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "membersTargetedAge", String.valueOf(membersTargetedAge));    
             }
         });
 
@@ -220,6 +226,16 @@ class CustomizePartyScreen extends JPanel {
         frame.add(panel);
         frame.setVisible(true);  
         frame.setLocationRelativeTo(null);
+    }
+
+    public static boolean isIntegerInRange(String textField, int min, int max) {
+        try {         
+            int number = Integer.parseInt(textField);
+    
+            return number >= min && number <= max;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 
     private JSlider createScoreSlider(final String scoreName, String scoreValue, GridBagConstraints constraints, final JLabel scoreLabelToUpdate) {
