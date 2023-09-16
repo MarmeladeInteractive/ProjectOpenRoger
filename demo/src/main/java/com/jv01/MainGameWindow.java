@@ -38,6 +38,7 @@ public class MainGameWindow {
     Player player;
     Chunks chunk;
     GameMap map;
+    InfoMenuScreen infoMenu;
 
     private JLabel coordinatesLabel;
     private JLabel moneyLabel;
@@ -335,6 +336,16 @@ public class MainGameWindow {
         if(player.keyBord.mapKeyPressed){
             player.keyBord.mapKeyPressed = false;
             map = new GameMap(gameName,player);  
+        }
+
+        if(player.keyBord.menuKeyPressed){
+            player.keyBord.menuKeyPressed = false;
+            infoMenu = new InfoMenuScreen(gameName,player);
+        }
+
+        if(player.keyBord.quitKeyPressed){
+            player.keyBord.quitKeyPressed = false;
+            System.exit(0);
         }
 
         if(player.positionX < 0)changeChunk("left");

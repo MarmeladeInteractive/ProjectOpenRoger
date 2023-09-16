@@ -22,7 +22,7 @@ public class Player{
     public String gameName;
 
     public long money = 1000;
-    public String playerName = "Michel";
+    public String playerName = "Roger";
 
     public int playerSize = 100;
 
