@@ -242,7 +242,11 @@ public class Player{
             positionY += step;
             currentFrameIndex = 3;
             currentFramePicIndex++;
+        } else if (keyBord.quitKeyPressed) {
+            System.exit(0);
         }
+
+
 
 
         currentFramePicIndex = (currentFramePicIndex) % walkingFrames[currentFrameIndex].length;

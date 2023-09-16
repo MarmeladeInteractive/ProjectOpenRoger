@@ -24,6 +24,8 @@ public class KeyBord {
 
     public int mapKey = 77;
 
+    public int quitKey = 27;
+
     public boolean leftKeyPressed = false;
     public boolean rightKeyPressed = false;
     public boolean upKeyPressed = false;
@@ -38,6 +40,8 @@ public class KeyBord {
 
     public boolean mapKeyPressed = false;
     public Tempo tempoMapKey = new Tempo();
+
+    public boolean quitKeyPressed = false;
     
     public String gameName;
     
@@ -65,6 +69,8 @@ public class KeyBord {
 
         this.intercatKey = Integer.parseInt(save.getChildFromMapElements(allElements,"intercatKey"));
         this.upgradeKey = Integer.parseInt(save.getChildFromMapElements(allElements,"upgradeKey"));
+
+        this.quitKey = Integer.parseInt(save.getChildFromMapElements(allElements,"quitKey"));
     }
 
     public void initializeKeyListener(){
@@ -101,6 +107,10 @@ public class KeyBord {
                      mapKeyPressed = true;
                      tempoMapKey.start(100);
                  }
+
+                 else if (keyCode == quitKey) {
+                     quitKeyPressed = true;;
+                 }
  
                  else{
                      System.out.println(keyCode);
@@ -131,6 +141,10 @@ public class KeyBord {
  
                  else if (keyCode == mapKey) {
                      mapKeyPressed = false;
+                 }
+
+                 else if (keyCode == quitKey) {
+                     quitKeyPressed = false;;
                  }
              }
          };
