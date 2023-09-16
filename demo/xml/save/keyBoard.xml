@@ -8,5 +8,6 @@
         <mapKey>77</mapKey>
         <intercatKey>69</intercatKey>
         <upgradeKey>85</upgradeKey>
+        <quitKey>27</quitKey>
     </keyBoard>
 </keyBoard>
