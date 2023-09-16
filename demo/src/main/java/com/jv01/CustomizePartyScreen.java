@@ -189,10 +189,18 @@ class CustomizePartyScreen extends JPanel {
                 // feminismScore, populismScore, anarchismScore dans le XML saves\[gameName]\parties.xml
                 if (isIntegerInRange(wealthTargetTextField.getText(), 0, 100)) {
                     membersTargetedWealth = wealthTargetTextField.getText();
+                } else {
+                    // message d'erreur à l'utilisateur
+                    JOptionPane.showMessageDialog(frame, "Targeted wealth must be a value between 0 and 100.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
                 }
-
-                if (isIntegerInRange(ageTargetTextField.getText(), 0, 100)) {
+        
+                if (isIntegerInRange(ageTargetTextField.getText(), 18, 100)) {
                     membersTargetedAge = ageTargetTextField.getText();
+                } else {
+                    // message d'erreur à l'utilisateur
+                    JOptionPane.showMessageDialog(frame, "Targeted age must be a value between 18 and 100.", "Error", JOptionPane.ERROR_MESSAGE);
+                    return; 
                 }
                 
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "conservatismScore", String.valueOf(conservatismScore));
