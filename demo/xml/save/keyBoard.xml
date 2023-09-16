@@ -9,5 +9,6 @@
         <intercatKey>69</intercatKey>
         <upgradeKey>85</upgradeKey>
         <quitKey>27</quitKey>
+        <menuKey>80</menuKey>
     </keyBoard>
 </keyBoard>
