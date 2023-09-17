@@ -32,9 +32,14 @@ public class Corporation {
 
         corporationName = faker.company().name();
         workers = faker.number().numberBetween(1, 2000);
+
         stockValueBuy = faker.number().numberBetween(5,1000);
-        stockValueSell = stockValueBuy*faker.number().numberBetween(stockValueBuy/2,stockValueBuy*2);
-        wealth = workers * faker.number().numberBetween(10, 100) * (stockValueBuy);
+        stockValueSell = stockValueBuy*faker.number().numberBetween(0,2);
+        if (stockValueSell==0)
+        {
+            stockValueSell=stockValueBuy/2;
+        }
+        wealth = (workers) * faker.number().numberBetween(1, 100) * (stockValueBuy/stockValueSell);
 
         conservatismForce = faker.number().numberBetween(-10, 10);
         nationalismForce = faker.number().numberBetween(-10, 10);
