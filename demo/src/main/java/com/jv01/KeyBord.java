@@ -13,16 +13,19 @@ public class KeyBord {
 
     public KeyListener keyListener;
 
-    public int leftKey = 81;
-    public int rightKey = 68;
-    public int upKey = 90;
-    public int downKey = 83;
-    public int runKey = 16;
+    public int leftKey = 81; //
+    public int rightKey = 68; //
+    public int upKey = 90; //
+    public int downKey = 83; //
+    public int runKey = 16; //
 
-    public int intercatKey = 69;
-    public int upgradeKey = 85;
+    public int intercatKey = 69; //
+    public int upgradeKey = 85; // u
 
-    public int mapKey = 77;
+    public int mapKey = 77; // m
+
+    public int quitKey = 27; // esc
+    public int menuKey = 80; // p
 
     public boolean leftKeyPressed = false;
     public boolean rightKeyPressed = false;
@@ -38,6 +41,10 @@ public class KeyBord {
 
     public boolean mapKeyPressed = false;
     public Tempo tempoMapKey = new Tempo();
+
+    public boolean quitKeyPressed = false;
+    public boolean menuKeyPressed = false;
+    public Tempo tempoMenuKey = new Tempo();
     
     public String gameName;
     
@@ -65,6 +72,9 @@ public class KeyBord {
 
         this.intercatKey = Integer.parseInt(save.getChildFromMapElements(allElements,"intercatKey"));
         this.upgradeKey = Integer.parseInt(save.getChildFromMapElements(allElements,"upgradeKey"));
+
+        this.quitKey = Integer.parseInt(save.getChildFromMapElements(allElements,"quitKey"));
+        this.menuKey = Integer.parseInt(save.getChildFromMapElements(allElements,"menuKey"));
     }
 
     public void initializeKeyListener(){
@@ -101,6 +111,14 @@ public class KeyBord {
                      mapKeyPressed = true;
                      tempoMapKey.start(100);
                  }
+
+                 else if (keyCode == quitKey) {
+                     quitKeyPressed = true;
+                 }
+                 else if (keyCode == menuKey && !tempoMenuKey.isRunning()) {
+                    menuKeyPressed = true;
+                    tempoMenuKey.start(100);
+                 } 
  
                  else{
                      System.out.println(keyCode);
@@ -132,6 +150,13 @@ public class KeyBord {
                  else if (keyCode == mapKey) {
                      mapKeyPressed = false;
                  }
+
+                 else if (keyCode == quitKey) {
+                     quitKeyPressed = false;;
+                 }
+                 else if (keyCode == menuKey) {
+                    menuKeyPressed = false;;
+                }
              }
          };
      }

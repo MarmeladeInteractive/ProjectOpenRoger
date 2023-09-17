@@ -46,8 +46,10 @@ public class MainMenuScreen {
     
         JButton newGameButton = new JButton("Nouvelle partie");
         JButton loadGameButton = new JButton("Charger une partie");
+        JButton quitGameButton = new JButton("Quit");
         panel.add(newGameButton, constraints);
         panel.add(loadGameButton, constraints);
+        panel.add(quitGameButton,constraints);
     
         newGameButton.addActionListener(new ActionListener() {
             @Override
@@ -62,6 +64,13 @@ public class MainMenuScreen {
                 openLoadGamePage();
             }
         });
+        
+        quitGameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });        
     
         frame.add(panel);
         frame.setLocationRelativeTo(null); 
