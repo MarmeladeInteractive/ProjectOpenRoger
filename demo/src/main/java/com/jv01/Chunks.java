@@ -40,6 +40,8 @@ public class Chunks {
     public List<int[][]> restrictedAreas = new ArrayList<>();
     public List<Object[]> trigerEvents = new ArrayList<>();
 
+    public List<Object[]> characters = new ArrayList<>();
+
     public Document doc;
     public Element element;
 
@@ -71,7 +73,6 @@ public class Chunks {
                 createBiome();
                 addBuildings();
                 addDecorations();
-                //addItems();
                 saveChunk();
             }else{
                 addInsideBuildings();
@@ -108,7 +109,6 @@ public class Chunks {
                     }
                 }
                 addDecorations();
-                //addItems();
             }else{
                 this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
                 addInsideBuildings();
@@ -412,31 +412,31 @@ public class Chunks {
         boolean structure = false;
 
         int decorationType = -1;
-        
-        if(biome == 0 || biome == 1){
-            for(int i=2; i>=0; i--){
-                cell[0]=i;
-                for(int j=2; j>=0; j--){
-                    cell[1]=j;
-                
-                    for(int k=2; k>=0; k--){
-                        position[0]=k;
-                        for(int l=2; l>=0; l--){
-                            position[1]=l;
 
-                            if((((i==0&&j==0)&&completedCell[0])||((i==0&&j==2)&&completedCell[1])||((i==2&&j==0)&&completedCell[2])||((i==2&&j==2)&&completedCell[3]))){
-                                k=-1;
-                                l=-1;
-                                break;
-                            }
-                        
-                            int[] code = {(position[0]+1)*(cell[0]+1),(position[1]+1)*(cell[1]+1)};
+        for(int i=2; i>=0; i--){
+            cell[0]=i;
+            for(int j=2; j>=0; j--){
+                cell[1]=j;
+            
+                for(int k=2; k>=0; k--){
+                    position[0]=k;
+                    for(int l=2; l>=0; l--){
+                        position[1]=l;
 
-                            decorationKey = getObjectKey(code);
+                        if((((i==0&&j==0)&&completedCell[0])||((i==0&&j==2)&&completedCell[1])||((i==2&&j==0)&&completedCell[2])||((i==2&&j==2)&&completedCell[3]))){
+                            k=-1;
+                            l=-1;
+                            break;
+                        }
 
-                            key01 = decorationKey.charAt((position[0])*(3)+(position[1]+1));
-                            key02 = decorationKey.charAt((position[0])*(3)+(position[1]+1)+1);
+                        int[] code = {(position[0]+1)*(cell[0]+1),(position[1]+1)*(cell[1]+1)};
 
+                        decorationKey = getObjectKey(code);
+
+                        key01 = decorationKey.charAt((position[0])*(3)+(position[1]+1));
+                        key02 = decorationKey.charAt((position[0])*(3)+(position[1]+1)+1);
+
+                        if(biome == 0 || biome == 1){
                             if(k==2 && l==2 && key01 == '0' && !structure){
                                 position[0]=0;
                                 position[1]=0;
@@ -460,7 +460,7 @@ public class Chunks {
 
                                 Objects obj = new Objects(cell[0]*cellSize+(cellSize/2)+building01.offsetX, cell[1]*cellSize+(cellSize/2)+ building01.offsetY, building01.dimension, building01.imageUrl, 1, backgroundPanel);         
                                 restrictedAreas.add(obj.restrictedAreas);
-                                triggerableBuilding.add(building01);
+                                //triggerableBuilding.add(building01);
 
                                 k=-1;
                                 l=-1;
@@ -489,35 +489,7 @@ public class Chunks {
                                 if(ran == 1)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),0);
                                 if(ran == 2)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),1);
                             }
-                        }
-                    }
-                }
-            }
-        }else if(biome == 2 || biome == 3 || biome == 4){
-            for(int i=2; i>=0; i--){
-                cell[0]=i;
-                for(int j=2; j>=0; j--){
-                    cell[1]=j;
-                
-                    for(int k=2; k>=0; k--){
-                        position[0]=k;
-                        for(int l=2; l>=0; l--){
-
-                            if((((i==0&&j==0)&&completedCell[0])||((i==0&&j==2)&&completedCell[1])||((i==2&&j==0)&&completedCell[2])||((i==2&&j==2)&&completedCell[3]))){
-                                k=-1;
-                                l=-1;
-                                break;
-                            }
-
-                            position[1]=l;
-                        
-                            int[] code = {(position[0]+1)*(cell[0]+1),(position[1]+1)*(cell[1]+1)};
-
-                            decorationKey = getObjectKey(code);
-
-                            key01 = decorationKey.charAt((position[0])*(3)+(position[1]+1));
-                            key02 = decorationKey.charAt((position[0])*(3)+(position[1]+1)+1);
-
+                        }else if(biome == 2 || biome == 3 || biome == 4){
                             if(k==2 && l==2 && key01 == '0' && !structure){
                                 position[0]=0;
                                 position[1]=0;
@@ -560,49 +532,7 @@ public class Chunks {
                                 if(ran >= 0 && ran <=5)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),0);
                                 if(ran == 6 || ran == 7)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),1);
                             }
-                        }
-                    }
-                }
-            }
-        }else if(biome == 5 || biome == 6 || biome == 7){
-            for(int i=2; i>=0; i--){
-                cell[0]=i;
-                for(int j=2; j>=0; j--){
-                    cell[1]=j;
-                
-                    for(int k=2; k>=0; k--){
-                        position[0]=k;
-                        for(int l=2; l>=0; l--){
-
-                            if((((i==0&&j==0)&&completedCell[0])||((i==0&&j==2)&&completedCell[1])||((i==2&&j==0)&&completedCell[2])||((i==2&&j==2)&&completedCell[3]))){
-                                k=-1;
-                                l=-1;
-                                break;
-                            }
-
-                            position[1]=l;
-                        
-                            int[] code = {(position[0]+1)*(cell[0]+1),(position[1]+1)*(cell[1]+1)};
-
-                            decorationKey = getObjectKey(code);
-
-                            key01 = decorationKey.charAt((position[0])*(3)+(position[1]+1));
-                            key02 = decorationKey.charAt((position[0])*(3)+(position[1]+1)+1);
-
-                            /*if(k==2 && l==2 && key01 == '0' && !structure){
-                                position[0]=0;
-                                position[1]=0;
-
-                                Decorations deco = new Decorations("lacs", 0, chunk, cell, decorationKey);
-                                int size[] = {(int)(deco.dimension[0]+deco.scale),(int)(deco.dimension[1]+deco.scale)};
-
-                                new Objects(cell[0]*cellSize+(position[0]*(cellSize/3))+((size[0])/2)+deco.offsetX, cell[1]*cellSize+(position[1]*(cellSize/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);                    
-            
-                                k=-1;
-                                l=-1;
-                                structure = true;
-                                break;
-                            }*/
+                        }else if(biome == 5 || biome == 6 || biome == 7){
                             decorationType = -1;
                             if(key01 == '0' && key02 <= '1'){
                                 decorationType = 0;
