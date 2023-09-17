@@ -10,5 +10,6 @@
         <upgradeKey>85</upgradeKey>
         <quitKey>27</quitKey>
         <menuKey>80</menuKey>
+        <cheatCodeMenuKey>113</cheatCodeMenuKey>
     </keyBoard>
 </keyBoard>

@@ -26,6 +26,7 @@ public class KeyBord {
 
     public int quitKey = 27; // esc
     public int menuKey = 80; // p
+    public int cheatCodeMenuKey = 113;
 
     public boolean leftKeyPressed = false;
     public boolean rightKeyPressed = false;
@@ -43,8 +44,12 @@ public class KeyBord {
     public Tempo tempoMapKey = new Tempo();
 
     public boolean quitKeyPressed = false;
+
     public boolean menuKeyPressed = false;
     public Tempo tempoMenuKey = new Tempo();
+
+    public boolean cheatCodeMenuKeyPressed = false;
+    public Tempo tempoCheatCodeMenuKey = new Tempo();
     
     public String gameName;
     
@@ -75,6 +80,8 @@ public class KeyBord {
 
         this.quitKey = Integer.parseInt(save.getChildFromMapElements(allElements,"quitKey"));
         this.menuKey = Integer.parseInt(save.getChildFromMapElements(allElements,"menuKey"));
+
+        this.cheatCodeMenuKey = Integer.parseInt(save.getChildFromMapElements(allElements,"cheatCodeMenuKey"));
     }
 
     public void initializeKeyListener(){
@@ -118,6 +125,11 @@ public class KeyBord {
                  else if (keyCode == menuKey && !tempoMenuKey.isRunning()) {
                     menuKeyPressed = true;
                     tempoMenuKey.start(100);
+                 }
+                 
+                 else if (keyCode == cheatCodeMenuKey && !tempoCheatCodeMenuKey.isRunning()) {
+                    cheatCodeMenuKeyPressed = true;
+                    tempoCheatCodeMenuKey.start(100);
                  } 
  
                  else{
@@ -156,7 +168,10 @@ public class KeyBord {
                  }
                  else if (keyCode == menuKey) {
                     menuKeyPressed = false;;
-                }
+                 }
+                 else if (keyCode == cheatCodeMenuKey) {
+                    cheatCodeMenuKeyPressed = false;
+                 }
              }
          };
      }
