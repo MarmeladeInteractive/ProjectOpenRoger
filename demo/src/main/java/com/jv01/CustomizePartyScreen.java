@@ -28,6 +28,7 @@ class CustomizePartyScreen extends JPanel {
     public Document doc;
 
     public String gameName;
+    public String seed;
 
     public int currentParty = 1;
 
@@ -63,8 +64,9 @@ class CustomizePartyScreen extends JPanel {
 
     
 
-    public CustomizePartyScreen(String gameName) {
+    public CustomizePartyScreen(String gameName, String seed) {
         this.gameName = gameName;
+        this.seed = seed;
 
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(BOXE_SIZE, BOXE_SIZE);
@@ -233,7 +235,7 @@ class CustomizePartyScreen extends JPanel {
                 save.changeElementChildValue(gameName, "parties", "party", String.valueOf(currentParty), "wealth", String.valueOf(0));    
                 frame.dispose();
                 Game game = new Game();
-                game.startGame(gameName);
+                game.startGame(gameName,seed);
             }
         });
 
@@ -307,7 +309,7 @@ class CustomizePartyScreen extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CustomizePartyScreen customizePartyScreen = new CustomizePartyScreen("aboieaboiechieng");
+                CustomizePartyScreen customizePartyScreen = new CustomizePartyScreen("aboieaboiechieng","eeee");
             }
         });
     }
