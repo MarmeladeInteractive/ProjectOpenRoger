@@ -66,53 +66,29 @@ public class Party {
 
         partyElement.setAttribute("id", String.valueOf(newId));
 
-        Element element = doc.createElement("partyName");
-        element.appendChild(doc.createTextNode(partyName));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"partyName",String.valueOf(partyName));
 
-        element = doc.createElement("members");
-        element.appendChild(doc.createTextNode(String.valueOf(members)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"members",String.valueOf(members));
 
-        element = doc.createElement("membersTargetedAge");
-        element.appendChild(doc.createTextNode(String.valueOf(membersTargetedAge)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"membersTargetedAge",String.valueOf(membersTargetedAge));
 
-        element = doc.createElement("membersTargetedWealth");
-        element.appendChild(doc.createTextNode(String.valueOf(membersTargetedWealth)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"membersTargetedWealth",String.valueOf(membersTargetedWealth));
 
-        element = doc.createElement("wealth");
-        element.appendChild(doc.createTextNode(String.valueOf(wealth)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"wealth",String.valueOf(wealth));
 
-        element = doc.createElement("conservatismScore");
-        element.appendChild(doc.createTextNode(String.valueOf(conservatismScore)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"conservatismScore",String.valueOf(conservatismScore));
 
-        element = doc.createElement("nationalismScore");
-        element.appendChild(doc.createTextNode(String.valueOf(nationalismScore)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"nationalismScore",String.valueOf(nationalismScore));
 
-        element = doc.createElement("ecologismScore");
-        element.appendChild(doc.createTextNode(String.valueOf(ecologismScore)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"ecologismScore",String.valueOf(ecologismScore));
 
-        element = doc.createElement("feminismScore");
-        element.appendChild(doc.createTextNode(String.valueOf(feminismScore)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"feminismScore",String.valueOf(feminismScore));
 
-        element = doc.createElement("anarchismScore");
-        element.appendChild(doc.createTextNode(String.valueOf(anarchismScore)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"anarchismScore",String.valueOf(anarchismScore));
 
-        element = doc.createElement("populismScore");
-        element.appendChild(doc.createTextNode(String.valueOf(populismScore)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"populismScore",String.valueOf(populismScore));
 
-        element = doc.createElement("ideologicalCode");
-        element.appendChild(doc.createTextNode(String.valueOf(ideologicalCode)));
-        partyElement.appendChild(element);
+        save.createXmlElement(partyElement,doc,"ideologicalCode",String.valueOf(ideologicalCode));
 
         doc.getDocumentElement().appendChild(partyElement);
     }
