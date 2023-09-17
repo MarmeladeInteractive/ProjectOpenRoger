@@ -1,0 +1,72 @@
+<parties>
+    <party id="1">
+        <partyName>ouiiiiiii</partyName>
+        <members>1</members>
+        <membersTargetedAge>38</membersTargetedAge>
+        <membersTargetedWealth>68</membersTargetedWealth>
+        <wealth>0</wealth>
+        <conservatismScore>0</conservatismScore>
+        <nationalismScore>5</nationalismScore>
+        <ecologismScore>95</ecologismScore>
+        <feminismScore>80</feminismScore>
+        <anarchismScore>80</anarchismScore>
+        <populismScore>99</populismScore>
+        <ideologicalCode>4-4-4-4-1-1</ideologicalCode>
+    </party>
+    <party id="2">
+        <partyName>Corbray of Heart's Home</partyName>
+        <members>15642</members>
+        <membersTargetedAge>44</membersTargetedAge>
+        <membersTargetedWealth>65</membersTargetedWealth>
+        <wealth>3003264</wealth>
+        <conservatismScore>56</conservatismScore>
+        <nationalismScore>80</nationalismScore>
+        <ecologismScore>88</ecologismScore>
+        <feminismScore>98</feminismScore>
+        <anarchismScore>40</anarchismScore>
+        <populismScore>54</populismScore>
+        <ideologicalCode>2-3-4-4-4-3</ideologicalCode>
+    </party>
+    <party id="3">
+        <partyName>Conklyn</partyName>
+        <members>72449</members>
+        <membersTargetedAge>81</membersTargetedAge>
+        <membersTargetedWealth>92</membersTargetedWealth>
+        <wealth>43686747</wealth>
+        <conservatismScore>82</conservatismScore>
+        <nationalismScore>71</nationalismScore>
+        <ecologismScore>8</ecologismScore>
+        <feminismScore>89</feminismScore>
+        <anarchismScore>17</anarchismScore>
+        <populismScore>77</populismScore>
+        <ideologicalCode>1-4-1-4-3-4</ideologicalCode>
+    </party>
+    <party id="4">
+        <partyName>Greengood</partyName>
+        <members>35262</members>
+        <membersTargetedAge>28</membersTargetedAge>
+        <membersTargetedWealth>51</membersTargetedWealth>
+        <wealth>12694320</wealth>
+        <conservatismScore>15</conservatismScore>
+        <nationalismScore>7</nationalismScore>
+        <ecologismScore>79</ecologismScore>
+        <feminismScore>82</feminismScore>
+        <anarchismScore>75</anarchismScore>
+        <populismScore>74</populismScore>
+        <ideologicalCode>3-3-4-4-1-1</ideologicalCode>
+    </party>
+    <party id="5">
+        <partyName>Fisher</partyName>
+        <members>49167</members>
+        <membersTargetedAge>78</membersTargetedAge>
+        <membersTargetedWealth>47</membersTargetedWealth>
+        <wealth>8063388</wealth>
+        <conservatismScore>93</conservatismScore>
+        <nationalismScore>76</nationalismScore>
+        <ecologismScore>22</ecologismScore>
+        <feminismScore>58</feminismScore>
+        <anarchismScore>0</anarchismScore>
+        <populismScore>68</populismScore>
+        <ideologicalCode>1-3-1-3-4-4</ideologicalCode>
+    </party>
+</parties>
