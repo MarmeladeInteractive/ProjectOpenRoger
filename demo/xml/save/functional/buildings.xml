@@ -84,7 +84,7 @@
     </building>
 
     <building id="6">
-        <name>Maison abandonnée</name>
+        <name>Maison abandonnee</name>
         <size>{200,200}</size>
         <description></description>
         <imagesUrls>
@@ -107,6 +107,20 @@
                 demo/img/buildings/house02.png,
                 demo/img/buildings/house03.png,
                 demo/img/buildings/house04.png,
+            }
+        </imagesUrls>
+    </building>
+
+    <building id="8">
+        <name>Siege corporation</name>
+        <size>{200,200}</size>
+        <description></description>
+        <imagesUrls>
+            {
+                demo/img/buildings/corpo01.png,
+                demo/img/buildings/corpo02.png,
+                demo/img/buildings/corpo03.png,
+                demo/img/buildings/corpo04.png,
             }
         </imagesUrls>
     </building>
