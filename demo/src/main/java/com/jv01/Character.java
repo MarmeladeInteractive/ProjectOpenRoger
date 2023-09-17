@@ -1,5 +1,7 @@
 package com.jv01;
 
+import javax.swing.JPanel;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -25,6 +27,8 @@ public class Character{
     
     int valueMax = 100;
 
+    int size = 100;
+
     public  String name;
     public  int age;
     public  int health;
@@ -33,7 +37,9 @@ public class Character{
     public  int belief;
     public  int hygiene;
     public  int mood;
-    public  String location;
+
+    public long[] chunk = {0,0};
+    public  int[] position = {0,0};
 
     public  int conservatismScore;
     public  int nationalismScore;
@@ -44,6 +50,8 @@ public class Character{
 
     public  String ideologicalCode;
     public  String politicalPartyId;
+
+    public JPanel backgroundPanel;
 
     public Character(String gameName){
         this.gameName = gameName;
@@ -111,7 +119,9 @@ public class Character{
 
         save.createXmlElement(characterElement,doc,"politicalPartyId",String.valueOf(politicalPartyId));
 
-        save.createXmlElement(characterElement,doc,"location",String.valueOf(location));
+        save.createXmlElement(characterElement,doc,"chunk",String.valueOf(chunk));
+
+        save.createXmlElement(characterElement,doc,"position",String.valueOf(position));
 
         save.createXmlElement(characterElement,doc,"inventory",String.valueOf(null));
 
@@ -149,5 +159,10 @@ public class Character{
         
         ideology = null;
         return(chosenPartyId);
+    }
+
+    public void addCaracter(JPanel backgroundPanel, int boxSize){
+       // Objects obj = new Objects(size + 50, boxSize-size - 150, new int[] {size,size}, "demo\\img\\achat.png", 1, backgroundPanel);
+        
     }
 }
