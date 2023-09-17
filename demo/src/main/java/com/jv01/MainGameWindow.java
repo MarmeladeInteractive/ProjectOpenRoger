@@ -39,6 +39,7 @@ public class MainGameWindow {
     Chunks chunk;
     GameMap map;
     InfoMenuScreen infoMenu;
+    CheatCodeMenu cheatCodeMenu = new CheatCodeMenu();
 
     private JLabel coordinatesLabel;
     private JLabel moneyLabel;
@@ -110,6 +111,7 @@ public class MainGameWindow {
 
         createBackgroundPanel();
         player.inventory.createInventoryPanel(frame);
+        currentChunk = player.chunk;
 
         addCoordinatesLabel();
         addMoneyLabel();
@@ -320,17 +322,6 @@ public class MainGameWindow {
             }else{
                 coloseMsgLabels();
             }
-
-            if(refreshDisplay){
-                refreshDisplay = false;
-                updateLabels();
-            }
-            
-            if(refresh){
-                refresh = false;
-                showMainGameWindow();
-                updateLabels();
-            }
         
 
         if(player.keyBord.mapKeyPressed){
@@ -348,6 +339,18 @@ public class MainGameWindow {
             System.exit(0);
         }
 
+        if(player.keyBord.cheatCodeMenuKeyPressed){
+            player.keyBord.cheatCodeMenuKeyPressed = false;
+            cheatCodeMenu.open(this);
+        }
+
+        if(cheatCodeMenu.frame.isVisible()){
+            refresh = cheatCodeMenu.refresh;
+            refreshDisplay = cheatCodeMenu.refreshDisplay;
+            cheatCodeMenu.refresh = false;
+            cheatCodeMenu.refreshDisplay = false;
+        }   
+
         if(player.positionX < 0)changeChunk("left");
         if(player.positionX > (boxSize))changeChunk("right");
         if(player.positionY < 0)changeChunk("up");
@@ -356,6 +359,19 @@ public class MainGameWindow {
         player.playerLabel.setBounds(player.positionX - (player.playerSize/2), player.positionY - (player.playerSize/2), player.playerSize, player.playerSize);
 
         updatePositionTextLabels();
+
+        if(refreshDisplay){
+            refreshDisplay = false;
+            updateLabels();
+            cheatCodeMenu.close();
+        }
+        
+        if(refresh){
+            refresh = false;
+            showMainGameWindow();
+            updateLabels();
+            cheatCodeMenu.close();
+        }
 
         frame.revalidate();
         frame.repaint();
