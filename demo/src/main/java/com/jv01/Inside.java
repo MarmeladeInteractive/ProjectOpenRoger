@@ -30,6 +30,7 @@ public class Inside {
             "demo\\img\\insides\\store01.jpg",
             "demo\\img\\insides\\abandonedHouse01.jpg",
             "demo\\img\\insides\\house01.jpg",
+            "demo\\img\\insides\\corpoHouse01.jpg",
         };
 
 
@@ -42,6 +43,7 @@ public class Inside {
         "Magasin",
         "Maison abandonnee",
         "Maison",
+        "Siege corporation"
     };
 
     public Inside(int type, int boxSize, String gameName, JPanel backgroundPanel){
@@ -69,6 +71,10 @@ public class Inside {
 
             case 6:
                 createAbandonedHouseInside();
+                break;
+
+            case 8:
+                createCorpoHouseInside();
                 break;
         
             default:
@@ -121,7 +127,12 @@ public class Inside {
         EmptyHouse emptyHouse = new EmptyHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(emptyHouse.restrictedAreas);
         addTrigerEventsAreas(emptyHouse.trigerEvents);
+    }
 
+    private void createCorpoHouseInside(){
+        CorporationHouse corpoHouse = new CorporationHouse(gameName,boxSize, backgroundPanel);
+        addRestrictedAreas(corpoHouse.restrictedAreas);
+        addTrigerEventsAreas(corpoHouse.trigerEvents);
     }
 
 

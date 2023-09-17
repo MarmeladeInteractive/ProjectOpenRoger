@@ -81,6 +81,7 @@ public class Game{
         save.saveXmlFile(doc, gameName, "game");
 
         generateParties();
+        generateCorporations();
 
         loadingScreen.closeLoadingScreen();
         //startGame();
@@ -182,6 +183,18 @@ public class Game{
             }else{
                 party = null;
             }
+        }
+    }
+
+    public  void generateCorporations(){
+        int nCorporations = 0;
+        Corporation corporation = null;
+
+        while(nCorporations < 5){
+            
+            corporation = new Corporation(name);
+            corporation.saveCorporation();
+            nCorporations++;
         }
     }
 
