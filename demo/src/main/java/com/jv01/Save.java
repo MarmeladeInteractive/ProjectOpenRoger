@@ -155,7 +155,7 @@ public class Save {
 
         return(ChildElementContent);
     }
-    public String getChildFromMapElements(Map<String, List<String>> map, String key){
+    public String getChildFromMapElements(Map<String, List<String>> map, String key){   
         String value = map.get(key).get(0);
         return value;
     }

@@ -84,7 +84,7 @@ public class Game{
 
         loadingScreen.closeLoadingScreen();
         //startGame();
-        new CustomizePartyScreen(name);
+        new CustomizePartyScreen(name,seed);
     }
 
     public  Element createGameElement(Document doc){
@@ -190,7 +190,7 @@ public class Game{
         mainGameWindow.showMainGameWindow();
     }
 
-    public void startGame(String gamename){
+    public void startGame(String gamename, String seed){                 
         MainGameWindow mainGameWindow = new MainGameWindow(gamename, seed);
         mainGameWindow.showMainGameWindow();
     }
