@@ -57,7 +57,7 @@ public class KeyBord {
     }
 
     public void getKeyBoardValues(){
-        Document doc = save.getDocumentXml(gameName,"keyBoard");
+        Document doc = save.getDocumentXml(gameName,"functional/keyBoard");
         Element element = save.getElementById(doc, "keyBoard", "keyBoard");
 
         Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
