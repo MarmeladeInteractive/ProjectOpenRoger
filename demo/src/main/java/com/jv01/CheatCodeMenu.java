@@ -92,20 +92,24 @@ public class CheatCodeMenu {
                     case "$SET-MONEY":
                         addMoney(mots[1]);
                         break;
-                    case "$TP":
-                        tp(mots[1]);
+                    case "$SET-STEP":
+                        setStep(mots[1]);
                         break;
-
+                    case "$SET-SPEED":
+                        setSpeed(mots[1]);
+                        break;
 
                     case "$GET-SEED":
                         cheatCodeTextField.setText(mainGameWindow.seed);
                         break;
 
+                    case "$TP":
+                        tp(mots[1]);
+                        break;
 
                     case "$EXIT":
                         System.exit(0);
                         break;
-
 
                     default:
                         cheatCodeTextField.setForeground(Color.RED);
@@ -171,6 +175,27 @@ public class CheatCodeMenu {
             mainGameWindow.player.saveChunk();
             refresh = true;
 
+        } catch (NumberFormatException e) {
+
+        }
+    }
+
+    private void setStep(String value){
+        try {
+            int step = Integer.parseInt(value);
+ 
+            mainGameWindow.player.step = step;
+            mainGameWindow.player.saveStep();
+        } catch (NumberFormatException e) {
+
+        }
+    }
+    private void setSpeed(String value){
+        try {
+            int speed = Integer.parseInt(value);
+ 
+            mainGameWindow.player.speed = speed;
+            mainGameWindow.player.saveSpeed();
         } catch (NumberFormatException e) {
 
         }

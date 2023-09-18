@@ -121,6 +121,7 @@ public class KeyBord {
 
                  else if (keyCode == quitKey) {
                      quitKeyPressed = true;
+                     System.exit(0);
                  }
                  else if (keyCode == menuKey && !tempoMenuKey.isRunning()) {
                     menuKeyPressed = true;

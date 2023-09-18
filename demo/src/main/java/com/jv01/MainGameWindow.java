@@ -65,7 +65,7 @@ public class MainGameWindow {
             @Override
             public void actionPerformed(ActionEvent e) {
                 updateCounter++;
-                if (updateCounter >= player.speed) {
+                if (updateCounter >= player.movementType) {
                     updatePlayerLocation();
                     displayAlert();
                     updateCounter = 0;
@@ -454,6 +454,12 @@ public class MainGameWindow {
                     break;
 
                 case "inBuilding":
+                    isInsideBuilding = true;
+                    player.positionX = (boxSize) / 2;
+                    player.positionY = (boxSize) / 2;
+                    break;
+
+                case "TP":
                     isInsideBuilding = true;
                     player.positionX = (boxSize) / 2;
                     player.positionY = (boxSize) / 2;
