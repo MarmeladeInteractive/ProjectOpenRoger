@@ -27,7 +27,8 @@ public class Player{
     public int playerSize = 100;
 
     public int step = 10;
-    public int speed = 2;
+    public int movementType = 2;
+    public int speed = 1;
 
     public int currentFrameIndex = 0;
     public int currentFramePicIndex = 0;
@@ -201,53 +202,48 @@ public class Player{
     public void updatePlayerLocation() {
 
         if (keyBord.runKeyPressed){
-            speed = 1;
+            movementType = 1;
         } else {
-            speed = 2;
+            movementType = 2;
         }
 
         if (keyBord.leftKeyPressed && keyBord.upKeyPressed) {
-            positionX -= step;
-            positionY -= step;
+            positionX -= step*speed;
+            positionY -= step*speed;
             currentFrameIndex = 5;
             currentFramePicIndex++;
         } else if (keyBord.leftKeyPressed && keyBord.downKeyPressed) {
-            positionX -= step;
-            positionY += step;
+            positionX -= step*speed;
+            positionY += step*speed;
             currentFrameIndex = 7;
             currentFramePicIndex++;
         } else if (keyBord.rightKeyPressed && keyBord.upKeyPressed) {
-            positionX += step;
-            positionY -= step;
+            positionX += step*speed;
+            positionY -= step*speed;
             currentFrameIndex = 4;
             currentFramePicIndex++;
         } else if (keyBord.rightKeyPressed && keyBord.downKeyPressed) {
-            positionX += step;
-            positionY += step;
+            positionX += step*speed;
+            positionY += step*speed;
             currentFrameIndex = 6;
             currentFramePicIndex++;
         } else if (keyBord.leftKeyPressed) {
-            positionX -= step;
+            positionX -= step*speed;
             currentFrameIndex = 0;
             currentFramePicIndex++;
         } else if (keyBord.rightKeyPressed) {
-            positionX += step;
+            positionX += step*speed;
             currentFrameIndex = 1;
             currentFramePicIndex++;
         } else if (keyBord.upKeyPressed) {
-            positionY -= step;
+            positionY -= step*speed;
             currentFrameIndex = 2;
             currentFramePicIndex++;
         } else if (keyBord.downKeyPressed) {
-            positionY += step;
+            positionY += step*speed;
             currentFrameIndex = 3;
             currentFramePicIndex++;
-        } else if (keyBord.quitKeyPressed) {
-            System.exit(0);
         }
-
-
-
 
         currentFramePicIndex = (currentFramePicIndex) % walkingFrames[currentFrameIndex].length;
         Image scaledImage = walkingFrames[currentFrameIndex][currentFramePicIndex].getImage().getScaledInstance(playerSize, playerSize, Image.SCALE_SMOOTH);
@@ -290,11 +286,22 @@ public class Player{
         savePlayerValue("partyID",String.valueOf(partyID));
     }
 
+    public void saveStep(){        
+        savePlayerValue("step",String.valueOf(step));
+    }
+
+    public void saveSpeed(){
+        savePlayerValue("speed",String.valueOf(speed));
+    }
+
 
     public void save(){
         saveMoney();
         saveChunk();
         saveWasteCollected();
+        savePartyID();
+        saveStep();
+        saveSpeed();
     }
 
     private void displayAlert(String msg){
