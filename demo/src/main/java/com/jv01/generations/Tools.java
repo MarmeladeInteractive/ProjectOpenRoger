@@ -1,4 +1,4 @@
-package com.jv01.genarations;
+package com.jv01.generations;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

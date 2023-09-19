@@ -1,4 +1,4 @@
-package com.jv01.genarations;
+package com.jv01.generations;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
