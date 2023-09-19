@@ -1,4 +1,4 @@
-package com.jv01.genarations;
+package com.jv01.generations;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

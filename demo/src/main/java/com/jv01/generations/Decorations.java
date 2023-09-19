@@ -1,4 +1,4 @@
-package com.jv01.genarations;
+package com.jv01.generations;
 
 public class Decorations {
     public String name;
