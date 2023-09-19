@@ -5,85 +5,79 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import java.io.*;
+import javax.sound.sampled.*;
+
 import java.io.File;
 import javax.sound.sampled.*;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import org.w3c.dom.*;
+
 public class SoundManager {
-    private Clip clip;
+    private Document soundDocument;
 
     public SoundManager() {
+        loadSoundsFromXML("demo/xml/save/functional/sounds.xml"); // Chargez le fichier XML des sons lors de la création de SoundManager
+    }
+
+    public void playSound(int soundID) {
+        Element soundElement = getSoundElementByID(soundID);
+
+        if (soundElement != null) {
+            String soundURL = soundElement.getElementsByTagName("soundUrl").item(0).getTextContent();
+            
+            try {
+                // Charger le son à partir de l'URL
+                AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundURL));
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInputStream);
+                clip.start();
+                Thread.sleep(10000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Sound not found for ID: " + soundID);
+        }
+    }
+
+    private void loadSoundsFromXML(String xmlFilePath) {
         try {
-            // Créez un AudioInputStream à partir du fichier audio
-            File soundFile = new File("demo/xml/save/functional/test00.wav");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-
-            // Obtenez le clip audio
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-
-            // Ajoutez un LineListener pour gérer les événements audio
-            clip.addLineListener(new LineListener() {
-                @Override
-                public void update(LineEvent event) {
-                    if (event.getType() == LineEvent.Type.STOP) {
-                        clip.close();
-                    }
-                }
-            });
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            soundDocument = builder.parse(new File(xmlFilePath));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public SoundManager(String pathToAudio) {
-        try {
-            // Créez un AudioInputStream à partir du fichier audio
-            File soundFile = new File(pathToAudio);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
+    private Element getSoundElementByID(int soundID) {
+        NodeList soundNodes = soundDocument.getElementsByTagName("sound");
 
-            // Obtenez le clip audio
-            clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-
-            // Ajoutez un LineListener pour gérer les événements audio
-            clip.addLineListener(new LineListener() {
-                @Override
-                public void update(LineEvent event) {
-                    if (event.getType() == LineEvent.Type.STOP) {
-                        clip.close();
-                    }
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (int i = 0; i < soundNodes.getLength(); i++) {
+            Element soundElement = (Element) soundNodes.item(i);
+            int id = Integer.parseInt(soundElement.getAttribute("id"));
+            if (id == soundID) {
+                return soundElement;
+            }
         }
+        return null; // Retourne null si le son avec l'ID donné n'est pas trouvé.
     }
 
+    public static void main(String[] args) {
+        SoundManager soundManager = new SoundManager();
+        soundManager.playSound(0); // Joue le son avec l'ID 0 (vous pouvez remplacer l'ID par celui que vous souhaitez).
 
-    public void playSound() {
-        if (clip != null) {
-            clip.start();
-        }
-    }
+        soundManager.playSound(1);
 
-    public void stopSound() {
-        if (clip != null) {
-            clip.stop();
-            clip.setFramePosition(0); // Réinitialisez la position de lecture au début
-        }
-    }
-
-    public void increaseVolume(float amount) {
-        if (clip != null) {
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(gainControl.getValue() + amount);
-        }
-    }
-
-    public void decreaseVolume(float amount) {
-        if (clip != null) {
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(gainControl.getValue() - amount);
-        }
+        soundManager.playSound(2);
     }
 }
