@@ -21,25 +21,40 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import org.w3c.dom.*;
 
+import com.jv01.fonctionals.Save;
+
 public class SoundManager {
+    public Save save = new Save();
+
+    public String gameName;
+
     private Document sfxDocument;
     private Document musicDocument;
 
     private Clip currentSFXClip;
     private Clip currentMusicClip;
 
-    public SoundManager() {
-        loadSoundsFromXML("demo/xml/save/functional/sounds.xml"); 
-        loadMusicsFromXML("demo/xml/save/functional/music.xml"); 
+    public SoundManager(String gameName){
+        this.gameName = gameName;
+        //loadSoundsFromXML("demo/xml/save/functional/sounds.xml"); 
+        //loadMusicsFromXML("demo/xml/save/functional/music.xml"); 
+
+        sfxDocument = save.getDocumentXml(gameName, "functional/sounds");
+        musicDocument = save.getDocumentXml(gameName, "functional/music");
         // Chargez le fichier XML des sons lors de la création de SoundManager
     }
 
     public void playSFX(int sfxID) {
-        Element sfxElement = getSoundElementByID(sfxID);
+       // Element sfxElement = getSoundElementByID(sfxID);
+
+        Element sfxElement = save.getElementById(sfxDocument,"sound",String.valueOf(sfxID));
 
         if (sfxElement != null) {
-            String soundURL = sfxElement.getElementsByTagName("soundUrl").item(0).getTextContent();
-            
+            //String soundURL = sfxElement.getElementsByTagName("soundUrl").item(0).getTextContent();
+            String soundURL = save.stringToStringArray(save.getChildFromElement(sfxElement, "soundUrl"))[0];
+            soundURL = save.dropSpaceFromString(soundURL);
+
+            System.out.println(soundURL);
             try {
                 // Charger le son à partir de l'URL
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(soundURL));
@@ -131,13 +146,13 @@ public class SoundManager {
 
 
     public static void main(String[] args) {
-        /*
-        SoundManager soundManager = new SoundManager();
-        soundManager.playSFX(0); // Joue le son avec l'ID 0 (vous pouvez remplacer l'ID par celui que vous souhaitez).
-        soundManager.playMusic(0);
-        soundManager.stopMusic();
-        soundManager.playSFX(1);
+        
+        SoundManager soundManager = new SoundManager("ee");
+        //soundManager.playSFX(0); // Joue le son avec l'ID 0 (vous pouvez remplacer l'ID par celui que vous souhaitez).
+        //soundManager.playMusic(0);
+        //soundManager.stopMusic();
+        //soundManager.playSFX(1);
         soundManager.playSFX(2);
-        */
+        
     }
 }

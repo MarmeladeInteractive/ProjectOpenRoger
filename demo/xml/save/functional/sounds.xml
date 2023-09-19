@@ -2,16 +2,28 @@
     <sound id="0">
         <name>test00</name>
         <soundDuration>2</soundDuration>
-        <soundUrl>demo/sounds/sfx/test00.wav</soundUrl>
+        <soundUrl>{demo/sounds/sfx/test00.wav}</soundUrl>
     </sound>
     <sound id="1">
         <name>test01</name>
         <soundDuration>2</soundDuration>
-        <soundUrl>demo/sounds/sfx/test01.wav</soundUrl>
+        <soundUrl>{demo/sounds/sfx/test01.wav}</soundUrl>
     </sound>
     <sound id="2">
         <name>lebeure</name>
         <soundDuration>120</soundDuration>
-        <soundUrl>demo/sounds/sfx/lebeure.wav</soundUrl>
+        <soundUrl>{demo/sounds/sfx/lebeure.wav}</soundUrl>
+    </sound>
+    <sound id="3">
+        <name>dechets</name>
+        <soundDuration>1</soundDuration>
+        <soundUrl>
+            {
+                demo/sounds/sfx/wastes/Dechet01.mp3,
+                demo/sounds/sfx/wastes/Dechet02.mp3,
+                demo/sounds/sfx/wastes/Dechet03.mp3,
+                demo/sounds/sfx/wastes/Dechet04.mp3
+            }
+        </soundUrl>
     </sound>
 </sounds>
