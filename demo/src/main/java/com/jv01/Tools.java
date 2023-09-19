@@ -73,6 +73,7 @@ public class Tools {
         this.updateSpam = save.getChildFromElement(element, "upgradeable");
         this.useSpam = save.getChildFromElement(element, "useSpam");
         this.buySpam = save.getChildFromElement(element, "buySpam");
+
     }
 
     public void interact(Player player){
@@ -144,7 +145,34 @@ public class Tools {
                         break;
                 }
             }else{
+                switch (id) {
+                    case 0:
+                        
+                        break;
+                    case 1:
+                        if((player.inventory.maxChocolatines != player.inventory.chocolatines)&&(player.inventory.maxCroissants != player.inventory.croissants))if(player.isEnoughMoney(usePrice,true)){
+                            if((player.inventory.maxChocolatines - player.inventory.chocolatines)>=(level*2)){
+                                player.inventory.chocolatines += level*2;
+                            }else{
+                                player.inventory.chocolatines = player.inventory.maxChocolatines;
+                            }
+                            if((player.inventory.maxCroissants - player.inventory.croissants)>=(level*2)){
+                                player.inventory.croissants += level*2;
+                            }else{
+                                player.inventory.croissants = player.inventory.maxCroissants;
+                            }
+                            player.inventory.saveChocolatines();
+                            player.inventory.saveCroissants();
+                            refresh = true;
+                        }
+                        break;
+                    case 2:
+
+                        break;
                 
+                    default:
+                        break;
+                }
             }
         }else if(player.keyBord.upgradeKeyPressed){
             if(level<3){

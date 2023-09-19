@@ -90,7 +90,7 @@ public class CheatCodeMenu {
 
                 switch (mots[0]) {
                     case "$SET-MONEY":
-                        addMoney(mots[1]);
+                        setMoney(mots[1]);
                         break;
                     case "$SET-STEP":
                         setStep(mots[1]);
@@ -103,8 +103,26 @@ public class CheatCodeMenu {
                         cheatCodeTextField.setText(mainGameWindow.seed);
                         break;
 
+                    case "$FILL-INVENTORY":
+                        fillInventory();
+                        break;
+                    case "$EMPTY-INVENTORY":
+                        emptyInventory();
+                        break;
+
+                    case "$MOTHERLOAD":
+                        motherLoad();
+                        break;
+                    case "$LOAD-NEARBY-CHUNKS":
+                        loadNearbyChunks();
+                        break;
+
                     case "$TP":
                         tp(mots[1]);
+                        break;
+
+                    case "$DEV-MODE":
+                        devMode();
                         break;
 
                     case "$EXIT":
@@ -150,7 +168,7 @@ public class CheatCodeMenu {
     }
 
 
-    private void addMoney(String value){
+    private void setMoney(String value){
         try {         
             int number = Integer.parseInt(value);
             mainGameWindow.player.money = number;
@@ -181,6 +199,25 @@ public class CheatCodeMenu {
         }
     }
 
+    private void chargeChunk(String value) {
+        try {
+            int[] chunkInt = save.stringToIntArray(value);
+            long[] chunk = new long[chunkInt.length];
+
+            for (int i = 0; i < chunkInt.length; i++) {
+                chunk[i] = (long) chunkInt[i];
+            }
+ 
+            mainGameWindow.currentChunk = chunk;
+            mainGameWindow.changeChunk("chargeChunk");
+            ////mainGameWindow.player.saveChunk();
+            //refresh = true;
+
+        } catch (NumberFormatException e) {
+
+        }
+    }
+
     private void setStep(String value){
         try {
             int step = Integer.parseInt(value);
@@ -200,5 +237,42 @@ public class CheatCodeMenu {
         } catch (NumberFormatException e) {
 
         }
+    }
+
+    private void devMode(){
+        setSpeed("4");
+        setMoney("100000");
+    }
+
+    private void fillInventory(){
+        mainGameWindow.player.inventory.fillInventory();
+        mainGameWindow.player.inventory.saveAll();
+    }
+
+    private void emptyInventory(){
+        mainGameWindow.player.inventory.emptyInventory();
+        mainGameWindow.player.inventory.saveAll();
+    }
+
+    private void motherLoad(){
+        long newValue = mainGameWindow.player.money + 50000;
+        setMoney(String.valueOf(newValue));
+    }
+
+    private void loadNearbyChunks(){
+        int n = 10;
+        long[] playerChunk = mainGameWindow.currentChunk;
+        long[] currentChunk = new long[] {playerChunk[0]-(n/2),playerChunk[1]-(n/2)};
+
+        for(int i = 0; i <= (n); i++){
+            for(int j = 0; j <= (n); j++){
+                chargeChunk("{"+String.valueOf(currentChunk[0])+","+String.valueOf(currentChunk[1])+"}");
+                currentChunk[1]++;
+            }
+            currentChunk[1] -= n+1;
+            currentChunk[0]++;
+        }
+
+        tp("{"+String.valueOf(playerChunk[0])+","+String.valueOf(playerChunk[1])+"}");
     }
 }
