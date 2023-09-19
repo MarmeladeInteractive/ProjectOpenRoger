@@ -16,7 +16,7 @@ public class MainMenuScreen {
     public  Game game = new Game();
 
     public String gameTitle = "Jeux";
-    private JFrame frame = new JFrame("Main Menu");
+    private JFrame frame = new JFrame("Main Menu"); 
 
     public JTextField nameTextField = new JTextField(20);
     public JTextField seedTextField = new JTextField(20);
