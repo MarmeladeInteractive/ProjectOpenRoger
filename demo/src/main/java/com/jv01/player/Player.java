@@ -6,7 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
-import com.jv01.genarations.KeyBord;
+import com.jv01.generations.KeyBord;
 
 import java.awt.*;
 

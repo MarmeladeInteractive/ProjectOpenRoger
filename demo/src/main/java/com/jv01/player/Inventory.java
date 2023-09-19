@@ -15,8 +15,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
-import com.jv01.genarations.Items;
-import com.jv01.genarations.Objects;
+import com.jv01.generations.Items;
+import com.jv01.generations.Objects;
 
 import java.awt.*;
 

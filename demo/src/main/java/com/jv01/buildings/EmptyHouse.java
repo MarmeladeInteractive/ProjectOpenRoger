@@ -5,8 +5,8 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-import com.jv01.genarations.Objects;
-import com.jv01.genarations.Tools;
+import com.jv01.generations.Objects;
+import com.jv01.generations.Tools;
 
 public class EmptyHouse{
     public String gameName;

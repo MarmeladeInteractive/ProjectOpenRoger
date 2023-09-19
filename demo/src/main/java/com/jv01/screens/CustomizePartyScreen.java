@@ -5,7 +5,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.jv01.fonctionals.Save;
-import com.jv01.genarations.Game;
+import com.jv01.generations.Game;
 
 import org.w3c.dom.Node;
 

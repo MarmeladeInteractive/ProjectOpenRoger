@@ -2,7 +2,7 @@ package com.jv01.screens;
 
 import javax.swing.*;
 
-import com.jv01.genarations.Game;
+import com.jv01.generations.Game;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
