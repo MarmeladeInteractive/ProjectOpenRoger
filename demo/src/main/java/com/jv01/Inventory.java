@@ -239,6 +239,13 @@ public class Inventory {
         updateLables();
     }
 
+    public void saveAll(){
+        saveWastes();
+        saveApples();
+        saveChocolatines();
+        saveCroissants();
+    }
+
     public void updateWastesLabel(){
         wastesLabel.setText(
             "<html>"+
@@ -331,5 +338,21 @@ public class Inventory {
                 isCroissant = false;
             }
         }
+    }
+
+    public void fillInventory(){
+        wastes = maxWastes;
+        apples = maxApples;
+        chocolatines = maxChocolatines;
+        croissants = maxCroissants;
+        updateLables();
+    }
+
+    public void emptyInventory(){
+        wastes = 0;
+        apples = 0;
+        chocolatines = 0;
+        croissants = 0;
+        updateLables();
     }
 }

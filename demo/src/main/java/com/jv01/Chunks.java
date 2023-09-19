@@ -16,6 +16,8 @@ import org.w3c.dom.Element;
 public class Chunks {
     public Save save = new Save();
 
+    public boolean load = true;
+
     public String id;
     public long[] chunk;
     public String seed;
@@ -52,7 +54,9 @@ public class Chunks {
     private Random random = new Random();
 
 
-    public Chunks(long[] chunk, String seed, String key, String gameName, int boxSize, JPanel backgroundPanel, boolean isInsideBuilding){
+    public Chunks(long[] chunk, String seed, String key, String gameName, int boxSize, JPanel backgroundPanel, boolean isInsideBuilding, boolean load){
+        this.load = load;
+
         this.chunk = chunk;
         this.seed = seed;
         this.boxSize = boxSize;
@@ -72,7 +76,7 @@ public class Chunks {
             if(!isInsideBuilding){
                 createBiome();
                 addBuildings();
-                addDecorations();
+                if(this.load)addDecorations();
                 saveChunk();
             }else{
                 addInsideBuildings();
@@ -84,7 +88,7 @@ public class Chunks {
                 this.biome = Integer.parseInt(save.getChildFromMapElements(allElements,"biome"));
                 this.backPic = save.getChildFromMapElements(allElements,"backPic");
 
-                changeBiome(biome, backPic);
+                if(this.load)changeBiome(biome, backPic);
 
                 this.number = Integer.parseInt(save.getChildFromMapElements(allElements,"number"));
 
@@ -96,7 +100,7 @@ public class Chunks {
                     
                     for(int i=0; i <number; i++){
                         int[] cell = (new int[]{bCellX[i],bCellY[i]});
-                        createBuilding(number, cell, bType[i]);
+                        if(this.load)createBuilding(number, cell, bType[i]);
                     }
 
                     int[] completedCellInt = save.stringToIntArray(save.getChildFromMapElements(allElements,"completedCell"));
@@ -108,7 +112,7 @@ public class Chunks {
                         }
                     }
                 }
-                addDecorations();
+                if(this.load)addDecorations();
             }else{
                 this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
                 addInsideBuildings();
@@ -298,7 +302,7 @@ public class Chunks {
         if(isCenterChunk)buildingType = 0;
 
         if(number != 0){
-            createBuilding(number, cell01, buildingType);
+            if(this.load)createBuilding(number, cell01, buildingType);
             bCellX[0] = cell01[0];
             bCellY[0] = cell01[1];
             bType[0] = buildingType;
@@ -381,7 +385,7 @@ public class Chunks {
                 } 
             }
 
-            createBuilding(number, cell, 7);
+            if(this.load)createBuilding(number, cell, 7);
             bCellX[i-1] = cell[0];
             bCellY[i-1] = cell[1];
             bType[i-1] = 7;

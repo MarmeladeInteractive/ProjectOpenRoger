@@ -27,6 +27,8 @@ public class MainGameWindow {
     long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
 
+    public boolean displayChunks = true;
+
     private int boxSize = 800;
     int cellSize = boxSize / 3;
     BufferedImage img;
@@ -401,7 +403,7 @@ public class MainGameWindow {
 
     public void buildChunk(){
         chunk = null;
-        chunk = new Chunks(currentChunk, seed, key, gameName, boxSize, backgroundPanel,isInsideBuilding);
+        chunk = new Chunks(currentChunk, seed, key, gameName, boxSize, backgroundPanel,isInsideBuilding,displayChunks);
     }
 
     public void enterBuilding(){
@@ -461,6 +463,14 @@ public class MainGameWindow {
 
                 case "TP":
                     isInsideBuilding = false;
+                    displayChunks = true;
+                    player.positionX = (boxSize) / 2;
+                    player.positionY = (boxSize) / 2;
+                    break;
+                
+                case "chargeChunk":
+                    isInsideBuilding = false;
+                    displayChunks = false;
                     player.positionX = (boxSize) / 2;
                     player.positionY = (boxSize) / 2;
                     break;
