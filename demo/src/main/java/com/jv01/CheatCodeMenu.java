@@ -171,9 +171,10 @@ public class CheatCodeMenu {
                 chunk[i] = (long) chunkInt[i];
             }
  
-            mainGameWindow.player.chunk = chunk;
-            mainGameWindow.player.saveChunk();
-            refresh = true;
+            mainGameWindow.currentChunk = chunk;
+            mainGameWindow.changeChunk("TP");
+            ////mainGameWindow.player.saveChunk();
+            //refresh = true;
 
         } catch (NumberFormatException e) {
 
