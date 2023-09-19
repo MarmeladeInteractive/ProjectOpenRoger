@@ -1,0 +1,7 @@
+<settings>
+    <setting id ="default">
+        <keyboardProfile>keyBoard</keyboardProfile>
+        <musicVolume>100</musicVolume>
+        <soundVolume>100</soundVolume>
+    </setting>
+</settings>

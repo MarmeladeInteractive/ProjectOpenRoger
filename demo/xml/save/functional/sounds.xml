@@ -1,0 +1,14 @@
+<sounds>
+    <sound id="0">
+        <name>test00</name>
+        <soundUrl>demo/sounds/test00.wav</soundUrl>
+    </sound>
+        <sound id="1">
+        <name>test01</name>
+        <soundUrl>demo/sounds/test01.wav</soundUrl>
+    </sound>
+        <sound id="2">
+        <name>lebeure</name>
+        <soundUrl>demo/sounds/lebeure.wav</soundUrl>
+    </sound>
+</sounds>
