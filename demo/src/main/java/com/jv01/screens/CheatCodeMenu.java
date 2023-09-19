@@ -111,8 +111,8 @@ public class CheatCodeMenu {
                         emptyInventory();
                         break;
 
-                    case "$MOTHERLOAD":
-                        motherLoad();
+                    case "$MOTHERLODE":
+                        motherLode();
                         break;
                     case "$LOAD-NEARBY-CHUNKS":
                         loadNearbyChunks();
@@ -255,7 +255,7 @@ public class CheatCodeMenu {
         mainGameWindow.player.inventory.saveAll();
     }
 
-    private void motherLoad(){
+    private void motherLode(){
         long newValue = mainGameWindow.player.money + 50000;
         setMoney(String.valueOf(newValue));
     }
