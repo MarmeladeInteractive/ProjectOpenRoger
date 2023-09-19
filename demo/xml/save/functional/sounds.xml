@@ -19,10 +19,22 @@
         <soundDuration>1</soundDuration>
         <soundUrl>
             {
-                demo/sounds/sfx/wastes/Dechet01.mp3,
-                demo/sounds/sfx/wastes/Dechet02.mp3,
-                demo/sounds/sfx/wastes/Dechet03.mp3,
-                demo/sounds/sfx/wastes/Dechet04.mp3
+                demo/sounds/sfx/wastes/waste01.wav,
+                demo/sounds/sfx/wastes/waste02.wav,
+                demo/sounds/sfx/wastes/waste03.wav,
+                demo/sounds/sfx/wastes/waste04.wav
+            }
+        </soundUrl>
+    </sound>
+    <sound id="4">
+        <name>poubelle</name>
+        <soundDuration>1</soundDuration>
+        <soundUrl>
+            {
+                demo/sounds/sfx/dump/dump01.wav,
+                demo/sounds/sfx/dump/dump01.wav,
+                demo/sounds/sfx/dump/dump01.wav,
+                demo/sounds/sfx/dump/dump01.wav
             }
         </soundUrl>
     </sound>

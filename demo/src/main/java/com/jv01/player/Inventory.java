@@ -15,12 +15,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.fonctionals.SoundManager;
 import com.jv01.generations.Items;
 import com.jv01.generations.Objects;
 
 import java.awt.*;
 
 public class Inventory {
+    public SoundManager soundManager;
     public Save save = new Save();
 
     public String gameName;
@@ -69,6 +71,8 @@ public class Inventory {
     public Inventory(String gameName){
         this.gameName = gameName;
 
+        soundManager = new SoundManager(gameName);
+
         getInventoryValues();  
     }
 
@@ -77,7 +81,7 @@ public class Inventory {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
-                ImageIcon backgroundImage = new ImageIcon("demo\\img\\inventory\\back.jpg");
+                ImageIcon backgroundImage = new ImageIcon("demo/img/inventory/back.jpg");
                 Image img = backgroundImage.getImage();
                 g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
@@ -353,6 +357,7 @@ public class Inventory {
     }
 
     public void emptyInventory(){
+        soundManager.playSFX(4);
         wastes = 0;
         apples = 0;
         chocolatines = 0;

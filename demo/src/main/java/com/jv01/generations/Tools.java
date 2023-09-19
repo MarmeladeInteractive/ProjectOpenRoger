@@ -4,10 +4,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.fonctionals.SoundManager;
 import com.jv01.player.Player;
 
 public class Tools {
     public Save save = new Save();
+    public SoundManager soundManager;
     public String gameName;
 
     public boolean refresh = false;
@@ -33,6 +35,8 @@ public class Tools {
 
     public Tools(String gameName, int id, int level){
         this.gameName = gameName;
+
+        soundManager = new SoundManager(gameName);
 
         this.id = id;
         this.level = level;
@@ -130,6 +134,8 @@ public class Tools {
                         break;
                     case 5:
                         if(player.inventory.wastes >= 0){
+
+                            soundManager.playSFX(4);
                             
                             player.money += player.inventory.wastes;
 

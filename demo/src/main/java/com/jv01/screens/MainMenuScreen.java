@@ -133,6 +133,7 @@ public class MainMenuScreen {
 
         frame.add(panel);
         frame.setVisible(true);  
+        nameTextField.requestFocus();
         frame.setLocationRelativeTo(null);
     }
 
@@ -184,6 +185,7 @@ public class MainMenuScreen {
 
         frame.add(panel);
         frame.setVisible(true);  
+        seedTextField.requestFocus();
         frame.setLocationRelativeTo(null);
     }
 

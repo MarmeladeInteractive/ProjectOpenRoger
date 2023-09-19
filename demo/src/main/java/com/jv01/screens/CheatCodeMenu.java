@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.DocumentListener;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.fonctionals.SoundManager;
 import com.jv01.generations.MainGameWindow;
 
 import javax.swing.event.DocumentEvent;

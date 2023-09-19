@@ -2,6 +2,7 @@ package com.jv01.generations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PrimitiveIterator;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -10,12 +11,15 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.fonctionals.SoundManager;
 import com.jv01.player.Player;
 
+import javax.management.loading.PrivateClassLoader;
 import javax.swing.JLabel;
 
 public class Items {
     private Save save = new Save();
+    private SoundManager soundManager;
     public String gameName;
 
     public String name;
@@ -47,6 +51,8 @@ public class Items {
 
     public Items(String gameName, int id){
         this.gameName = gameName;
+
+        soundManager = new SoundManager(gameName);
         this.id = id;
 
         getItemsValues();
@@ -105,6 +111,9 @@ public class Items {
                 case 0:
                     if(player.inventory.wastes < player.inventory.maxWastes){
                         removeItem();
+
+                        soundManager.playSFX(3);
+
                         this.isExist = false;
                         //player.money += 1;
                         player.wasteCollected ++;
