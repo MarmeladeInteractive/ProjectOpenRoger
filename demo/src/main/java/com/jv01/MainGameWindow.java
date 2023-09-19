@@ -111,7 +111,7 @@ public class MainGameWindow {
 
         createBackgroundPanel();
         player.inventory.createInventoryPanel(frame);
-        currentChunk = player.chunk;
+        //currentChunk = player.chunk;
 
         addCoordinatesLabel();
         addMoneyLabel();
@@ -460,7 +460,7 @@ public class MainGameWindow {
                     break;
 
                 case "TP":
-                    isInsideBuilding = true;
+                    isInsideBuilding = false;
                     player.positionX = (boxSize) / 2;
                     player.positionY = (boxSize) / 2;
                     break;
