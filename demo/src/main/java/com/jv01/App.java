@@ -2,6 +2,8 @@ package com.jv01;
 
 import javax.swing.SwingUtilities;
 
+import com.jv01.screens.MainMenuScreen;
+
 public class App{
     public static MainMenuScreen mainMenu = new MainMenuScreen();
 
