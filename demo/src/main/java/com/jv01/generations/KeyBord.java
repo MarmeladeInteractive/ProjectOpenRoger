@@ -111,10 +111,10 @@ public class KeyBord {
  
                  else if (keyCode == intercatKey && !tempoInteractKey.isRunning()) {
                      interactKeyPressed = true;
-                     tempoInteractKey.start(1000);
+                     tempoInteractKey.start(100);
                  }else if (keyCode == upgradeKey && !tempoUpgradeKey.isRunning()) {
                      upgradeKeyPressed = true;
-                     tempoUpgradeKey.start(1000);
+                     tempoUpgradeKey.start(100);
                  }
  
                  else if (keyCode == mapKey  && !tempoMapKey.isRunning()) {
