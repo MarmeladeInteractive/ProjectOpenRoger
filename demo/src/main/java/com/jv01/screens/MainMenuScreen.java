@@ -1,7 +1,10 @@
 package com.jv01.screens;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
+import com.jv01.fonctionals.Save;
 import com.jv01.generations.Game;
 
 import java.awt.*;
@@ -12,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainMenuScreen {
-   
+    public Save save = new Save();
     public  Game game = new Game();
 
     public String gameTitle = "Jeux";
@@ -73,7 +76,43 @@ public class MainMenuScreen {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
             }
-        });        
+        });
+        
+        nameTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                nameTextField.setForeground(Color.BLACK);
+                nameTextField.setBackground(new Color(255, 255, 255, 255));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               
+            }
+        });
+
+        seedTextField.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                seedTextField.setForeground(Color.BLACK);
+                seedTextField.setBackground(new Color(255, 255, 255, 255));
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+               
+            }
+        });
     
         frame.add(panel);
         frame.setLocationRelativeTo(null); 
@@ -117,7 +156,13 @@ public class MainMenuScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String gameName = nameTextField.getText();
-                startNewGame(gameName, null);
+                if(isValideInput(gameName)){
+                     startNewGame(gameName, null);
+                }else{
+                    nameTextField.setForeground(Color.RED);
+                    nameTextField.setBackground(new Color(255, 120, 120, 255));
+                    nameTextField.requestFocus();
+                }          
             }
         });
 
@@ -169,7 +214,20 @@ public class MainMenuScreen {
             public void actionPerformed(ActionEvent e) {
                 String gameName = nameTextField.getText();
                 String seed = seedTextField.getText();
-                startNewGame(gameName, seed);
+
+                if(isValideInput(gameName)){
+                    if(isValideInput(seed)){
+                        startNewGame(gameName, seed);
+                    }else{
+                        seedTextField.setForeground(Color.RED);
+                        seedTextField.setBackground(new Color(255, 120, 120, 255));
+                        seedTextField.requestFocus();
+                    }
+                }else{
+                    nameTextField.setForeground(Color.RED);
+                    nameTextField.setBackground(new Color(255, 120, 120, 255));
+                    nameTextField.requestFocus();
+                }
             }
         });
 
@@ -251,6 +309,14 @@ public class MainMenuScreen {
         frame.add(panel);
         frame.setVisible(true);     
         frame.setLocationRelativeTo(null);
+    }
+
+    private boolean isValideInput(String input){
+        boolean isValideInput = false;
+        if(save.dropSpaceFromString(input).length() > 0){
+            isValideInput = true;
+        }
+        return isValideInput;
     }
 
     private void startNewGame(String gameName, String seed) {
