@@ -4,6 +4,9 @@ import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import com.jv01.fonctionals.Save;
 import com.jv01.generations.Game;
 
@@ -28,6 +31,11 @@ public class MainMenuScreen {
 
     public JPanel panel;
     public JList<String> gameNamesJList;
+
+    public List<String> gameNamesList = new ArrayList<>();
+    public List<String> gameNamesListDisplay = new ArrayList<>();
+    public List<String> oldVersionGameNamesList = new ArrayList<>();
+
     public GridBagConstraints constraints;
 
     public String gameName = "";
@@ -266,17 +274,39 @@ public class MainMenuScreen {
         panel.add(titleLabel, constraints);
 
         try{
+            Document doc = save.getDocumentXmlFromRoot("game");
+            Element element = save.getElementById(doc, "game", "game");
+            String currentVersion = save.getChildFromElement(element,"version");
+
             File savesDirectory = new File("saves");
             File[] gameFolders = savesDirectory.listFiles();
 
-            List<String> gameNamesList = new ArrayList<>();
+            
+
+            String fileName;
+            Document newDoc;
+            Element newElement;
+            String newCurrentVersion;
+
             for (File gameFolder : gameFolders) {
                 if (gameFolder.isDirectory()) {
-                    gameNamesList.add(gameFolder.getName());
+                    fileName = gameFolder.getName();
+                    newDoc = save.getDocumentXml(fileName,"game");
+                    newElement = save.getElementById(newDoc, "game", "game");
+                    newCurrentVersion = save.getChildFromElement(newElement,"version");
+
+                    if(newCurrentVersion.equals(currentVersion)){
+                        gameNamesList.add(fileName);
+                        gameNamesListDisplay.add(fileName);
+                    }else {
+                        gameNamesListDisplay.add("<html><font color='red'>" + fileName + "</font></html>");
+                        gameNamesList.add(fileName);
+                        oldVersionGameNamesList.add(fileName);
+                    }                   
                 }
             }
 
-            gameNamesJList = new JList<>(gameNamesList.toArray(new String[0]));
+            gameNamesJList = new JList<>(gameNamesListDisplay.toArray(new String[0]));
             JScrollPane scrollPane = new JScrollPane(gameNamesJList);
             panel.add(scrollPane, constraints);
         } catch (Exception e) {
@@ -289,9 +319,29 @@ public class MainMenuScreen {
         loadButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String selectedGame = gameNamesJList.getSelectedValue();
+
+                int index = gameNamesJList.getSelectedIndex();
+                String selectedGame = gameNamesList.get(index);
+
                 if (selectedGame != null) {
-                    loadGame(selectedGame);
+                    for(String name : oldVersionGameNamesList){
+                        if(name.equals(selectedGame)){
+                            int choise = JOptionPane.showConfirmDialog(frame,
+                            "La partie que vous souhaitez charger n'est pas de la bonne version!\n"+
+                            "Êtes-vous sûr de vouloir la lancer?",
+
+                            "Attention",
+                            JOptionPane.YES_NO_OPTION);
+
+                            if(choise == JOptionPane.YES_OPTION){
+                                loadGame(selectedGame);
+                            }else if(choise == JOptionPane.NO_OPTION){
+                                gameNamesJList.clearSelection();
+                            }
+                        }else{
+                            loadGame(selectedGame);
+                        }
+                    }           
                 }
             }
         });

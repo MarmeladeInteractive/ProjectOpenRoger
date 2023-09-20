@@ -77,11 +77,7 @@ public class Game{
         
         save.createAllFiles(gameName);
 
-        Document doc = save.getDocumentXml(gameName, "game");
-
-        createGameElement(doc);
-
-        save.saveXmlFile(doc, gameName, "game");
+        editElement();
 
         generateParties();
         generateCorporations();
@@ -91,25 +87,11 @@ public class Game{
         new CustomizePartyScreen(name,seed);
     }
 
-    public  Element createGameElement(Document doc){
+    public void editElement(){
         LocalDateTime now = LocalDateTime.now();
-        Element rootElement = doc.getDocumentElement();
-    
-        Element gameElement = null;
-
-        gameElement = doc.createElement("date");
-        gameElement.appendChild(doc.createTextNode(Objects.toString(now)));
-        rootElement.appendChild(gameElement);
-
-        gameElement = doc.createElement("seed");
-        gameElement.appendChild(doc.createTextNode(seed));
-        rootElement.appendChild(gameElement);
-
-        gameElement = doc.createElement("name");
-        gameElement.appendChild(doc.createTextNode(name));
-        rootElement.appendChild(gameElement);
-
-        return rootElement;
+        save.changeElementChildValue(name,"game","game","game","date",Objects.toString(now));
+        save.changeElementChildValue(name,"game","game","game","seed",seed);
+        save.changeElementChildValue(name,"game","game","game","name",name);
     }
 
     public  String readgameElementValue(Document doc, String element) {
