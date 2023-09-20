@@ -90,6 +90,20 @@ public class Save {
         return doc;
     }
 
+    public Document getDocumentXmlFromRoot(String fileName) {
+        Document doc = null;
+        String filePath = "demo/xml/save/" + fileName + ".xml";
+        try {
+            File xmlFile = new File(filePath);
+            DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+            doc = dBuilder.parse(xmlFile);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return doc;
+    }
+
     public boolean saveXmlFile(Document doc, String gameName, String fileName) {
         try {
             String filePath = "saves/" + gameName + "/" + fileName + ".xml";
