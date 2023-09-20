@@ -290,19 +290,23 @@ public class MainMenuScreen {
 
             for (File gameFolder : gameFolders) {
                 if (gameFolder.isDirectory()) {
-                    fileName = gameFolder.getName();
-                    newDoc = save.getDocumentXml(fileName,"game");
-                    newElement = save.getElementById(newDoc, "game", "game");
-                    newCurrentVersion = save.getChildFromElement(newElement,"version");
+                    try{
+                        fileName = gameFolder.getName();
+                        newDoc = save.getDocumentXml(fileName,"game");
+                        newElement = save.getElementById(newDoc, "game", "game");
+                        newCurrentVersion = save.getChildFromElement(newElement,"version");
 
-                    if(newCurrentVersion.equals(currentVersion)){
-                        gameNamesList.add(fileName);
-                        gameNamesListDisplay.add(fileName);
-                    }else {
-                        gameNamesListDisplay.add("<html><font color='red'>" + fileName + "</font></html>");
-                        gameNamesList.add(fileName);
-                        oldVersionGameNamesList.add(fileName);
-                    }                   
+                        if(newCurrentVersion.equals(currentVersion)){
+                            gameNamesList.add(fileName);
+                            gameNamesListDisplay.add(fileName);
+                        }else {
+                            gameNamesListDisplay.add("<html><font color='red'>" + fileName + "</font></html>");
+                            gameNamesList.add(fileName);
+                            oldVersionGameNamesList.add(fileName);
+                        }   
+                    } catch (Exception e) {
+            
+                    }                
                 }
             }
 
