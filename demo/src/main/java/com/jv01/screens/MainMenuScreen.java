@@ -165,7 +165,7 @@ public class MainMenuScreen {
             public void actionPerformed(ActionEvent e) {
                 String gameName = nameTextField.getText();
                 if(isValideInput(gameName)){
-                     startNewGame(gameName, null);
+                    startNewGame(gameName, null);      
                 }else{
                     nameTextField.setForeground(Color.RED);
                     nameTextField.setBackground(new Color(255, 120, 120, 255));
@@ -225,7 +225,7 @@ public class MainMenuScreen {
 
                 if(isValideInput(gameName)){
                     if(isValideInput(seed)){
-                        startNewGame(gameName, seed);
+                        startNewGame(gameName, null);
                     }else{
                         seedTextField.setForeground(Color.RED);
                         seedTextField.setBackground(new Color(255, 120, 120, 255));
@@ -278,36 +278,29 @@ public class MainMenuScreen {
             Element element = save.getElementById(doc, "game", "game");
             String currentVersion = save.getChildFromElement(element,"version");
 
-            File savesDirectory = new File("saves");
-            File[] gameFolders = savesDirectory.listFiles();
+            List<String> savesNames = getAllSavesNames();
 
-            
-
-            String fileName;
             Document newDoc;
             Element newElement;
             String newCurrentVersion;
 
-            for (File gameFolder : gameFolders) {
-                if (gameFolder.isDirectory()) {
-                    try{
-                        fileName = gameFolder.getName();
-                        newDoc = save.getDocumentXml(fileName,"game");
-                        newElement = save.getElementById(newDoc, "game", "game");
-                        newCurrentVersion = save.getChildFromElement(newElement,"version");
+            for (String fileName : savesNames) {
+                try{
+                    newDoc = save.getDocumentXml(fileName,"game");
+                    newElement = save.getElementById(newDoc, "game", "game");
+                    newCurrentVersion = save.getChildFromElement(newElement,"version");
 
-                        if(newCurrentVersion.equals(currentVersion)){
-                            gameNamesList.add(fileName);
-                            gameNamesListDisplay.add(fileName);
-                        }else {
-                            gameNamesListDisplay.add("<html><font color='red'>" + fileName + "</font></html>");
-                            gameNamesList.add(fileName);
-                            oldVersionGameNamesList.add(fileName);
-                        }   
-                    } catch (Exception e) {
-            
-                    }                
-                }
+                    if(newCurrentVersion.equals(currentVersion)){
+                        gameNamesList.add(fileName);
+                        gameNamesListDisplay.add(fileName);
+                    }else {
+                        gameNamesListDisplay.add("<html><font color='red'>" + fileName + "</font></html>");
+                        gameNamesList.add(fileName);
+                        oldVersionGameNamesList.add(fileName);
+                    }   
+                } catch (Exception e) {
+        
+                }                
             }
 
             gameNamesJList = new JList<>(gameNamesListDisplay.toArray(new String[0]));
@@ -373,9 +366,49 @@ public class MainMenuScreen {
         return isValideInput;
     }
 
+    private boolean isExistingNameMap(String newNameMap){
+        boolean isExisting = false;
+        List<String> savesNames = getAllSavesNames();
+        try{
+            for (String gameName : savesNames) {
+                if(gameName.equals(newNameMap)){
+                    isExisting = true;
+                    break;
+                }              
+            }
+        } catch (Exception e) {
+            
+        }
+        return isExisting;
+    }
+
+    private List<String> getAllSavesNames(){
+        List<String> savesNames = new ArrayList<>();
+        try{
+            File savesDirectory = new File("saves");
+            File[] gameFolders = savesDirectory.listFiles();
+
+            for (File gameFolder : gameFolders) {
+                if (gameFolder.isDirectory()) {
+                    savesNames.add(gameFolder.getName());         
+                }
+            }
+        } catch (Exception e) {
+            
+        }
+        return savesNames;
+    }
+
     private void startNewGame(String gameName, String seed) {
-        frame.dispose();
-        game.runNewGame(gameName, seed);
+        if(isExistingNameMap(gameName)){
+            nameTextField.setForeground(Color.RED);
+            nameTextField.setBackground(new Color(255, 120, 120, 255));
+            nameTextField.requestFocus();
+            JOptionPane.showMessageDialog(frame,"Une sauvegarde porte déja ce nom","Attention",JOptionPane.CANCEL_OPTION);
+        }else{
+            frame.dispose();
+            game.runNewGame(gameName, seed);
+        }
     }
 
     private void loadGame(String gameName) {
