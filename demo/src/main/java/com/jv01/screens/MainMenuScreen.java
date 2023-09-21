@@ -317,8 +317,15 @@ public class MainMenuScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                int index = gameNamesJList.getSelectedIndex();
-                String selectedGame = gameNamesList.get(index);
+                int index;
+                String selectedGame = null;
+
+                try{
+                    index = gameNamesJList.getSelectedIndex();
+                    selectedGame = gameNamesList.get(index);
+                } catch (Exception e1){
+                    JOptionPane.showMessageDialog(frame,"Choisisez une sauvegarde","Attention",JOptionPane.CANCEL_OPTION);
+                }              
 
                 if (selectedGame != null) {
                     for(String name : oldVersionGameNamesList){
