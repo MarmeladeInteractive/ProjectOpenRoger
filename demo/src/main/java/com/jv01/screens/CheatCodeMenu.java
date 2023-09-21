@@ -17,9 +17,8 @@ public class CheatCodeMenu {
     public boolean refresh = false;
     public boolean refreshDisplay = false;
 
-    MainGameWindow mainGameWindow;
-    Save save = new Save();
-
+    public MainGameWindow mainGameWindow;
+    public Save save = new Save();
 
     public JFrame frame = new JFrame("Cheat code");
 
@@ -28,6 +27,9 @@ public class CheatCodeMenu {
     public JPanel panel;
     public JList<String> cheatCodesJList;
     public GridBagConstraints constraints;
+
+    public JButton cheatCodeButton;
+    public JButton exitButton;
 
     public String cheatCode = "";
 
@@ -76,9 +78,9 @@ public class CheatCodeMenu {
 
         panel.add(cheatCodeTextField, constraints);
 
-        JButton cheatCodeButton = new JButton("Valider");
-
         constraints.gridx++;
+
+        cheatCodeButton = new JButton("Valider");
 
         panel.add(cheatCodeButton, constraints); 
 
@@ -139,7 +141,7 @@ public class CheatCodeMenu {
             }
         });
 
-        JButton exitButton = new JButton("Exit");
+        exitButton = new JButton("Exit");
 
         constraints.gridx++;
 
@@ -191,6 +193,7 @@ public class CheatCodeMenu {
             }
  
             mainGameWindow.currentChunk = chunk;
+            mainGameWindow.player.chunk = chunk;
             mainGameWindow.changeChunk("TP");
             ////mainGameWindow.player.saveChunk();
             //refresh = true;
