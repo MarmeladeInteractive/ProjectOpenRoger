@@ -1,12 +1,12 @@
 <musics>
     <music id="0">
         <name>MainMenu</name>
-        <musicDuration>120</musicDuration>
-        <musicUrl>demo/sounds/musics/SOUDIERE-Cadillacs.wav</musicUrl>
+        <musicDuration>45</musicDuration>
+        <musicUrl>demo/sounds/musics/OmeletteChampiChampetre.wav</musicUrl>
     </music>
     <music id="1">
         <name>GameLoop</name>
         <musicDuration>120</musicDuration>
-        <musicUrl>demo/sounds/musics/SOUDIERE-Cadillacs.wav</musicUrl>
+        <musicUrl>demo/sounds/musics/OmeletteChampiChampetre.wav</musicUrl>
     </music>
 </musics>
