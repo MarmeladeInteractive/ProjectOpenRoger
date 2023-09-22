@@ -8,6 +8,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.fonctionals.SoundManager;
 import com.jv01.generations.Game;
 
 import java.awt.*;
@@ -46,7 +47,13 @@ public class MainMenuScreen {
 
     public String gameName = "";
 
+    public SoundManager soundManager;
+
     public void showMainMenu() {
+
+        soundManager = new SoundManager();
+        soundManager.playMusic(0);
+
         frame.getContentPane().removeAll();
         frame.repaint();
     
@@ -447,12 +454,14 @@ public class MainMenuScreen {
             nameTextField.requestFocus();
             JOptionPane.showMessageDialog(frame,"Une sauvegarde porte déja ce nom","Attention",JOptionPane.CANCEL_OPTION);
         }else{
+            soundManager.stopMusic(false);
             frame.dispose();
             game.runNewGame(gameName, seed);
         }
     }
 
     private void loadGame(String gameName) {
+        soundManager.stopMusic(false);
         frame.dispose();
         game.runGame(gameName);
     }
