@@ -282,25 +282,26 @@ public class Chunks {
             completedCell[3] = true;
         }
 
-        int buildingType = 0;
+        int buildingType = 7;
         char key4 = key.charAt(3);
+        char key5 = key.charAt(4);
 
         if (key4 >= '0' && key4 <= '1' && biome > 3) {
-            buildingType = 7;
+            if(key5 <= getCharComparedToPercentage(10))buildingType = 8;
         } else if (key4 >= '2' && key4 <= '3' && biome > 3) {
-            buildingType = 1;
+            if(key5 <= getCharComparedToPercentage(20))buildingType = 1;
         } else if (key4 >= '4' && key4 <= '5'  && biome > 3) {
-            buildingType = 2;
+            if(key5 <= getCharComparedToPercentage(20))buildingType = 2;
         } else if (key4 >= '6' && key4 <= '7'  && biome > 3) {
-            buildingType = 3;
+            if(key5 <= getCharComparedToPercentage(30))buildingType = 3;
         } else if (key4 >= '8' && key4 <= '9'  && biome > 3) {
-            buildingType = 4;
+            if(key5 <= getCharComparedToPercentage(30))buildingType = 4;
         } else if (key4 >= 'a' && key4 <= 'b'  && biome > 3) {
-            buildingType = 5;
+            if(key5 <= getCharComparedToPercentage(30))buildingType = 5;
         } else if (key4 >= 'c' && key4 <= 'd') {
-            buildingType = 6;
+            if(key5 <= getCharComparedToPercentage(50))buildingType = 6;
         }else {
-            buildingType = 7;
+            if(key5 <= getCharComparedToPercentage(100))buildingType = 7;
         }
 
         if(isCenterChunk)buildingType = 0;
@@ -394,6 +395,15 @@ public class Chunks {
             bCellY[i-1] = cell[1];
             bType[i-1] = 7;
         }
+    }
+    private char getCharComparedToPercentage(int percentage) {
+        if (percentage < 0 || percentage > 100) {
+            throw new IllegalArgumentException("Le pourcentage doit être compris entre 0 et 100.");
+        }
+    
+        char[] charArray = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
+        int index = (int)(percentage / 6.25)-1;
+        return charArray[index];
     }
 
     private Buildings createBuilding(int number, int[] cell, int buildingType){
