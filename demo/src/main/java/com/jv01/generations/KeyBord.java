@@ -5,6 +5,8 @@ import java.awt.event.KeyListener;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -124,7 +126,17 @@ public class KeyBord {
 
                  else if (keyCode == quitKey) {
                      quitKeyPressed = true;
-                     System.exit(0);
+                     int result = JOptionPane.showConfirmDialog(
+                        null,
+                        "Are you sure you want to quit the game?",
+                        "Quit Game Confirmation",
+                        JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (result == JOptionPane.YES_OPTION) {
+                        // User clicked "Yes," so exit the game.
+                        System.exit(0);
+                    }
                  }
                  else if (keyCode == menuKey && !tempoMenuKey.isRunning()) {
                     menuKeyPressed = true;
