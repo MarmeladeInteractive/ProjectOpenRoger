@@ -34,12 +34,21 @@ public class SoundManager {
 
     private Clip currentSFXClip;
     private Clip currentMusicClip;
+    private boolean toLoop;
 
-    public SoundManager(String gameName){
+    public SoundManager(String gameName){ // used in game
         this.gameName = gameName;
+        this.toLoop = true;
 
         sfxDocument = save.getDocumentXml(gameName, "functional/sounds");
         musicDocument = save.getDocumentXml(gameName, "functional/music");
+    }
+
+    public SoundManager(){ // used in main menu
+        this.toLoop = true;
+
+        sfxDocument = save.getDocumentXmlFromRoot("functional/sounds");
+        musicDocument = save.getDocumentXmlFromRoot("functional/music");
     }
 
     public void playSFX(int sfxID) {
@@ -67,19 +76,33 @@ public class SoundManager {
     }
 
     public void playMusic(int musicID) {
-        Element musicElement = save.getElementById(musicDocument,"music",String.valueOf(musicID));
+        Element musicElement = save.getElementById(musicDocument, "music", String.valueOf(musicID));
 
         if (musicElement != null) {
             String musicURL = save.stringToStringArray(save.getChildFromElement(musicElement, "musicUrl"))[0];
             musicURL = save.dropSpaceFromString(musicURL);
-            
+
             try {
                 // Charger le son à partir de l'URL
                 AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(musicURL));
                 currentMusicClip = AudioSystem.getClip();
                 currentMusicClip.open(audioInputStream);
+
+                // Ajouter un LineListener pour détecter lorsque la musique s'arrête
+                currentMusicClip.addLineListener(new LineListener() {
+                    @Override
+                    public void update(LineEvent event) {
+                        if (event.getType() == LineEvent.Type.STOP) {
+                            if (toLoop) {
+                                // Si toLoop est vrai, redémarrez la musique
+                                currentMusicClip.setMicrosecondPosition(0); // Réinitialiser la position
+                                currentMusicClip.start();
+                            }
+                        }
+                    }
+                });
+
                 currentMusicClip.start();
-                //Thread.sleep(5000);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -88,11 +111,17 @@ public class SoundManager {
         }
     }
 
+    // Ajoutez une méthode pour définir la valeur de toLoop
+    public void setLoop(boolean loop) {
+        this.toLoop = loop;
+    }
+
     public void stopSFX() {
         currentSFXClip.stop();
     }
 
-    public void stopMusic() {
+    public void stopMusic(boolean loop) {
+        this.toLoop = loop; // true : music will still loop, false it will stop
         currentMusicClip.stop();
     }
 
