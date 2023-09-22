@@ -47,13 +47,17 @@ public class MainMenuScreen {
 
     public String gameName = "";
 
-    public SoundManager soundManager;
+    public SoundManager soundManager = new SoundManager();
+    public boolean isMusicPlaying = false;
 
     public void showMainMenu() {
 
-        soundManager = new SoundManager();
-        soundManager.playMusic(0);
-
+        if(!isMusicPlaying){
+            soundManager.playMusic(0);
+            isMusicPlaying = true;
+        }
+        
+        
         frame.getContentPane().removeAll();
         frame.repaint();
     
@@ -77,7 +81,10 @@ public class MainMenuScreen {
         panel.add(newGameButton, constraints);
         panel.add(loadGameButton, constraints);
         panel.add(quitGameButton,constraints);
-    
+
+        for (ActionListener al : newGameButton.getActionListeners()) {
+            newGameButton.removeActionListener(al);
+        }   
         newGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,6 +92,9 @@ public class MainMenuScreen {
             }
         });
     
+        for (ActionListener al : loadGameButton.getActionListeners()) {
+            loadGameButton.removeActionListener(al);
+        }
         loadGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,6 +102,9 @@ public class MainMenuScreen {
             }
         });
         
+        for (ActionListener al : quitGameButton.getActionListeners()) {
+            quitGameButton.removeActionListener(al);
+        }
         quitGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -99,6 +112,9 @@ public class MainMenuScreen {
             }
         });
 
+        for (KeyListener kl : nameTextField.getKeyListeners()) {
+            nameTextField.removeKeyListener(kl);
+        }
         nameTextField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -121,6 +137,9 @@ public class MainMenuScreen {
             }
         });
 
+        for (KeyListener kl : seedTextField.getKeyListeners()) {
+            seedTextField.removeKeyListener(kl);
+        }
         seedTextField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -305,6 +324,11 @@ public class MainMenuScreen {
             Element newElement;
             String newCurrentVersion;
 
+
+            gameNamesList.clear();
+            gameNamesListDisplay.clear();
+            oldVersionGameNamesList.clear();
+
             for (String fileName : savesNames) {
                 try{
                     newDoc = save.getDocumentXml(fileName,"game");
@@ -324,6 +348,7 @@ public class MainMenuScreen {
                 }                
             }
 
+
             gameNamesJList = new JList<>(gameNamesListDisplay.toArray(new String[0]));
             JScrollPane scrollPane = new JScrollPane(gameNamesJList);
 
@@ -338,7 +363,6 @@ public class MainMenuScreen {
         startGameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 int index;
                 String selectedGame = null;
 
@@ -367,7 +391,10 @@ public class MainMenuScreen {
                         }else{
                             loadGame(selectedGame);
                         }
-                    }           
+                    }
+                    if(oldVersionGameNamesList.size()==0){
+                        loadGame(selectedGame);
+                    }          
                 }
             }
         });

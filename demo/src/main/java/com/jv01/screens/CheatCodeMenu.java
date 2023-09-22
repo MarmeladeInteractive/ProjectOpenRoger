@@ -38,25 +38,9 @@ public class CheatCodeMenu {
     public CheatCodeMenu(){
         createCheatCodeMenu();
 
-        cheatCodeTextField.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                cheatCodeTextField.setForeground(Color.BLACK);
-                panel.setBackground(new Color(170, 170, 170, 255));
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                cheatCodeTextField.setForeground(Color.BLACK);
-                panel.setBackground(new Color(170, 170, 170, 255));
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-               
-            }
-        });
-
+        for (KeyListener kl : cheatCodeTextField.getKeyListeners()) {
+            cheatCodeTextField.removeKeyListener(kl);
+        }
         cheatCodeTextField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
@@ -68,6 +52,9 @@ public class CheatCodeMenu {
                     runCMD();
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     close();
+                }else{
+                    cheatCodeTextField.setForeground(Color.BLACK);
+                    panel.setBackground(new Color(170, 170, 170, 255));
                 }
             }
 
