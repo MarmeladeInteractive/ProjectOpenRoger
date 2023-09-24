@@ -5,6 +5,7 @@ import javax.swing.event.DocumentListener;
 
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
+import com.jv01.generations.Chunks;
 import com.jv01.generations.MainGameWindow;
 
 import javax.swing.event.DocumentEvent;
@@ -152,7 +153,10 @@ public class CheatCodeMenu {
                 motherLode();
                 break;
             case "$LOAD-NEARBY-CHUNKS":
-                loadNearbyChunks();
+                        loadNearbyChunks("10");//10
+                        break;
+            case "$LOAD-NEARBY-CHUNKS_":
+                loadNearbyChunks(mots[1]);
                 break;
 
             case "$TP":
@@ -290,20 +294,26 @@ public class CheatCodeMenu {
         refreshDisplay = true;
     }
 
-    private void loadNearbyChunks(){
+    private void loadNearbyChunks(String value){
         int n = 10;
-        long[] playerChunk = mainGameWindow.currentChunk;
-        long[] currentChunk = new long[] {playerChunk[0]-(n/2),playerChunk[1]-(n/2)};
+        try {
+            n = Integer.parseInt(value);
+        
+            long[] playerChunk = mainGameWindow.currentChunk;
+            long[] currentChunk = new long[] {playerChunk[0]-(n/2),playerChunk[1]-(n/2)};
 
-        for(int i = 0; i <= (n); i++){
-            for(int j = 0; j <= (n); j++){
-                chargeChunk("{"+String.valueOf(currentChunk[0])+","+String.valueOf(currentChunk[1])+"}");
-                currentChunk[1]++;
+            for(int i = 0; i <= (n); i++){
+                for(int j = 0; j <= (n); j++){
+                    chargeChunk("{"+String.valueOf(currentChunk[0])+","+String.valueOf(currentChunk[1])+"}");
+                    currentChunk[1]++;
+                }
+                currentChunk[1] -= n+1;
+                currentChunk[0]++;
             }
-            currentChunk[1] -= n+1;
-            currentChunk[0]++;
-        }
 
-        tp("{"+String.valueOf(playerChunk[0])+","+String.valueOf(playerChunk[1])+"}");
+            tp("{"+String.valueOf(playerChunk[0])+","+String.valueOf(playerChunk[1])+"}");
+        } catch (NumberFormatException e) {
+
+        }
     }
 }

@@ -61,6 +61,7 @@ public class Corporation {
         partyElement.setAttribute("id", String.valueOf(newId));
 
         save.createXmlElement(partyElement,doc,"corporationName",String.valueOf(corporationName));
+        save.createXmlElement(partyElement,doc,"corporationHouseChunk",String.valueOf("{0,0}"));
         save.createXmlElement(partyElement,doc,"workers",String.valueOf(workers));
         save.createXmlElement(partyElement,doc,"wealth",String.valueOf(wealth));
         save.createXmlElement(partyElement,doc,"stockValueBuy",String.valueOf(stockValueBuy));
