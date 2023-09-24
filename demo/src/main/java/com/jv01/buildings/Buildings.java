@@ -74,7 +74,6 @@ public class Buildings {
         boolean corporationHouseExiste = false;
 
         for(int i = 1; i <= numberOfCorporations; i++){
-            System.out.println("d");
             Element corp = save.getElementById(doc, "corporation",String.valueOf(i));
             int[] chunkInt = save.stringToIntArray(save.getChildFromElement(corp, "corporationHouseChunk"));
             long[] chunk = {(long)chunkInt[0],(long)chunkInt[1]};

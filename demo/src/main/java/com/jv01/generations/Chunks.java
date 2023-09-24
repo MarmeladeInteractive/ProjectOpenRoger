@@ -31,6 +31,8 @@ public class Chunks {
     public int cellSize;
     public String backPic = "";
 
+    public boolean displayOnMap = true;
+
     public String gameName;
 
     public int number = 0;
@@ -57,12 +59,13 @@ public class Chunks {
 
     private Random random = new Random();
 
-    public Chunks(long[] chunk, String seed, String gameName, int buildingType){
+    public Chunks(long[] chunk, String seed, String gameName, int buildingType, boolean displayOnMap){
         this.chunk = chunk;
         this.seed = seed;
         this.gameName = gameName;
 
         this.load = false;
+        this.displayOnMap = displayOnMap;
 
         this.key = getKey();
 
@@ -96,6 +99,8 @@ public class Chunks {
         this.isInsideBuilding = isInsideBuilding;
         this.gameName = gameName;
 
+        this.displayOnMap = true;
+
         this.key = getKey();
 
         this.id = chunk[0]+"_"+chunk[1];
@@ -118,7 +123,14 @@ public class Chunks {
             if(!isInsideBuilding){
                 this.biome = Integer.parseInt(save.getChildFromMapElements(allElements,"biome"));
                 this.backPic = save.getChildFromMapElements(allElements,"backPic");
+                try{
+                    if(!Boolean.parseBoolean(save.getChildFromMapElements(allElements,"displayOnMap"))){
+                        save.changeElementChildValue(gameName,"chunks","chunk",id,"displayOnMap","true");
+                    }
+                }catch(Exception e){
 
+                }
+                
                 if(this.load)changeBiome(biome, backPic);
 
                 this.number = Integer.parseInt(save.getChildFromMapElements(allElements,"number"));
@@ -156,21 +168,15 @@ public class Chunks {
 
         chunkElement.setAttribute("id", id);
 
-        Element element = doc.createElement("cell");
-        element.appendChild(doc.createTextNode('{'+String.valueOf(chunk[0])+','+String.valueOf(chunk[1])+'}'));
-        chunkElement.appendChild(element);
+        save.createXmlElement(chunkElement,doc,"cell",'{'+String.valueOf(chunk[0])+','+String.valueOf(chunk[1])+'}');
 
-        element = doc.createElement("biome");
-        element.appendChild(doc.createTextNode(String.valueOf(biome)));
-        chunkElement.appendChild(element);
+        save.createXmlElement(chunkElement,doc,"displayOnMap",String.valueOf(displayOnMap));
 
-        element = doc.createElement("backPic");
-        element.appendChild(doc.createTextNode(backPic));
-        chunkElement.appendChild(element);
+        save.createXmlElement(chunkElement,doc,"biome",String.valueOf(biome));
 
-        element = doc.createElement("number");
-        element.appendChild(doc.createTextNode(String.valueOf(number)));
-        chunkElement.appendChild(element);
+        save.createXmlElement(chunkElement,doc,"backPic",String.valueOf(backPic));
+
+        save.createXmlElement(chunkElement,doc,"number",String.valueOf(number));
 
         String buildingsCellsX = "{";
         String buildingsCellsY = "{";
@@ -191,17 +197,11 @@ public class Chunks {
         buildingsCellsY+="}";
         buildingsTypes+="}";
 
-        element = doc.createElement("buildingsCellsX");
-        element.appendChild(doc.createTextNode(buildingsCellsX));
-        chunkElement.appendChild(element);
+        save.createXmlElement(chunkElement,doc,"buildingsCellsX",String.valueOf(buildingsCellsX));
 
-        element = doc.createElement("buildingsCellsY");
-        element.appendChild(doc.createTextNode(buildingsCellsY));
-        chunkElement.appendChild(element);
+        save.createXmlElement(chunkElement,doc,"buildingsCellsY",String.valueOf(buildingsCellsY));
 
-        element = doc.createElement("buildingsTypes");
-        element.appendChild(doc.createTextNode(buildingsTypes));
-        chunkElement.appendChild(element);
+        save.createXmlElement(chunkElement,doc,"buildingsTypes",String.valueOf(buildingsTypes));
 
         String completedCellInt = "{";
 
@@ -214,9 +214,7 @@ public class Chunks {
 
         completedCellInt+='}';
 
-        element = doc.createElement("completedCell");
-        element.appendChild(doc.createTextNode(completedCellInt));
-        chunkElement.appendChild(element);
+        save.createXmlElement(chunkElement,doc,"completedCell",String.valueOf(completedCellInt));
 
         doc.getDocumentElement().appendChild(chunkElement);
     }
