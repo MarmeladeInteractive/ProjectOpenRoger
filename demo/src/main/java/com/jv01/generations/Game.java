@@ -178,7 +178,7 @@ public class Game{
         for(int i = 1; i <= numCorpos; i++){
             corporation = new Corporation(name);
             corporation.saveCorporation();
-            new Chunks(corporationsHousesFirstGeneration.chunks.get(i-1), seed, name, 8);
+            new Chunks(corporationsHousesFirstGeneration.chunks.get(i-1), seed, name, 8, false);
         }
     }
 

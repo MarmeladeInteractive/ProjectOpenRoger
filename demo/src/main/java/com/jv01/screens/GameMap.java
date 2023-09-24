@@ -80,6 +80,7 @@ public class GameMap extends JPanel {
                 Element chunkElement = (Element) chunkNodes.item(i);
 
                 int[] cellCoords = save.stringToIntArray(save.getChildFromElement(chunkElement, "cell"));
+                boolean displayOnMap = Boolean.parseBoolean(save.getChildFromElement(chunkElement, "displayOnMap"));
                 int biome01 = Integer.parseInt(save.getChildFromElement(chunkElement, "biome"));
                 int number = Integer.parseInt(save.getChildFromElement(chunkElement, "number"));
                 int buildingType = -1;
@@ -91,7 +92,7 @@ public class GameMap extends JPanel {
                 int x = cellCoords[0];
                 int y = cellCoords[1];
 
-                if(((x>(currentChunk[0]-grideSize/2))&&(x<(currentChunk[0]+grideSize/2)))&&((y>(currentChunk[1]-grideSize/2))&&(y<(currentChunk[1]+grideSize/2)))){
+                if(displayOnMap && ((x>(currentChunk[0]-grideSize/2))&&(x<(currentChunk[0]+grideSize/2)))&&((y>(currentChunk[1]-grideSize/2))&&(y<(currentChunk[1]+grideSize/2)))){
                     x = cellCoords[0]- (int)currentChunk[0];
                     y = cellCoords[1]- (int)currentChunk[1];
 
