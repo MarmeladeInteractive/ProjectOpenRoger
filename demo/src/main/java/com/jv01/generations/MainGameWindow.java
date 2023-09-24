@@ -345,7 +345,6 @@ public class MainGameWindow {
 
         if(player.keyBord.quitKeyPressed){
             player.keyBord.quitKeyPressed = false;
-            System.exit(0);
         }
 
         if(player.keyBord.cheatCodeMenuKeyPressed){

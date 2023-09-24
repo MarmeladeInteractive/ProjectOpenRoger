@@ -13,6 +13,8 @@ import javax.swing.event.DocumentEvent;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class CheatCodeMenu {
     public boolean refresh = false;
@@ -37,21 +39,28 @@ public class CheatCodeMenu {
     public CheatCodeMenu(){
         createCheatCodeMenu();
 
-        cheatCodeTextField.getDocument().addDocumentListener(new DocumentListener() {
+        for (KeyListener kl : cheatCodeTextField.getKeyListeners()) {
+            cheatCodeTextField.removeKeyListener(kl);
+        }
+        cheatCodeTextField.addKeyListener(new KeyListener() {
             @Override
-            public void insertUpdate(DocumentEvent e) {
-                cheatCodeTextField.setForeground(Color.BLACK);
-                panel.setBackground(new Color(170, 170, 170, 255));
+            public void keyTyped(KeyEvent e) {
             }
 
             @Override
-            public void removeUpdate(DocumentEvent e) {
-                
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    runCMD();
+                } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                    close();
+                }else{
+                    cheatCodeTextField.setForeground(Color.BLACK);
+                    panel.setBackground(new Color(170, 170, 170, 255));
+                }
             }
 
             @Override
-            public void changedUpdate(DocumentEvent e) {
-               
+            public void keyReleased(KeyEvent e) {
             }
         });
     }
@@ -88,60 +97,7 @@ public class CheatCodeMenu {
         cheatCodeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cheatCodeTextField.requestFocus();
-                String cheatCode = cheatCodeTextField.getText();
-                String[] mots = cheatCode.split(" ");
-
-                switch (mots[0]) {
-                    case "$SET-MONEY":
-                        setMoney(mots[1]);
-                        break;
-                    case "$SET-STEP":
-                        setStep(mots[1]);
-                        break;
-                    case "$SET-SPEED":
-                        setSpeed(mots[1]);
-                        break;
-
-                    case "$GET-SEED":
-                        cheatCodeTextField.setText(mainGameWindow.seed);
-                        break;
-
-                    case "$FILL-INVENTORY":
-                        fillInventory();
-                        break;
-                    case "$EMPTY-INVENTORY":
-                        emptyInventory();
-                        break;
-
-                    case "$MOTHERLODE":
-                        motherLode();
-                        break;
-                    case "$LOAD-NEARBY-CHUNKS":
-                        loadNearbyChunks("10");//10
-                        break;
-                    case "$LOAD-NEARBY-CHUNKS_":
-                        loadNearbyChunks(mots[1]);
-                        break;
-
-                    case "$TP":
-                        tp(mots[1]);
-                        break;
-
-                    case "$DEV-MODE":
-                        devMode();
-                        break;
-
-                    case "$EXIT":
-                        System.exit(0);
-                        break;
-
-                    default:
-                        cheatCodeTextField.setForeground(Color.RED);
-                        panel.setBackground(new Color(210, 170, 170, 255));
-                        break;
-                }
-
+                runCMD();
             }
         });
 
@@ -162,6 +118,66 @@ public class CheatCodeMenu {
         frame.setLocation(0, 0);
         frame.setVisible(false);  
     }
+    private void runCMD(){
+        cheatCodeTextField.requestFocus();
+        String cheatCode = cheatCodeTextField.getText();
+        String[] mots = cheatCode.split(" ");
+
+        if (mots.length == 1) {
+            mots = new String[]{mots[0], "@_é_@"};
+        }
+
+        switch (mots[0]) {
+            case "$SET-MONEY":
+                setMoney(mots[1]);
+                break;
+            case "$SET-STEP":
+                setStep(mots[1]);
+                break;
+            case "$SET-SPEED":
+                setSpeed(mots[1]);
+                break;
+
+            case "$GET-SEED":
+                cheatCodeTextField.setText(mainGameWindow.seed);
+                break;
+
+            case "$FILL-INVENTORY":
+                fillInventory();
+                break;
+            case "$EMPTY-INVENTORY":
+                emptyInventory();
+                break;
+
+            case "$MOTHERLODE":
+                motherLode();
+                break;
+            case "$LOAD-NEARBY-CHUNKS":
+                        loadNearbyChunks("10");//10
+                        break;
+            case "$LOAD-NEARBY-CHUNKS_":
+                loadNearbyChunks(mots[1]);
+                break;
+
+            case "$TP":
+                tp(mots[1]);
+                break;
+
+            case "$DEV-MODE":
+                devMode();
+                break;
+
+            case "$EXIT":
+                System.exit(0);
+                break;
+
+            default:
+                cheatCodeTextField.setForeground(Color.RED);
+                panel.setBackground(new Color(210, 170, 170, 255));
+                break;
+        }
+
+    }
 
     public void open(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
@@ -174,6 +190,11 @@ public class CheatCodeMenu {
         frame.setVisible(false);
     }
 
+    public void error(){
+        cheatCodeTextField.setForeground(Color.RED);
+        panel.setBackground(new Color(210, 170, 170, 255));
+    }
+
 
     private void setMoney(String value){
         try {         
@@ -183,7 +204,7 @@ public class CheatCodeMenu {
             refreshDisplay = true;
 
         } catch (NumberFormatException e) {
-            
+            error();
         }
     }
 
@@ -199,11 +220,10 @@ public class CheatCodeMenu {
             mainGameWindow.currentChunk = chunk;
             mainGameWindow.player.chunk = chunk;
             mainGameWindow.changeChunk("TP");
-            ////mainGameWindow.player.saveChunk();
-            //refresh = true;
+            refreshDisplay = true;
 
         } catch (NumberFormatException e) {
-
+            error();
         }
     }
 
@@ -218,12 +238,12 @@ public class CheatCodeMenu {
  
             mainGameWindow.currentChunk = chunk;
             mainGameWindow.changeChunk("chargeChunk");
-
+            refreshDisplay = true;
             ////mainGameWindow.player.saveChunk();
             //refresh = true;
 
         } catch (NumberFormatException e) {
-
+            error();
         }
     }
 
@@ -233,8 +253,9 @@ public class CheatCodeMenu {
  
             mainGameWindow.player.step = step;
             mainGameWindow.player.saveStep();
+            refreshDisplay = true;
         } catch (NumberFormatException e) {
-
+            error();
         }
     }
     private void setSpeed(String value){
@@ -243,29 +264,34 @@ public class CheatCodeMenu {
  
             mainGameWindow.player.speed = speed;
             mainGameWindow.player.saveSpeed();
+            refreshDisplay = true;
         } catch (NumberFormatException e) {
-
+            error();
         }
     }
 
     private void devMode(){
         setSpeed("4");
         setMoney("100000");
+        refreshDisplay = true;
     }
 
     private void fillInventory(){
         mainGameWindow.player.inventory.fillInventory();
         mainGameWindow.player.inventory.saveAll();
+        refreshDisplay = true;
     }
 
     private void emptyInventory(){
         mainGameWindow.player.inventory.emptyInventory();
         mainGameWindow.player.inventory.saveAll();
+        refreshDisplay = true;
     }
 
     private void motherLode(){
         long newValue = mainGameWindow.player.money + 50000;
         setMoney(String.valueOf(newValue));
+        refreshDisplay = true;
     }
 
     private void loadNearbyChunks(String value){
