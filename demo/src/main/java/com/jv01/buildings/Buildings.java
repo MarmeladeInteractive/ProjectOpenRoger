@@ -1,7 +1,11 @@
 package com.jv01.buildings;
 
+import java.util.Arrays;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.NamedNodeMap;
 
 import com.jv01.fonctionals.Save;
 
@@ -38,6 +42,8 @@ public class Buildings {
         this.type = getBuildingVariety();
 
         getBuildingValues();
+
+        if(id == 8)getCorporationHouseValues();
     }
 
     public Buildings(){
@@ -57,6 +63,41 @@ public class Buildings {
 
         this.defaultImageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[0];
         this.defaultImageUrl = save.dropSpaceFromString(this.imageUrl);
+    }
+
+    private void getCorporationHouseValues(){
+        Document doc = save.getDocumentXml(gameName,"corporations");
+        NodeList corporationNodes = doc.getElementsByTagName("corporation");
+        int numberOfCorporations = corporationNodes.getLength();
+
+        int unassignedId = -1;
+        boolean corporationHouseExiste = false;
+
+        for(int i = 1; i <= numberOfCorporations; i++){
+            System.out.println("d");
+            Element corp = save.getElementById(doc, "corporation",String.valueOf(i));
+            int[] chunkInt = save.stringToIntArray(save.getChildFromElement(corp, "corporationHouseChunk"));
+            long[] chunk = {(long)chunkInt[0],(long)chunkInt[1]};
+
+            if(Arrays.equals(chunk, this.chunk)){
+                this.name = save.getChildFromElement(corp, "corporationName");
+                this.description = save.getChildFromElement(corp, "catchPhrase");
+                corporationHouseExiste = true;
+                break;
+            }else if(Arrays.equals(chunk, new long[]{0, 0})){
+                unassignedId = i;
+            }
+        }
+
+        if(!corporationHouseExiste){
+            if(unassignedId>0){
+                save.changeElementChildValue(gameName,"corporations","corporation",String.valueOf(unassignedId),"corporationHouseChunk",'{'+String.valueOf(this.chunk[0])+','+String.valueOf(this.chunk[1])+'}');
+                getCorporationHouseValues();
+            }else{
+                this.id = 7;
+                getBuildingValues();
+            }
+        }
     }
 
     public int getBuildingVariety(){

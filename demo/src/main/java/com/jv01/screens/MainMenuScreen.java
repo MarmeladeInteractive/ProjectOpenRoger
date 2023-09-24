@@ -225,7 +225,7 @@ public class MainMenuScreen {
 
                 if(isValideInput(gameName)){
                     if(isValideInput(seed)){
-                        startNewGame(gameName, null);
+                        startNewGame(gameName, seed);
                     }else{
                         seedTextField.setForeground(Color.RED);
                         seedTextField.setBackground(new Color(255, 120, 120, 255));

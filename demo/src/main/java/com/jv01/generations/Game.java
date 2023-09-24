@@ -1,6 +1,7 @@
 package com.jv01.generations;
 
 import java.io.File;
+import java.nio.CharBuffer;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -80,7 +81,7 @@ public class Game{
         editElement();
 
         generateParties();
-        generateCorporations();
+        generateCorporations(5,20);
 
         loadingScreen.closeLoadingScreen();
         //startGame();
@@ -171,15 +172,13 @@ public class Game{
         }
     }
 
-    public  void generateCorporations(){
-        int nCorporations = 0;
+    public  void generateCorporations(int numCorpos, int radius){
         Corporation corporation = null;
-
-        while(nCorporations < 5){
-            
+        CorporationsHousesFirstGeneration corporationsHousesFirstGeneration = new CorporationsHousesFirstGeneration(seed, numCorpos, radius);
+        for(int i = 1; i <= numCorpos; i++){
             corporation = new Corporation(name);
             corporation.saveCorporation();
-            nCorporations++;
+            new Chunks(corporationsHousesFirstGeneration.chunks.get(i-1), seed, name, 8);
         }
     }
 

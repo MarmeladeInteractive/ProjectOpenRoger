@@ -410,7 +410,7 @@ public class MainGameWindow {
 
     public void buildChunk(){
         chunk = null;
-        chunk = new Chunks(currentChunk, seed, key, gameName, boxSize, backgroundPanel,isInsideBuilding,displayChunks);
+        chunk = new Chunks(currentChunk, seed, gameName, boxSize, backgroundPanel,isInsideBuilding,displayChunks);
     }
 
     public void enterBuilding(){

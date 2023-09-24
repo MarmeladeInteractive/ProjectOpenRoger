@@ -57,8 +57,35 @@ public class Chunks {
 
     private Random random = new Random();
 
+    public Chunks(long[] chunk, String seed, String gameName, int buildingType){
+        this.chunk = chunk;
+        this.seed = seed;
+        this.gameName = gameName;
 
-    public Chunks(long[] chunk, String seed, String key, String gameName, int boxSize, JPanel backgroundPanel, boolean isInsideBuilding, boolean load){
+        this.load = false;
+
+        this.key = getKey();
+
+        this.id = chunk[0]+"_"+chunk[1];
+
+        this.doc = save.getDocumentXml(gameName,"chunks");
+        this.element = save.getElementById(doc, "chunk", id);
+
+        if(element == null){
+            if(!isInsideBuilding){
+                createBiome();
+                addBuildings(buildingType);
+                saveChunk();
+            }else{
+                addInsideBuildings();
+            }
+            
+        }else{
+            
+        }   
+    }
+
+    public Chunks(long[] chunk, String seed, String gameName, int boxSize, JPanel backgroundPanel, boolean isInsideBuilding, boolean load){
         this.load = load;
 
         this.chunk = chunk;
@@ -69,7 +96,7 @@ public class Chunks {
         this.isInsideBuilding = isInsideBuilding;
         this.gameName = gameName;
 
-        this.key = key;
+        this.key = getKey();
 
         this.id = chunk[0]+"_"+chunk[1];
 
@@ -79,7 +106,7 @@ public class Chunks {
         if(element == null){
             if(!isInsideBuilding){
                 createBiome();
-                addBuildings();
+                addBuildings(-1);
                 if(this.load)addDecorations();
                 saveChunk();
             }else{
@@ -211,7 +238,7 @@ public class Chunks {
         biome = type;
     }
 
-    public void addBuildings(){
+    public void addBuildings(int buildingType){
         int[] cell = {0,0};
         int[] cell01 = {0,0};
         char key2 = key.charAt(1);
@@ -258,7 +285,7 @@ public class Chunks {
             }
         }
 
-        if(isCenterChunk && number == 0)number = 1;
+        if((isCenterChunk || (buildingType > 0)) && number == 0)number = 1;
 
         char key3 = key.charAt(2);
 
@@ -282,32 +309,36 @@ public class Chunks {
             completedCell[3] = true;
         }
 
-        int buildingType = 7;
-        char key4 = key.charAt(3);
-        char key5 = key.charAt(4);
+        if(buildingType < 0){
+            buildingType = 7;
+            char key4 = key.charAt(3);
+            char key5 = key.charAt(4);
 
-        if (key4 >= '0' && key4 <= '1' && biome > 3) {
-            if(key5 <= getCharComparedToPercentage(10))buildingType = 8;
-        } else if (key4 >= '2' && key4 <= '3' && biome > 3) {
-            if(key5 <= getCharComparedToPercentage(20))buildingType = 1;
-        } else if (key4 >= '4' && key4 <= '5'  && biome > 3) {
-            if(key5 <= getCharComparedToPercentage(20))buildingType = 2;
-        } else if (key4 >= '6' && key4 <= '7'  && biome > 3) {
-            if(key5 <= getCharComparedToPercentage(30))buildingType = 3;
-        } else if (key4 >= '8' && key4 <= '9'  && biome > 3) {
-            if(key5 <= getCharComparedToPercentage(30))buildingType = 4;
-        } else if (key4 >= 'a' && key4 <= 'b'  && biome > 3) {
-            if(key5 <= getCharComparedToPercentage(30))buildingType = 5;
-        } else if (key4 >= 'c' && key4 <= 'd') {
-            if(key5 <= getCharComparedToPercentage(50))buildingType = 6;
-        }else {
-            if(key5 <= getCharComparedToPercentage(100))buildingType = 7;
+            /*if (key4 >= '0' && key4 <= '1' && biome > 3) {
+                if(key5 <= getCharComparedToPercentage(13))buildingType = 8;
+            } else */if (key4 >= '2' && key4 <= '3' && biome > 3) {
+                if(key5 <= getCharComparedToPercentage(20))buildingType = 1;
+            } else if (key4 >= '4' && key4 <= '5'  && biome > 3) {
+                if(key5 <= getCharComparedToPercentage(20))buildingType = 2;
+            } else if (key4 >= '6' && key4 <= '7'  && biome > 3) {
+                if(key5 <= getCharComparedToPercentage(30))buildingType = 3;
+            } else if (key4 >= '8' && key4 <= '9'  && biome > 3) {
+                if(key5 <= getCharComparedToPercentage(30))buildingType = 4;
+            } else if (key4 >= 'a' && key4 <= 'b'  && biome > 3) {
+                if(key5 <= getCharComparedToPercentage(30))buildingType = 5;
+            } else if (key4 >= 'c' && key4 <= 'd') {
+                if(key5 <= getCharComparedToPercentage(50))buildingType = 6;
+            }else {
+                if(key5 <= getCharComparedToPercentage(100))buildingType = 7;
+            }
+
+            if(isCenterChunk)buildingType = 0;
         }
 
-        if(isCenterChunk)buildingType = 0;
-
         if(number != 0){
-            if(this.load)createBuilding(number, cell01, buildingType);
+            if(this.load){
+                buildingType = createBuilding(number, cell01, buildingType).id;
+            }
             bCellX[0] = cell01[0];
             bCellY[0] = cell01[1];
             bType[0] = buildingType;
@@ -411,6 +442,7 @@ public class Chunks {
         String buildingKey = getObjectKey(code);
 
         Buildings building01 = new Buildings(gameName, buildingType, chunk, cell, buildingKey);
+        buildingType = building01.id;
 
         Objects obj = new Objects(cell[0]*cellSize+(cellSize/2)+building01.offsetX, cell[1]*cellSize+(cellSize/2)+ building01.offsetY, building01.dimension, building01.imageUrl, 1, backgroundPanel);         
         restrictedAreas.add(obj.restrictedAreas);
@@ -615,4 +647,9 @@ public class Chunks {
         String key01 = hash(seed+key,cell[0],cell[1]);
         return(key01);
     }
+
+    public String getKey(){
+        String key = hash(seed,chunk[0],chunk[1]);
+        return(key);
+    };
 }

@@ -50,7 +50,7 @@ public class GameMap extends JPanel {
     public KeyListener keyListener;
     public boolean mapKeyPressed;
 
-    private static int grideSize = 20;
+    private static int grideSize = 50;
 
     private static final int BOXE_SIZE = 800;
     private static final int CELL_SIZE = BOXE_SIZE / grideSize;
