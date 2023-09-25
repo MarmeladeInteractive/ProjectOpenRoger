@@ -12,6 +12,8 @@ public class Corporation {
 
     public  String gameName;
 
+    public long[] chunk;
+
     public  String corporationName;
     public  long workers;
     public  long wealth;
@@ -28,8 +30,9 @@ public class Corporation {
 
     public  String catchPhrase;
 
-    public Corporation(String gameName){
+    public Corporation(String gameName, long[] chunk){
         this.gameName = gameName;
+        this.chunk = chunk;
 
         corporationName = faker.company().name();
         workers = faker.number().numberBetween(1, 2000);
@@ -61,7 +64,7 @@ public class Corporation {
         partyElement.setAttribute("id", String.valueOf(newId));
 
         save.createXmlElement(partyElement,doc,"corporationName",String.valueOf(corporationName));
-        save.createXmlElement(partyElement,doc,"corporationHouseChunk",String.valueOf("{0,0}"));
+        save.createXmlElement(partyElement,doc,"corporationHouseChunk",'{'+String.valueOf(chunk[0])+','+String.valueOf(chunk[1])+'}');
         save.createXmlElement(partyElement,doc,"workers",String.valueOf(workers));
         save.createXmlElement(partyElement,doc,"wealth",String.valueOf(wealth));
         save.createXmlElement(partyElement,doc,"stockValueBuy",String.valueOf(stockValueBuy));
