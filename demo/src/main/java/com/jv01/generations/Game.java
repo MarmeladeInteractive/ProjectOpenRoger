@@ -29,6 +29,7 @@ public class Game{
 
     public  String name;
     public  String seed;
+    public String version;
 
     public Game(){
         name = "null";
@@ -60,8 +61,11 @@ public class Game{
         }else
         {
             name = gameName;
-            Document doc = save.getDocumentXml(gameName, "game");
-            seed = readgameElementValue(doc,"seed");
+            //Document doc = save.getDocumentXml(gameName, "game");
+            //seed = readgameElementValue(doc,"seed");
+            //version = readgameElementValue(doc,"version");
+            seed = save.getGameValue(gameName,"seed");
+            version = save.getGameValue(gameName,"version");
             startGame();   
         }    
     }

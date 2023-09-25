@@ -260,4 +260,10 @@ public class Save {
 
         changeElementChildValue(gameName,"chunks","chunk",chunkId,"buildingsTypes",newTypesString);
     }
+
+    public String getGameValue(String gameName, String childName){
+        Document doc = getDocumentXml(gameName, "game");
+        Element element = getElementById(doc, "game", "game");
+        return getChildFromElement(element, childName);
+    }
 }

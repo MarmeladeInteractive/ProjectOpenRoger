@@ -374,27 +374,30 @@ public class MainMenuScreen {
                 }              
 
                 if (selectedGame != null) {
+                    boolean isOldVersion = false;
                     for(String name : oldVersionGameNamesList){
-                        if(name.equals(selectedGame)){
-                            int choise = JOptionPane.showConfirmDialog(frame,
+                        if(name.equals(selectedGame)){          
+                            isOldVersion = true;
+                        }
+                    }
+                    if(oldVersionGameNamesList.size()==0){
+                        loadGame(selectedGame);
+                    }   
+                    if(isOldVersion){
+                        int choise = JOptionPane.showConfirmDialog(frame,
                             "La partie que vous souhaitez charger n'est pas de la bonne version!\n"+
                             "Êtes-vous sûr de vouloir la lancer?",
 
                             "Attention",
                             JOptionPane.YES_NO_OPTION);
-
-                            if(choise == JOptionPane.YES_OPTION){
-                                loadGame(selectedGame);
-                            }else if(choise == JOptionPane.NO_OPTION){
-                                gameNamesJList.clearSelection();
-                            }
-                        }else{
+                        if(choise == JOptionPane.YES_OPTION){
                             loadGame(selectedGame);
+                        }else if(choise == JOptionPane.NO_OPTION){
+                            gameNamesJList.clearSelection();
                         }
-                    }
-                    if(oldVersionGameNamesList.size()==0){
+                    }else{
                         loadGame(selectedGame);
-                    }          
+                    }       
                 }
             }
         });
