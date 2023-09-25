@@ -348,7 +348,6 @@ public class MainMenuScreen {
                 }                
             }
 
-
             gameNamesJList = new JList<>(gameNamesListDisplay.toArray(new String[0]));
             JScrollPane scrollPane = new JScrollPane(gameNamesJList);
 

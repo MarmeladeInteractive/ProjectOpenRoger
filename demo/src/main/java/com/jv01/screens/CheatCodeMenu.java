@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CheatCodeMenu {
     public boolean refresh = false;
@@ -28,7 +30,7 @@ public class CheatCodeMenu {
     public JTextField cheatCodeTextField = new JTextField(40);
 
     public JPanel panel;
-    public JList<String> cheatCodesJList;
+    //public JList<String> cheatCodesJList;
     public GridBagConstraints constraints;
 
     public JButton cheatCodeButton;
@@ -36,7 +38,35 @@ public class CheatCodeMenu {
 
     public String cheatCode = "";
 
+    public String[] allCMDs= {
+            "$SET-MONEY",
+            "$SET-STEP",
+            "$SET-SPEED",
+
+            "$GET-SEED",
+            "$GET-VERSION",
+
+            "$FILL-INVENTORY",
+            "$EMPTY-INVENTORY",
+
+            "$MOTHERLODE",
+            "$LOAD-NEARBY-CHUNKS",
+            "$LOAD-NEARBY-CHUNKS_",
+
+            "$TP",
+
+            "$DEV-MODE",
+
+            "$EXIT",
+    };
+
+    public List<String> PossibleCMDs = new ArrayList<>();
+    public int indexCurrentPossibleCMDs = 0;
+    public String thisCMD;
+    public boolean getTabed = false;
+
     public CheatCodeMenu(){
+        cheatCodeTextField.setFocusTraversalKeysEnabled(false);
         createCheatCodeMenu();
 
         for (KeyListener kl : cheatCodeTextField.getKeyListeners()) {
@@ -53,9 +83,25 @@ public class CheatCodeMenu {
                     runCMD();
                 } else if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
                     close();
+                }else if (e.getKeyCode() == KeyEvent.VK_TAB) {
+                    if(!getTabed){
+                        thisCMD = cheatCodeTextField.getText();
+                        getTabed = true;
+                    }
+                    getPossibleCMDs();
+                    if(PossibleCMDs.size()>0){
+                        if(indexCurrentPossibleCMDs>=PossibleCMDs.size())indexCurrentPossibleCMDs=0;
+                        cheatCodeTextField.setText(PossibleCMDs.get(indexCurrentPossibleCMDs));
+                        indexCurrentPossibleCMDs++; 
+                    }                    
                 }else{
                     cheatCodeTextField.setForeground(Color.BLACK);
                     panel.setBackground(new Color(170, 170, 170, 255));
+                    if(cheatCodeTextField.getText().length()==0){
+                        indexCurrentPossibleCMDs = 0;
+                        PossibleCMDs.clear();
+                    }
+                    getTabed = false;
                 }
             }
 
@@ -63,6 +109,7 @@ public class CheatCodeMenu {
             public void keyReleased(KeyEvent e) {
             }
         });
+
     }
 
     private void createCheatCodeMenu() {
@@ -180,6 +227,15 @@ public class CheatCodeMenu {
                 break;
         }
 
+    }
+
+    private void getPossibleCMDs(){
+        PossibleCMDs.clear();
+        for(String cmd : allCMDs){
+            if(cmd.toLowerCase().contains(thisCMD)){
+                PossibleCMDs.add(cmd);
+            }
+        }
     }
 
     public void open(MainGameWindow mainGameWindow){
