@@ -141,6 +141,9 @@ public class CheatCodeMenu {
             case "$GET-SEED":
                 cheatCodeTextField.setText(mainGameWindow.seed);
                 break;
+            case "$GET-VERSION":
+                cheatCodeTextField.setText(save.getGameValue(mainGameWindow.gameName,"version"));
+                break;
 
             case "$FILL-INVENTORY":
                 fillInventory();
