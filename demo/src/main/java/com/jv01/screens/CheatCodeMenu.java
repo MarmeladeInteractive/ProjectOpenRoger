@@ -153,8 +153,8 @@ public class CheatCodeMenu {
                 motherLode();
                 break;
             case "$LOAD-NEARBY-CHUNKS":
-                        loadNearbyChunks("10");//10
-                        break;
+                loadNearbyChunks("10");//10
+                break;
             case "$LOAD-NEARBY-CHUNKS_":
                 loadNearbyChunks(mots[1]);
                 break;
