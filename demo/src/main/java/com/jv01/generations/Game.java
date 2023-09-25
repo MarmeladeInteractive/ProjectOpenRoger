@@ -180,7 +180,7 @@ public class Game{
         Corporation corporation = null;
         CorporationsHousesFirstGeneration corporationsHousesFirstGeneration = new CorporationsHousesFirstGeneration(seed, numCorpos, radius);
         for(int i = 1; i <= numCorpos; i++){
-            corporation = new Corporation(name);
+            corporation = new Corporation(name,corporationsHousesFirstGeneration.chunks.get(i-1));
             corporation.saveCorporation();
             new Chunks(corporationsHousesFirstGeneration.chunks.get(i-1), seed, name, 8, false);
         }
