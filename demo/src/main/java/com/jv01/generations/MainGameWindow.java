@@ -117,7 +117,7 @@ public class MainGameWindow {
 
         nightLabel.setOpaque(true);
         nightLabel.setForeground(new Color(0, 0, 0));
-        nightLabel.setBackground(new Color(0, 0, 0, 0));
+        nightLabel.setBackground(new Color(0, 0, 0, date.nightFilterOpacity));
 
         nightLabel.setBounds(0, 0 , boxSize-1, boxSize-1);
         
@@ -541,7 +541,11 @@ public class MainGameWindow {
     }
 
     public void updateDate(){
-        nightLabel.setBackground(new Color(0, 0, 0, date.nightFilterOpacity));
+        if(isInsideBuilding){
+            nightLabel.setBackground(new Color(0, 0, 0, 0));
+        }else{
+            nightLabel.setBackground(new Color(0, 0, 0, date.nightFilterOpacity));
+        }
         updateDateTextLabels();
     }
 

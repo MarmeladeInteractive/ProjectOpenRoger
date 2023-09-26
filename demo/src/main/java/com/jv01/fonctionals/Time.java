@@ -90,6 +90,24 @@ public class Time {
         return heurFormat.format(calendar.getTime());
     }
 
+    public void setHour(String hour){
+        try {
+            String[] hourString = hour.split(":");
+            int[] hourInt = new int[]{Integer.parseInt(hourString[0]),Integer.parseInt(hourString[1])};
+
+            if(hourInt[0]>=0 && hourInt[0]<=24 && hourInt[1]>=0 && hourInt[1]<=60){
+                calendar.set(Calendar.HOUR_OF_DAY, hourInt[0]);
+                calendar.set(Calendar.MINUTE, hourInt[1]);
+                updateSeason();
+                updateNightFilterOpacity();
+            }else{
+                
+            } 
+        } catch (NumberFormatException e) {
+
+        }
+    }
+
     private void updateSeason() {
         int mois = calendar.get(Calendar.MONTH);
         if (mois >= 0 && mois <= 2) {
@@ -120,6 +138,13 @@ public class Time {
         }else{
             nightFilterOpacity = maxOpacity;
         }  
+
+        if (hour > 12 && hour < 24) {
+            nightFilterOpacity = minOpacity + (int)Math.round((maxOpacity - minOpacity) * ((hour-12) / 12.0)); 
+        } else {
+            nightFilterOpacity =  (int)Math.round((maxOpacity - minOpacity) * ((12-hour) / 12.0));
+        }
+
     }
 
     public void saveDate(){
