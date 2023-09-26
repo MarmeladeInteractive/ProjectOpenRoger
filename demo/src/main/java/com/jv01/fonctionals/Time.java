@@ -25,6 +25,8 @@ public class Time {
 
     private int season = 0; 
 
+    public int nightFilterOpacity = 0;
+
     public Time(String gameName) {
         this.gameName = gameName;
 
@@ -68,6 +70,7 @@ public class Time {
     public void avancerTemps(long secondes) {
         calendar.add(Calendar.SECOND, (int) secondes);
         updateSeason();
+        updateNightFilterOpacity();
     }
 
     public void changerDate(int annee, int mois, int jour) {
@@ -98,6 +101,25 @@ public class Time {
         } else {
             season = 3;
         }
+    }
+
+    private void updateNightFilterOpacity(){
+        int hour = Integer.parseInt(getHour().split(":")[0]);
+        boolean isDay = false;
+        if(hour > 6 && hour < 18){
+            isDay = true;
+        }else{
+            isDay = false;
+        }
+
+        int minOpacity = 0;
+        int maxOpacity = 200;
+
+        if(isDay){
+            nightFilterOpacity = minOpacity;
+        }else{
+            nightFilterOpacity = maxOpacity;
+        }  
     }
 
     public void saveDate(){

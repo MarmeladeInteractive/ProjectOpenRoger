@@ -52,6 +52,8 @@ public class MainGameWindow {
     InfoMenuScreen infoMenu;
     CheatCodeMenu cheatCodeMenu = new CheatCodeMenu();
 
+    JLabel nightLabel = new JLabel();
+
     private JLabel coordinatesLabel;
     private JLabel moneyLabel;
     private JLabel dateLabel;
@@ -83,7 +85,7 @@ public class MainGameWindow {
                 if (updateCounter >= player.movementType) {
                     updatePlayerLocation();
                     displayAlert();
-                    updateDateTextLabels();
+                    updateDate();
                     updateCounter = 0;
                 }
             }
@@ -112,6 +114,12 @@ public class MainGameWindow {
 
         player.positionX = boxSize / 2;
         player.positionY = boxSize / 2;
+
+        nightLabel.setOpaque(true);
+        nightLabel.setForeground(new Color(0, 0, 0));
+        nightLabel.setBackground(new Color(0, 0, 0, 0));
+
+        nightLabel.setBounds(0, 0 , boxSize-1, boxSize-1);
         
         frame.setFocusable(true);
         frame.requestFocusInWindow();
@@ -138,6 +146,9 @@ public class MainGameWindow {
         addAlertArea();
 
         backgroundPanel.add(player.playerLabel);
+
+        backgroundPanel.add(nightLabel);
+        backgroundPanel.setComponentZOrder(nightLabel, 0);
 
         buildChunk();
         
@@ -526,6 +537,11 @@ public class MainGameWindow {
     public void updateLabels(){
         updatePositionTextLabels();
         updateMoneyTextLabels();
+        updateDateTextLabels();
+    }
+
+    public void updateDate(){
+        nightLabel.setBackground(new Color(0, 0, 0, date.nightFilterOpacity));
         updateDateTextLabels();
     }
 
