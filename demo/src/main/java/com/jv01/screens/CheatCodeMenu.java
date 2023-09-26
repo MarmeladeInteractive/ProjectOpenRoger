@@ -38,6 +38,8 @@ public class CheatCodeMenu {
             "$SET-MONEY",
             "$SET-STEP",
             "$SET-SPEED",
+            "$SET-HOUR",
+            "$SET-TIME",
 
             "$GET-SEED",
             "$GET-VERSION",
@@ -180,6 +182,12 @@ public class CheatCodeMenu {
                 break;
             case "$SET-SPEED":
                 setSpeed(mots[1]);
+                break;
+            case "$SET-HOUR":
+                setHour(mots[1]);
+                break;
+            case "$SET-TIME":
+                setTime(mots[1]);
                 break;
 
             case "$GET-SEED":
@@ -326,6 +334,30 @@ public class CheatCodeMenu {
             refreshDisplay = true;
         } catch (NumberFormatException e) {
             error();
+        }
+    }
+
+    private void setHour(String value){
+        try {
+            String[] hourString = value.split(":");
+            int[] hourInt = new int[]{Integer.parseInt(hourString[0]),Integer.parseInt(hourString[1])};
+
+            if(hourInt[0]>=0 && hourInt[0]<=24 && hourInt[1]>=0 && hourInt[1]<=60){
+                mainGameWindow.date.setHour(value);
+                refreshDisplay = true;
+            }else{
+                error();
+            }           
+        } catch (NumberFormatException e) {
+            error();
+        }
+    }
+
+    private void setTime(String value){
+        if(value.equals("nuit") || value.equals("night")){
+            setHour("24:00");
+        }else if(value.equals("jour") || value.equals("day")){
+            setHour("12:00");
         }
     }
 
