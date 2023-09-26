@@ -1,8 +1,12 @@
 <game>
     <game id="game">
-        <version>0.4.1</version>
+        <version>0.4.2</version>
         <date></date>
         <seed></seed>
         <name></name>
     </game>
+    <time id="time">
+        <date>01:01:2000:12:00</date>
+        <secondsPerDay>1440</secondsPerDay>
+    </time>
 </game>

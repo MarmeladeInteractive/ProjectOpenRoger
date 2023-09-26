@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
 import com.jv01.generations.KeyBord;
+import com.jv01.generations.MainGameWindow;
 
 import java.awt.*;
 
@@ -19,6 +20,8 @@ import java.awt.image.BufferedImage;
 
 public class Player{
     public Save save = new Save();
+    public MainGameWindow mainGameWindow;
+
     public Inventory inventory;
     public KeyBord keyBord;
 
@@ -54,9 +57,9 @@ public class Player{
     public int partyID = 1;
 
 
-    public Player(String gameName){
-  
-        this.gameName = gameName; 
+    public Player(MainGameWindow mainGameWindow){
+        this.mainGameWindow = mainGameWindow;
+        this.gameName = mainGameWindow.gameName; 
         
         getPlayerValues();
 
@@ -271,6 +274,7 @@ public class Player{
 
     public void savePlayerValue( String childName, String newValue){
         save.changeElementChildValue(gameName, "player", "player", "player", childName, newValue);
+        mainGameWindow.date.saveDate();
     }
 
     public void saveMoney(){

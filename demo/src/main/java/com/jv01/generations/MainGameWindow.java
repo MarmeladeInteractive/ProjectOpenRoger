@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import com.jv01.buildings.Buildings;
+import com.jv01.fonctionals.Time;
 import com.jv01.player.Player;
 import com.jv01.screens.AlertWindow;
 import com.jv01.screens.CheatCodeMenu;
@@ -52,6 +53,7 @@ public class MainGameWindow {
 
     private JLabel coordinatesLabel;
     private JLabel moneyLabel;
+    private JLabel dateLabel;
 
     private JLabel msgLabel;
     private int msgBoxSizeX = 380;
@@ -66,9 +68,12 @@ public class MainGameWindow {
     public boolean refresh = false;
     public boolean refreshDisplay = false;
 
+    public Time date;
+
     public MainGameWindow(String gameName, String seed){
         this.gameName = gameName;
         this.seed = seed;
+        this.date = new Time(gameName);
 
         seedTimer = new Timer(50, new ActionListener() {
             @Override
@@ -77,6 +82,7 @@ public class MainGameWindow {
                 if (updateCounter >= player.movementType) {
                     updatePlayerLocation();
                     displayAlert();
+                    updateDateTextLabels();
                     updateCounter = 0;
                 }
             }
@@ -94,7 +100,7 @@ public class MainGameWindow {
         
         frame.getContentPane().setBackground(new java.awt.Color(90, 90, 90));
 
-        player = new Player(gameName);
+        player = new Player(this);
         currentChunk = player.chunk;
         isInsideBuilding = player.isInsideBuilding;
 
@@ -124,6 +130,8 @@ public class MainGameWindow {
 
         addCoordinatesLabel();
         addMoneyLabel();
+        addDateLabel();
+
         addMsgLabel();
 
         addAlertArea();
@@ -163,6 +171,21 @@ public class MainGameWindow {
         moneyLabel.setFont(labelFont);
 
         frame.add(moneyLabel);
+    }
+
+    private void addDateLabel(){
+        dateLabel = new JLabel();
+        dateLabel.setForeground(Color.BLACK);
+
+        int labelX = backgroundPanel.getX() + 625;
+        int labelY = backgroundPanel.getY() - 35;
+
+        dateLabel.setBounds(labelX, labelY, 200, 40);
+
+        Font labelFont = new Font("Arial", Font.BOLD, 16);
+        dateLabel.setFont(labelFont);
+
+        frame.add(dateLabel);
     }
 
     private void addMsgLabel(){
@@ -502,6 +525,7 @@ public class MainGameWindow {
     public void updateLabels(){
         updatePositionTextLabels();
         updateMoneyTextLabels();
+        updateDateTextLabels();
     }
 
     public void updatePositionTextLabels(){
@@ -517,6 +541,14 @@ public class MainGameWindow {
         moneyLabel.setText(
             "<html>"+
                 "Argent: " + player.money + '€'+
+            "</html>"
+        );
+    }
+
+    public void updateDateTextLabels(){
+        dateLabel.setText(
+            "<html>"+
+                "Date: " + date.getDate() + " " + date.getHour()+
             "</html>"
         );
     }

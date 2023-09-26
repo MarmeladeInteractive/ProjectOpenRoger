@@ -45,6 +45,7 @@ public class CheatCodeMenu {
 
             "$GET-SEED",
             "$GET-VERSION",
+            "$GET-DATE",
 
             "$FILL-INVENTORY",
             "$EMPTY-INVENTORY",
@@ -190,6 +191,9 @@ public class CheatCodeMenu {
                 break;
             case "$GET-VERSION":
                 cheatCodeTextField.setText(save.getGameValue(mainGameWindow.gameName,"version"));
+                break;
+            case "$GET-DATE":
+                cheatCodeTextField.setText(mainGameWindow.date.getDate() + " " + mainGameWindow.date.getHour());
                 break;
 
             case "$FILL-INVENTORY":
