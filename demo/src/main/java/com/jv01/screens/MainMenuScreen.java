@@ -1,8 +1,6 @@
 package com.jv01.screens;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -18,6 +16,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import java.io.File;
+
 import java.util.ArrayList;
 import java.util.List;
 

@@ -2,30 +2,21 @@ package com.jv01.screens;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import com.jv01.fonctionals.Save;
 import com.jv01.generations.Game;
-
-import org.w3c.dom.Node;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.List;
 
-import java.awt.event.KeyListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CustomizePartyScreen extends JPanel {
     public static Save save = new Save();
@@ -313,7 +304,7 @@ public class CustomizePartyScreen extends JPanel {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                CustomizePartyScreen customizePartyScreen = new CustomizePartyScreen("aboieaboiechieng","eeee");
+                new CustomizePartyScreen("aboieaboiechieng","eeee");
             }
         });
     }

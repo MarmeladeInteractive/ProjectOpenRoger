@@ -1,20 +1,16 @@
 package com.jv01.screens;
 
 import javax.swing.*;
-import javax.swing.event.DocumentListener;
 
 import com.jv01.fonctionals.Save;
-import com.jv01.fonctionals.SoundManager;
-import com.jv01.generations.Chunks;
 import com.jv01.generations.MainGameWindow;
-
-import javax.swing.event.DocumentEvent;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import java.util.ArrayList;
 import java.util.List;
 

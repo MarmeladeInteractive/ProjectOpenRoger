@@ -3,13 +3,11 @@ package com.jv01.player;
 import java.util.List;
 import java.util.Map;
 
-//import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-//import javax.swing.border.Border;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

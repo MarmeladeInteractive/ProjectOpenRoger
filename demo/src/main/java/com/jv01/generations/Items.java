@@ -2,7 +2,6 @@ package com.jv01.generations;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.PrimitiveIterator;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -14,7 +13,6 @@ import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
 import com.jv01.player.Player;
 
-import javax.management.loading.PrivateClassLoader;
 import javax.swing.JLabel;
 
 public class Items {

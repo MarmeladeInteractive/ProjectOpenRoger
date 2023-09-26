@@ -5,21 +5,10 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.*;
-import javax.xml.parsers.*;
-import java.io.*;
-import javax.sound.sampled.*;
 
 import java.io.File;
-import javax.sound.sampled.*;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import org.w3c.dom.*;
 
 import com.github.javafaker.Faker;
 

@@ -1,34 +1,19 @@
 package com.jv01.screens;
 
 import javax.swing.*;
+
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyAdapter;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 import com.jv01.player.Player;
-
-import org.w3c.dom.Node;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import java.awt.event.KeyListener;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class InfoMenuScreen extends JFrame {
 
     private PartyMenuScreen partyMenuScreen;
     private Player player;
     private String gameName;
-    private JPanel panel;
     private JFrame frame = new JFrame("Menu");
 
     private static final int BOXE_SIZE = 800;
@@ -53,7 +38,6 @@ public class InfoMenuScreen extends JFrame {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(BOXE_SIZE, BOXE_SIZE);
 
-        panel = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = GridBagConstraints.RELATIVE;

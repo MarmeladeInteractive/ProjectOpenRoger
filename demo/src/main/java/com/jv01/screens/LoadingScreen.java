@@ -1,6 +1,7 @@
 package com.jv01.screens;
 
 import javax.swing.*;
+
 import java.awt.*;
 
 public class LoadingScreen {
