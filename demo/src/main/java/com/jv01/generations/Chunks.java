@@ -224,8 +224,6 @@ public class Chunks {
         save.saveXmlFile(doc, gameName, "chunks");
     }
 
-
-
     public void createBiome(){
         Biomes biome = new Biomes(gameName, key);
         backPic = biome.imageUrl;
@@ -250,7 +248,13 @@ public class Chunks {
         }
 
         if(biome >= 0 && biome <= 1){
-
+            if(key2 >= '0' && key2 <= '1'){
+                number = 1;
+                if(key2 == '0')buildingType = 6;
+                if(key2 == '1')buildingType = 7;
+            }else{
+                number = 0;
+            }
         }else if(biome >= 2 && biome <= 3){
             if(key2 >= '0' && key2 <= 'b'){
                 number = 1;
@@ -361,8 +365,7 @@ public class Chunks {
                     cell[0]=2;
                     cell[1]=2;
                     completedCell[3] = true;
-                }
-                
+                }            
             } else if (key01 >= '4' && key01 <= '7') {
                 if(!completedCell[1]){
                     cell[0]=0;
@@ -500,7 +503,7 @@ public class Chunks {
                                 break;
                             }
 
-                            if(k==2 && l==2 && key01 == '1' && !structure && ((i==0&&j==0)||(i==2&&j==2)||(i==0&&j==2)||(i==2&&j==0))){
+                            /*if(k==2 && l==2 && key01 == '1' && !structure && ((i==0&&j==0)||(i==2&&j==2)||(i==0&&j==2)||(i==2&&j==0))){
                                 position[0]=0;
                                 position[1]=0;
 
@@ -514,7 +517,7 @@ public class Chunks {
                                 l=-1;
                                 structure = true;
                                 break;
-                            }
+                            }*/
 
                             if(key01 >= '0' && key01 <= '6'){
                                 decorationType = -1;
