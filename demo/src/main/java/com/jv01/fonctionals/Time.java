@@ -27,6 +27,8 @@ public class Time {
 
     public int nightFilterOpacity = 0;
 
+    private String[] saisons = {"Hiver", "Printemps", "Été", "Automne"};
+
     public Time(String gameName) {
         this.gameName = gameName;
 
@@ -42,7 +44,7 @@ public class Time {
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                avancerTemps(60); 
+                advanceTime(60); 
             }
         }, 0, timeForOneS, TimeUnit.MILLISECONDS);
     }
@@ -63,18 +65,18 @@ public class Time {
         int h = Integer.parseInt(date01[3]);
         int min = Integer.parseInt(date01[4]);
         
-        calendar.set(year, mouth, day, h, min);
+        calendar.set(year, mouth-1, day, h, min);
         updateSeason();
     }
 
-    public void avancerTemps(long secondes) {
+    public void advanceTime(long secondes) {
         calendar.add(Calendar.SECOND, (int) secondes);
         updateSeason();
         updateNightFilterOpacity();
     }
 
-    public void changerDate(int annee, int mois, int jour) {
-        calendar.set(annee, mois - 1, jour); 
+    public void changeDate(int year, int mouth, int day) {
+        calendar.set(year, mouth - 1, day); 
         updateSeason();
     }
 
@@ -83,7 +85,6 @@ public class Time {
     }
 
     public String getSaison() {
-        String[] saisons = {"Hiver", "Printemps", "Été", "Automne"};
         return saisons[season];
     }
     public String getHour(){
@@ -109,12 +110,12 @@ public class Time {
     }
 
     private void updateSeason() {
-        int mois = calendar.get(Calendar.MONTH);
-        if (mois >= 0 && mois <= 2) {
+        int mouth = calendar.get(Calendar.MONTH);
+        if (mouth >= 0 && mouth <= 2) {
             season = 0;
-        } else if (mois >= 3 && mois <= 5) {
+        } else if (mouth >= 3 && mouth <= 5) {
             season = 1;
-        } else if (mois >= 6 && mois <= 8) {
+        } else if (mouth >= 6 && mouth <= 8) {
             season = 2;
         } else {
             season = 3;
