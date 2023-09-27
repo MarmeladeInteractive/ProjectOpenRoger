@@ -40,6 +40,7 @@ public class CheatCodeMenu {
             "$SET-SPEED",
             "$SET-HOUR",
             "$SET-TIME",
+            "$SET-DAY-DURATION",
 
             "$GET-SEED",
             "$GET-VERSION",
@@ -49,10 +50,14 @@ public class CheatCodeMenu {
             "$EMPTY-INVENTORY",
 
             "$MOTHERLODE",
+
             "$LOAD-NEARBY-CHUNKS",
             "$LOAD-NEARBY-CHUNKS_",
 
             "$TP",
+
+            "$STOP-TIME",
+            "$START-TIME",
 
             "$DEV-MODE",
 
@@ -189,6 +194,9 @@ public class CheatCodeMenu {
             case "$SET-TIME":
                 setTime(mots[1]);
                 break;
+            case "$SET-DAY-DURATION":
+                setDayDuration(mots[1]);
+                break;
 
             case "$GET-SEED":
                 cheatCodeTextField.setText(mainGameWindow.seed);
@@ -219,6 +227,13 @@ public class CheatCodeMenu {
 
             case "$TP":
                 tp(mots[1]);
+                break;
+
+            case "$STOP-TIME":
+                setDayDuration("0");
+                break;
+            case "$START-TIME":
+                setDayDuration("1440");
                 break;
 
             case "$DEV-MODE":
@@ -358,6 +373,15 @@ public class CheatCodeMenu {
             setHour("24:00");
         }else if(value.equals("jour") || value.equals("day")){
             setHour("12:00");
+        }
+    }
+
+    private void setDayDuration(String value){
+        try {
+            long secondsPerDay = Long.parseLong(value);
+            mainGameWindow.date.changeTimeForDay(secondsPerDay);       
+        } catch (NumberFormatException e) {
+            error();
         }
     }
 

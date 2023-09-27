@@ -14,7 +14,7 @@ public class Time {
     private Save save =  new Save();
     private String gameName;
 
-    private long timeForOneS;
+    private volatile long timeForOneS;
 
     private Calendar calendar;
 
@@ -27,7 +27,11 @@ public class Time {
 
     public int nightFilterOpacity = 0;
 
+    public volatile boolean isTime = true;
+
     private String[] saisons = {"Hiver", "Printemps", "Été", "Automne"};
+
+    ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     public Time(String gameName) {
         this.gameName = gameName;
@@ -39,12 +43,12 @@ public class Time {
         this.calendar = Calendar.getInstance();
 
         getLocalSaveGameDate(); 
-
-        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        if(!isTime)timeForOneS = 1000;
+        
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                advanceTime(60); 
+                if(isTime){advanceTime(60);}
             }
         }, 0, timeForOneS, TimeUnit.MILLISECONDS);
     }
@@ -55,6 +59,8 @@ public class Time {
 
         String date = save.getChildFromElement(element,"date");
         long secondsPerDay = Integer.parseInt(save.getChildFromElement(element,"secondsPerDay"));
+
+        if(secondsPerDay <= 0)isTime = false;
 
         this.timeForOneS = Math.round((secondsPerDay*1.0 / 86400)*1000*60);
 
@@ -150,5 +156,27 @@ public class Time {
 
     public void saveDate(){
         save.changeElementChildValue(gameName,"game","time","time","date",savedFormat.format(calendar.getTime()));
+    }
+
+    public void changeTimeForDay(long newTime) {
+        save.changeElementChildValue(gameName, "game", "time", "time", "secondsPerDay", String.valueOf(newTime));
+        if (newTime <= 0) {
+            isTime = false;
+            this.timeForOneS = 1000;
+            scheduler.shutdown();
+        } else {
+            isTime = true;
+            scheduler.shutdown();
+            this.timeForOneS = Math.round((newTime * 1.0 / 86400) * 1000 * 60);
+            scheduler = Executors.newScheduledThreadPool(1); 
+            scheduler.scheduleAtFixedRate(new Runnable() {
+                @Override
+                public void run() {
+                    if (isTime) {
+                        advanceTime(60);
+                    }
+                }
+            }, 0, timeForOneS, TimeUnit.MILLISECONDS);
+        }
     }
 }
