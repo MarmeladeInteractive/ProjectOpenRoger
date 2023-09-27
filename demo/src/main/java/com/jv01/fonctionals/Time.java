@@ -19,7 +19,7 @@ public class Time {
     private Calendar calendar;
 
     private SimpleDateFormat dateFormat;
-    private SimpleDateFormat heurFormat;
+    private SimpleDateFormat hourFormat;
 
     private SimpleDateFormat savedFormat;
 
@@ -33,7 +33,7 @@ public class Time {
         this.gameName = gameName;
 
         this.dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        this.heurFormat = new SimpleDateFormat("HH:mm");
+        this.hourFormat = new SimpleDateFormat("HH:mm");
         this.savedFormat = new SimpleDateFormat("dd:MM:yyyy:HH:mm");
 
         this.calendar = Calendar.getInstance();
@@ -88,7 +88,7 @@ public class Time {
         return saisons[season];
     }
     public String getHour(){
-        return heurFormat.format(calendar.getTime());
+        return hourFormat.format(calendar.getTime());
     }
 
     public void setHour(String hour){
