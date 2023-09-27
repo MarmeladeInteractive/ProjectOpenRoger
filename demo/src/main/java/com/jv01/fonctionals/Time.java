@@ -51,6 +51,8 @@ public class Time {
                 if(isTime){advanceTime(60);}
             }
         }, 0, timeForOneS, TimeUnit.MILLISECONDS);
+
+        updateNightFilterOpacity();
     }
 
     public void getLocalSaveGameDate(){
