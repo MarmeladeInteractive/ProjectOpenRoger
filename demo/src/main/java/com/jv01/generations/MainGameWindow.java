@@ -25,6 +25,7 @@ public class MainGameWindow {
     
     public String gameName;
     public String seed;
+    public boolean cheatCodesEnabled;
 
     public Timer seedTimer;
     public String key="0";
@@ -77,9 +78,11 @@ public class MainGameWindow {
 
     public Time date;
 
-    public MainGameWindow(String gameName, String seed){
+    public MainGameWindow(String gameName, String seed, boolean cheatCodesEnabled){
         this.gameName = gameName;
         this.seed = seed;
+        this.cheatCodesEnabled = cheatCodesEnabled;
+        
         this.date = new Time(gameName);
 
         seedTimer = new Timer(50, new ActionListener() {

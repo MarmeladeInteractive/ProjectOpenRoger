@@ -33,6 +33,8 @@ public class Game{
     public  String seed;
     public String version;
 
+    public boolean cheatCodesEnabled = false;
+
     public Game(){
         name = "null";
     }
@@ -41,8 +43,9 @@ public class Game{
         this.name = name;
     }
 
-    public void runNewGame(String name, String seed01){
-        seed = seed01;
+    public void runNewGame(String name, String seed01, boolean cheatCodesEnabled){
+        this.seed = seed01;
+        this.cheatCodesEnabled = cheatCodesEnabled;
         runGame(name);
     }
 
@@ -54,25 +57,25 @@ public class Game{
             Timer timer = new Timer(30, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    createGame(name, loadingScreen);
+                    createGame(name, loadingScreen, cheatCodesEnabled);
                 }
             });
             timer.setRepeats(false);
             timer.start();
         
-        }else
-        {
+        }else{
             name = gameName;
             //Document doc = save.getDocumentXml(gameName, "game");
             //seed = readgameElementValue(doc,"seed");
             //version = readgameElementValue(doc,"version");
             seed = save.getGameValue(gameName,"seed");
             version = save.getGameValue(gameName,"version");
+            cheatCodesEnabled = Boolean.parseBoolean(save.getGameValue(gameName, "cheatCodesEnabled"));
             startGame();   
         }    
     }
 
-    public  void createGame(String gameName, LoadingScreen loadingScreen){
+    public  void createGame(String gameName, LoadingScreen loadingScreen, boolean cheatCodesEnabled){
         File savesDirectory = new File("saves/" + gameName);
         savesDirectory.mkdirs(); 
 
@@ -90,8 +93,8 @@ public class Game{
         generateCorporations(5,20);
 
         loadingScreen.closeLoadingScreen();
-        //startGame();
-        new CustomizePartyScreen(name,seed);
+
+        new CustomizePartyScreen(name,seed,cheatCodesEnabled);
     }
 
     public void editElement(){
@@ -99,6 +102,7 @@ public class Game{
         save.changeElementChildValue(name,"game","game","game","date",Objects.toString(now));
         save.changeElementChildValue(name,"game","game","game","seed",seed);
         save.changeElementChildValue(name,"game","game","game","name",name);
+        save.changeElementChildValue(name,"game","game","game","cheatCodesEnabled",Boolean.toString(cheatCodesEnabled));
     }
 
     public  String readgameElementValue(Document doc, String element) {
@@ -189,12 +193,12 @@ public class Game{
     }
 
     private void startGame(){
-        MainGameWindow mainGameWindow = new MainGameWindow(name, seed);
+        MainGameWindow mainGameWindow = new MainGameWindow(name, seed, cheatCodesEnabled);
         mainGameWindow.showMainGameWindow();
     }
 
-    public void startGame(String gamename, String seed){                 
-        MainGameWindow mainGameWindow = new MainGameWindow(gamename, seed);
+    public void startGame(String gamename, String seed, boolean cheatCodesEnabled){                 
+        MainGameWindow mainGameWindow = new MainGameWindow(gamename, seed, cheatCodesEnabled);
         mainGameWindow.showMainGameWindow();
     }
 }
