@@ -138,6 +138,7 @@ public class MainGameWindow {
         buildChunk();
 
         addNightLabel();
+        player.playerLabel.setVisible(true);
     }
 
     public void restartFrame(){
@@ -147,8 +148,8 @@ public class MainGameWindow {
 
         createBackgroundPanel();
         player.inventory.createInventoryPanel(frame);
-        backgroundPanel.add(player.playerLabel);
-
+        
+    
         addCoordinatesLabel();
         addMoneyLabel();
         addDateLabel();
@@ -158,6 +159,9 @@ public class MainGameWindow {
         addAlertArea();
 
         updateLabels();
+
+        backgroundPanel.add(player.playerLabel);
+        player.playerLabel.setVisible(false);
     }
 
     private void addCoordinatesLabel(){
