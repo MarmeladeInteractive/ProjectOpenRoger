@@ -35,6 +35,8 @@ public class MainMenuScreen {
 
     public JButton chooseSeedButton;
 
+    private JCheckBox cheatCodesCheckBox;
+
     public JPanel panel;
     public JList<String> gameNamesJList;
 
@@ -186,6 +188,9 @@ public class MainMenuScreen {
 
         panel.add(nameTextField, constraints);
 
+        cheatCodesCheckBox = new JCheckBox("Activer les cheat codes");
+        panel.add(cheatCodesCheckBox, constraints);
+
         JButton chooseSeedButton = new JButton("Choisir une seed");
         panel.add(chooseSeedButton, constraints);
 
@@ -204,7 +209,7 @@ public class MainMenuScreen {
             public void actionPerformed(ActionEvent e) {
                 String gameName = nameTextField.getText();
                 if(isValideInput(gameName)){
-                    startNewGame(gameName, null);      
+                    startNewGame(gameName, null, cheatCodesCheckBox.isSelected());      
                 }else{
                     nameTextField.setForeground(Color.RED);
                     nameTextField.setBackground(new Color(255, 120, 120, 255));
@@ -253,6 +258,9 @@ public class MainMenuScreen {
 
         panel.add(seedTextField, constraints);
 
+        cheatCodesCheckBox = new JCheckBox("Activer les cheat codes");
+        panel.add(cheatCodesCheckBox, constraints);
+
         startGameButton = new JButton("Lancer la partie");
         panel.add(startGameButton, constraints);
 
@@ -264,7 +272,7 @@ public class MainMenuScreen {
 
                 if(isValideInput(gameName)){
                     if(isValideInput(seed)){
-                        startNewGame(gameName, seed);
+                        startNewGame(gameName, seed, cheatCodesCheckBox.isSelected());
                     }else{
                         seedTextField.setForeground(Color.RED);
                         seedTextField.setBackground(new Color(255, 120, 120, 255));
@@ -475,7 +483,7 @@ public class MainMenuScreen {
         return savesNames;
     }
 
-    private void startNewGame(String gameName, String seed) {
+    private void startNewGame(String gameName, String seed, boolean cheatCodesEnabled) {
         if(isExistingNameMap(gameName)){
             nameTextField.setForeground(Color.RED);
             nameTextField.setBackground(new Color(255, 120, 120, 255));
@@ -484,7 +492,7 @@ public class MainMenuScreen {
         }else{
             soundManager.stopMusic(false);
             frame.dispose();
-            game.runNewGame(gameName, seed);
+            game.runNewGame(gameName, seed, cheatCodesEnabled);
         }
     }
 

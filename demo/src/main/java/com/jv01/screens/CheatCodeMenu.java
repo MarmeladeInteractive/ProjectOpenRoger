@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheatCodeMenu {
+    public boolean cheatCodesEnabled = false;
+
     public boolean refresh = false;
     public boolean refreshDisplay = false;
 
@@ -42,9 +44,9 @@ public class CheatCodeMenu {
             "$SET-TIME",
             "$SET-DAY-DURATION",
 
-            "$GET-SEED",
-            "$GET-VERSION",
-            "$GET-DATE",
+            "GET-SEED",
+            "GET-VERSION",
+            "GET-DATE",
 
             "$RUN-ARCADE",
 
@@ -63,7 +65,7 @@ public class CheatCodeMenu {
 
             "$DEV-MODE",
 
-            "$EXIT",
+            "EXIT",
     };
 
     public List<String> PossibleCMDs = new ArrayList<>();
@@ -180,6 +182,12 @@ public class CheatCodeMenu {
             mots = new String[]{mots[0], "@_é_@"};
         }
 
+        if(!cheatCodesEnabled){
+            if(mots[0].contains("$")){
+                mots = new String[]{"@_é_@", "@_é_@"};
+            }
+        }
+
         switch (mots[0]) {
             case "$SET-MONEY":
                 setMoney(mots[1]);
@@ -200,13 +208,13 @@ public class CheatCodeMenu {
                 setDayDuration(mots[1]);
                 break;
 
-            case "$GET-SEED":
+            case "GET-SEED":
                 cheatCodeTextField.setText(mainGameWindow.seed);
                 break;
-            case "$GET-VERSION":
+            case "GET-VERSION":
                 cheatCodeTextField.setText(save.getGameValue(mainGameWindow.gameName,"version"));
                 break;
-            case "$GET-DATE":
+            case "GET-DATE":
                 cheatCodeTextField.setText(mainGameWindow.date.getDate() + " " + mainGameWindow.date.getHour());
                 break;
 
@@ -246,7 +254,7 @@ public class CheatCodeMenu {
                 devMode();
                 break;
 
-            case "$EXIT":
+            case "EXIT":
                 System.exit(0);
                 break;
 
@@ -262,7 +270,13 @@ public class CheatCodeMenu {
         PossibleCMDs.clear();
         for(String cmd : allCMDs){
             if(cmd.toLowerCase().contains(thisCMD)){
-                PossibleCMDs.add(cmd);
+                if(cheatCodesEnabled){
+                    PossibleCMDs.add(cmd);
+                }else{
+                    if(!cmd.contains("$")){
+                        PossibleCMDs.add(cmd);
+                    }
+                }   
             }
         }
     }
@@ -279,6 +293,7 @@ public class CheatCodeMenu {
 
     public void open(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
+        cheatCodesEnabled = mainGameWindow.cheatCodesEnabled;
         frame.setVisible(true);
         cheatCodeTextField.requestFocus();
     }
