@@ -181,30 +181,4 @@
             }
         </imagesUrls>
     </tool>
-
-    <tool id="6">
-        <name>Arcade</name>
-        <size>{100,100}</size>
-        <description></description>
-        <level>0</level>
-        <upgradeable>0</upgradeable>
-        <upgradeSpam></upgradeSpam>
-        <useSpam>jouer à un jeux</useSpam>
-        <buySpam></buySpam>
-        <prices>
-            {
-                0
-            }
-        </prices>
-        <usePrices>
-            {
-                0
-            }
-        </usePrices>
-        <imagesUrls>
-            {
-                demo/img/tools/arcade01.png
-            }
-        </imagesUrls>
-    </tool>
 </tools>
