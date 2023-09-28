@@ -330,9 +330,9 @@ public class Chunks {
             char key4 = key.charAt(3);
             char key5 = key.charAt(4);
 
-            /*if (key4 >= '0' && key4 <= '1' && biome > 3) {
-                if(key5 <= getCharComparedToPercentage(13))buildingType = 8;
-            } else */if (key4 >= '2' && key4 <= '3' && biome > 3) {
+            if (key4 >= '0' && key4 <= '1' && biome > 3) {
+                if(key5 <= getCharComparedToPercentage(20))buildingType = 9;
+            } else if (key4 >= '2' && key4 <= '3' && biome > 3) {
                 if(key5 <= getCharComparedToPercentage(20))buildingType = 1;
             } else if (key4 >= '4' && key4 <= '5'  && biome > 3) {
                 if(key5 <= getCharComparedToPercentage(20))buildingType = 2;
@@ -640,7 +640,7 @@ public class Chunks {
     }
 
     public void addArcade(){
-        Arcade arcade = new Arcade(mainGameWindow);
+        new Arcade(mainGameWindow);
     }
 
     public String hash(String seed, long value1, long value2) {
