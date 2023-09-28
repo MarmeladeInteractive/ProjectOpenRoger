@@ -16,11 +16,13 @@ import org.w3c.dom.Element;
 import com.jv01.buildings.Inside;
 import com.jv01.buildings.Buildings;
 import com.jv01.fonctionals.Save;
+import com.jv01.miniGames.Arcade;
 
 public class Chunks {
     public Save save = new Save();
 
     public boolean load = true;
+    public MainGameWindow mainGameWindow;
 
     public String id;
     public long[] chunk;
@@ -38,6 +40,7 @@ public class Chunks {
     public int number = 0;
 
     public boolean isInsideBuilding;
+    public String environment;
     public boolean isCenterChunk = false;
 
     public boolean[] completedCell = {false,false,false,false};
@@ -75,29 +78,25 @@ public class Chunks {
         this.element = save.getElementById(doc, "chunk", id);
 
         if(element == null){
-            if(!isInsideBuilding){
-                createBiome();
-                addBuildings(buildingType);
-                saveChunk();
-            }else{
-                addInsideBuildings();
-            }
-            
+            createBiome();
+            addBuildings(buildingType);
+            saveChunk();
         }else{
             
         }   
     }
 
-    public Chunks(long[] chunk, String seed, String gameName, int boxSize, JPanel backgroundPanel, boolean isInsideBuilding, boolean load){
-        this.load = load;
+    public Chunks(MainGameWindow mainGameWindow){
+        this.load = mainGameWindow.displayChunks;
+        this.mainGameWindow = mainGameWindow;
 
-        this.chunk = chunk;
-        this.seed = seed;
-        this.boxSize = boxSize;
+        this.chunk = mainGameWindow.currentChunk;
+        this.seed = mainGameWindow.seed;
+        this.boxSize = mainGameWindow.boxSize;
         this.cellSize = boxSize/3;
-        this.backgroundPanel = backgroundPanel;
-        this.isInsideBuilding = isInsideBuilding;
-        this.gameName = gameName;
+        this.backgroundPanel = mainGameWindow.backgroundPanel;
+        this.environment = mainGameWindow.environment;
+        this.gameName = mainGameWindow.gameName;
 
         this.displayOnMap = true;
 
@@ -109,56 +108,71 @@ public class Chunks {
         this.element = save.getElementById(doc, "chunk", id);
 
         if(element == null){
-            if(!isInsideBuilding){
-                createBiome();
-                addBuildings(-1);
-                if(this.load)addDecorations();
-                saveChunk();
-            }else{
-                addInsideBuildings();
+            switch (environment) {
+                case "ext":
+                    createBiome();
+                    addBuildings(-1);
+                    if(this.load)addDecorations();
+                    saveChunk();
+                    break;
+                case "insideBuilding":
+                    addInsideBuildings();
+                    break;
+            
+                default:
+                    break;
             }
             
         }else{
             Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
-            if(!isInsideBuilding){
-                this.biome = Integer.parseInt(save.getChildFromMapElements(allElements,"biome"));
-                this.backPic = save.getChildFromMapElements(allElements,"backPic");
-                try{
-                    if(!Boolean.parseBoolean(save.getChildFromMapElements(allElements,"displayOnMap"))){
-                        save.changeElementChildValue(gameName,"chunks","chunk",id,"displayOnMap","true");
+            switch (environment) {
+                case "ext":
+                    this.biome = Integer.parseInt(save.getChildFromMapElements(allElements,"biome"));
+                    this.backPic = save.getChildFromMapElements(allElements,"backPic");
+                    try{
+                        if(!Boolean.parseBoolean(save.getChildFromMapElements(allElements,"displayOnMap"))){
+                            save.changeElementChildValue(gameName,"chunks","chunk",id,"displayOnMap","true");
+                        }
+                    }catch(Exception e){
+
                     }
-                }catch(Exception e){
-
-                }
-                
-                if(this.load)changeBiome(biome, backPic);
-
-                this.number = Integer.parseInt(save.getChildFromMapElements(allElements,"number"));
-
-                if(number>0){
-                    this.bCellX = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsCellsX"));
-                    this.bCellY = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsCellsY"));
-                    this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
-
                     
-                    for(int i=0; i <number; i++){
-                        int[] cell = (new int[]{bCellX[i],bCellY[i]});
-                        if(this.load)createBuilding(number, cell, bType[i]);
-                    }
+                    if(this.load)changeBiome(biome, backPic);
 
-                    int[] completedCellInt = save.stringToIntArray(save.getChildFromMapElements(allElements,"completedCell"));
-                    for(int i=0; i<4; i++){
-                        if(completedCellInt[i]==1){
-                            completedCell[i] = true;
-                        }else{
-                            completedCell[i] = false;
+                    this.number = Integer.parseInt(save.getChildFromMapElements(allElements,"number"));
+
+                    if(number>0){
+                        this.bCellX = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsCellsX"));
+                        this.bCellY = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsCellsY"));
+                        this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
+
+                        
+                        for(int i=0; i <number; i++){
+                            int[] cell = (new int[]{bCellX[i],bCellY[i]});
+                            if(this.load)createBuilding(number, cell, bType[i]);
+                        }
+
+                        int[] completedCellInt = save.stringToIntArray(save.getChildFromMapElements(allElements,"completedCell"));
+                        for(int i=0; i<4; i++){
+                            if(completedCellInt[i]==1){
+                                completedCell[i] = true;
+                            }else{
+                                completedCell[i] = false;
+                            }
                         }
                     }
-                }
-                if(this.load)addDecorations();
-            }else{
-                this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
-                addInsideBuildings();
+                    if(this.load)addDecorations();
+                    break;
+                case "insideBuilding":
+                    this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
+                    addInsideBuildings();
+                    break;
+                case "arcade":
+                    addArcade();
+                    break;
+
+                default:
+                    break;
             }
         }   
     }
@@ -333,9 +347,9 @@ public class Chunks {
             }else {
                 if(key5 <= getCharComparedToPercentage(100))buildingType = 7;
             }
-
-            if(isCenterChunk)buildingType = 0;
         }
+        
+        if(isCenterChunk)buildingType = 0;
 
         if(number != 0){
             if(this.load){
@@ -625,6 +639,9 @@ public class Chunks {
         backPic = inside01.imageUrl;
     }
 
+    public void addArcade(){
+        Arcade arcade = new Arcade(mainGameWindow);
+    }
 
     public String hash(String seed, long value1, long value2) {
         try {

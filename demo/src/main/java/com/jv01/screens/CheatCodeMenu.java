@@ -46,6 +46,8 @@ public class CheatCodeMenu {
             "$GET-VERSION",
             "$GET-DATE",
 
+            "$RUN-ARCADE",
+
             "$FILL-INVENTORY",
             "$EMPTY-INVENTORY",
 
@@ -208,6 +210,10 @@ public class CheatCodeMenu {
                 cheatCodeTextField.setText(mainGameWindow.date.getDate() + " " + mainGameWindow.date.getHour());
                 break;
 
+            case "$RUN-ARCADE":
+                runArcade(mots[1]);
+                break;
+
             case "$FILL-INVENTORY":
                 fillInventory();
                 break;
@@ -258,6 +264,15 @@ public class CheatCodeMenu {
             if(cmd.toLowerCase().contains(thisCMD)){
                 PossibleCMDs.add(cmd);
             }
+        }
+    }
+
+    private void runArcade(String value){
+        try {         
+            int id = Integer.parseInt(value);
+            mainGameWindow.runArcade(id);
+        } catch (NumberFormatException e) {
+            error();
         }
     }
 
