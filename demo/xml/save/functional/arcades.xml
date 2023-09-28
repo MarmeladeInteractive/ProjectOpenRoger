@@ -20,7 +20,7 @@
         </usePrices>
         <imagesUrls>
             {
-                demo/img/tools/arcade01.png
+                demo/img/arcades/arcade01.png
             }
         </imagesUrls>
     </arcade>

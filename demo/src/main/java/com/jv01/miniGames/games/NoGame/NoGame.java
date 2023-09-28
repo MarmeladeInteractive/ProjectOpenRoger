@@ -1,4 +1,4 @@
-package com.jv01.miniGames.games.NoGame;
+package com.jv01.miniGames.games.noGame;
 
 import javax.swing.*;
 
