@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import com.jv01.miniGames.games.horsesRace.HorsesRace;
 import com.jv01.miniGames.games.noGame.NoGame;
+import com.jv01.miniGames.roulette.Roulette;
 import com.jv01.generations.MainGameWindow;
 
 import java.awt.*;
@@ -82,18 +83,16 @@ public class Arcade {
     private void runGame(){
         switch (idGame) {
             case 0:
-                showHorsesRace();
+                new HorsesRace(gamePanel,boxSize);
+                break;
+            case 1:
+                new Roulette(gamePanel,boxSize);
                 break;
         
             default:
                 new NoGame(gamePanel,boxSize);
                 break;
         }
-    }
-    
-
-    public void showHorsesRace() {
-        new HorsesRace(gamePanel,boxSize);
     }
 
     private void focusOnArcade(){
