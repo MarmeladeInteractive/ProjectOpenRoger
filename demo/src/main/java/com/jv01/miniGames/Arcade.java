@@ -76,7 +76,7 @@ public class Arcade {
         panel.setComponentZOrder(closeGameButton, 0);
     
         gamePanel.setLayout(null);
-        gamePanel.setBounds(0, 0, 800, 800);
+        gamePanel.setBounds(0, 0, boxSize, boxSize);
     }
 
     private void runGame(){
@@ -93,7 +93,7 @@ public class Arcade {
     
 
     public void showHorsesRace() {
-        HorsesRace horsesRace = new HorsesRace(gamePanel,boxSize);
+        new HorsesRace(gamePanel,boxSize);
     }
 
     private void focusOnArcade(){
