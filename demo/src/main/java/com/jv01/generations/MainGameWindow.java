@@ -366,7 +366,7 @@ public class MainGameWindow {
                 openMsgLabels(spam);
 
                 if(isTool){
-                    tool.interact(player);
+                    tool.interact(this);
                     refresh = tool.refresh;
                     refreshDisplay = tool.refreshDisplay;
                 }else if(isItem){

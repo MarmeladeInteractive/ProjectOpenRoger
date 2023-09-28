@@ -83,71 +83,75 @@ public class Tools {
 
     }
 
-    public void interact(Player player){
-        doc = save.getDocumentXml(player.gameName, "partyHouse");
+    public void interact(MainGameWindow mainGameWindow){
+        doc = save.getDocumentXml(mainGameWindow.player.gameName, "partyHouse");
 
-        if(player.keyBord.interactKeyPressed){
+        if(mainGameWindow.player.keyBord.interactKeyPressed){
             if(level==0){
                 switch (id) {
                     case 0:
-                        if(player.isEnoughMoney(price,true)){
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
-                            save.changeElementChildValue(player.gameName, "partyHouse", "partyHouse", "partyHouse", "printerLevel", String.valueOf(1));
-                            player.keyBord.interactKeyPressed = false;
+                            save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "printerLevel", String.valueOf(1));
+                            mainGameWindow.player.keyBord.interactKeyPressed = false;
                             refresh = true;
                         }
                         break;
                     case 1:
-                        if(player.isEnoughMoney(price,true)){
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
-                            save.changeElementChildValue(player.gameName, "partyHouse", "partyHouse", "partyHouse", "ovenLevel", String.valueOf(1));
-                            player.keyBord.interactKeyPressed = false;
+                            save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "ovenLevel", String.valueOf(1));
+                            mainGameWindow.player.keyBord.interactKeyPressed = false;
                             refresh = true;
                         }
                         break;
                     case 2:
-                        if(player.isEnoughMoney(price,true)){
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
-                            save.changeElementChildValue(player.gameName, "partyHouse", "partyHouse", "partyHouse", "transportationLevel", String.valueOf(1));
-                            player.keyBord.interactKeyPressed = false;
+                            save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "transportationLevel", String.valueOf(1));
+                            mainGameWindow.player.keyBord.interactKeyPressed = false;
                             refresh = true;
                         }
                         break;
 
                     case 3:
-                        if(player.isEnoughMoney(price,true)){
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
-                            save.changeChunkBuildingType(player.gameName,player.chunk,0);
+                            save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,0);
                                                       
-                            player.keyBord.interactKeyPressed = false;
-                            player.positionX = -100;
+                            mainGameWindow.player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.positionX = -100;
                         }
                         break;
                     case 4:
-                        if(player.isEnoughMoney(price,true)){
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
-                            save.changeChunkBuildingType(player.gameName,player.chunk,0);
+                            save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,0);
                                                       
-                            player.keyBord.interactKeyPressed = false;
-                            player.positionX = -100;
+                            mainGameWindow.player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.positionX = -100;
                         }
                         break;
                     case 5:
-                        if(player.inventory.wastes >= 0){
+                        if(mainGameWindow.player.inventory.wastes >= 0){
 
                             soundManager.playSFX(4);
                             
-                            player.money += player.inventory.wastes;
+                            mainGameWindow.player.money += mainGameWindow.player.inventory.wastes;
 
-                            player.inventory.wastes = 0;
+                            mainGameWindow.player.inventory.wastes = 0;
 
-                            player.save();
-                            player.inventory.saveWastes();
+                            mainGameWindow.player.save();
+                            mainGameWindow.player.inventory.saveWastes();
 
                             refreshDisplay = true;
                                                       
-                            player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.keyBord.interactKeyPressed = false;
                         }
+                        break;
+                    case 6:
+                        mainGameWindow.runArcade(0); 
+                        mainGameWindow.player.keyBord.interactKeyPressed = false;         
                         break;
                 
                     default:
@@ -159,19 +163,19 @@ public class Tools {
                         
                         break;
                     case 1:
-                        if((player.inventory.maxChocolatines != player.inventory.chocolatines)&&(player.inventory.maxCroissants != player.inventory.croissants))if(player.isEnoughMoney(usePrice,true)){
-                            if((player.inventory.maxChocolatines - player.inventory.chocolatines)>=(level*2)){
-                                player.inventory.chocolatines += level*2;
+                        if((mainGameWindow.player.inventory.maxChocolatines != mainGameWindow.player.inventory.chocolatines)&&(mainGameWindow.player.inventory.maxCroissants != mainGameWindow.player.inventory.croissants))if(mainGameWindow.player.isEnoughMoney(usePrice,true)){
+                            if((mainGameWindow.player.inventory.maxChocolatines - mainGameWindow.player.inventory.chocolatines)>=(level*2)){
+                                mainGameWindow.player.inventory.chocolatines += level*2;
                             }else{
-                                player.inventory.chocolatines = player.inventory.maxChocolatines;
+                                mainGameWindow.player.inventory.chocolatines = mainGameWindow.player.inventory.maxChocolatines;
                             }
-                            if((player.inventory.maxCroissants - player.inventory.croissants)>=(level*2)){
-                                player.inventory.croissants += level*2;
+                            if((mainGameWindow.player.inventory.maxCroissants - mainGameWindow.player.inventory.croissants)>=(level*2)){
+                                mainGameWindow.player.inventory.croissants += level*2;
                             }else{
-                                player.inventory.croissants = player.inventory.maxCroissants;
+                                mainGameWindow.player.inventory.croissants = mainGameWindow.player.inventory.maxCroissants;
                             }
-                            player.inventory.saveChocolatines();
-                            player.inventory.saveCroissants();
+                            mainGameWindow.player.inventory.saveChocolatines();
+                            mainGameWindow.player.inventory.saveCroissants();
                             refresh = true;
                         }
                         break;
@@ -183,33 +187,33 @@ public class Tools {
                         break;
                 }
             }
-        }else if(player.keyBord.upgradeKeyPressed){
+        }else if(mainGameWindow.player.keyBord.upgradeKeyPressed){
             if(level<3){
                 switch (id) {
                     case 0:
-                        if(player.isEnoughMoney(price,true)){
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
                             level++;
                             
-                            save.changeElementChildValue(player.gameName, "partyHouse", "partyHouse", "partyHouse", "printerLevel", String.valueOf(level));
-                            player.keyBord.upgradeKeyPressed = false;
+                            save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "printerLevel", String.valueOf(level));
+                            mainGameWindow.player.keyBord.upgradeKeyPressed = false;
                             refresh = true;
                         }
                         break;
                     case 1:
-                        if(player.isEnoughMoney(price,true)){
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
                             level++;
                             
-                            save.changeElementChildValue(player.gameName, "partyHouse", "partyHouse", "partyHouse", "ovenLevel", String.valueOf(level));
-                            player.keyBord.upgradeKeyPressed = false;
+                            save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "ovenLevel", String.valueOf(level));
+                            mainGameWindow.player.keyBord.upgradeKeyPressed = false;
                             refresh = true;
                         }
                         break;
                     case 2:
-                        if(player.isEnoughMoney(price,true)){
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
                             level++;
                             
-                            save.changeElementChildValue(player.gameName, "partyHouse", "partyHouse", "partyHouse", "transportationLevel", String.valueOf(level));
-                            player.keyBord.upgradeKeyPressed = false;
+                            save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "transportationLevel", String.valueOf(level));
+                            mainGameWindow.player.keyBord.upgradeKeyPressed = false;
                             refresh = true;
                         }
                         break;

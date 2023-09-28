@@ -31,6 +31,7 @@ public class Inside {
             "demo\\img\\insides\\abandonedHouse01.jpg",
             "demo\\img\\insides\\house01.jpg",
             "demo\\img\\insides\\corpoHouse01.jpg",
+            "demo\\img\\insides\\pmu01.jpg",
         };
 
 
@@ -43,7 +44,8 @@ public class Inside {
         "Magasin",
         "Maison abandonnee",
         "Maison",
-        "Siege corporation"
+        "Siege corporation",
+        "PMU"
     };
 
     public Inside(int type, int boxSize, String gameName, JPanel backgroundPanel){
@@ -75,6 +77,10 @@ public class Inside {
 
             case 8:
                 createCorpoHouseInside();
+                break;
+
+            case 9:
+                createPmuInside();
                 break;
         
             default:
@@ -135,6 +141,12 @@ public class Inside {
         addTrigerEventsAreas(corpoHouse.trigerEvents);
     }
 
+    private void createPmuInside(){
+        PmuHouse pmuHouse = new PmuHouse(gameName, boxSize, backgroundPanel);
+        addRestrictedAreas(pmuHouse.restrictedAreas);
+        addTrigerEventsAreas(pmuHouse.trigerEvents);
+    }
+
 
     private void addRestrictedAreas(List<int[][]> buildingRestrictedAreas){
         for (int[][] rest : buildingRestrictedAreas) {
@@ -146,6 +158,4 @@ public class Inside {
             trigerEvents.add(trigEvent);
         }
     }
-    
-
 }

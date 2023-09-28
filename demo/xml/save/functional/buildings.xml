@@ -124,4 +124,18 @@
             }
         </imagesUrls>
     </building>
+
+    <building id="9">
+        <name>PMU</name>
+        <size>{200,200}</size>
+        <description></description>
+        <imagesUrls>
+            {
+                demo/img/buildings/pmu01.png,
+                demo/img/buildings/pmu02.png,
+                demo/img/buildings/pmu03.png,
+                demo/img/buildings/pmu04.png,
+            }
+        </imagesUrls>
+    </building>
 </buildings>

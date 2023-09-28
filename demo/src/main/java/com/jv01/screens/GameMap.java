@@ -47,6 +47,7 @@ public class GameMap extends JPanel {
         "demo\\img\\buildings\\abandonedHouse01.png",
         "demo\\img\\buildings\\house01.png",
         "demo\\img\\buildings\\corpo01.png",
+        "demo\\img\\buildings\\pmu01.png",
     };
 
     public KeyListener keyListener;
