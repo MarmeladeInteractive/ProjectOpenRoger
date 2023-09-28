@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
+import com.jv01.generations.Arcades;
 import com.jv01.generations.Objects;
 import com.jv01.generations.Tools;
 
@@ -30,7 +31,7 @@ public class PmuHouse{
 
     public void addTools(){
 
-        Tools arcade = new Tools(gameName, 6, 0);
+        Arcades arcade = new Arcades(gameName, 0, 0);
         Objects obj = new Objects(boxSize /2 , arcade.size[1] + 50, arcade.size, arcade.imageUrl, 1, backgroundPanel);
         
         restrictedAreas.add(new int[][]{ 
@@ -43,7 +44,7 @@ public class PmuHouse{
                 obj.position[0],
                 obj.position[1],
             },
-            "tool",
+            "arcade",
             arcade,
             140
         };

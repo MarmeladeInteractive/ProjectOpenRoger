@@ -284,11 +284,13 @@ public class MainGameWindow {
         boolean isTool = false;
         boolean isItem = false;
         boolean isDealer = false;
+        boolean isArcade = false;
 
         String spam = "";
         Tools tool = new Tools(gameName, 0, 0);
         Items item = new Items(gameName,0);
         Dealers dealer = new Dealers(gameName, 0);
+        Arcades arcade = new Arcades(gameName, 0, 0);
 
         if(!isInsideBuilding){
             for(Buildings b : chunk.triggerableBuilding){
@@ -358,7 +360,21 @@ public class MainGameWindow {
                         //isItem = false;
                         //displaySpam = false;
                     }
-                }  
+                }else if(trigEvent[1] == "arcade" && !displaySpam){
+                    arcade = (Arcades) trigEvent[2];
+
+                    int distance = getDistanceFromPlayer(position[0], position[1]);
+
+                    if(distance < arcade.size[0]){
+                        displaySpam = true;
+                        isArcade = true;
+                        spam = arcade.spam;
+                        break;
+                    }else{
+                        //isItem = false;
+                        //displaySpam = false;
+                    }
+                }
                 //System.out.println("spam");
             }
 
@@ -375,6 +391,10 @@ public class MainGameWindow {
                 }else if(isDealer){
                     dealer.interact(player);
                     refreshDisplay = dealer.refreshDisplay;
+                }else if(isArcade){
+                    arcade.interact(this);
+                    refresh = arcade.refresh;
+                    refreshDisplay = arcade.refreshDisplay;
                 }
 
             }else{
