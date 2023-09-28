@@ -32,11 +32,11 @@ public class PmuHouse{
     public void addTools(){
 
         Arcades arcade = new Arcades(gameName, 0, 0);
-        Objects obj = new Objects(boxSize /2 , arcade.size[1] + 50, arcade.size, arcade.imageUrl, 1, backgroundPanel);
+        Objects obj = new Objects(boxSize /2 , arcade.size[1] + 50 + 50, arcade.size, arcade.imageUrl, 1, backgroundPanel);
         
         restrictedAreas.add(new int[][]{ 
             {boxSize/2 - arcade.size[0]/2,50},
-            {boxSize/2 + arcade.size[0]/2,arcade.size[1] +100},
+            {boxSize/2 + arcade.size[0]/2,arcade.size[1] +50 +50},
         });
 
         Object[] item = {
@@ -49,6 +49,26 @@ public class PmuHouse{
             140
         };
         trigerEvents.add(item);
+
+
+        arcade = new Arcades(gameName, 1, 0);
+        obj = new Objects(boxSize /2 + 150, arcade.size[1] + 50 + 50, arcade.size, arcade.imageUrl, 1, backgroundPanel);
+        
+        restrictedAreas.add(new int[][]{ 
+            {boxSize/2 - arcade.size[0]/2 +150,50},
+            {boxSize/2 + arcade.size[0]/2 +150,arcade.size[1] +50 +50},
+        });
+
+        Object[] item01 = {
+            new int[]{
+                obj.position[0],
+                obj.position[1],
+            },
+            "arcade",
+            arcade,
+            140
+        };
+        trigerEvents.add(item01);
 
         Tools dump = new Tools(gameName, 5, 0);
         obj = new Objects(dump.size[0]/2 + boxSize/2 -150 , boxSize - 80 - dump.size[1]/2, dump.size, dump.imageUrl, 0, backgroundPanel);
