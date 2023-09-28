@@ -31,14 +31,14 @@ public class MainGameWindow {
 
     private JFrame frame;
 
-    private JPanel backgroundPanel; 
+    public JPanel backgroundPanel; 
 
     public long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
 
     public boolean displayChunks = true;
 
-    private int boxSize = 800;
+    public int boxSize = 800;
     int cellSize = boxSize / 3;
     BufferedImage img;
 
@@ -63,6 +63,10 @@ public class MainGameWindow {
     private int msgBoxSizeY = 100;
 
     private boolean isInsideBuilding = false;
+
+    public int arcadeGameId = 0;
+
+    public String environment;
 
     private int alertTime = 1000;
 
@@ -129,13 +133,21 @@ public class MainGameWindow {
     }
 
     public void showMainGameWindow() {
+        restartFrame();
+
+        buildChunk();
+
+        addNightLabel();
+    }
+
+    public void restartFrame(){
         frame.getContentPane().removeAll();
 
         key = getKey();
 
         createBackgroundPanel();
         player.inventory.createInventoryPanel(frame);
-        //currentChunk = player.chunk;
+        backgroundPanel.add(player.playerLabel);
 
         addCoordinatesLabel();
         addMoneyLabel();
@@ -145,13 +157,6 @@ public class MainGameWindow {
 
         addAlertArea();
 
-        backgroundPanel.add(player.playerLabel);
-
-        backgroundPanel.add(nightLabel);
-        backgroundPanel.setComponentZOrder(nightLabel, 0);
-
-        buildChunk();
-        
         updateLabels();
     }
 
@@ -198,6 +203,11 @@ public class MainGameWindow {
         dateLabel.setFont(labelFont);
 
         frame.add(dateLabel);
+    }
+
+    private void addNightLabel(){
+        backgroundPanel.add(nightLabel);
+        backgroundPanel.setComponentZOrder(nightLabel, 0);
     }
 
     private void addMsgLabel(){
@@ -444,12 +454,24 @@ public class MainGameWindow {
 
     public void buildChunk(){
         chunk = null;
-        chunk = new Chunks(currentChunk, seed, gameName, boxSize, backgroundPanel,isInsideBuilding,displayChunks);
+        if(isInsideBuilding){
+            environment = "insideBuilding";
+        }else{
+            environment = "ext";
+        }
+        chunk = new Chunks(this);
     }
 
     public void enterBuilding(){
         coloseMsgLabels();
         changeChunk("inBuilding");
+    }
+
+    public void runArcade(int idGame){
+        restartFrame();
+        environment = "arcade";
+        arcadeGameId = idGame;
+        chunk = new Chunks(this);
     }
 
      
