@@ -2,8 +2,8 @@ package com.jv01.miniGames;
 
 import javax.swing.*;
 
-import com.jv01.miniGames.games.NoGame.NoGame;
 import com.jv01.miniGames.games.horsesRace.HorsesRace;
+import com.jv01.miniGames.games.noGame.NoGame;
 import com.jv01.generations.MainGameWindow;
 
 import java.awt.*;
@@ -45,7 +45,7 @@ public class Arcade {
         JLabel imageLabel = new JLabel();  
     
         try {
-            ImageIcon imageIcon = new ImageIcon("demo/img/arcades/arcade01.png");
+            ImageIcon imageIcon = new ImageIcon("demo/img/arcades/arcadeInside01.png");
             Image image = imageIcon.getImage().getScaledInstance(boxSize, boxSize, Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(image);
             imageLabel.setIcon(imageIcon);
