@@ -271,6 +271,7 @@ public class CheatCodeMenu {
         try {         
             int id = Integer.parseInt(value);
             mainGameWindow.runArcade(id);
+            close();
         } catch (NumberFormatException e) {
             error();
         }

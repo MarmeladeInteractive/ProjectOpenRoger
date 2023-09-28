@@ -8,21 +8,23 @@ import java.awt.event.ActionListener;
 public class HorsesRace {
 
     private JPanel gamePanel;
+    private int boxSize;
 
     JButton startGameButton;
 
-    public HorsesRace(JPanel parentPanel) { 
-        gamePanel = parentPanel; 
-        gamePanel.setLayout(null);
+    public HorsesRace(JPanel parentPanel, int boxSize) { 
+        this.gamePanel = parentPanel; 
+        this.gamePanel.setLayout(null);
+
+        this.boxSize = boxSize;
 
         showMenu();
     
     }
 
     public void showMenu(){
-
         JLabel titleLabel = new JLabel("Horses Race");
-        titleLabel.setBounds(100, 25, 200, 50);
+        titleLabel.setBounds((boxSize/2)-100, (boxSize/2)-25, 200, 50);
         titleLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -32,7 +34,7 @@ public class HorsesRace {
         constraints.insets = new Insets(5, 10, 5, 10);
 
         startGameButton = new JButton("Start Game");
-        startGameButton.setBounds(100, 100, 200, 50);
+        startGameButton.setBounds((boxSize/2)-100, (boxSize/2)+25, 200, 50);
 
         for (ActionListener al : startGameButton.getActionListeners()) {
             startGameButton.removeActionListener(al);
