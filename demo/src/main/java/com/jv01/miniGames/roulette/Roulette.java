@@ -274,7 +274,7 @@ public class Roulette{
  
         gamePanel.revalidate();
         gamePanel.repaint();
-        addArcadeBorder(gamePanel);///////////////////////////////////////////////////////////////////////////
+        //addArcadeBorder(gamePanel);///////////////////////////////////////////////////////////////////////////
     }
 
     private double getWheelValue(){
