@@ -3,7 +3,7 @@ package com.jv01.miniGames;
 import javax.swing.*;
 
 import com.jv01.miniGames.games.horsesRace.HorsesRace;
-import com.jv01.miniGames.games.noGame.NoGame;
+import com.jv01.miniGames.games.NoGame.NoGame;
 import com.jv01.miniGames.roulette.Roulette;
 import com.jv01.generations.MainGameWindow;
 
