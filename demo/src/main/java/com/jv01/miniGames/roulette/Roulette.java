@@ -17,16 +17,28 @@ public class Roulette{
     private JButton startGameButton;
 
     private JButton rotateButton;
-    private volatile boolean isRotating = false;
+    private volatile boolean isWheelRotating = false;
+    private volatile boolean isBallRotating = false;
 
     private JPanel wheelPanel;
+    private JPanel ballPanel;
+    private JPanel backPanel;
 
-    private volatile double totalRotationAngle;
-    private volatile double rotationPerIteration;
-    private volatile double currentRotationAngleInRadians;
+    private volatile double totalWheelRotationAngle;
+    private volatile double rotationWheelPerIteration;
+    private volatile double currentWhellRotationAngleInRadians;
+
+    private volatile double totalBallRotationAngle;
+    private volatile double rotationBallPerIteration;
+    private volatile double currentBallRotationAngleInRadians;
 
     private int maxRound = 10;
     private int minRound = 2;
+
+    public int finalValue;
+    public String finalColor;
+
+    public JLabel scoreLabel = new JLabel("...");
 
     public Roulette(JPanel parentPanel, int boxSize){
         this.gamePanel = parentPanel; 
@@ -64,7 +76,10 @@ public class Roulette{
 
     private void startGame(){
         refreshGamePanel();
+       
         createWheel();
+        createBall();
+        createBack();       
         
         rotateButton = new JButton("Tourner la roue");
         rotateButton.setBounds((boxSize)-200-100, (boxSize)-50-100, 200, 50);
@@ -72,11 +87,21 @@ public class Roulette{
         rotateButton.addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                if(!isRotating)rotateWheel();
+                if(!isWheelRotating){
+                    runGame();
+                }
             }
         });
 
+        scoreLabel.setText("0 - Vert");
+        scoreLabel.setBounds((boxSize/2), (boxSize/2), 200, 50);
+        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
+        gamePanel.add(ballPanel); 
+        gamePanel.add(wheelPanel); 
+        gamePanel.add(backPanel);  
         gamePanel.add(rotateButton);
+        gamePanel.add(scoreLabel);
     }
 
     private void createWheel(){
@@ -84,62 +109,163 @@ public class Roulette{
             @Override
             protected void paintComponent(Graphics g){
                 super.paintComponent(g);
-
+    
                 ImageIcon backgroundImage = new ImageIcon("demo/src/main/java/com/jv01/miniGames/roulette/img/wheel.png");
                 Image img = backgroundImage.getImage();
                 
                 Graphics2D g2d = (Graphics2D) g;
-
+    
                 int centerX = this.getWidth() / 2;
                 int centerY = this.getHeight() / 2;
                 
-                g2d.rotate(currentRotationAngleInRadians, centerX, centerY);
+                g2d.rotate(currentWhellRotationAngleInRadians, centerX, centerY);
                 
                 g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
             }
-            
         };
-        wheelPanel.setBounds(50, (boxSize/2)-200, 400, 400);
-
-        gamePanel.add(wheelPanel);
+        wheelPanel.setOpaque(false);
+        wheelPanel.setBounds(50, (boxSize/2)-200, 400, 400);       
+    }
+    
+    private void createBall(){
+        ballPanel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+    
+                ImageIcon backgroundImage = new ImageIcon("demo/src/main/java/com/jv01/miniGames/roulette/img/ball.png");
+                Image img = backgroundImage.getImage();
+    
+                Graphics2D g2d = (Graphics2D) g;
+    
+                int centerX = this.getWidth() / 2;
+                int centerY = this.getHeight() / 2;
+    
+                g2d.rotate(currentBallRotationAngleInRadians, centerX, centerY);
+    
+                g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
+        ballPanel.setOpaque(false);
+        ballPanel.setBounds(50, (boxSize/2)-200, 400, 400);
+    }
+    private void createBack(){
+        backPanel = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+    
+                ImageIcon backgroundImage = new ImageIcon("demo/src/main/java/com/jv01/miniGames/roulette/img/back.png");
+                Image img = backgroundImage.getImage();
+                
+                Graphics2D g2d = (Graphics2D) g;
+    
+                int centerX = this.getWidth() / 2;
+                int centerY = this.getHeight() / 2;
+                
+                g2d.rotate(currentWhellRotationAngleInRadians, centerX, centerY);
+                
+                g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
+        backPanel.setOpaque(false);
+        backPanel.setBounds(50, (boxSize/2)-200, 400, 400);       
     }
 
+    private void runGame(){
+        rotateWheel();
+        rotateBall();
+    }
+    
+    
+
     private void rotateWheel(){
-        isRotating = true;
+        isWheelRotating = true;
         double rotation = Math.toRadians(random.nextInt(360*3+1));
         int nTours = random.nextInt(maxRound-minRound+1) + minRound;
-        totalRotationAngle = rotation + Math.toRadians(360*nTours);
+        totalWheelRotationAngle = rotation + Math.toRadians(360*nTours);
 
-        rotationPerIteration = 0.2;
+        rotationWheelPerIteration = 0.2;
         int refreshInterval = 10;
     
         Timer animationTimer = new Timer(refreshInterval, new ActionListener(){
     
             @Override
             public void actionPerformed(ActionEvent e){
-                if(currentRotationAngleInRadians <= totalRotationAngle){
+                if(currentWhellRotationAngleInRadians <= totalWheelRotationAngle){
 
-                    currentRotationAngleInRadians += rotationPerIteration;
+                    currentWhellRotationAngleInRadians += rotationWheelPerIteration;
+                    if(!isBallRotating){
+                        currentBallRotationAngleInRadians += rotationWheelPerIteration;
+                        ballPanel.repaint();
+                    }
 
-                    double stay = totalRotationAngle - currentRotationAngleInRadians;
+                    double stay = totalWheelRotationAngle - currentWhellRotationAngleInRadians;
 
                     if (stay >= 0 && stay < 17) {
-                        rotationPerIteration = 0.2 - (17-stay) * 0.01172;
-                        if (rotationPerIteration < 0.001) {
-                            rotationPerIteration = 0.001;
+                        rotationWheelPerIteration = 0.2 - (17-stay) * 0.01172;
+                        if (rotationWheelPerIteration < 0.001) {
+                            rotationWheelPerIteration = 0.001;
                         }
                     }
                     wheelPanel.repaint();
+
                 }else{
                     ((Timer) e.getSource()).stop();
-                    currentRotationAngleInRadians = currentRotationAngleInRadians%(Math.PI*2);
+                    currentWhellRotationAngleInRadians = currentWhellRotationAngleInRadians%(Math.PI*2);
                     wheelPanel.repaint();
-                    isRotating = false;
+                    isWheelRotating = false;
+                    if(!isBallRotating && !isWheelRotating){
+                        getValue();   
+                    }
                 }
             }
         });
 
         animationTimer.start();
+    }
+
+    private void rotateBall(){
+        isBallRotating = true;
+        double rotation = Math.toRadians(random.nextInt(360+1));
+        totalBallRotationAngle = totalWheelRotationAngle-(Math.PI*2*3) +  rotation ;
+
+        totalBallRotationAngle = totalBallRotationAngle*(-1.0);
+
+        rotationBallPerIteration = 0.3;
+        int refreshInterval = 10;
+    
+        Timer animationBallTimer = new Timer(refreshInterval, new ActionListener(){
+    
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if(currentBallRotationAngleInRadians >= totalBallRotationAngle){
+
+                    currentBallRotationAngleInRadians -= rotationBallPerIteration;
+
+                    double stay = totalBallRotationAngle - currentBallRotationAngleInRadians;
+                    stay = stay*(-1.0);
+
+                    if (stay >= 0 && stay < 10) {
+                        rotationBallPerIteration = 0.3 - (10-stay) * 0.0305;
+                        if (rotationBallPerIteration < 0.001) {
+                            rotationBallPerIteration = 0.001;
+                        }
+                    }
+                    ballPanel.repaint();
+                }else{
+                    ((Timer) e.getSource()).stop();
+                    currentBallRotationAngleInRadians = currentBallRotationAngleInRadians%(Math.PI*2);
+                    ballPanel.repaint();
+                    isBallRotating = false;
+                    if(!isBallRotating && !isWheelRotating){
+                        getValue();   
+                    }
+                }
+            }
+        });
+
+        animationBallTimer.start();
     }
     
 
@@ -149,6 +275,42 @@ public class Roulette{
         gamePanel.revalidate();
         gamePanel.repaint();
         addArcadeBorder(gamePanel);///////////////////////////////////////////////////////////////////////////
+    }
+
+    private double getWheelValue(){
+        currentWhellRotationAngleInRadians = currentWhellRotationAngleInRadians%(Math.PI*2);
+        return currentWhellRotationAngleInRadians;
+    }
+
+    private double getBallValue(){
+        currentBallRotationAngleInRadians = Math.PI*2+currentBallRotationAngleInRadians;
+        currentBallRotationAngleInRadians = currentBallRotationAngleInRadians%(Math.PI*2);
+        return currentBallRotationAngleInRadians;
+    }
+
+    private void getValue(){
+        double wheelAngle = getWheelValue();
+        double whellBall = getBallValue();
+        double newVal;
+
+        if(whellBall>=wheelAngle){
+            newVal = Math.abs(wheelAngle - whellBall);
+        }else{
+            newVal = Math.PI*2 - Math.abs(wheelAngle - whellBall);
+        }
+
+        int[] numbers = {0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26};
+        String[] colors = {"vert","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire"};
+        double anglePerCase = (Math.PI*2)/37;
+
+        newVal = newVal + anglePerCase/2;
+
+        int index = (int)Math.floor(Math.toDegrees(newVal) / Math.toDegrees(anglePerCase));
+        changeResultValues(String.valueOf(numbers[index]),colors[index]);
+    }
+
+    private void changeResultValues(String number, String colors){
+        scoreLabel.setText(number + " - " + colors);
     }
 
 
