@@ -2,17 +2,28 @@ package com.jv01.miniGames.roulette;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
+import com.jv01.miniGames.Arcade;
+import com.jv01.screens.AlertWindow;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.util.Random;
 
 public class Roulette{
+    public boolean isInGame = true;
+    public Arcade arcade;
     private JPanel gamePanel;
     private int boxSize;
     private Random random = new Random();
+
+    private Bet bet;
 
     private JButton startGameButton;
 
@@ -23,6 +34,7 @@ public class Roulette{
     private JPanel wheelPanel;
     private JPanel ballPanel;
     private JPanel backPanel;
+    private JPanel tablePanel;
 
     private volatile double totalWheelRotationAngle;
     private volatile double rotationWheelPerIteration;
@@ -40,12 +52,29 @@ public class Roulette{
 
     public JLabel scoreLabel = new JLabel("...");
 
-    public Roulette(JPanel parentPanel, int boxSize){
-        this.gamePanel = parentPanel; 
+    public JLabel currentBet = new JLabel("0");
+    private JLabel finalValueSquareLabel = new JLabel();
+    private JLabel finalValueLabel = new JLabel("0");
+
+    public Roulette(Arcade arcade){
+        this.arcade = arcade;
+        this.gamePanel = arcade.gamePanel; 
+        this.gamePanel.setLayout(null);
+
+        this.boxSize = arcade.boxSize;
+
+        bet = new Bet(this);
+        showMenu();
+    }
+
+    public Roulette(JPanel gamePanel,int boxSize){
+        this.isInGame = false;
+        this.gamePanel = gamePanel; 
         this.gamePanel.setLayout(null);
 
         this.boxSize = boxSize;
 
+        bet = new Bet(this);
         showMenu();
     }
 
@@ -79,10 +108,17 @@ public class Roulette{
        
         createWheel();
         createBall();
-        createBack();       
+        createBack();
+        createFinalValueSquare();
+        createTable();
         
+        getValue();
+
+        currentBet.setBounds((boxSize/2)-100, 50, 200, 50);
+        currentBet.setHorizontalAlignment(SwingConstants.CENTER);
+
         rotateButton = new JButton("Tourner la roue");
-        rotateButton.setBounds((boxSize)-200-100, (boxSize)-50-100, 200, 50);
+        rotateButton.setBounds(50+100, (boxSize)-50-100, 200, 50);
  
         rotateButton.addActionListener(new ActionListener(){
             @Override
@@ -93,14 +129,17 @@ public class Roulette{
             }
         });
 
-        scoreLabel.setText("0 - Vert");
-        scoreLabel.setBounds((boxSize/2), (boxSize/2), 200, 50);
-        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        gamePanel.add(tablePanel);
 
         gamePanel.add(ballPanel); 
         gamePanel.add(wheelPanel); 
         gamePanel.add(backPanel);  
         gamePanel.add(rotateButton);
+        gamePanel.add(finalValueSquareLabel);
+        gamePanel.add(currentBet);
+
+        scoreLabel.setBounds((boxSize/2)-100, 40, 200, 50);
+        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         gamePanel.add(scoreLabel);
     }
 
@@ -125,9 +164,9 @@ public class Roulette{
         };
         wheelPanel.setOpaque(false);
         wheelPanel.setBounds(50, (boxSize/2)-200, 400, 400);       
-    }
-    
+    } 
     private void createBall(){
+        currentBallRotationAngleInRadians = Math.toRadians(random.nextInt(360+1));
         ballPanel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g){
@@ -150,6 +189,7 @@ public class Roulette{
         ballPanel.setBounds(50, (boxSize/2)-200, 400, 400);
     }
     private void createBack(){
+        currentWhellRotationAngleInRadians = Math.toRadians(random.nextInt(360+1));
         backPanel = new JPanel(){
             @Override
             protected void paintComponent(Graphics g){
@@ -171,7 +211,53 @@ public class Roulette{
         backPanel.setOpaque(false);
         backPanel.setBounds(50, (boxSize/2)-200, 400, 400);       
     }
-
+    private void createFinalValueSquare() {
+        finalValueSquareLabel.setBounds(200 - 40 + 50, 50, 80, 100);
+        finalValueSquareLabel.setOpaque(true);
+        finalValueSquareLabel.setBackground(new Color(0, 255, 0));
+    
+        finalValueLabel.setForeground(Color.WHITE);
+        finalValueLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        finalValueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        finalValueSquareLabel.setLayout(new BorderLayout());
+        finalValueSquareLabel.add(finalValueLabel, BorderLayout.CENTER);
+    }
+    private void createTable(){
+        tablePanel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+        
+                ImageIcon backgroundImage = new ImageIcon("demo/src/main/java/com/jv01/miniGames/roulette/img/table.png");
+                Image img = backgroundImage.getImage();
+        
+                Graphics2D g2d = (Graphics2D) g;
+        
+                g2d.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
+            }
+        };
+        
+        tablePanel.setOpaque(false);
+        tablePanel.setBounds(boxSize - 300 - 50, 100, 300, 600);
+        
+        tablePanel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int x = e.getX();
+                int y = e.getY();
+                
+                if (e.getButton() == MouseEvent.BUTTON1) {
+                    bet.clickOnTable(x, y, "left");
+                } else if (e.getButton() == MouseEvent.BUTTON3) {
+                    bet.clickOnTable(x, y, "right");
+                }
+            }
+        });
+  
+        
+        
+    }
+    
     private void runGame(){
         rotateWheel();
         rotateBall();
@@ -202,9 +288,9 @@ public class Roulette{
 
                     double stay = totalWheelRotationAngle - currentWhellRotationAngleInRadians;
 
-                    if (stay >= 0 && stay < 17) {
+                    if (stay >= 0 && stay < 17){
                         rotationWheelPerIteration = 0.2 - (17-stay) * 0.01172;
-                        if (rotationWheelPerIteration < 0.001) {
+                        if (rotationWheelPerIteration < 0.001){
                             rotationWheelPerIteration = 0.001;
                         }
                     }
@@ -246,9 +332,9 @@ public class Roulette{
                     double stay = totalBallRotationAngle - currentBallRotationAngleInRadians;
                     stay = stay*(-1.0);
 
-                    if (stay >= 0 && stay < 10) {
+                    if (stay >= 0 && stay < 10){
                         rotationBallPerIteration = 0.3 - (10-stay) * 0.0305;
-                        if (rotationBallPerIteration < 0.001) {
+                        if (rotationBallPerIteration < 0.001){
                             rotationBallPerIteration = 0.001;
                         }
                     }
@@ -274,7 +360,7 @@ public class Roulette{
  
         gamePanel.revalidate();
         gamePanel.repaint();
-        //addArcadeBorder(gamePanel);///////////////////////////////////////////////////////////////////////////
+        addArcadeBorder(gamePanel);///////////////////////////////////////////////////////////////////////////
     }
 
     private double getWheelValue(){
@@ -299,20 +385,44 @@ public class Roulette{
             newVal = Math.PI*2 - Math.abs(wheelAngle - whellBall);
         }
 
-        int[] numbers = {0,32,15,19,4,21,2,25,17,34,6,27,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26};
-        String[] colors = {"vert","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire","rouge","noire"};
+        int[] numbers ={0,32,15,19,4,21,2,25,17,27,6,34,13,36,11,30,8,23,10,5,24,16,33,1,20,14,31,9,22,18,29,7,28,12,35,3,26};
+        String[] colors ={"vert","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir","rouge","noir"};
         double anglePerCase = (Math.PI*2)/37;
 
         newVal = newVal + anglePerCase/2;
 
         int index = (int)Math.floor(Math.toDegrees(newVal) / Math.toDegrees(anglePerCase));
+        index = index%37;
         changeResultValues(String.valueOf(numbers[index]),colors[index]);
+        bet.getResult(String.valueOf(numbers[index]),colors[index]);
+        //bet.getResult(String.valueOf(22),colors[2]);
     }
 
     private void changeResultValues(String number, String colors){
-        scoreLabel.setText(number + " - " + colors);
-    }
+        finalValue = Integer.parseInt(number);
+        finalColor = colors;
+        Color newColor = new Color(0, 0, 0);
+        switch (finalColor){
+            case "vert":
+                newColor = new Color(0, 255, 0);
+                break;
+            case "noir":
+                newColor = new Color(0, 0, 0);
+                break;
+            case "rouge":
+                newColor = new Color(255, 0, 0);
+                break;
+        
+            default:
+                newColor = new Color(0, 0, 0);
+                break;
+        }
 
+        finalValueSquareLabel.setBackground(newColor);
+        finalValueLabel.setText(number);
+        finalValueSquareLabel.revalidate();
+        finalValueSquareLabel.repaint();
+    }
 
 
 
@@ -327,14 +437,14 @@ public class Roulette{
 private static void addArcadeBorder(JPanel panel){
         JLabel imageLabel = new JLabel();  
     
-        try {
+        try{
             ImageIcon imageIcon = new ImageIcon("demo/img/arcades/arcadeInside01.png");
             Image image = imageIcon.getImage().getScaledInstance(800, 800, Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(image);
             imageLabel.setIcon(imageIcon);
     
             imageLabel.setBounds(0, 0, 800, 800);
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
         }
     

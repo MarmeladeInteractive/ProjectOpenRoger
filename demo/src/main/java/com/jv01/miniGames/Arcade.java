@@ -12,14 +12,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Arcade {
-    private int boxSize;
+    public int boxSize;
 
     private JPanel panel;
-    private JPanel gamePanel = new JPanel();
+    public JPanel gamePanel = new JPanel();
 
     private int idGame = 0;
 
-    private MainGameWindow mainGameWindow;
+    public MainGameWindow mainGameWindow;
 
     private JButton closeGameButton;
 
@@ -86,7 +86,7 @@ public class Arcade {
                 new HorsesRace(gamePanel,boxSize);
                 break;
             case 1:
-                new Roulette(gamePanel,boxSize);
+                new Roulette(this);
                 break;
         
             default:
