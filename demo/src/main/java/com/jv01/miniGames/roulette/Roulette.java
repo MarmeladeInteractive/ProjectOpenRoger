@@ -19,6 +19,7 @@ import java.util.Random;
 public class Roulette{
     public boolean isInGame = true;
     public Arcade arcade;
+    public Tokens tokens;
     private JPanel gamePanel;
     private int boxSize;
     private Random random = new Random();
@@ -34,7 +35,7 @@ public class Roulette{
     private JPanel wheelPanel;
     private JPanel ballPanel;
     private JPanel backPanel;
-    private JPanel tablePanel;
+    public JPanel tablePanel;
 
     private volatile double totalWheelRotationAngle;
     private volatile double rotationWheelPerIteration;
@@ -63,7 +64,6 @@ public class Roulette{
 
         this.boxSize = arcade.boxSize;
 
-        bet = new Bet(this);
         showMenu();
     }
 
@@ -74,7 +74,6 @@ public class Roulette{
 
         this.boxSize = boxSize;
 
-        bet = new Bet(this);
         showMenu();
     }
 
@@ -112,7 +111,7 @@ public class Roulette{
         createFinalValueSquare();
         createTable();
         
-        getValue();
+        
 
         currentBet.setBounds((boxSize/2)-100, 50, 200, 50);
         currentBet.setHorizontalAlignment(SwingConstants.CENTER);
@@ -130,6 +129,12 @@ public class Roulette{
         });
 
         gamePanel.add(tablePanel);
+
+        tokens = new Tokens(this);
+
+        bet = new Bet(this);
+
+        getValue();
 
         gamePanel.add(ballPanel); 
         gamePanel.add(wheelPanel); 
@@ -252,10 +257,8 @@ public class Roulette{
                     bet.clickOnTable(x, y, "right");
                 }
             }
-        });
-  
-        
-        
+        });   
+        tablePanel.setLayout(null);
     }
     
     private void runGame(){
@@ -360,7 +363,7 @@ public class Roulette{
  
         gamePanel.revalidate();
         gamePanel.repaint();
-        addArcadeBorder(gamePanel);///////////////////////////////////////////////////////////////////////////
+        //addArcadeBorder(gamePanel);///////////////////////////////////////////////////////////////////////////
     }
 
     private double getWheelValue(){
@@ -395,7 +398,7 @@ public class Roulette{
         index = index%37;
         changeResultValues(String.valueOf(numbers[index]),colors[index]);
         bet.getResult(String.valueOf(numbers[index]),colors[index]);
-        //bet.getResult(String.valueOf(22),colors[2]);
+        //bet.getResult(String.valueOf(36),colors[2]);
     }
 
     private void changeResultValues(String number, String colors){
