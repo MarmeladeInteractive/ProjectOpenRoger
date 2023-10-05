@@ -88,9 +88,10 @@ public class Game{
         save.createAllFiles(gameName);
 
         editElement();
-
+        
         generateParties();
         generateCorporations(5,20);
+        generateCharacters(100);
 
         loadingScreen.closeLoadingScreen();
 
@@ -189,6 +190,14 @@ public class Game{
             corporation = new Corporation(name,corporationsHousesFirstGeneration.chunks.get(i-1));
             corporation.saveCorporation();
             new Chunks(corporationsHousesFirstGeneration.chunks.get(i-1), seed, name, 8, false);
+        }
+    }
+
+    public  void generateCharacters(int numCharacters){
+        Character character = null;
+        for(int i=1; i<=numCharacters; i++){
+            character = new Character(name);
+            character.saveCharacter();
         }
     }
 
