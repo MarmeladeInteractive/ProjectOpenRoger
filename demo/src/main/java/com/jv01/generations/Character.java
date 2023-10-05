@@ -89,47 +89,29 @@ public class Character{
         characterElement.setAttribute("id", String.valueOf(newId));
         
         save.createXmlElement(characterElement,doc,"name",String.valueOf(name));
-
         save.createXmlElement(characterElement,doc,"age",String.valueOf(age));
-
         save.createXmlElement(characterElement,doc,"health",String.valueOf(health));
-
         save.createXmlElement(characterElement,doc,"energy",String.valueOf(energy));
-
         save.createXmlElement(characterElement,doc,"belief",String.valueOf(belief));
-
         save.createXmlElement(characterElement,doc,"money",String.valueOf(money));
-
         save.createXmlElement(characterElement,doc,"Hygiene",String.valueOf(hygiene));
-
         save.createXmlElement(characterElement,doc,"mood",String.valueOf(mood));
-
         save.createXmlElement(characterElement,doc,"conservatismScore",String.valueOf(conservatismScore));
-
         save.createXmlElement(characterElement,doc,"nationalismScore",String.valueOf(nationalismScore));
-
         save.createXmlElement(characterElement,doc,"ecologismScore",String.valueOf(ecologismScore));
-
         save.createXmlElement(characterElement,doc,"feminismScore",String.valueOf(feminismScore));
-
         save.createXmlElement(characterElement,doc,"anarchismScore",String.valueOf(anarchismScore));
-
         save.createXmlElement(characterElement,doc,"populismScore",String.valueOf(populismScore));
-
         save.createXmlElement(characterElement,doc,"ideologicalCode",String.valueOf(ideologicalCode));
-
         save.createXmlElement(characterElement,doc,"politicalPartyId",String.valueOf(politicalPartyId));
-
-        save.createXmlElement(characterElement,doc,"chunk",String.valueOf(chunk));
-
-        save.createXmlElement(characterElement,doc,"position",String.valueOf(position));
-
-        save.createXmlElement(characterElement,doc,"inventory",String.valueOf(null));
+        save.createXmlElement(characterElement,doc,"chunk","{"+position[0]+","+position[1]+"}");
+        save.createXmlElement(characterElement,doc,"position","{"+chunk[0]+","+chunk[1]+"}");
+        save.createXmlElement(characterElement,doc,"inventory","{}");
 
         doc.getDocumentElement().appendChild(characterElement);
     }
 
-    public  void saveCharacter(){
+    public void saveCharacter(){
         Document doc = save.getDocumentXml(gameName, "characters");
 
         createCharacterElement(doc);
