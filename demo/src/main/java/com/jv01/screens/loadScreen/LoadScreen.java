@@ -3,8 +3,8 @@ package com.jv01.screens.loadScreen;
 import javax.swing.*;
 
 import com.jv01.miniGames.games.horsesRace.HorsesRace;
+import com.jv01.miniGames.games.roulette.Roulette;
 import com.jv01.miniGames.games.NoGame.NoGame;
-import com.jv01.miniGames.roulette.Roulette;
 import com.jv01.screens.MainMenuScreen;
 import com.jv01.generations.MainGameWindow;
 
