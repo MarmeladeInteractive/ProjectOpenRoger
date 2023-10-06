@@ -88,6 +88,7 @@ public class Race {
 
 
     private void runRace(){
+        horsesRace.arcade.setCloseButtonVisibility(false);
         order = horsesRace.horses.ordreArriveeAleatoireAvecCotes(horsesRace.horses.horses);
         final int height = (600 - 15 * horsesRace.horses.horses.length) / horsesRace.horses.horses.length;
         finalOrder.clear();
@@ -160,6 +161,7 @@ public class Race {
     }
 
     private void stopRace(){
+        horsesRace.arcade.setCloseButtonVisibility(true);
         for(int h:finalOrder){
             System.out.println(h);
         }

@@ -26,8 +26,21 @@ public class HorsesRace {
 
         this.boxSize = boxSize;
 
-        showMenu();
-    
+        this.isInGame = false;
+
+        showMenu(); 
+    }
+
+    public HorsesRace(Arcade arcade){ 
+        this.arcade = arcade;
+        this.gamePanel = arcade.gamePanel; 
+        this.gamePanel.setLayout(null);
+
+        this.boxSize = arcade.boxSize;
+
+        this.isInGame = true;
+
+        showMenu();   
     }
 
     public void showMenu(){

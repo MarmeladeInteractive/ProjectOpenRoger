@@ -83,7 +83,7 @@ public class Arcade {
     private void runGame(){
         switch (idGame) {
             case 0:
-                new HorsesRace(gamePanel,boxSize);
+                new HorsesRace(this);
                 break;
             case 1:
                 new Roulette(this);
@@ -93,6 +93,10 @@ public class Arcade {
                 new NoGame(gamePanel,boxSize);
                 break;
         }
+    }
+
+    public void setCloseButtonVisibility(boolean v){
+        closeGameButton.setVisible(v);
     }
 
     private void focusOnArcade(){
