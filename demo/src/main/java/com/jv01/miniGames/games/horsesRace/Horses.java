@@ -29,6 +29,8 @@ class Horses {
 
     public int height;
 
+    public String[] namesList = {"Éclair", "Galop", "Pégase", "Foudre", "Cavalier", "Vent", "Crinière", "Fer", "Sabot", "Selle", "Étoile", "Champion", "Trot", "Neige", "Fer à Cheval", "Ailes", "Espoir", "Brise", "Saut", "Nuage"};
+
     public Horses(int n) {
 
         this.horses = new Horse[n];
@@ -41,7 +43,7 @@ class Horses {
         Collections.shuffle(nHorsesList);
 
         for(int i = 0; i < horses.length; i++){
-            this.horses[i] = new Horse((i+1),"Cheval "+String.valueOf(nHorsesList.get(i) + 1), getProb(), new JLabel(), height);
+            this.horses[i] = new Horse(i+1,(nHorsesList.get(i)),"N°"+(nHorsesList.get(i)+1)+" "+namesList[random.nextInt(namesList.length)], getProb(), new JLabel(), height);
             this.horsesSelectors[i] = new JPanel();
         }
     }
@@ -72,7 +74,7 @@ class Horses {
     
             JLabel textLabel = new JLabel(horses[i].name);
             textLabel.setFont(new Font("Arial", Font.PLAIN, 20));
-            textLabel.setBounds(height + 10, 2, 100, height - 5);
+            textLabel.setBounds(height + 10, 2, 140, height - 5);
             horsesSelectors[i].add(textLabel);
 
             JLabel coteLabel = new JLabel(String.valueOf(horses[i].probability));
@@ -147,14 +149,14 @@ class Horse {
     public int step = 5;
     public int position = 0;
 
-    public Horse(int id, String name, double probability, JLabel label, int height) {
+    public Horse(int id, int picId, String name, double probability, JLabel label, int height) {
         this.id = id;
         this.name = name;
         this.probability = probability;
         this.label = label;
 
         for(int i = 0; i < horseIconsFrame.length; i++){
-            ImageIcon horsesIcons = new ImageIcon("demo/src/main/java/com/jv01/miniGames/games/horsesRace/img/horses/horse0"+ String.valueOf(id+1) + "/f0"+(i+1)+".png");
+            ImageIcon horsesIcons = new ImageIcon("demo/src/main/java/com/jv01/miniGames/games/horsesRace/img/horses/horse0"+ String.valueOf(picId+1) + "/f0"+(i+1)+".png");
             Image horseImage = horsesIcons.getImage().getScaledInstance(height, height, Image.SCALE_SMOOTH);
 
             horseIconsFrame[i]=new ImageIcon(horseImage);
