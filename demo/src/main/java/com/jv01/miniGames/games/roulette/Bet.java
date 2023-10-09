@@ -26,7 +26,15 @@ public class Bet {
     }
 
     public void clickOnTable(int x, int y, String click){
-        if(x>=100 && x<=280){
+        boolean ok = true;
+        if(roulette.isInGame){
+            if(((roulette.arcade.mainGameWindow.player.money)>=(betValue+totalBet))||click.equals("right")){
+
+            }else{
+                ok = false;
+            }
+        }
+        if(ok&&(!roulette.isBallRotating)&&(!roulette.isWheelRotating))if(x>=100 && x<=280){
             if(y>=80 && y<=550){
                 if(
                     (x>=150&&x<=170)||

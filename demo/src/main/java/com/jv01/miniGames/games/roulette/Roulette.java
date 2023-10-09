@@ -25,8 +25,8 @@ public class Roulette{
     private JButton startGameButton;
 
     private JButton rotateButton;
-    private volatile boolean isWheelRotating = false;
-    private volatile boolean isBallRotating = false;
+    public volatile boolean isWheelRotating = false;
+    public volatile boolean isBallRotating = false;
 
     private JPanel wheelPanel;
     private JPanel ballPanel;
