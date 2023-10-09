@@ -47,7 +47,7 @@ public class Race {
     }
 
     private void addBack(){
-        backPic = new ImageIcon("demo/src/main/java/com/jv01/miniGames/games/roulette/img/horseRaceBack01.jpg");
+        backPic = new ImageIcon("demo/src/main/java/com/jv01/miniGames/games/horsesRace/img/horseRaceBack01.jpg");
         Image backImage = backPic.getImage().getScaledInstance(4800, 800, Image.SCALE_SMOOTH);
         backPic = new ImageIcon(backImage);
 
@@ -73,7 +73,7 @@ public class Race {
             horsesLabels[i] = new JLabel(horsesRace.horses.horses[i].horseIconsFrame[0]);
             horsesLabels[i].setHorizontalAlignment(SwingConstants.CENTER);
 
-            horsesLabels[i].setBounds(height-40, 100 + i * (height + 15), height, height);
+            horsesLabels[i].setBounds(height-40, 150 + i * (height + 15), height, height);
 
             horsesRace.gamePanel.add(horsesLabels[i],1);
         }
@@ -134,7 +134,7 @@ public class Race {
                     horsesRace.horses.horses[i].position += horsesRace.horses.horses[i].step;
 
                     changeHorseFrame(i);
-                    horsesLabels[i].setBounds(height-40 + horsesRace.horses.horses[i].position, 100 + i * (height + 15) + (horsesRace.horses.horses[i].position%50)/10, height, height);
+                    horsesLabels[i].setBounds(height-40 + horsesRace.horses.horses[i].position,150   + i * (height + 15) + (horsesRace.horses.horses[i].position%50)/10, height, height);
 
                     if(stop)if(!horseIsInFinalList(horsesRace.horses.horses[i].id))finalOrder.add(horsesRace.horses.horses[i].id); 
                     
