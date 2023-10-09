@@ -35,6 +35,7 @@ public class Player{
     public int step = 10;
     public int movementType = 2;
     public int speed = 1;
+    public boolean canWalk = true;
 
     public int currentFrameIndex = 0;
     public int currentFramePicIndex = 0;
@@ -204,56 +205,56 @@ public class Player{
     }
 
     public void updatePlayerLocation() {
+        if(canWalk){
+            if (keyBord.runKeyPressed){
+                movementType = 1;
+            } else {
+                movementType = 2;
+            }
 
-        if (keyBord.runKeyPressed){
-            movementType = 1;
-        } else {
-            movementType = 2;
-        }
+            if (keyBord.leftKeyPressed && keyBord.upKeyPressed) {
+                positionX -= step*speed;
+                positionY -= step*speed;
+                currentFrameIndex = 5;
+                currentFramePicIndex++;
+            } else if (keyBord.leftKeyPressed && keyBord.downKeyPressed) {
+                positionX -= step*speed;
+                positionY += step*speed;
+                currentFrameIndex = 7;
+                currentFramePicIndex++;
+            } else if (keyBord.rightKeyPressed && keyBord.upKeyPressed) {
+                positionX += step*speed;
+                positionY -= step*speed;
+                currentFrameIndex = 4;
+                currentFramePicIndex++;
+            } else if (keyBord.rightKeyPressed && keyBord.downKeyPressed) {
+                positionX += step*speed;
+                positionY += step*speed;
+                currentFrameIndex = 6;
+                currentFramePicIndex++;
+            } else if (keyBord.leftKeyPressed) {
+                positionX -= step*speed;
+                currentFrameIndex = 0;
+                currentFramePicIndex++;
+            } else if (keyBord.rightKeyPressed) {
+                positionX += step*speed;
+                currentFrameIndex = 1;
+                currentFramePicIndex++;
+            } else if (keyBord.upKeyPressed) {
+                positionY -= step*speed;
+                currentFrameIndex = 2;
+                currentFramePicIndex++;
+            } else if (keyBord.downKeyPressed) {
+                positionY += step*speed;
+                currentFrameIndex = 3;
+                currentFramePicIndex++;
+            }
 
-        if (keyBord.leftKeyPressed && keyBord.upKeyPressed) {
-            positionX -= step*speed;
-            positionY -= step*speed;
-            currentFrameIndex = 5;
-            currentFramePicIndex++;
-        } else if (keyBord.leftKeyPressed && keyBord.downKeyPressed) {
-            positionX -= step*speed;
-            positionY += step*speed;
-            currentFrameIndex = 7;
-            currentFramePicIndex++;
-        } else if (keyBord.rightKeyPressed && keyBord.upKeyPressed) {
-            positionX += step*speed;
-            positionY -= step*speed;
-            currentFrameIndex = 4;
-            currentFramePicIndex++;
-        } else if (keyBord.rightKeyPressed && keyBord.downKeyPressed) {
-            positionX += step*speed;
-            positionY += step*speed;
-            currentFrameIndex = 6;
-            currentFramePicIndex++;
-        } else if (keyBord.leftKeyPressed) {
-            positionX -= step*speed;
-            currentFrameIndex = 0;
-            currentFramePicIndex++;
-        } else if (keyBord.rightKeyPressed) {
-            positionX += step*speed;
-            currentFrameIndex = 1;
-            currentFramePicIndex++;
-        } else if (keyBord.upKeyPressed) {
-            positionY -= step*speed;
-            currentFrameIndex = 2;
-            currentFramePicIndex++;
-        } else if (keyBord.downKeyPressed) {
-            positionY += step*speed;
-            currentFrameIndex = 3;
-            currentFramePicIndex++;
-        }
-
-        currentFramePicIndex = (currentFramePicIndex) % walkingFrames[currentFrameIndex].length;
-        Image scaledImage = walkingFrames[currentFrameIndex][currentFramePicIndex].getImage().getScaledInstance(playerSize, playerSize, Image.SCALE_SMOOTH);
-        ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
-        playerLabel.setIcon(scaledImageIcon);
-        
+            currentFramePicIndex = (currentFramePicIndex) % walkingFrames[currentFrameIndex].length;
+            Image scaledImage = walkingFrames[currentFrameIndex][currentFramePicIndex].getImage().getScaledInstance(playerSize, playerSize, Image.SCALE_SMOOTH);
+            ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
+            playerLabel.setIcon(scaledImageIcon);
+        }     
     }
 
     public boolean isEnoughMoney(int price, boolean takeOff){

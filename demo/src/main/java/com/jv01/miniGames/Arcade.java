@@ -103,6 +103,7 @@ public class Arcade {
 
     private void runGame(){
         startTime = LocalTime.now();
+        mainGameWindow.player.canWalk = false;
         switch (idGame) {
             case 0:
                 eleName = "horsesRace";
