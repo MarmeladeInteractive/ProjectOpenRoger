@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.jv01.screens.NewsWindow;
+
 public class Time {
     private Save save =  new Save();
     private String gameName;
@@ -28,6 +30,7 @@ public class Time {
     public int nightFilterOpacity = 0;
 
     public volatile boolean isTime = true;
+    private boolean newsPaperExist = false;
 
     private String[] saisons = {"Hiver", "Printemps", "Été", "Automne"};
 
@@ -81,6 +84,7 @@ public class Time {
         calendar.add(Calendar.SECOND, (int) secondes);
         updateSeason();
         updateNightFilterOpacity();
+        getNewsPaper();
     }
 
     public void changeDate(int year, int mouth, int day) {
@@ -95,6 +99,7 @@ public class Time {
     public String getSaison() {
         return saisons[season];
     }
+
     public String getHour(){
         return hourFormat.format(calendar.getTime());
     }
@@ -153,7 +158,19 @@ public class Time {
         } else {
             nightFilterOpacity =  (int)Math.round((maxOpacity - minOpacity) * ((12-hour) / 12.0));
         }
+    }
 
+    private void getNewsPaper(){
+        int hour = Integer.parseInt(getHour().split(":")[0]);
+        if(hour == 8 && this.newsPaperExist==false){
+            NewsWindow morningNewspaperWindow = new NewsWindow(gameName);
+            morningNewspaperWindow.setVisible(true);
+            this.newsPaperExist = true;
+        }else if (hour == 8 && this.newsPaperExist==true){
+            //
+        }else if (hour != 8 && this.newsPaperExist==true){
+            this.newsPaperExist = false;
+        }
     }
 
     public void saveDate(){
