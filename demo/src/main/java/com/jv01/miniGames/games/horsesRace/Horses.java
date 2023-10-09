@@ -42,11 +42,13 @@ class Horses {
         "Jasmine", "Loki", "Merlin", "Nectarine", "Orion", "Peaches", "Quixote", "Rocinante", "Sable", "Tornado",
         "Valentine", "Zephyr"
     };
+    private  List<String> takenNames = new ArrayList<>();
     
     public Horses(int n) {
         this.horses = new Horse[n];
         this.horsesSelectors = new JPanel[n];
         this.height = (600 - 15 * n) / n;
+        this.takenNames.clear();
 
         for(int i = 0; i < nHorses; i++){
             nHorsesList.add(i);
@@ -54,7 +56,7 @@ class Horses {
         Collections.shuffle(nHorsesList);
 
         for(int i = 0; i < horses.length; i++){
-            this.horses[i] = new Horse(i+1,(nHorsesList.get(i)),"N°"+(nHorsesList.get(i)+1)+" "+namesList[random.nextInt(namesList.length)], getProb(), new JLabel(), height);
+            this.horses[i] = new Horse(i+1,(nHorsesList.get(i)),"N°"+(nHorsesList.get(i)+1)+" "+getName(), getProb(), new JLabel(), height);
             this.horsesSelectors[i] = new JPanel();
         }
     }
@@ -139,6 +141,29 @@ class Horses {
         } else {
             return random.nextInt(coteMax - 11) + 11; 
         }
+    }
+    private String getName(){
+        boolean ok = false;
+        String name = namesList[random.nextInt(namesList.length)];
+        while(!ok){
+            if(takenNames.size()>0){
+                ok = true;
+                for(String n: takenNames){
+                    if(name.equals(n)){
+                        ok = false;
+                    }
+                }
+                if(ok){
+                    takenNames.add(name);
+                }else{
+                    name = namesList[random.nextInt(namesList.length)];
+                }
+            }else{
+                takenNames.add(name);
+                ok = true;
+            }
+        }
+        return name;
     }
   
     public void resetAllHorsesSelectors(){
