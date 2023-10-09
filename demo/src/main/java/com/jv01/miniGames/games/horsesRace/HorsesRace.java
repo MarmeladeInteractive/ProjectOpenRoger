@@ -3,6 +3,8 @@ package com.jv01.miniGames.games.horsesRace;
 import com.jv01.miniGames.Arcade;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -21,6 +23,7 @@ public class HorsesRace {
     public Horses horses;
 
     public JLabel betLabel = new JLabel("0");
+    public JTextField betField;
     public int currentBet = 0;
     private int maxBet = 1000;
     private int betStep = 10;
@@ -88,6 +91,20 @@ public class HorsesRace {
     }
 
     private void addBetPanel(){
+        JPanel betBox01 = new JPanel();
+        betBox01.setBackground(new Color(205,205,205));
+        betBox01.setBounds(boxSize - 300 - 80, (boxSize)-100-200-40, 300, 40);
+
+        betBox01.setLayout(null);
+
+        JLabel miseMax = new JLabel("Mise max : "+String.valueOf(maxBet));
+        miseMax.setBounds(20, 0, 300, 40);
+        miseMax.setFont(new Font("Arial", Font.PLAIN, 16));
+        miseMax.setHorizontalAlignment(SwingConstants.LEFT);
+        betBox01.add(miseMax);
+
+        gamePanel.add(betBox01);
+
         JPanel betBox = new JPanel();
         betBox.setBackground(new Color(205,205,205));
         betBox.setBounds(boxSize - 300 - 80, (boxSize)-100-200, 300, 80);
@@ -101,22 +118,40 @@ public class HorsesRace {
             public void actionPerformed(ActionEvent e){
                 if((currentBet-betStep)>=0){
                     currentBet-=betStep;
-                    betLabel.setText(String.valueOf(currentBet));
-                    betLabel.setForeground(Color.BLACK);
+                    betField.setText(String.valueOf(currentBet));
+                    betField.setForeground(Color.BLACK);
                 }else{
                     currentBet = 0;
-                    betLabel.setText(String.valueOf(currentBet));
-                    betLabel.setForeground(Color.BLACK);
+                    betField.setText(String.valueOf(currentBet));
+                    betField.setForeground(Color.BLACK);
                 }
             }
         });
         betBox.add(l);
 
-        betLabel.setText(String.valueOf(currentBet));
-        betLabel.setBounds(5+50, 0, 200-10, 80);
-        betLabel.setFont(new Font("Arial", Font.PLAIN, 24));
-        betLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        betBox.add(betLabel);
+        betField = new JTextField(String.valueOf(currentBet));
+        betField.setBounds(5 + 50, 20, 200 - 10, 40);
+        betField.setFont(new Font("Arial", Font.PLAIN, 24));
+        betField.setHorizontalAlignment(SwingConstants.CENTER);
+
+        betField.getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                updateBetFromTextField();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                updateBetFromTextField();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                
+            }
+        });
+
+        betBox.add(betField);
 
         JButton r = new JButton(">");
         r.setBounds(300-5-50, 15, 50, 50);
@@ -131,10 +166,10 @@ public class HorsesRace {
                     }else{
                         currentBet+=betStep;
                     } 
-                    betLabel.setText(String.valueOf(currentBet));
-                    betLabel.setForeground(Color.BLACK);
+                    betField.setText(String.valueOf(currentBet));
+                    betField.setForeground(Color.BLACK);
                 }else{
-                    betLabel.setForeground(Color.RED);
+                    betField.setForeground(Color.RED);
                 }
             }
         });
@@ -142,6 +177,32 @@ public class HorsesRace {
         
 
         gamePanel.add(betBox);
+    }
+    private boolean updateBetFromTextField(){
+        String betText = betField.getText();
+        try{
+            int newBet = Integer.parseInt(betText);
+            if(newBet >= 0 && newBet <= maxBet){
+                if(isInGame){
+                    if(newBet <= arcade.mainGameWindow.player.money){
+                        currentBet = newBet;
+                        betField.setForeground(Color.BLACK);
+                        return true;
+                    }else{
+                        betField.setForeground(Color.RED);
+                    }   
+                }else{
+                    currentBet = newBet;
+                    betField.setForeground(Color.BLACK);
+                    return true;
+                }
+            }else{
+                betField.setForeground(Color.RED);
+            }
+        }catch(NumberFormatException ex){
+            betField.setForeground(Color.RED);
+        }
+        return false;
     }
 
     private void addRunRaceButton(){
@@ -152,7 +213,11 @@ public class HorsesRace {
             @Override
             public void actionPerformed(ActionEvent e){
                 if(horses.selectedHorse>=0){
-                    runRace();
+                    if(updateBetFromTextField()){
+                        runRace();
+                    }else{
+                        betField.setForeground(Color.RED);
+                    }
                 }
             }
         });
