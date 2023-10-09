@@ -1,0 +1,17 @@
+<miniGamesStats>
+    <horsesRace id="horsesRace">
+        <totalBet>0</totalBet>
+        <totalLoss>0</totalLoss>
+        <totalGain>0</totalGain>
+        <gamesPlayed>0</gamesPlayed>
+        <timePlayed>0</timePlayed>
+    </horsesRace>
+
+    <roulette id="roulette">
+        <totalBet>0</totalBet>
+        <totalLoss>0</totalLoss>
+        <totalGain>0</totalGain>
+        <gamesPlayed>0</gamesPlayed>
+        <timePlayed>0</timePlayed>
+    </roulette>
+</miniGamesStats>

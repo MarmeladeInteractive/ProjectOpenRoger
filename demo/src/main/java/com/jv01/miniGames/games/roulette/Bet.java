@@ -348,7 +348,7 @@ public class Bet {
     }
     private void takeMoneyToPlayer(long money){
         roulette.arcade.mainGameWindow.player.isEnoughMoney((int)money,true);
-         roulette.arcade.mainGameWindow.updateLabels();
+        roulette.arcade.mainGameWindow.updateLabels();
     }
 
     public long getResult(String number, String colors){
@@ -442,10 +442,16 @@ public class Bet {
         
         if(totalBet<=result){
             roulette.scoreLabel.setText(String.valueOf( "Gains : " + (result - totalBet) ));
-            if(roulette.isInGame)giveMoneyToPlayer(result - totalBet);
+            if(roulette.isInGame){
+                giveMoneyToPlayer(result - totalBet);
+                if(totalBet>0)roulette.arcade.saveXml(totalBet,(result - totalBet));
+            };
         }else{
             roulette.scoreLabel.setText(String.valueOf( "Losses : " + (totalBet - result) ));
-            if(roulette.isInGame)takeMoneyToPlayer(totalBet - result);
+            if(roulette.isInGame){
+                takeMoneyToPlayer((totalBet - result));
+                if(totalBet>0)roulette.arcade.saveXml(totalBet,(totalBet - result)*(-1));
+            }
         }
 
         fillAll();
