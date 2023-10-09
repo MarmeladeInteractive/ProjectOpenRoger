@@ -91,7 +91,6 @@ public class Player{
 
     }
 
-
     public void initializePlayer(){
 
         initializeWalkingFrames();
@@ -112,7 +111,6 @@ public class Player{
         inventory = new Inventory(gameName);
         keyBord = new KeyBord(gameName);
     }
-
 
     public void initializeWalkingFrames() {
         ImageIcon[] rightFrames = new ImageIcon[]{
@@ -300,7 +298,6 @@ public class Player{
     public void saveSpeed(){
         savePlayerValue("speed",String.valueOf(speed));
     }
-
 
     public void save(){
         saveMoney();
