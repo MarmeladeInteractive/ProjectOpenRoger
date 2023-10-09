@@ -207,6 +207,7 @@ public class Race {
                 horsesRace.arcade.mainGameWindow.player.money += (long)(totGain-horsesRace.currentBet);
                 horsesRace.arcade.mainGameWindow.player.saveMoney();
                 horsesRace.arcade.mainGameWindow.updateLabels();
+                horsesRace.arcade.saveXml(horsesRace.currentBet,(long)(totGain-horsesRace.currentBet));
             }
             gain.setForeground(Color.GREEN);
         }else{
@@ -215,6 +216,7 @@ public class Race {
                 horsesRace.arcade.mainGameWindow.player.money -= (long)horsesRace.currentBet;
                 horsesRace.arcade.mainGameWindow.player.saveMoney();
                 horsesRace.arcade.mainGameWindow.updateLabels();
+                horsesRace.arcade.saveXml(horsesRace.currentBet,(-1)*(horsesRace.currentBet));
             }
             gain.setForeground(Color.RED);
         }
