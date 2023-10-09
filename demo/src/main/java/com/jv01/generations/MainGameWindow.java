@@ -142,6 +142,7 @@ public class MainGameWindow {
 
         addNightLabel();
         player.playerLabel.setVisible(true);
+        player.canWalk = true;
     }
 
     public void restartFrame(){
