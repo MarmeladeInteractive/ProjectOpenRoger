@@ -29,10 +29,21 @@ class Horses {
 
     public int height;
 
-    public String[] namesList = {"Éclair", "Galop", "Pégase", "Foudre", "Cavalier", "Vent", "Crinière", "Fer", "Sabot", "Selle", "Étoile", "Champion", "Trot", "Neige", "Fer à Cheval", "Ailes", "Espoir", "Brise", "Saut", "Nuage"};
-
+    public String[] namesList = {
+        "Éclair", "Galop", "Pégase", "Foudre", "Cavalier", "Vent", "Crinière", "Fer", "Sabot", "Selle",
+        "Étoile", "Champion", "Trot", "Neige", "Fer à Cheval", "Ailes", "Espoir", "Brise", "Saut", "Nuage",
+        "Avalanche", "Biscuit", "Cascade", "Diamant", "Étincelle", "Fantôme", "Gagnant", "Héro", "Iris", "Joyau",
+        "Kaiser", "Lune", "Mystère", "Nocturne", "Ombre", "Papillon", "Quasar", "Rafale", "Silhouette", "Tempête",
+        "Voyageur", "Amande", "Belle", "Caramel", "Duchesse", "Élégance", "Félicité", "Gazelle", "Hirondelle", "Innocence",
+        "Jade", "Lavande", "Mélodie", "Nectar", "Olympe", "Pivoine", "Quenelle", "Rosée", "Saphir", "Trésor",
+        "Vanille", "Aurore", "Blizzard", "Céleste", "Danseur", "Étoile Filante", "Faucon", "Griffon", "Harmonie", "Ivresse",
+        "Jument", "Licorn", "Montagne", "Nuit", "Orage", "Pégasus", "Quintessence", "Rêve", "Sorcière", "Tambourin",
+        "Venus", "Alizée", "Briar", "Clyde", "Dolly", "Eldorado", "Flamenco", "Gavroche", "Havane", "Icarus",
+        "Jasmine", "Loki", "Merlin", "Nectarine", "Orion", "Peaches", "Quixote", "Rocinante", "Sable", "Tornado",
+        "Valentine", "Zephyr"
+    };
+    
     public Horses(int n) {
-
         this.horses = new Horse[n];
         this.horsesSelectors = new JPanel[n];
         this.height = (600 - 15 * n) / n;
@@ -124,7 +135,7 @@ class Horses {
         double probability = Math.random();
 
         if (probability < 0.8) { 
-            return random.nextInt(11 - coteMin) + coteMin; 
+            return random.nextInt(11 - coteMin) + coteMin + 1; 
         } else {
             return random.nextInt(coteMax - 11) + 11; 
         }

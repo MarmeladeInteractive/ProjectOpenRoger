@@ -20,6 +20,11 @@ public class HorsesRace {
 
     public Horses horses;
 
+    public JLabel betLabel = new JLabel("0");
+    public int currentBet = 0;
+    private int maxBet = 1000;
+    private int betStep = 10;
+
     public HorsesRace(JPanel parentPanel, int boxSize){ 
         this.gamePanel = parentPanel; 
         this.gamePanel.setLayout(null);
@@ -71,13 +76,72 @@ public class HorsesRace {
         gamePanel.add(startGameButton, constraints);
     }
 
-    private void startGame(){
+    public void startGame(){
         refreshGamePanel();
 
         horses = new Horses(5);
         horses.addHorsesSelectors(gamePanel);
 
+        addBetPanel();
+
         addRunRaceButton();
+    }
+
+    private void addBetPanel(){
+        JPanel betBox = new JPanel();
+        betBox.setBackground(new Color(205,205,205));
+        betBox.setBounds(boxSize - 300 - 80, (boxSize)-100-200, 300, 80);
+
+        betBox.setLayout(null);
+
+        JButton l = new JButton("<");
+        l.setBounds(5, 15, 50, 50);
+        l.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if((currentBet-betStep)>=0){
+                    currentBet-=betStep;
+                    betLabel.setText(String.valueOf(currentBet));
+                    betLabel.setForeground(Color.BLACK);
+                }else{
+                    currentBet = 0;
+                    betLabel.setText(String.valueOf(currentBet));
+                    betLabel.setForeground(Color.BLACK);
+                }
+            }
+        });
+        betBox.add(l);
+
+        betLabel.setText(String.valueOf(currentBet));
+        betLabel.setBounds(5+50, 0, 200-10, 80);
+        betLabel.setFont(new Font("Arial", Font.PLAIN, 24));
+        betLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        betBox.add(betLabel);
+
+        JButton r = new JButton(">");
+        r.setBounds(300-5-50, 15, 50, 50);
+        r.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                if((currentBet+betStep)<=maxBet){
+                    if(isInGame){
+                        if((currentBet+betStep)<=arcade.mainGameWindow.player.money){
+                            currentBet+=betStep;
+                        }
+                    }else{
+                        currentBet+=betStep;
+                    } 
+                    betLabel.setText(String.valueOf(currentBet));
+                    betLabel.setForeground(Color.BLACK);
+                }else{
+                    betLabel.setForeground(Color.RED);
+                }
+            }
+        });
+        betBox.add(r);
+        
+
+        gamePanel.add(betBox);
     }
 
     private void addRunRaceButton(){
