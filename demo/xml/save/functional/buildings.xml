@@ -1,7 +1,7 @@
 <buildings>
     <building id="0">
         <name>Maison du parti</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
@@ -15,7 +15,7 @@
 
     <building id="1">
         <name>Maison vide</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
@@ -29,7 +29,7 @@
 
     <building id="2">
         <name>Mairie</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
@@ -43,7 +43,7 @@
 
     <building id="3">
         <name>Imprimerie</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
@@ -57,7 +57,7 @@
 
     <building id="4">
         <name>Boulangerie</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
@@ -71,7 +71,7 @@
 
     <building id="5">
         <name>Magasin</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
@@ -85,7 +85,7 @@
 
     <building id="6">
         <name>Maison abandonnee</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
@@ -113,7 +113,7 @@
 
     <building id="8">
         <name>Siege corporation</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
@@ -127,7 +127,7 @@
 
     <building id="9">
         <name>PMU</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
