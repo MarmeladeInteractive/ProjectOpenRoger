@@ -124,6 +124,7 @@ public class Inside {
     }
 
     private void createAbandonedHouseInside(){
+        soundManager.playSFX(6);
         AbandonedHouse abandonedHouse = new AbandonedHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(abandonedHouse.restrictedAreas);
         addTrigerEventsAreas(abandonedHouse.trigerEvents);
