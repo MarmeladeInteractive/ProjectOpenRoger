@@ -527,29 +527,30 @@ public class MainGameWindow {
             switch (direction) {
                 case "up":
                     currentChunk[0]--;
-                    player.positionX = (boxSize - player.playerSize) / 2;
-                    player.positionY = (boxSize - player.playerSize);
+                    player.positionX = (boxSize) / 2;
+                    player.positionY = (boxSize);
                     break;
                 case "down":
                     currentChunk[0]++;
-                    player.positionX = (boxSize - player.playerSize) / 2;
+                    player.positionX = (boxSize) / 2;
                     player.positionY = 0;
                     break;
                 case "left":
                     currentChunk[1]--;
-                    player.positionX = (boxSize - player.playerSize);
-                    player.positionY = (boxSize - player.playerSize) / 2;
+                    player.positionX = (boxSize);
+                    player.positionY = (boxSize) / 2;
                     break;
                 case "right":
                     currentChunk[1]++;
                     player.positionX = 0;
-                    player.positionY = (boxSize - player.playerSize) / 2;
+                    player.positionY = (boxSize) / 2;
                     break;
 
                 case "inBuilding":
                     isInsideBuilding = true;
                     player.positionX = (boxSize) / 2;
-                    player.positionY = (boxSize) / 2;
+                    player.positionY = (boxSize - 100);
+                    player.stopPlayer();
                     break;
 
                 case "TP":

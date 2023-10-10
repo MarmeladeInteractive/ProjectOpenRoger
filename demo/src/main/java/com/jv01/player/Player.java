@@ -257,6 +257,14 @@ public class Player{
         }     
     }
 
+    public void stopPlayer(){
+        keyBord.rightKeyPressed = false;
+        keyBord.leftKeyPressed = false;
+        keyBord.upKeyPressed = false;
+        keyBord.downKeyPressed = false;
+        keyBord.runKeyPressed = false;
+    }
+
     public boolean isEnoughMoney(int price, boolean takeOff){
         boolean isEnought = false;
         if(money>=price){
