@@ -38,4 +38,28 @@
             }
         </soundUrl>
     </sound>
+    <sound id="5">
+        <name>dingDing</name>
+        <soundDuration>1</soundDuration>
+        <soundUrl>
+            {
+                demo/sounds/sfx/dingDing/dingDing01.wav,
+                demo/sounds/sfx/dingDing/dingDing01.wav,
+                demo/sounds/sfx/dingDing/dingDing01.wav,
+                demo/sounds/sfx/dingDing/dingDing01.wav
+            }
+        </soundUrl>
+    </sound>
+    <sound id="6">
+        <name>doorSqueak01</name>
+        <soundDuration>1</soundDuration>
+        <soundUrl>
+            {
+                demo/sounds/sfx/door/doorSqueak01.wav,
+                demo/sounds/sfx/door/doorSqueak01.wav,
+                demo/sounds/sfx/door/doorSqueak01.wav,
+                demo/sounds/sfx/door/doorSqueak01.wav
+            }
+        </soundUrl>
+    </sound>
 </sounds>

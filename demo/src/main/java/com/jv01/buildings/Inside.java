@@ -1,5 +1,7 @@
 package com.jv01.buildings;
 
+import com.jv01.fonctionals.SoundManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,8 @@ public class Inside {
     public String name;
     public int type;
     public String imageUrl;
+
+    private SoundManager soundManager;
 
     public int boxSize;
 
@@ -51,6 +55,8 @@ public class Inside {
     public Inside(int type, int boxSize, String gameName, JPanel backgroundPanel){
         this.gameName = gameName;
         this.boxSize =  boxSize;
+
+        soundManager = new SoundManager(gameName);
 
         this.type = type;
         this.name = names[type];
@@ -118,6 +124,7 @@ public class Inside {
     }
 
     private void createAbandonedHouseInside(){
+        soundManager.playSFX(6);
         AbandonedHouse abandonedHouse = new AbandonedHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(abandonedHouse.restrictedAreas);
         addTrigerEventsAreas(abandonedHouse.trigerEvents);
@@ -142,6 +149,7 @@ public class Inside {
     }
 
     private void createPmuInside(){
+        soundManager.playSFX(5);
         PmuHouse pmuHouse = new PmuHouse(gameName, boxSize, backgroundPanel);
         addRestrictedAreas(pmuHouse.restrictedAreas);
         addTrigerEventsAreas(pmuHouse.trigerEvents);
