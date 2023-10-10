@@ -99,7 +99,7 @@
 
     <building id="7">
         <name>Maison</name>
-        <size>{200,200}</size>
+        <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
