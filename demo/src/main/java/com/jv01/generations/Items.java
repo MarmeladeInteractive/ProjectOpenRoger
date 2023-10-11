@@ -110,7 +110,7 @@ public class Items {
                     if(player.inventory.wastes < player.inventory.maxWastes){
                         removeItem();
 
-                        soundManager.playSFX(3);
+                        soundManager.playSFX("waste01");
 
                         this.isExist = false;
                         //player.money += 1;

@@ -54,7 +54,7 @@ public class MainMenuScreen {
     public void showMainMenu() {
 
         if(!isMusicPlaying){
-            soundManager.playMusic(0);
+            soundManager.playMusic("theme_01");
             isMusicPlaying = true;
         }
         

@@ -132,7 +132,7 @@ public class Inside {
     }
 
     private void createAbandonedHouseInside(){
-        if(!isInsideBuilding)soundManager.playSFX(6);
+        if(!isInsideBuilding)soundManager.playSFX("door_02");
         AbandonedHouse abandonedHouse = new AbandonedHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(abandonedHouse.restrictedAreas);
         addTrigerEventsAreas(abandonedHouse.trigerEvents);
@@ -157,7 +157,7 @@ public class Inside {
     }
 
     private void createPmuInside(){
-        if(!isInsideBuilding)soundManager.playSFX(5);
+        if(!isInsideBuilding)soundManager.playSFX("door_01");
         PmuHouse pmuHouse = new PmuHouse(gameName, boxSize, backgroundPanel);
         addRestrictedAreas(pmuHouse.restrictedAreas);
         addTrigerEventsAreas(pmuHouse.trigerEvents);
