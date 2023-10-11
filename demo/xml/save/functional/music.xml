@@ -1,5 +1,5 @@
 <musics>
-    <music id="0">
+    <music id="theme_01">
         <name>MainMenu</name>
         <musicDuration>45</musicDuration>
         <musicUrl>demo/sounds/musics/OmeletteChampiChampetre.wav</musicUrl>

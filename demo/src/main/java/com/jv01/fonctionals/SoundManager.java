@@ -40,7 +40,7 @@ public class SoundManager {
         musicDocument = save.getDocumentXmlFromRoot("functional/music");
     }
 
-    public void playSFX(int sfxID) {
+    public void playSFX(String sfxID) {
         Element sfxElement = save.getElementById(sfxDocument,"sound",String.valueOf(sfxID));
 
         if (sfxElement != null) {
@@ -64,7 +64,7 @@ public class SoundManager {
         }
     }
 
-    public void playMusic(int musicID) {
+    public void playMusic(String musicID) {
         Element musicElement = save.getElementById(musicDocument, "music", String.valueOf(musicID));
 
         if (musicElement != null) {
@@ -121,7 +121,7 @@ public class SoundManager {
         //soundManager.playMusic(0);
         //soundManager.stopMusic();
         //soundManager.playSFX(1);
-        soundManager.playSFX(2);
+        soundManager.playSFX("2");
         
     }
 }

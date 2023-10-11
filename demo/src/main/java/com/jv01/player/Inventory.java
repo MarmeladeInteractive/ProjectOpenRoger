@@ -355,7 +355,7 @@ public class Inventory {
     }
 
     public void emptyInventory(){
-        soundManager.playSFX(4);
+        soundManager.playSFX("waste01");
         wastes = 0;
         apples = 0;
         chocolatines = 0;

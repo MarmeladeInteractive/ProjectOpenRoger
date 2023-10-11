@@ -134,7 +134,7 @@ public class Tools {
                     case 5:
                         if(mainGameWindow.player.inventory.wastes >= 0){
 
-                            soundManager.playSFX(4);
+                            soundManager.playSFX("waste01");
                             
                             mainGameWindow.player.money += mainGameWindow.player.inventory.wastes;
 

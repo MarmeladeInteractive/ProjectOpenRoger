@@ -14,7 +14,7 @@
         <soundDuration>120</soundDuration>
         <soundUrl>{demo/sounds/sfx/lebeure.wav}</soundUrl>
     </sound>
-    <sound id="3">
+    <sound id="waste01">
         <name>dechets</name>
         <soundDuration>1</soundDuration>
         <soundUrl>
@@ -26,7 +26,7 @@
             }
         </soundUrl>
     </sound>
-    <sound id="4">
+    <sound id="dump_01">
         <name>poubelle</name>
         <soundDuration>1</soundDuration>
         <soundUrl>
@@ -38,7 +38,7 @@
             }
         </soundUrl>
     </sound>
-    <sound id="5">
+    <sound id="door_01">
         <name>dingDing</name>
         <soundDuration>1</soundDuration>
         <soundUrl>
@@ -50,7 +50,7 @@
             }
         </soundUrl>
     </sound>
-    <sound id="6">
+    <sound id="door_02">
         <name>doorSqueak01</name>
         <soundDuration>1</soundDuration>
         <soundUrl>
