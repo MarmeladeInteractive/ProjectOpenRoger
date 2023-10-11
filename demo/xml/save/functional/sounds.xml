@@ -1,18 +1,13 @@
 <sounds>
-    <sound id="0">
-        <name>test00</name>
-        <soundDuration>2</soundDuration>
-        <soundUrl>{demo/sounds/sfx/test00.wav}</soundUrl>
-    </sound>
-    <sound id="1">
-        <name>test01</name>
-        <soundDuration>2</soundDuration>
-        <soundUrl>{demo/sounds/sfx/test01.wav}</soundUrl>
-    </sound>
     <sound id="2">
         <name>lebeure</name>
         <soundDuration>120</soundDuration>
         <soundUrl>{demo/sounds/sfx/lebeure.wav}</soundUrl>
+    </sound>
+    <sound id="null">
+        <name>lebeure</name>
+        <soundDuration>120</soundDuration>
+        <soundUrl>{demo/sounds/sfx/null/null.wav}</soundUrl>
     </sound>
     <sound id="waste01">
         <name>dechets</name>

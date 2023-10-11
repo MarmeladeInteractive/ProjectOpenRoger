@@ -14,6 +14,7 @@
             }
         </imagesUrls>
         <interactsSpam>pour ramasser les déchets</interactsSpam>
+        <interactsSoundId>waste01</interactsSoundId>
     </item>
 
     <item id="1">
@@ -31,6 +32,7 @@
             }
         </imagesUrls>
         <interactsSpam>pour ramasser la pomme</interactsSpam>
+        <interactsSoundId>null</interactsSoundId>
     </item>
 
     <item id="2">
@@ -48,6 +50,7 @@
             }
         </imagesUrls>
         <interactsSpam>pour ramasser la chocolatine</interactsSpam>
+        <interactsSoundId>null</interactsSoundId>
     </item>
 
     <item id="3">
@@ -65,5 +68,6 @@
             }
         </imagesUrls>
         <interactsSpam>pour ramasser le croissant</interactsSpam>
+        <interactsSoundId>null</interactsSoundId>
     </item>
 </items>

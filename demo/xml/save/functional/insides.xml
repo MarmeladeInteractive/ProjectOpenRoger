@@ -1,0 +1,52 @@
+<insides>
+    <inside id="0">
+        <name>Maison du parti</name>
+        <bacPic>demo/img/insides/partyHouse01.jpg</bacPic>
+        <doorSoundId>null</doorSoundId>
+    </inside>
+    <inside id="1">
+        <name>Maison vide</name>
+        <bacPic>demo/img/insides/emptyProperty01.jpg</bacPic>
+        <doorSoundId>null</doorSoundId>
+    </inside>
+    <inside id="2">
+        <name>Mairie</name>
+        <bacPic>demo/img/insides/cityHall01.jpg</bacPic>
+        <doorSoundId>null</doorSoundId>
+    </inside>
+    <inside id="3">
+        <name>Imprimerie</name>
+        <bacPic>demo/img/insides/printingPress01.jpg</bacPic>
+        <doorSoundId>null</doorSoundId>
+    </inside>
+    <inside id="4">
+        <name>Boulangerie</name>
+        <bacPic>demo/img/insides/bakery01.jpg</bacPic>
+        <doorSoundId>null</doorSoundId>
+    </inside>
+    <inside id="5">
+        <name>Magasin</name>
+        <bacPic>demo/img/insides/store01.jpg</bacPic>
+        <doorSoundId>null</doorSoundId>
+    </inside>
+    <inside id="6">
+        <name>Maison abandonnee</name>
+        <bacPic>demo/img/insides/abandonedHouse01.jpg</bacPic>
+        <doorSoundId>door_02</doorSoundId>
+    </inside>
+    <inside id="7">
+        <name>Maison</name>
+        <bacPic>demo/img/insides/house01.jpg</bacPic>
+        <doorSoundId>null</doorSoundId>
+    </inside>
+    <inside id="8">
+        <name>Siege corporation</name>
+        <bacPic>demo/img/insides/corpoHouse01.jpg</bacPic>
+        <doorSoundId>null</doorSoundId>
+    </inside>
+    <inside id="9">
+        <name>PMU</name>
+        <bacPic>demo/img/insides/pmu01.jpg</bacPic>
+        <doorSoundId>door_01</doorSoundId>
+    </inside>
+</insides>
