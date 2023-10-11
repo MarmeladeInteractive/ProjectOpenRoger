@@ -126,15 +126,15 @@
     </building>
 
     <building id="9">
-        <name>PMU</name>
+        <name>BAR</name>
         <size>{220,220}</size>
         <description></description>
         <imagesUrls>
             {
-                demo/img/buildings/pmu01.png,
-                demo/img/buildings/pmu02.png,
-                demo/img/buildings/pmu03.png,
-                demo/img/buildings/pmu04.png,
+                demo/img/buildings/bar01.png,
+                demo/img/buildings/bar02.png,
+                demo/img/buildings/bar03.png,
+                demo/img/buildings/bar04.png,
             }
         </imagesUrls>
     </building>

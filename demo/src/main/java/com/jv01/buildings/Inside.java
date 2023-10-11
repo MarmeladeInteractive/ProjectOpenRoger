@@ -71,7 +71,7 @@ public class Inside {
                 break;
 
             case 9:
-                createPmuInside();
+                createBarInside();
                 break;
         
             default:
@@ -142,11 +142,11 @@ public class Inside {
         addTrigerEventsAreas(corpoHouse.trigerEvents);
     }
 
-    private void createPmuInside(){
+    private void createBarInside(){
         if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        PmuHouse pmuHouse = new PmuHouse(gameName, boxSize, backgroundPanel);
-        addRestrictedAreas(pmuHouse.restrictedAreas);
-        addTrigerEventsAreas(pmuHouse.trigerEvents);
+        BarHouse barHouse = new BarHouse(gameName, boxSize, backgroundPanel);
+        addRestrictedAreas(barHouse.restrictedAreas);
+        addTrigerEventsAreas(barHouse.trigerEvents);
     }
 
 

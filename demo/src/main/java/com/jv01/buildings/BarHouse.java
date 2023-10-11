@@ -9,7 +9,7 @@ import com.jv01.generations.Arcades;
 import com.jv01.generations.Objects;
 import com.jv01.generations.Tools;
 
-public class PmuHouse{
+public class BarHouse{
     public String gameName;
     public int boxSize;
 
@@ -20,7 +20,7 @@ public class PmuHouse{
     public int trigerSize = 50;
 
 
-    public PmuHouse(String gameName, int boxSize, JPanel backgroundPanel){
+    public BarHouse(String gameName, int boxSize, JPanel backgroundPanel){
         this.gameName = gameName;
         this.boxSize = boxSize;
 

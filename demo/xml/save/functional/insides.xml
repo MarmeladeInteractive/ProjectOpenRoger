@@ -45,8 +45,8 @@
         <doorSoundId>null</doorSoundId>
     </inside>
     <inside id="9">
-        <name>PMU</name>
-        <bacPic>demo/img/insides/pmu01.jpg</bacPic>
+        <name>BAR</name>
+        <bacPic>demo/img/insides/bar01.jpg</bacPic>
         <doorSoundId>door_01</doorSoundId>
     </inside>
 </insides>
