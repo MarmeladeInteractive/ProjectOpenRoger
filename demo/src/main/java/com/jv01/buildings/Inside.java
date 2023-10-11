@@ -112,6 +112,7 @@ public class Inside {
     }
 
     private void createPartieHouseInside(){
+        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
         PartieHouse partieHouse = new PartieHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(partieHouse.restrictedAreas);
         addTrigerEventsAreas(partieHouse.trigerEvents);
@@ -125,18 +126,21 @@ public class Inside {
     }
 
     private void createBakeryInside(){
+        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
         Bakery bakery = new Bakery(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(bakery.restrictedAreas);
         addTrigerEventsAreas(bakery.trigerEvents);
     }
 
     private void createEmptyHouseInside(){
+        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
         EmptyHouse emptyHouse = new EmptyHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(emptyHouse.restrictedAreas);
         addTrigerEventsAreas(emptyHouse.trigerEvents);
     }
 
     private void createCorpoHouseInside(){
+        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
         CorporationHouse corpoHouse = new CorporationHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(corpoHouse.restrictedAreas);
         addTrigerEventsAreas(corpoHouse.trigerEvents);
