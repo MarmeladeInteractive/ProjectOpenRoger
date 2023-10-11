@@ -1,5 +1,6 @@
 package com.jv01.buildings;
 
+import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
 import com.jv01.generations.Chunks;
 
@@ -8,8 +9,11 @@ import java.util.List;
 
 import javax.swing.JPanel;
 
-public class Inside {
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 
+public class Inside {
+    private Save save = new Save();
     private Chunks chunk;
 
     public String gameName;
@@ -20,6 +24,8 @@ public class Inside {
 
     private SoundManager soundManager;
 
+    private String doorSoundId;
+
     public int boxSize;
 
     public JPanel backgroundPanel;
@@ -27,49 +33,20 @@ public class Inside {
     public List<int[][]> restrictedAreas = new ArrayList<>();
     public List<Object[]> trigerEvents = new ArrayList<>();
 
-
-    public String[] imagesUrl = 
-        {
-            "demo\\img\\insides\\partyHouse01.jpg",
-            "demo\\img\\insides\\emptyProperty01.jpg",
-            "demo\\img\\insides\\cityHall01.jpg",
-            "demo\\img\\insides\\printingPress01.jpg",
-            "demo\\img\\insides\\bakery01.jpg",
-            "demo\\img\\insides\\store01.jpg",
-            "demo\\img\\insides\\abandonedHouse01.jpg",
-            "demo\\img\\insides\\house01.jpg",
-            "demo\\img\\insides\\corpoHouse01.jpg",
-            "demo\\img\\insides\\pmu01.jpg",
-        };
-
-
-    public String[] names = {
-        "Maison du parti",
-        "Maison vide",
-        "Mairie",
-        "Imprimerie",
-        "Boulangerie",
-        "Magasin",
-        "Maison abandonnee",
-        "Maison",
-        "Siege corporation",
-        "PMU"
-    };
-
-    //public Inside(int type, int boxSize, String gameName, JPanel backgroundPanel){
     public Inside(Chunks chunk){
         this.chunk = chunk;
 
         this.gameName = chunk.gameName;
-        this.boxSize =  chunk.boxSize;
-        this.isInsideBuilding = chunk.isInsideBuilding;
 
         soundManager = new SoundManager(gameName);
 
-        this.type = chunk.bType[0];
-        this.name = names[type];
-        this.imageUrl = imagesUrl[type];
+        this.boxSize =  chunk.boxSize;
+        this.isInsideBuilding = chunk.isInsideBuilding;
         this.backgroundPanel = chunk.backgroundPanel;
+
+        this.type = chunk.bType[0]; 
+
+        getInsideValue();
 
         addRestrictedBorders();
 
@@ -102,6 +79,15 @@ public class Inside {
         }
     }
 
+    private void getInsideValue(){
+        Document doc = save.getDocumentXml(gameName,"functional/insides");
+        Element element = save.getElementById(doc, "inside", String.valueOf(type));
+
+        this.name = save.getChildFromElement(element, "name");
+        this.imageUrl = save.getChildFromElement(element, "bacPic");
+        this.doorSoundId = save.getChildFromElement(element, "doorSoundId");
+    }
+
     private void addRestrictedBorders(){
         this.restrictedAreas.add(new int[][]{ 
             {0,0},
@@ -132,7 +118,7 @@ public class Inside {
     }
 
     private void createAbandonedHouseInside(){
-        if(!isInsideBuilding)soundManager.playSFX("door_02");
+        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
         AbandonedHouse abandonedHouse = new AbandonedHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(abandonedHouse.restrictedAreas);
         addTrigerEventsAreas(abandonedHouse.trigerEvents);
@@ -157,7 +143,7 @@ public class Inside {
     }
 
     private void createPmuInside(){
-        if(!isInsideBuilding)soundManager.playSFX("door_01");
+        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
         PmuHouse pmuHouse = new PmuHouse(gameName, boxSize, backgroundPanel);
         addRestrictedAreas(pmuHouse.restrictedAreas);
         addTrigerEventsAreas(pmuHouse.trigerEvents);

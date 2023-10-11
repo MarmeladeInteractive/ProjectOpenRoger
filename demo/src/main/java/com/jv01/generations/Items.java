@@ -23,6 +23,7 @@ public class Items {
     public String name;
     public int id;
     public int type;
+    public String interactsSoundId;
 
     public int buyPrice;
     public int sellPrice;
@@ -77,6 +78,8 @@ public class Items {
         this.defaultImageUrl = save.dropSpaceFromString(this.defaultImageUrl);
 
         this.spam = save.getChildFromElement(element, "interactsSpam");
+
+        this.interactsSoundId = save.getChildFromElement(element, "interactsSoundId");
     }
 
     public Object[] addItem(int x, int y, JPanel backgroundPanel){
@@ -110,7 +113,7 @@ public class Items {
                     if(player.inventory.wastes < player.inventory.maxWastes){
                         removeItem();
 
-                        soundManager.playSFX("waste01");
+                        soundManager.playSFX(interactsSoundId);
 
                         this.isExist = false;
                         //player.money += 1;
@@ -129,6 +132,9 @@ public class Items {
                 case 1:
                     if(player.inventory.apples < player.inventory.maxApples){
                         removeItem();
+
+                        soundManager.playSFX(interactsSoundId);
+                        
                         this.isExist = false;
                         //player.money += 1;
                         //player.wasteCollected ++;
