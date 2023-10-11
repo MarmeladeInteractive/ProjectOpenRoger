@@ -483,7 +483,11 @@ public class MainGameWindow {
     public void buildChunk(){
         chunk = null;
         if(isInsideBuilding){
-            environment = "insideBuilding";
+            if(environment.equals("arcade")){
+                environment = "extInsideBuilding";
+            }else{
+                environment = "insideBuilding";
+            }      
         }else{
             environment = "ext";
         }
