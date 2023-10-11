@@ -39,7 +39,7 @@ public class Chunks {
 
     public int number = 0;
 
-    public boolean isInsideBuilding;
+    public boolean isInsideBuilding = false;
     public String environment;
     public boolean isCenterChunk = false;
 
@@ -165,6 +165,11 @@ public class Chunks {
                     break;
                 case "insideBuilding":
                     this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
+                    addInsideBuildings();
+                    break;
+                case "extInsideBuilding":
+                    this.bType = save.stringToIntArray(save.getChildFromMapElements(allElements,"buildingsTypes"));
+                    isInsideBuilding = true;
                     addInsideBuildings();
                     break;
                 case "arcade":
@@ -630,9 +635,7 @@ public class Chunks {
     }
 
     public void addInsideBuildings(){
-        int type = bType[0];
-
-        Inside inside01 = new Inside(type,boxSize,gameName, backgroundPanel);
+        Inside inside01 = new Inside(this);
         restrictedAreas = inside01.restrictedAreas;
         trigerEvents = inside01.trigerEvents;
 

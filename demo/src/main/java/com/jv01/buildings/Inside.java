@@ -1,6 +1,7 @@
 package com.jv01.buildings;
 
 import com.jv01.fonctionals.SoundManager;
+import com.jv01.generations.Chunks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,10 +10,13 @@ import javax.swing.JPanel;
 
 public class Inside {
 
+    private Chunks chunk;
+
     public String gameName;
     public String name;
     public int type;
     public String imageUrl;
+    public boolean isInsideBuilding;
 
     private SoundManager soundManager;
 
@@ -52,16 +56,20 @@ public class Inside {
         "PMU"
     };
 
-    public Inside(int type, int boxSize, String gameName, JPanel backgroundPanel){
-        this.gameName = gameName;
-        this.boxSize =  boxSize;
+    //public Inside(int type, int boxSize, String gameName, JPanel backgroundPanel){
+    public Inside(Chunks chunk){
+        this.chunk = chunk;
+
+        this.gameName = chunk.gameName;
+        this.boxSize =  chunk.boxSize;
+        this.isInsideBuilding = chunk.isInsideBuilding;
 
         soundManager = new SoundManager(gameName);
 
-        this.type = type;
+        this.type = chunk.bType[0];
         this.name = names[type];
         this.imageUrl = imagesUrl[type];
-        this.backgroundPanel = backgroundPanel;
+        this.backgroundPanel = chunk.backgroundPanel;
 
         addRestrictedBorders();
 
@@ -124,7 +132,7 @@ public class Inside {
     }
 
     private void createAbandonedHouseInside(){
-        soundManager.playSFX(6);
+        if(!isInsideBuilding)soundManager.playSFX(6);
         AbandonedHouse abandonedHouse = new AbandonedHouse(gameName,boxSize, backgroundPanel);
         addRestrictedAreas(abandonedHouse.restrictedAreas);
         addTrigerEventsAreas(abandonedHouse.trigerEvents);
@@ -149,7 +157,7 @@ public class Inside {
     }
 
     private void createPmuInside(){
-        soundManager.playSFX(5);
+        if(!isInsideBuilding)soundManager.playSFX(5);
         PmuHouse pmuHouse = new PmuHouse(gameName, boxSize, backgroundPanel);
         addRestrictedAreas(pmuHouse.restrictedAreas);
         addTrigerEventsAreas(pmuHouse.trigerEvents);
