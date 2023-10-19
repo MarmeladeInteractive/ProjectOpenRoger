@@ -289,6 +289,7 @@ public class MainGameWindow {
         boolean isItem = false;
         boolean isDealer = false;
         boolean isArcade = false;
+        boolean isNpc = false;
 
         String spam = "";
         Tools tool = new Tools(gameName, 0, 0);
@@ -378,6 +379,19 @@ public class MainGameWindow {
                         //isItem = false;
                         //displaySpam = false;
                     }
+                }else if(trigEvent[1] == "npc" && !displaySpam){
+                
+                    int distance = getDistanceFromPlayer(position[0], position[1]);
+
+                    if(distance < 150){
+                        displaySpam = true;
+                        isNpc = true;
+                        spam = "eeeeee";
+                        break;
+                    }else{
+                        //isItem = false;
+                        //displaySpam = false;
+                    }
                 }
                 //System.out.println("spam");
             }
@@ -399,6 +413,8 @@ public class MainGameWindow {
                     arcade.interact(this);
                     refresh = arcade.refresh;
                     refreshDisplay = arcade.refreshDisplay;
+                }else if(isNpc){
+                    
                 }
 
             }else{

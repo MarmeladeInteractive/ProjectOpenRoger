@@ -15,6 +15,8 @@ public class Character{
 
     public  String gameName;
 
+    public String characterId = "0";
+
     int ageMin = 18;
     int ageMax = 100;
 
@@ -28,7 +30,7 @@ public class Character{
     
     int valueMax = 100;
 
-    int size = 100;
+    int size[] = {100,100};
 
     public  String name;
     public  int age;
@@ -38,6 +40,8 @@ public class Character{
     public  int belief;
     public  int hygiene;
     public  int mood;
+
+    public String npcPic = "demo/img/characters/npc/rogerBleu.png";
 
     public long[] chunk = {0,0};
     public  int[] position = {0,0};
@@ -56,7 +60,16 @@ public class Character{
 
     public Character(String gameName){
         this.gameName = gameName;
+        createCharacterValues();
+    }
 
+    public Character(String gameName,String id){
+        this.gameName = gameName;
+        this.characterId = id;
+        createCharacterValues();
+    }
+
+    private void createCharacterValues(){
         name = faker.name().fullName();
         age = faker.number().numberBetween(ageMin, ageMax);
         health = faker.number().numberBetween(healthMin, valueMax) - ((age) * (faker.number().numberBetween(0, 10)))/20;
@@ -83,12 +96,28 @@ public class Character{
     public  void createCharacterElement(Document doc){
         Element characterElement = doc.createElement("character");
 
-        int lastId = save.findLastId(doc, "character");
-        int newId = lastId + 1;
+        String newId;
+        if(characterId.equals("0")){
+            int lastId = save.findLastId(doc, "character");
+            newId = String.valueOf(lastId + 1);
+        }else{
+            newId = characterId;
+            try{
+                chunk[0] = save.stringToIntArray(characterId.split("_")[0])[0];
+                chunk[1] = save.stringToIntArray(characterId.split("_")[0])[1];
 
-        characterElement.setAttribute("id", String.valueOf(newId));
+                position[0] = save.stringToIntArray(characterId.split("_")[1])[0];
+                position[1] = save.stringToIntArray(characterId.split("_")[1])[1];
+            }catch(Exception e){
+
+            }     
+        }
+        
+        characterElement.setAttribute("id", newId);
         
         save.createXmlElement(characterElement,doc,"name",String.valueOf(name));
+        save.createXmlElement(characterElement,doc,"npcPic",String.valueOf(npcPic));
+        save.createXmlElement(characterElement,doc,"size","{"+String.valueOf(size[0])+","+String.valueOf(size[1])+"}");
         save.createXmlElement(characterElement,doc,"age",String.valueOf(age));
         save.createXmlElement(characterElement,doc,"health",String.valueOf(health));
         save.createXmlElement(characterElement,doc,"energy",String.valueOf(energy));
@@ -104,11 +133,15 @@ public class Character{
         save.createXmlElement(characterElement,doc,"populismScore",String.valueOf(populismScore));
         save.createXmlElement(characterElement,doc,"ideologicalCode",String.valueOf(ideologicalCode));
         save.createXmlElement(characterElement,doc,"politicalPartyId",String.valueOf(politicalPartyId));
-        save.createXmlElement(characterElement,doc,"chunk","{"+position[0]+","+position[1]+"}");
-        save.createXmlElement(characterElement,doc,"position","{"+chunk[0]+","+chunk[1]+"}");
+        save.createXmlElement(characterElement,doc,"chunk","{"+chunk[0]+","+chunk[1]+"}");
+        save.createXmlElement(characterElement,doc,"position","{"+position[0]+","+position[1]+"}");
         save.createXmlElement(characterElement,doc,"inventory","{}");
 
         doc.getDocumentElement().appendChild(characterElement);
+    }
+
+    public void getCharacterValues(String id){
+
     }
 
     public void saveCharacter(){
