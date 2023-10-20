@@ -289,12 +289,14 @@ public class MainGameWindow {
         boolean isItem = false;
         boolean isDealer = false;
         boolean isArcade = false;
+        boolean isNpc = false;
 
         String spam = "";
         Tools tool = new Tools(gameName, 0, 0);
         Items item = new Items(gameName,0);
         Dealers dealer = new Dealers(gameName, 0);
         Arcades arcade = new Arcades(gameName, 0, 0);
+        Npcs npc = new Npcs(gameName);
 
         if(!isInsideBuilding){
             for(Buildings b : chunk.triggerableBuilding){
@@ -378,6 +380,20 @@ public class MainGameWindow {
                         //isItem = false;
                         //displaySpam = false;
                     }
+                }else if(trigEvent[1] == "npc" && !displaySpam){
+                    npc = (Npcs) trigEvent[2];
+
+                    int distance = getDistanceFromPlayer(position[0], position[1]);
+
+                    if(distance < 50){
+                        displaySpam = true;
+                        isNpc = true;
+                        spam = String.valueOf(npc.name);
+                        break;
+                    }else{
+                        //isItem = false;
+                        //displaySpam = false;
+                    }
                 }
                 //System.out.println("spam");
             }
@@ -399,6 +415,8 @@ public class MainGameWindow {
                     arcade.interact(this);
                     refresh = arcade.refresh;
                     refreshDisplay = arcade.refreshDisplay;
+                }else if(isNpc){
+                    
                 }
 
             }else{

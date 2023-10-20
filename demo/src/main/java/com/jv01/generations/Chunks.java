@@ -20,6 +20,7 @@ import com.jv01.miniGames.Arcade;
 
 public class Chunks {
     public Save save = new Save();
+    public Npcs npc;
 
     public boolean load = true;
     public MainGameWindow mainGameWindow;
@@ -51,7 +52,7 @@ public class Chunks {
     public List<int[][]> restrictedAreas = new ArrayList<>();
     public List<Object[]> trigerEvents = new ArrayList<>();
 
-    public List<Object[]> characters = new ArrayList<>();
+    public List<String> characters = new ArrayList<>();
 
     public Document doc;
     public Element element;
@@ -67,6 +68,8 @@ public class Chunks {
         this.seed = seed;
         this.gameName = gameName;
 
+        this.npc = new Npcs(gameName);
+
         this.load = false;
         this.displayOnMap = displayOnMap;
 
@@ -80,6 +83,7 @@ public class Chunks {
         if(element == null){
             createBiome();
             addBuildings(buildingType);
+            //addNpcs();
             saveChunk();
         }else{
             
@@ -98,6 +102,8 @@ public class Chunks {
         this.environment = mainGameWindow.environment;
         this.gameName = mainGameWindow.gameName;
 
+        this.npc = new Npcs(gameName);
+
         this.displayOnMap = true;
 
         this.key = getKey();
@@ -112,6 +118,7 @@ public class Chunks {
                 case "ext":
                     createBiome();
                     addBuildings(-1);
+                    if(this.load)addNpcs();
                     if(this.load)addDecorations();
                     saveChunk();
                     break;
@@ -161,6 +168,7 @@ public class Chunks {
                             }
                         }
                     }
+                    if(this.load)addNpcs();
                     if(this.load)addDecorations();
                     break;
                 case "insideBuilding":
@@ -472,6 +480,66 @@ public class Chunks {
         return building01;
     }
 
+    public void addNpcs(){
+        String npcKey = "0";
+        int[] position = {0,0};
+        int[] cell = {0,0};
+        char key01 = npcKey.charAt(0);
+        char key02 = npcKey.charAt(0);
+
+        for(int i=2; i>=0; i--){
+            cell[0]=i;
+            for(int j=2; j>=0; j--){
+                cell[1]=j;
+            
+                for(int k=2; k>=0; k--){
+                    position[0]=k;
+                    for(int l=2; l>=0; l--){
+                        position[1]=l;
+
+                        if((((i==0&&j==0)&&completedCell[0])||((i==0&&j==2)&&completedCell[1])||((i==2&&j==0)&&completedCell[2])||((i==2&&j==2)&&completedCell[3]))){
+                            k=-1;
+                            l=-1;
+                            break;
+                        }
+
+                        int[] code = {(position[0]+1)*(cell[0]+1),(position[1]+1)*(cell[1]+1)};
+                        npcKey = getObjectKey(code);
+
+                        key01 = npcKey.charAt((position[0])*(3)+(position[1]+1));
+                        key02 = npcKey.charAt((position[0])*(3)+(position[1]+1)+1);
+
+                        if(biome == 0 || biome == 1){
+                            
+                        }else if(biome == 2 || biome == 3 || biome == 4){
+                            if(key01 <= getCharComparedToPercentage(13)){
+                                if(key02 <= getCharComparedToPercentage(7)){
+                                    createNpc(cell[0]*cellSize+(position[0]*(cellSize/3)), cell[1]*cellSize+(position[1]*(cellSize/3)));              
+                                }
+                            }
+                        }else if(biome == 5 || biome == 6 || biome == 7){
+                            if(key01 <= getCharComparedToPercentage(26)){
+                                if(key02 <= getCharComparedToPercentage(13)){
+                                    createNpc(cell[0]*cellSize+(position[0]*(cellSize/3)), cell[1]*cellSize+(position[1]*(cellSize/3)));              
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void createNpc(int x, int y){
+        String id = "{"+String.valueOf(chunk[0])+","+String.valueOf(chunk[1])+"}_{"+String.valueOf(x)+","+String.valueOf(y)+"}"; 
+        npc = new Npcs(gameName);
+        npc.createCharacter(id);
+        Object[] obj = npc.addNpc(x,y,backgroundPanel);
+        //restrictedAreas.add(npc.restrictedAreas);
+
+        trigerEvents.add(obj);
+    }
+
     public void addDecorations(){
         String decorationKey = "0";
         int[] position = {0,0};
@@ -666,6 +734,11 @@ public class Chunks {
 
     public String getObjectKey(int[] cell){
         String key01 = hash(seed+key,cell[0],cell[1]);
+        return(key01);
+    }
+
+    public String getNpcKey(int[] cell){
+        String key01 = hash("npc"+seed+key,cell[0],cell[1]);
         return(key01);
     }
 

@@ -91,7 +91,7 @@ public class Game{
         
         generateParties();
         generateCorporations(5,20);
-        generateCharacters(100);
+        //generateCharacters(100);
 
         loadingScreen.closeLoadingScreen();
 
