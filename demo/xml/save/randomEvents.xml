@@ -1,0 +1,18 @@
+<randomEvents>
+    <randomEvent id="1">
+        <name>CorporationManifestation</name>
+        <corporationName></corporationName>
+        <text>A riot is occuring near a corporation.</text>
+        <position></position>
+    </randomEvent>
+    <randomEvent id="2">
+        <name>NPCVisitingPartyHouse</name>
+        <text>Some citizens are curious about your party, you might want to meet them.</text>
+        <position></position>
+    </randomEvent>
+    <randomEvent id="3">
+        <name>BakeryPromotion</name>
+        <text>A bakery is making pretty good deals, come and see for yourself !</text>
+        <position></position>
+    </randomEvent>
+</randomEvents>
