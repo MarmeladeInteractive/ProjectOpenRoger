@@ -296,6 +296,7 @@ public class MainGameWindow {
         Items item = new Items(gameName,0);
         Dealers dealer = new Dealers(gameName, 0);
         Arcades arcade = new Arcades(gameName, 0, 0);
+        Npcs npc = new Npcs(gameName);
 
         if(!isInsideBuilding){
             for(Buildings b : chunk.triggerableBuilding){
@@ -380,13 +381,14 @@ public class MainGameWindow {
                         //displaySpam = false;
                     }
                 }else if(trigEvent[1] == "npc" && !displaySpam){
-                
+                    npc = (Npcs) trigEvent[2];
+
                     int distance = getDistanceFromPlayer(position[0], position[1]);
 
-                    if(distance < 150){
+                    if(distance < 50){
                         displaySpam = true;
                         isNpc = true;
-                        spam = "eeeeee";
+                        spam = String.valueOf(npc.name);
                         break;
                     }else{
                         //isItem = false;

@@ -168,6 +168,7 @@ public class Chunks {
                             }
                         }
                     }
+                    if(this.load)addNpcs();
                     if(this.load)addDecorations();
                     break;
                 case "insideBuilding":
@@ -508,16 +509,20 @@ public class Chunks {
                         key01 = npcKey.charAt((position[0])*(3)+(position[1]+1));
                         key02 = npcKey.charAt((position[0])*(3)+(position[1]+1)+1);
 
-                        if(key01 <= getCharComparedToPercentage(10)){
-                            createNpc(cell[0]*cellSize+(position[0]*(cellSize/3)), cell[1]*cellSize+(position[1]*(cellSize/3)));              
-                        }
-
                         if(biome == 0 || biome == 1){
                             
                         }else if(biome == 2 || biome == 3 || biome == 4){
- 
+                            if(key01 <= getCharComparedToPercentage(13)){
+                                if(key02 <= getCharComparedToPercentage(7)){
+                                    createNpc(cell[0]*cellSize+(position[0]*(cellSize/3)), cell[1]*cellSize+(position[1]*(cellSize/3)));              
+                                }
+                            }
                         }else if(biome == 5 || biome == 6 || biome == 7){
-
+                            if(key01 <= getCharComparedToPercentage(26)){
+                                if(key02 <= getCharComparedToPercentage(13)){
+                                    createNpc(cell[0]*cellSize+(position[0]*(cellSize/3)), cell[1]*cellSize+(position[1]*(cellSize/3)));              
+                                }
+                            }
                         }
                     }
                 }
@@ -526,11 +531,11 @@ public class Chunks {
     }
 
     public void createNpc(int x, int y){
-        System.out.println(chunk[0]);
         String id = "{"+String.valueOf(chunk[0])+","+String.valueOf(chunk[1])+"}_{"+String.valueOf(x)+","+String.valueOf(y)+"}"; 
+        npc = new Npcs(gameName);
         npc.createCharacter(id);
         Object[] obj = npc.addNpc(x,y,backgroundPanel);
-        restrictedAreas.add(npc.restrictedAreas);
+        //restrictedAreas.add(npc.restrictedAreas);
 
         trigerEvents.add(obj);
     }

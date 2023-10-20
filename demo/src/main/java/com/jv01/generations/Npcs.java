@@ -37,8 +37,7 @@ public class Npcs {
     }
 
     public void createCharacter(String id){
-        Character character = new Character(gameName,id);
-        character.saveCharacter();
+        Character character = new Character(gameName,id,true);
 
         this.name = character.name;
         this.id = id;
@@ -48,18 +47,9 @@ public class Npcs {
         getOffset();
     }
 
-    public void getCharacterValues(){
-        this.name = "eeeeeeee";
-
-        this.imageUrl = "demo/img/characters/npc/rogerBleu.png";
-
-        this.size = new int[]{100,100};
-        getOffset();
-    }
-
     public Object[] addNpc(int x, int y, JPanel backgroundPanel){
-        Objects obj = new Objects(x+offsetX, y+offsetY, size, imageUrl, 1, backgroundPanel);  
-        restrictedAreas = obj.restrictedAreas;
+        Objects obj = new Objects(x+offsetX, y+offsetY, size, imageUrl, 0, backgroundPanel);  
+        //restrictedAreas = obj.restrictedAreas;
         
         Object[] npc01 = {
             new int[]{
