@@ -26,21 +26,25 @@ public class LoadScreen {
     private JLabel imageLabel1_2 = new JLabel();
 
     private JLabel imageLabel2 = new JLabel();
+    private JLabel imageLabel2_2 = new JLabel();
 
     private float alpha1 = 0.0f;
     private float alpha1_2 = 0.0f;
 
     private float alpha2 = 0.0f;
+    private float alpha2_2 = 0.0f;
 
     private Timer timer1;
     private Timer timer1_2;
 
     private Timer timer2;
+    private Timer timer2_2;
 
     private ImageIcon imageIcon1;
     private ImageIcon imageIcon1_2;
 
     private ImageIcon imageIcon2;
+    private ImageIcon imageIcon2_2;
 
     public LoadScreen() {  
         frame.getContentPane().removeAll();
@@ -127,20 +131,25 @@ public class LoadScreen {
         
     }
 
-    private void startSecondLogoFadeIn() {
-
-        
+    private void startSecondLogoFadeIn() {      
         try {
-            imageIcon2 = new ImageIcon("demo/src/main/java/com/jv01/screens/loadScreen/img/mscompany.png");
+            imageIcon2 = new ImageIcon("demo/src/main/java/com/jv01/screens/loadScreen/img/MS_CompanyLogo01_2.png");
             Image image2 = imageIcon2.getImage().getScaledInstance(boxSize, boxSize, Image.SCALE_SMOOTH);
             imageIcon2 = new ImageIcon(image2);
             imageLabel2.setIcon(new ImageIcon(makeImageWithAlpha(imageIcon2.getImage(), 0.0f)));
 
             imageLabel2.setBounds(0, 0, boxSize, boxSize);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-            label.add(imageLabel2);
-            frame.revalidate();
-            frame.repaint();
+        try {
+            imageIcon2_2 = new ImageIcon("demo/src/main/java/com/jv01/screens/loadScreen/img/MS_CompanyLogo01_6.png");
+            Image image2_2 = imageIcon2_2.getImage().getScaledInstance(boxSize, boxSize, Image.SCALE_SMOOTH);
+            imageIcon2_2 = new ImageIcon(image2_2);
+            imageLabel2_2.setIcon(new ImageIcon(makeImageWithAlpha(imageIcon2_2.getImage(), 0.0f)));
+
+            imageLabel2_2.setBounds(0, 0, boxSize, boxSize);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -149,18 +158,41 @@ public class LoadScreen {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (alpha2 < 1.0f) {
-                    alpha2 += 0.05f;
+                    alpha2 += 0.08f;
                     if (alpha2 > 1.0f) alpha2 = 1.0f;
                     imageLabel2.setIcon(new ImageIcon(makeImageWithAlpha(imageIcon2.getImage(), alpha2)));
                     frame.revalidate();
                     frame.repaint();
                 } else {
                     timer2.stop();
-                    startMainMenu();
+                    timer2_2.start();
                 }
             }
         });
         timer2.setRepeats(true);
+
+        timer2_2 = new Timer(80, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (alpha2_2 < 1.0f) {
+                    alpha2_2 += 0.05f;
+                    if (alpha2_2 > 1.0f) alpha2_2 = 1.0f;
+                    imageLabel2_2.setIcon(new ImageIcon(makeImageWithAlpha(imageIcon2_2.getImage(), alpha2_2)));
+                    frame.revalidate();
+                    frame.repaint();
+                } else {
+                    timer2_2.stop();
+                    startMainMenu();
+                }
+            }
+        });
+        timer2_2.setRepeats(true);
+
+        label.add(imageLabel2_2);
+        label.add(imageLabel2);
+        
+        frame.revalidate();
+        frame.repaint();
 
         timer2.start();
     }
