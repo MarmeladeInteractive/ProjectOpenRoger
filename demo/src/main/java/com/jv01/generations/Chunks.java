@@ -16,10 +16,13 @@ import org.w3c.dom.Element;
 import com.jv01.buildings.Inside;
 import com.jv01.buildings.Buildings;
 import com.jv01.fonctionals.Save;
+import com.jv01.fonctionals.Atlas;
 import com.jv01.miniGames.Arcade;
+
 
 public class Chunks {
     public Save save = new Save();
+    public Atlas atlas;
     public Npcs npc;
 
     public boolean load = true;
