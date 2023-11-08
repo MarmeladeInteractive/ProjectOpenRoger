@@ -55,7 +55,7 @@ public class Corporation {
         catchPhrase = faker.company().catchPhrase();
     }
 
-    public void createCorporatioElement(Document doc){
+    public void createCorporationElement(Document doc){
         Element partyElement = doc.createElement("corporation");
 
         int lastId = save.findLastId(doc, "corporation");
@@ -83,7 +83,7 @@ public class Corporation {
     public void saveCorporation(){
         Document doc = save.getDocumentXml(gameName, "corporations");
 
-        createCorporatioElement(doc);
+        createCorporationElement(doc);
 
         save.saveXmlFile(doc, gameName, "corporations");
     }

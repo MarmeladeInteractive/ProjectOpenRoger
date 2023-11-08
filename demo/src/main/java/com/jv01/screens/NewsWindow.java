@@ -51,9 +51,6 @@ public class NewsWindow extends JFrame {
             JScrollPane scrollPane = new JScrollPane(newsText);
 
             add(scrollPane, BorderLayout.CENTER);
-
-            System.out.println("Random Event Name: " + eventName);
-            System.out.println("Random Event Text: " + eventText);
         } 
         else 
         {
@@ -95,5 +92,6 @@ public class NewsWindow extends JFrame {
 
     private void generateRandomEvent() {
         System.out.println("Aie aie aie !");
+        // Switchcase en fction des differents event possible ?
     }
 }

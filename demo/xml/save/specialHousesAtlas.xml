@@ -1,32 +1,72 @@
 <specialHousesAtlas>
     <bakeryAltas>
-
+        <bakery id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </bakery>
     </bakeryAltas>
     <partyHouseAltas>
-
+        <partyHouse id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </partyHouse>
     </partyHouseAltas>
     <corporationAtlas>
-
+        <corporation id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </corporation>
     </corporationAtlas>
     <townHallAtlas>
-
+        <townHall id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </townHall>
     </townHallAtlas>
     <barAtlas>
-
+        <bar id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </bar>
     </barAtlas>
     <printingHouseAtlas>
-
+        <printingHouse id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </printingHouse>
     </printingHouseAtlas>
     <storeAtlas>
-
+        <store id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </store>
     </storeAtlas>
     <abandonedHouseAtlas>
-
+        <abandonedHouse id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </abandonedHouse>
     </abandonedHouseAtlas>
     <emptyHouseAtlas>
-
+        <emptyHouse id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </emptyHouse>
     </emptyHouseAtlas>
     <houseAtlas>
-
+        <house id="0">
+            <chunkx></chunkx>
+            <chunky></chunky>
+            <position></position>
+        </house>
     </houseAtlas>
 </specialHousesAtlas>

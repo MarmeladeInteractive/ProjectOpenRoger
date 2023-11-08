@@ -6,10 +6,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
+import com.jv01.fonctionals.Atlas;
 import com.jv01.fonctionals.Save;
 
 public class Buildings {
     public Save save = new Save();
+    public Atlas atlas;
     public String gameName;
 
     public String name;
@@ -31,6 +33,7 @@ public class Buildings {
 
     public Buildings(String gameName, int id, long[] chunk, int[] cell, String buildingKey){
         this.gameName = gameName;
+        this.atlas = new Atlas(gameName);
 
         this.id = id;
 
@@ -70,7 +73,7 @@ public class Buildings {
         int numberOfCorporations = corporationNodes.getLength();
 
         int unassignedId = -1;
-        boolean corporationHouseExiste = false;
+        boolean corporationHouseExist = false;
 
         for(int i = 1; i <= numberOfCorporations; i++){
             Element corp = save.getElementById(doc, "corporation",String.valueOf(i));
@@ -80,14 +83,14 @@ public class Buildings {
             if(Arrays.equals(chunk, this.chunk)){
                 this.name = save.getChildFromElement(corp, "corporationName");
                 this.description = save.getChildFromElement(corp, "catchPhrase");
-                corporationHouseExiste = true;
+                corporationHouseExist = true;
                 break;
             }else if(Arrays.equals(chunk, new long[]{0, 0})){
                 unassignedId = i;
             }
         }
 
-        if(!corporationHouseExiste){
+        if(!corporationHouseExist){
             if(unassignedId>0){
                 save.changeElementChildValue(gameName,"corporations","corporation",String.valueOf(unassignedId),"corporationHouseChunk",'{'+String.valueOf(this.chunk[0])+','+String.valueOf(this.chunk[1])+'}');
                 getCorporationHouseValues();

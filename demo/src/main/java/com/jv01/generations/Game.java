@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.security.SecureRandom;
 
 import com.github.javafaker.Faker;
+import com.jv01.fonctionals.Atlas;
 import com.jv01.fonctionals.Save;
 import com.jv01.screens.CustomizePartyScreen;
 import com.jv01.screens.LoadingScreen;
