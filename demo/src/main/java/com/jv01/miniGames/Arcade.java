@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 import com.jv01.miniGames.games.horsesRace.HorsesRace;
 import com.jv01.miniGames.games.roulette.Roulette;
 import com.jv01.miniGames.games.NoGame.NoGame;
+import com.jv01.miniGames.games.blackjack.Blackjack;
 import com.jv01.fonctionals.Save;
 import com.jv01.generations.MainGameWindow;
 
