@@ -41,6 +41,8 @@ public class Blackjack {
     private JTextArea outputArea;
     private JPanel tablePanel;
 
+    private JPanel playerCardsLaJPanel;
+
     public Hand playerHand;
     public int playerValue = 0;
     public Hand dealerHand;
@@ -89,6 +91,8 @@ public class Blackjack {
 
         addButtons();
         addPlayerLabel();
+
+        addPlayerCardsLabel();
 
         createTable(); 
         //gamePanel.add(tablePanel);
@@ -196,6 +200,14 @@ public class Blackjack {
         gamePanel.add(playerLabel);
     }
 
+    public void addPlayerCardsLabel(){
+        playerCardsLaJPanel = new JPanel();
+        playerCardsLaJPanel.setBounds(100,500,600,200);
+        playerCardsLaJPanel.setBackground(new Color(255,255,0));
+        gamePanel.add(playerCardsLaJPanel);
+
+    }
+
     public void refreshGamePanel(){
         gamePanel.removeAll();
  
@@ -205,11 +217,13 @@ public class Blackjack {
     }
 
     public void displayCards(){
+        int i = 0;
+        //playerCardsLaJPanel.c
         for(Cards card:playerHand.getCards()){
-            JLabel ttt = new JLabel(card.getIcon());
-            System.out.println(card.getIcon());
-            ttt.setBounds(200,200, 100, 100);
-            gamePanel.add(ttt);
+            JLabel cardLabel = new JLabel(card.getIcon());
+            cardLabel.setBounds(100+(card.widthCard+10)*i,200, card.widthCard, card.heightCard);
+            playerCardsLaJPanel.add(cardLabel);
+            i++;
         }
     }
 
