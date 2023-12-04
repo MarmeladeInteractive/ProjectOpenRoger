@@ -205,7 +205,6 @@ public class Blackjack {
         playerCardsLaJPanel.setBounds(100,500,600,200);
         playerCardsLaJPanel.setBackground(new Color(255,255,0));
         gamePanel.add(playerCardsLaJPanel);
-
     }
 
     public void refreshGamePanel(){
@@ -218,7 +217,9 @@ public class Blackjack {
 
     public void displayCards(){
         int i = 0;
-        //playerCardsLaJPanel.c
+        playerCardsLaJPanel.removeAll();
+        playerCardsLaJPanel.revalidate();
+        playerCardsLaJPanel.repaint();
         for(Cards card:playerHand.getCards()){
             JLabel cardLabel = new JLabel(card.getIcon());
             cardLabel.setBounds(100+(card.widthCard+10)*i,200, card.widthCard, card.heightCard);
@@ -229,6 +230,7 @@ public class Blackjack {
 
     private void changeResultValues(){
         playerLabel.setText("Your hand:" + playerHand.getCards());
+        displayCards();
     }
 
 
