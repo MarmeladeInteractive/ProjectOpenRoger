@@ -131,6 +131,7 @@ public class Blackjack {
 
     public void standCard(){
         int dealerValue = dealerHand.getHandValue();
+        playerValue = playerHand.getHandValue();
         while (dealerValue < 17) {
             dealerHand.addCard(decks.drawCard());
             dealerValue = dealerHand.getHandValue();
@@ -139,12 +140,14 @@ public class Blackjack {
         System.out.println("Dealer's hand: " + dealerHand.getCards());
         if (dealerValue > 21 || dealerValue < playerValue) {
             System.out.println("You win!");
+            playerLabel.setText("<html>"+"Your score: " + playerHand.getHandValue() + "_ Dealer's score: "+dealerHand.getHandValue()+"<br>"+"You win!"+"</html>");
         } else if (dealerValue > playerValue) {
             System.out.println("Dealer wins!");
+            playerLabel.setText("<html>"+"Your score: " + playerHand.getHandValue() + "_ Dealer's score: "+dealerHand.getHandValue()+"<br>"+"Dealer wins!"+"</html>");
         } else {
             System.out.println("It's a push (tie)!");
+            playerLabel.setText("<html>"+"Your score: " + playerHand.getHandValue() + "_ Dealer's score: "+dealerHand.getHandValue()+"<br>"+"It's a push (tie)!"+"</html>");
         }
-        changeResultValues();
     }
 
 
@@ -233,7 +236,7 @@ public class Blackjack {
     }
 
     private void changeResultValues(){
-        playerLabel.setText("Your hand:" + playerHand.getCards());
+        playerLabel.setText("Your score: " + playerHand.getHandValue());
         displayCards();
     }
 
