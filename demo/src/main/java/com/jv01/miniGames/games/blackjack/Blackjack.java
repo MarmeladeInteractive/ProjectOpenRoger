@@ -216,16 +216,20 @@ public class Blackjack {
     }
 
     public void displayCards(){
+        clearPlayerCardsDisplay();
         int i = 0;
-        playerCardsLaJPanel.removeAll();
-        playerCardsLaJPanel.revalidate();
-        playerCardsLaJPanel.repaint();
         for(Cards card:playerHand.getCards()){
             JLabel cardLabel = new JLabel(card.getIcon());
             cardLabel.setBounds(100+(card.widthCard+10)*i,200, card.widthCard, card.heightCard);
             playerCardsLaJPanel.add(cardLabel);
             i++;
         }
+    }
+
+    public void clearPlayerCardsDisplay(){
+        playerCardsLaJPanel.removeAll();
+        playerCardsLaJPanel.revalidate();
+        playerCardsLaJPanel.repaint();
     }
 
     private void changeResultValues(){
