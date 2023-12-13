@@ -1,4 +1,4 @@
-# Game Title: Roger's Adventures: The Political Path
+# Roger's Adventures: The Political Path
 *Version 0.4.52*
 
 ## General Description:
