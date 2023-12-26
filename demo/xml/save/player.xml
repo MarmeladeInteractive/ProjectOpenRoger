@@ -1,6 +1,6 @@
 <player>
     <player id="player">
-        <playerName>Michel</playerName>
+        <playerName>Roger</playerName>
         <money>1000</money>
         <speed>1</speed>
         <step>10</step>
