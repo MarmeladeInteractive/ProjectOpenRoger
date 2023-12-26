@@ -6,6 +6,7 @@
         <downKey>83</downKey>
         <runKey>16</runKey>
         <mapKey>77</mapKey>
+        <inventoryKey>73</inventoryKey>
         <intercatKey>69</intercatKey>
         <upgradeKey>85</upgradeKey>
         <quitKey>27</quitKey>

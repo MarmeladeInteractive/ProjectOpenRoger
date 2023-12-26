@@ -30,6 +30,8 @@ public class KeyBord {
 
     public int mapKey = 77; // m
 
+    public int inventoryKey = 73; // i
+
     public int quitKey = 27; // esc
     public int menuKey = 80; // p
     public int cheatCodeMenuKey = 113;
@@ -48,6 +50,9 @@ public class KeyBord {
 
     public boolean mapKeyPressed = false;
     public Tempo tempoMapKey = new Tempo();
+
+    public boolean inventoryKeyPressed = false;
+    public Tempo tempoInventoryKey = new Tempo();
 
     public boolean quitKeyPressed = false;
 
@@ -80,6 +85,7 @@ public class KeyBord {
         this.runKey = Integer.parseInt(save.getChildFromMapElements(allElements,"runKey"));
 
         this.mapKey = Integer.parseInt(save.getChildFromMapElements(allElements,"mapKey"));
+        this.inventoryKey = Integer.parseInt(save.getChildFromMapElements(allElements,"inventoryKey"));
 
         this.intercatKey = Integer.parseInt(save.getChildFromMapElements(allElements,"intercatKey"));
         this.upgradeKey = Integer.parseInt(save.getChildFromMapElements(allElements,"upgradeKey"));
@@ -123,6 +129,9 @@ public class KeyBord {
                  else if (keyCode == mapKey  && !tempoMapKey.isRunning()) {
                      mapKeyPressed = true;
                      tempoMapKey.start(100);
+                 } else if (keyCode == inventoryKey  && !tempoInventoryKey.isRunning()) {
+                     inventoryKeyPressed = true;
+                     tempoInventoryKey.start(100);
                  }
 
                  else if (keyCode == quitKey) {
@@ -178,6 +187,8 @@ public class KeyBord {
  
                  else if (keyCode == mapKey) {
                      mapKeyPressed = false;
+                 } else if (keyCode == inventoryKey) {
+                     interactKeyPressed = false;
                  }
 
                  else if (keyCode == quitKey) {
