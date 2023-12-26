@@ -9,8 +9,8 @@ import com.jv01.player.Player;
 
 import com.jv01.screens.AlertWindow;
 import com.jv01.screens.CheatCodeMenu;
-import com.jv01.screens.GameMap;
 import com.jv01.screens.InfoMenuScreen;
+import com.jv01.screens.Windows.GameMap;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -427,7 +427,8 @@ public class MainGameWindow {
 
         if(player.keyBord.mapKeyPressed){
             player.keyBord.mapKeyPressed = false;
-            map = new GameMap(gameName,player);  
+            //map = new GameMap(gameName,player);  
+            displayNewWindow("Map");
         }
 
         if(player.keyBord.inventoryKeyPressed){
