@@ -1,4 +1,4 @@
-package com.jv01.screens;
+package com.jv01.screens.Windows;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -6,6 +6,7 @@ import org.w3c.dom.NodeList;
 
 import com.jv01.fonctionals.Save;
 import com.jv01.player.Player;
+import com.jv01.screens.ShowNewWindow;
 
 import org.w3c.dom.Node;
 
@@ -17,6 +18,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 import java.awt.event.KeyListener;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 
 class Chunk01 {
     public int[] cellCoords;
@@ -36,6 +41,11 @@ public class GameMap extends JPanel {
     public static Save save = new Save();
     public Document doc;
     public Player player;
+
+    private JPanel newWindowPanel;
+
+    private JButton zoomInButton;
+    private JButton zoomOutButton;
     
     public String[] buildingsIcons = {
         "demo\\img\\buildings\\partyHouse01.png",
@@ -55,25 +65,45 @@ public class GameMap extends JPanel {
 
     private static int grideSize = 50;
 
-    private static final int BOXE_SIZE = 800;
-    private static final int CELL_SIZE = BOXE_SIZE / grideSize;
+    public int boxSize = 800;
+    public int cellSize = 0;
 
     private Map<int[], Chunk01> chunks;
 
-    public JFrame frame = new JFrame("Chunk Map");
-        
+    public GameMap(ShowNewWindow showNewWindow) {
+        this.player = showNewWindow.mainGameWindow.player;
+        this.newWindowPanel = showNewWindow.newWindowPanel; 
+        this.newWindowPanel.setLayout(null);
+        this.boxSize = showNewWindow.mainGameWindow.boxSize;
+        this.cellSize = boxSize/grideSize;
 
-    public GameMap(String gameName, Player player) {
-        this.player = player;
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(BOXE_SIZE, BOXE_SIZE);
-        doc = save.getDocumentXml(gameName, "chunks");
+        doc = save.getDocumentXml(showNewWindow.mainGameWindow.gameName, "chunks");
         chunks = new HashMap<>();
-    
-        loadChunksFromDocument(doc,player.chunk);
 
-        frame.add(this);
-        frame.setVisible(true);
+        loadChunksFromDocument(doc, player.chunk);
+
+        zoomInButton = new JButton("Zoom In (+)");
+        zoomInButton.setBounds(10, 10, 120, 30);
+        zoomInButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                zoomIn();
+            }
+        });
+        newWindowPanel.add(zoomInButton);
+
+        zoomOutButton = new JButton("Zoom Out (-)");
+        zoomOutButton.setBounds(140, 10, 120, 30);
+        zoomOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                zoomOut();
+            }
+        });
+        newWindowPanel.add(zoomOutButton);
+
+        this.setSize(boxSize, boxSize);
+        newWindowPanel.add(this);
     }
 
     private void loadChunksFromDocument(Document doc, long[] currentChunk) {
@@ -115,24 +145,31 @@ public class GameMap extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+    
         for (Map.Entry<int[], Chunk01> entry : chunks.entrySet()) {
             int[] cellCoords = entry.getKey();
             Chunk01 chunk = entry.getValue();
-
-            int x = cellCoords[0] * CELL_SIZE + BOXE_SIZE/2 - CELL_SIZE/2;
-            int y = cellCoords[1] * CELL_SIZE + BOXE_SIZE/2 - CELL_SIZE/2;
-
+    
+            int x = cellCoords[0] * cellSize + boxSize/2 - cellSize/2;
+            int y = cellCoords[1] * cellSize + boxSize/2 - cellSize/2;
+    
             g.setColor(getBiomeColor(chunk.biome));
-            g.fillRect(y, x, CELL_SIZE, CELL_SIZE);
-            if(chunk.imageIcon != null)chunk.imageIcon.paintIcon(this, g, y, x);
-
-            if(cellCoords[0]==cellCoords[1] && cellCoords[0]==0){
-                Image scaledImage = player.playerIcon.getImage().getScaledInstance(CELL_SIZE, CELL_SIZE, Image.SCALE_SMOOTH);
+            g.fillRect(y, x, cellSize, cellSize);
+    
+            if (chunk.imageIcon != null) {
+                Image scaledImage = chunk.imageIcon.getImage().getScaledInstance(cellSize, cellSize, Image.SCALE_AREA_AVERAGING);
+                ImageIcon scaledIcon = new ImageIcon(scaledImage);
+                scaledIcon.paintIcon(this, g, y, x);
+            }
+    
+            if (cellCoords[0] == cellCoords[1] && cellCoords[0] == 0) {
+                Image scaledImage = player.playerIcon.getImage().getScaledInstance(cellSize, cellSize, Image.SCALE_AREA_AVERAGING);
                 new ImageIcon(scaledImage).paintIcon(this, g, y, x);
             }
         }
     }
+    
+    
 
     private Color getBiomeColor(int biome) {
         Color color;
@@ -176,9 +213,25 @@ public class GameMap extends JPanel {
         ImageIcon imageIcon = null;
         if(buildingType>=0 && buildingType!=7){
             imageIcon01 = new ImageIcon(buildingsIcons[buildingType]);
-            Image scaledImage = imageIcon01.getImage().getScaledInstance(CELL_SIZE, CELL_SIZE, Image.SCALE_SMOOTH);
+            Image scaledImage = imageIcon01.getImage().getScaledInstance(cellSize, cellSize, Image.SCALE_SMOOTH);
             imageIcon = new ImageIcon(scaledImage);
         }
         return imageIcon;
+    }
+
+    private void zoomIn() {
+        if (grideSize > 10) {
+            grideSize -= 10;
+            cellSize = boxSize / grideSize;
+            repaint();
+        }
+    }
+
+    private void zoomOut() {
+        if (grideSize < 100) {
+            grideSize += 10;
+            cellSize = boxSize / grideSize;
+            repaint();
+        }
     }
 }
