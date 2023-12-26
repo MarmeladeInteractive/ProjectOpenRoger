@@ -22,7 +22,7 @@ public class Player{
     public Save save = new Save();
     public MainGameWindow mainGameWindow;
 
-    public Inventory inventory;
+    public PlayerInventory inventory;
     public KeyBord keyBord;
 
     public String gameName;
@@ -109,7 +109,7 @@ public class Player{
         playerLabel = new JLabel(playerIcon);
         playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
-        inventory = new Inventory(gameName);
+        inventory = new PlayerInventory(gameName);
         keyBord = new KeyBord(gameName);
     }
 

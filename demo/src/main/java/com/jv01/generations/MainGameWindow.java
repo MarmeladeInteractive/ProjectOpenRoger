@@ -66,6 +66,7 @@ public class MainGameWindow {
     private boolean isInsideBuilding = false;
 
     public int arcadeGameId = 0;
+    public String newWindowId = "";
 
     public String environment;
 
@@ -429,6 +430,11 @@ public class MainGameWindow {
             map = new GameMap(gameName,player);  
         }
 
+        if(player.keyBord.inventoryKeyPressed){
+            player.keyBord.inventoryKeyPressed = false;
+            displayNewWindow("Inventory");
+        }
+
         if(player.keyBord.menuKeyPressed){
             player.keyBord.menuKeyPressed = false;
             infoMenu = new InfoMenuScreen(gameName,player);
@@ -501,7 +507,7 @@ public class MainGameWindow {
     public void buildChunk(){
         chunk = null;
         if(isInsideBuilding){
-            if(environment.equals("arcade")){
+            if(environment.equals("arcade")||environment.equals("newWindow")){
                 environment = "extInsideBuilding";
             }else{
                 environment = "insideBuilding";
@@ -524,6 +530,12 @@ public class MainGameWindow {
         chunk = new Chunks(this);
     }
 
+    public void displayNewWindow(String idNewWindow){
+        restartFrame();
+        environment = "newWindow";
+        newWindowId = idNewWindow;
+        chunk = new Chunks(this);
+    }
      
     public String hash(String seed, long value1, long value2) {
         try {

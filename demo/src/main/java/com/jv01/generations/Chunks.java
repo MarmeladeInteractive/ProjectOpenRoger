@@ -18,6 +18,7 @@ import com.jv01.buildings.Buildings;
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.Atlas;
 import com.jv01.miniGames.Arcade;
+import com.jv01.screens.ShowNewWindow;
 
 
 public class Chunks {
@@ -185,6 +186,9 @@ public class Chunks {
                     break;
                 case "arcade":
                     addArcade();
+                    break;
+                case "newWindow":
+                    addNewWindow();
                     break;
 
                 default:
@@ -715,6 +719,10 @@ public class Chunks {
 
     public void addArcade(){
         new Arcade(mainGameWindow);
+    }
+
+    public void addNewWindow(){
+        new ShowNewWindow(mainGameWindow);
     }
 
     public String hash(String seed, long value1, long value2) {
