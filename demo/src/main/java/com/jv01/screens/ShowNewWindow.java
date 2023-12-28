@@ -18,6 +18,8 @@ import java.time.LocalTime;
 
 public class ShowNewWindow {
     public Save save = new Save();
+    public GameWindowsSize GWS = new GameWindowsSize(true);
+
     public int boxSize;
 
     private JPanel panel;
@@ -34,8 +36,8 @@ public class ShowNewWindow {
     public ShowNewWindow(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
 
-        this.boxSize = mainGameWindow.boxSize;
-        this.panel = mainGameWindow.backgroundPanel;
+        this.boxSize = GWS.boxSize;
+        this.panel = mainGameWindow.backgroundPanel.panel;
 
         this.idWindow = mainGameWindow.newWindowId;
 

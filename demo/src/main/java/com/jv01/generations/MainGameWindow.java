@@ -5,10 +5,14 @@ import javax.swing.border.Border;
 
 import com.jv01.buildings.Buildings;
 import com.jv01.fonctionals.Time;
+import com.jv01.generations.Panels.BackgroundPanel;
+import com.jv01.generations.Panels.FrontPanel;
+import com.jv01.generations.Panels.NightPanel;
 import com.jv01.player.Player;
 
 import com.jv01.screens.AlertWindow;
 import com.jv01.screens.CheatCodeMenu;
+import com.jv01.screens.GameWindowsSize;
 import com.jv01.screens.InfoMenuScreen;
 import com.jv01.screens.Windows.GameMap;
 
@@ -21,26 +25,28 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 
-public class MainGameWindow {
+public class MainGameWindow{
     
     public String gameName;
     public String seed;
     public boolean cheatCodesEnabled;
 
+    public GameWindowsSize GWS = new GameWindowsSize(true);
+
     public Timer seedTimer;
     public String key="0";
 
-    private JFrame frame;
+    public JFrame frame;
 
-    public JPanel backgroundPanel; 
+    public FrontPanel frontPanel;
+    public BackgroundPanel backgroundPanel;
+    public NightPanel nightPanel;
 
     public long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
 
     public boolean displayChunks = true;
 
-    public int boxSize = 800;
-    int cellSize = boxSize / 3;
     BufferedImage img;
 
     boolean[] completedCell = {false,false,false,false};
@@ -48,22 +54,16 @@ public class MainGameWindow {
     private int updateCounter = 0;
 
     public Player player;
-    Chunks chunk;
+    public Chunks chunk;
     GameMap map;
     InfoMenuScreen infoMenu;
     CheatCodeMenu cheatCodeMenu = new CheatCodeMenu();
-
-    JLabel nightLabel = new JLabel();
-
-    private JLabel coordinatesLabel;
-    private JLabel moneyLabel;
-    private JLabel dateLabel;
 
     private JLabel msgLabel;
     private int msgBoxSizeX = 380;
     private int msgBoxSizeY = 100;
 
-    private boolean isInsideBuilding = false;
+    public boolean isInsideBuilding = false;
 
     public int arcadeGameId = 0;
     public String newWindowId = "";
@@ -117,106 +117,49 @@ public class MainGameWindow {
 
         frame.addKeyListener(player.keyBord.keyListener);
 
-        player.positionX = (boxSize - player.playerSize) / 2;
-        player.positionY = (boxSize - player.playerSize) / 2;
+        player.positionX = (GWS.gameWindowWidth - player.playerSize) / 2;
+        player.positionY = (GWS.gameWindowHeight - player.playerSize) / 2;
 
-        player.positionX = boxSize / 2;
-        player.positionY = boxSize / 2;
+        player.positionX = GWS.gameWindowWidth / 2;
+        player.positionY = GWS.gameWindowHeight / 2;
 
-        nightLabel.setOpaque(true);
-        nightLabel.setForeground(new Color(0, 0, 0));
-        nightLabel.setBackground(new Color(0, 0, 0, date.nightFilterOpacity));
-
-        nightLabel.setBounds(0, 0 , boxSize-1, boxSize-1);
-        
         frame.setFocusable(true);
         frame.requestFocusInWindow();
         frame.setVisible(true);
+        
+        this.frontPanel = new FrontPanel(this);
+        this.backgroundPanel = new BackgroundPanel(this);
+        this.nightPanel = new NightPanel(this);
 
         showMainGameWindow();
     }
 
     public void showMainGameWindow() {
+        GWS = new GameWindowsSize(!isInsideBuilding);
         restartFrame();
 
         buildChunk();
 
-        addNightLabel();
         player.playerLabel.setVisible(true);
         player.canWalk = true;
     }
 
     public void restartFrame(){
         frame.getContentPane().removeAll();
-
         key = getKey();
-
-        createBackgroundPanel();
-        player.inventory.createInventoryPanel(frame);
-        
-    
-        addCoordinatesLabel();
-        addMoneyLabel();
-        addDateLabel();
+ 
+        frontPanel.createFrontPanel();
+        nightPanel.createNightPanel();
+        backgroundPanel.createBackgroundPanel(GWS);
 
         addMsgLabel();
 
         addAlertArea();
 
         updateLabels();
-
-        backgroundPanel.add(player.playerLabel);
+        
+        backgroundPanel.panel.add(player.playerLabel);
         player.playerLabel.setVisible(false);
-    }
-
-    private void addCoordinatesLabel(){
-        coordinatesLabel = new JLabel();
-        coordinatesLabel.setForeground(Color.BLACK);
-
-        int labelX = backgroundPanel.getX();
-        int labelY = backgroundPanel.getY() - 45;
-
-        coordinatesLabel.setBounds(labelX, labelY, 200, 40);
-
-        Font labelFont = new Font("Arial", Font.BOLD, 16);
-        coordinatesLabel.setFont(labelFont);
-
-        frame.add(coordinatesLabel);
-    }
-
-    private void addMoneyLabel(){
-        moneyLabel = new JLabel();
-        moneyLabel.setForeground(Color.BLACK);
-
-        int labelX = backgroundPanel.getX() + 300;
-        int labelY = backgroundPanel.getY() - 45;
-
-        moneyLabel.setBounds(labelX, labelY, 200, 40);
-
-        Font labelFont = new Font("Arial", Font.BOLD, 16);
-        moneyLabel.setFont(labelFont);
-
-        frame.add(moneyLabel);
-    }
-
-    private void addDateLabel(){
-        dateLabel = new JLabel();
-        dateLabel.setForeground(Color.BLACK);
-
-        int labelX = backgroundPanel.getX() + 625;
-        int labelY = backgroundPanel.getY() - 35;
-
-        dateLabel.setBounds(labelX, labelY, 200, 40);
-
-        Font labelFont = new Font("Arial", Font.BOLD, 16);
-        dateLabel.setFont(labelFont);
-
-        frame.add(dateLabel);
-    }
-
-    private void addNightLabel(){
-        backgroundPanel.add(nightLabel);
-        backgroundPanel.setComponentZOrder(nightLabel, 0);
     }
 
     private void addMsgLabel(){
@@ -228,7 +171,7 @@ public class MainGameWindow {
         Border bord= BorderFactory.createLineBorder(Color.black,2);
         msgLabel.setBorder(bord);
 
-        int labelX = (boxSize/2) - (msgBoxSizeX/2);
+        int labelX = (GWS.gameWindowWidth/2) - (msgBoxSizeX/2);
         int labelY = 10;
 
         msgLabel.setBounds(labelX, labelY , msgBoxSizeX, msgBoxSizeY);
@@ -239,40 +182,14 @@ public class MainGameWindow {
         msgLabel.setHorizontalAlignment(SwingConstants.CENTER);
         msgLabel.setVerticalAlignment(SwingConstants.CENTER);
 
-        backgroundPanel.add(msgLabel);
+        backgroundPanel.panel.add(msgLabel);
         msgLabel.setVisible(false);
     }
 
     private void addAlertArea(){
-        alertWindow = new AlertWindow(backgroundPanel,boxSize);
+        alertWindow = new AlertWindow(backgroundPanel.panel,GWS.gameWindowWidth);/////////////////ff
     }
-
-    private void createBackgroundPanel(){
-        backgroundPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                ImageIcon backgroundImage = new ImageIcon(chunk.backPic);
-                Image img = backgroundImage.getImage();
-                g.drawImage(img, 0, 0, this.getWidth(), this.getHeight(), this);
-            }
-        };
-        
-        backgroundPanel.setLayout(null);
-        backgroundPanel.setBounds(0, 0, boxSize, boxSize); 
-
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
-
-        Dimension screenSize = toolkit.getScreenSize();
-
-        int screenWidth = screenSize.width;
-        int screenHeight = screenSize.height;
-
-        backgroundPanel.setLocation((screenWidth - boxSize)/2,(screenHeight - boxSize)/2);
-
-        frame.add(backgroundPanel);
-    }
-
+    
     private void updatePlayerLocation() {
 
         int lastX = player.positionX;
@@ -301,12 +218,12 @@ public class MainGameWindow {
 
         if(!isInsideBuilding){
             for(Buildings b : chunk.triggerableBuilding){
-                int bX = (b.cell[0]+1)*cellSize-(cellSize/2);
-                int bY = (b.cell[1]+1)*cellSize-(cellSize/2);
+                int bX = (b.cell[0]+1)*GWS.cellWidth-(GWS.cellWidth/2);
+                int bY = (b.cell[1]+1)*GWS.cellHeight-(GWS.cellHeight/2);
 
                 int distance = getDistanceFromPlayer(bX, bY);
 
-                if(distance <= cellSize/2){
+                if(distance <= (b.dimension[0]+b.dimension[1])/2){
 
                     //openMsgLabels("'e' Pour entrer dans la " +b.name);
                     spam = "'e' Pour entrer dans la " +b.name;
@@ -458,9 +375,9 @@ public class MainGameWindow {
         }   
 
         if(player.positionX < 0)changeChunk("left");
-        if(player.positionX > (boxSize))changeChunk("right");
+        if(player.positionX > (GWS.gameWindowWidth))changeChunk("right");
         if(player.positionY < 0)changeChunk("up");
-        if(player.positionY > (boxSize))changeChunk("down");
+        if(player.positionY > (GWS.gameWindowHeight))changeChunk("down");
 
         player.playerLabel.setBounds(player.positionX - (player.playerSize/2), player.positionY - (player.playerSize/2), player.playerSize, player.playerSize);
 
@@ -562,44 +479,44 @@ public class MainGameWindow {
             switch (direction) {
                 case "up":
                     currentChunk[0]--;
-                    player.positionX = (boxSize) / 2;
-                    player.positionY = (boxSize);
+                    player.positionX = (GWS.gameWindowWidth) / 2;
+                    player.positionY = (GWS.gameWindowHeight);
                     break;
                 case "down":
                     currentChunk[0]++;
-                    player.positionX = (boxSize) / 2;
+                    player.positionX = (GWS.gameWindowWidth) / 2;
                     player.positionY = 0;
                     break;
                 case "left":
                     currentChunk[1]--;
-                    player.positionX = (boxSize);
-                    player.positionY = (boxSize) / 2;
+                    player.positionX = (GWS.gameWindowWidth);
+                    player.positionY = (GWS.gameWindowHeight) / 2;
                     break;
                 case "right":
                     currentChunk[1]++;
                     player.positionX = 0;
-                    player.positionY = (boxSize) / 2;
+                    player.positionY = (GWS.gameWindowHeight) / 2;
                     break;
 
                 case "inBuilding":
                     isInsideBuilding = true;
-                    player.positionX = (boxSize) / 2;
-                    player.positionY = (boxSize - 100);
+                    player.positionX = (GWS.boxSize + 50) / 2;
+                    player.positionY = (GWS.boxSize - 100);
                     player.stopPlayer();
                     break;
 
                 case "TP":
                     isInsideBuilding = false;
                     displayChunks = true;
-                    player.positionX = (boxSize) / 2;
-                    player.positionY = (boxSize) / 2;
+                    player.positionX = (GWS.gameWindowWidth) / 2;
+                    player.positionY = (GWS.gameWindowHeight) / 2;
                     break;
                 
                 case "chargeChunk":
                     isInsideBuilding = false;
                     displayChunks = false;
-                    player.positionX = (boxSize) / 2;
-                    player.positionY = (boxSize) / 2;
+                    player.positionX = (GWS.gameWindowWidth) / 2;
+                    player.positionY = (GWS.gameWindowHeight) / 2;
                     break;
             
                 default:
@@ -607,8 +524,8 @@ public class MainGameWindow {
             }
         }else{
             isInsideBuilding = false;
-            player.positionX = (boxSize) / 2;
-            player.positionY = (boxSize) / 2;
+            player.positionX = (GWS.gameWindowWidth) / 2;
+            player.positionY = (GWS.gameWindowHeight) / 2;
         }
         showMainGameWindow();
         updateLabels();
@@ -627,37 +544,20 @@ public class MainGameWindow {
     }
 
     public void updateDate(){
-        if(isInsideBuilding){
-            nightLabel.setBackground(new Color(0, 0, 0, 0));
-        }else{
-            nightLabel.setBackground(new Color(0, 0, 0, date.nightFilterOpacity));
-        }
+        nightPanel.updateNight(isInsideBuilding, date);
         updateDateTextLabels();
     }
 
     public void updatePositionTextLabels(){
-        coordinatesLabel.setText(
-            "<html>"+
-                "Chunk: (" + currentChunk[0] + ", " + currentChunk[1] + ")<br>"+
-                "Position: ("+(player.positionX)+", "+(player.positionY)+")"+
-            "</html>"
-        );
+        frontPanel.updatePositionTextLabels(currentChunk,new long[] {player.positionX,player.positionY});
     }
 
     public void updateMoneyTextLabels(){
-        moneyLabel.setText(
-            "<html>"+
-                "Argent: " + player.money + '€'+
-            "</html>"
-        );
+        frontPanel.updateMoneyTextLabels(player.money);
     }
 
     public void updateDateTextLabels(){
-        dateLabel.setText(
-            "<html>"+
-                "Date: " + date.getDate() + " " + date.getHour()+
-            "</html>"
-        );
+        frontPanel.updateDateTextLabels(date.getDate(), date.getHour());
     }
 
     public void openMsgLabels(String msg){

@@ -6,6 +6,7 @@ import org.w3c.dom.NodeList;
 
 import com.jv01.fonctionals.Save;
 import com.jv01.player.Player;
+import com.jv01.screens.GameWindowsSize;
 import com.jv01.screens.ShowNewWindow;
 
 import org.w3c.dom.Node;
@@ -42,6 +43,8 @@ public class GameMap extends JPanel {
     public Document doc;
     public Player player;
 
+    public GameWindowsSize GWS = new GameWindowsSize(true);
+
     private JPanel newWindowPanel;
 
     private JButton zoomInButton;
@@ -74,7 +77,7 @@ public class GameMap extends JPanel {
         this.player = showNewWindow.mainGameWindow.player;
         this.newWindowPanel = showNewWindow.newWindowPanel; 
         this.newWindowPanel.setLayout(null);
-        this.boxSize = showNewWindow.mainGameWindow.boxSize;
+        this.boxSize = GWS.boxSize;
         this.cellSize = boxSize/grideSize;
 
         doc = save.getDocumentXml(showNewWindow.mainGameWindow.gameName, "chunks");

@@ -115,7 +115,7 @@ public class Decorations {
         int key02 = Integer.parseInt(String.valueOf(decorationKey.charAt(2)), 16);
         int key03 = Integer.parseInt(String.valueOf(decorationKey.charAt(3)), 16);   
 
-        offsetX = (int)mapRange(key02,0,16,-20,20);
+        offsetX = (int)mapRange(key02,0,16,-50,50);
         offsetY = (int)mapRange(key03,0,16,-20,20);
     }
 

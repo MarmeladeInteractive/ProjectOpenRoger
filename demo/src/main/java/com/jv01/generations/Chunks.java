@@ -18,6 +18,7 @@ import com.jv01.buildings.Buildings;
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.Atlas;
 import com.jv01.miniGames.Arcade;
+import com.jv01.screens.GameWindowsSize;
 import com.jv01.screens.ShowNewWindow;
 
 
@@ -29,13 +30,14 @@ public class Chunks {
     public boolean load = true;
     public MainGameWindow mainGameWindow;
 
+    public GameWindowsSize GWS = new GameWindowsSize(true);
+
     public String id;
     public long[] chunk;
     public String seed;
     public int biome;
     public String key;
-    public int boxSize;
-    public int cellSize;
+
     public String backPic = "";
 
     public boolean displayOnMap = true;
@@ -100,9 +102,8 @@ public class Chunks {
 
         this.chunk = mainGameWindow.currentChunk;
         this.seed = mainGameWindow.seed;
-        this.boxSize = mainGameWindow.boxSize;
-        this.cellSize = boxSize/3;
-        this.backgroundPanel = mainGameWindow.backgroundPanel;
+
+        this.backgroundPanel = mainGameWindow.backgroundPanel.panel;
         this.environment = mainGameWindow.environment;
         this.gameName = mainGameWindow.gameName;
 
@@ -479,7 +480,7 @@ public class Chunks {
         Buildings building01 = new Buildings(gameName, buildingType, chunk, cell, buildingKey);
         buildingType = building01.id;
 
-        Objects obj = new Objects(cell[0]*cellSize+(cellSize/2)+building01.offsetX, cell[1]*cellSize+(cellSize/2)+ building01.offsetY, building01.dimension, building01.imageUrl, 1, backgroundPanel);         
+        Objects obj = new Objects(cell[0]*GWS.cellWidth+(GWS.cellWidth/2)+building01.offsetX, cell[1]*GWS.cellHeight+(GWS.cellHeight/2)+ building01.offsetY, building01.dimension, building01.imageUrl, 1, backgroundPanel);         
         restrictedAreas.add(obj.restrictedAreas);
         if((buildingType!=7)){
             triggerableBuilding.add(building01);
@@ -521,13 +522,13 @@ public class Chunks {
                         }else if(biome == 2 || biome == 3 || biome == 4){
                             if(key01 <= getCharComparedToPercentage(13)){
                                 if(key02 <= getCharComparedToPercentage(7)){
-                                    createNpc(cell[0]*cellSize+(position[0]*(cellSize/3)), cell[1]*cellSize+(position[1]*(cellSize/3)));              
+                                    createNpc(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3)), cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3)));              
                                 }
                             }
                         }else if(biome == 5 || biome == 6 || biome == 7){
                             if(key01 <= getCharComparedToPercentage(26)){
                                 if(key02 <= getCharComparedToPercentage(13)){
-                                    createNpc(cell[0]*cellSize+(position[0]*(cellSize/3)), cell[1]*cellSize+(position[1]*(cellSize/3)));              
+                                    createNpc(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3)), cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3)));              
                                 }
                             }
                         }
@@ -589,7 +590,7 @@ public class Chunks {
                                 Decorations deco = new Decorations("lacs", 0, chunk, cell, decorationKey);
                                 int size[] = {(int)(deco.dimension[0]+deco.scale),(int)(deco.dimension[1]+deco.scale)};
 
-                                new Objects(cell[0]*cellSize+(position[0]*(cellSize/3))+((size[0])/2)+deco.offsetX, cell[1]*cellSize+(position[1]*(cellSize/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);         
+                                new Objects(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3))+((size[0])/2)+deco.offsetX, cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);         
             
                                 k=-1;
                                 l=-1;
@@ -597,21 +598,6 @@ public class Chunks {
                                 break;
                             }
 
-                            /*if(k==2 && l==2 && key01 == '1' && !structure && ((i==0&&j==0)||(i==2&&j==2)||(i==0&&j==2)||(i==2&&j==0))){
-                                position[0]=0;
-                                position[1]=0;
-
-                                Buildings building01 = new Buildings(gameName, 6, chunk, cell, decorationKey);
-
-                                Objects obj = new Objects(cell[0]*cellSize+(cellSize/2)+building01.offsetX, cell[1]*cellSize+(cellSize/2)+ building01.offsetY, building01.dimension, building01.imageUrl, 1, backgroundPanel);         
-                                restrictedAreas.add(obj.restrictedAreas);
-                                //triggerableBuilding.add(building01);
-
-                                k=-1;
-                                l=-1;
-                                structure = true;
-                                break;
-                            }*/
 
                             if(key01 >= '0' && key01 <= '6'){
                                 decorationType = -1;
@@ -628,11 +614,11 @@ public class Chunks {
                                 Decorations deco = new Decorations("arbres", decorationType, chunk, cell, decorationKey);
                                 int size[] = {(int)(deco.dimension[0]+deco.scale),(int)(deco.dimension[1]+deco.scale)};
 
-                                new Objects(cell[0]*cellSize+(position[0]*(cellSize/3))+((size[0])/2)+deco.offsetX, cell[1]*cellSize+(position[1]*(cellSize/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);         
+                                new Objects(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3))+((size[0])/2)+deco.offsetX, cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);         
                             }else{
                                 int ran = random.nextInt(40);
-                                if(ran == 1)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),0);
-                                if(ran == 2)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),1);
+                                if(ran == 1)createItem(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3)),cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3)),0);
+                                if(ran == 2)createItem(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3)),cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3)),1);
                             }
                         }else if(biome == 2 || biome == 3 || biome == 4){
                             if(k==2 && l==2 && key01 == '0' && !structure){
@@ -642,7 +628,7 @@ public class Chunks {
                                 Decorations deco = new Decorations("lacs", 0, chunk, cell, decorationKey);
                                 int size[] = {(int)(deco.dimension[0]+deco.scale),(int)(deco.dimension[1]+deco.scale)};
 
-                                new Objects(cell[0]*cellSize+(position[0]*(cellSize/3))+((size[0])/2)+deco.offsetX, cell[1]*cellSize+(position[1]*(cellSize/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);                    
+                                new Objects(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3))+((size[0])/2)+deco.offsetX, cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);                    
             
                                 k=-1;
                                 l=-1;
@@ -671,11 +657,11 @@ public class Chunks {
                                 Decorations deco = new Decorations("arbres", decorationType, chunk, cell, decorationKey);
                                 int size[] = {(int)(deco.dimension[0]+deco.scale),(int)(deco.dimension[1]+deco.scale)};
 
-                                new Objects(cell[0]*cellSize+(position[0]*(cellSize/3))+((size[0])/2)+deco.offsetX, cell[1]*cellSize+(position[1]*(cellSize/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);
+                                new Objects(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3))+((size[0])/2)+deco.offsetX, cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);
                             }else{
                                 int ran = random.nextInt(100);
-                                if(ran >= 0 && ran <=5)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),0);
-                                if(ran == 6 || ran == 7)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),1);
+                                if(ran >= 0 && ran <=5)createItem(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3)),cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3)),0);
+                                if(ran == 6 || ran == 7)createItem(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3)),cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3)),1);
                             }
                         }else if(biome == 5 || biome == 6 || biome == 7){
                             decorationType = -1;
@@ -689,11 +675,11 @@ public class Chunks {
                                 Decorations deco = new Decorations("arbres", decorationType, chunk, cell, decorationKey);
                                 int size[] = {(int)(deco.dimension[0]+deco.scale),(int)(deco.dimension[1]+deco.scale)};
 
-                                new Objects(cell[0]*cellSize+(position[0]*(cellSize/3))+((size[0])/2)+deco.offsetX, cell[1]*cellSize+(position[1]*(cellSize/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);
+                                new Objects(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3))+((size[0])/2)+deco.offsetX, cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3))+((size[1])/2)+deco.offsetY, size, deco.imageUrl, 0, backgroundPanel);
                             }else{
                                 int ran = random.nextInt(100);
-                                if(ran >= 0 && ran <=5)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),0);
-                                if(ran == 6)createItem(cell[0]*cellSize+(position[0]*(cellSize/3)),cell[1]*cellSize+(position[1]*(cellSize/3)),1);
+                                if(ran >= 0 && ran <=5)createItem(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3)),cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3)),0);
+                                if(ran == 6)createItem(cell[0]*GWS.cellWidth+(position[0]*(GWS.cellWidth/3)),cell[1]*GWS.cellHeight+(position[1]*(GWS.cellHeight/3)),1);
                             }
                         }
                     }
