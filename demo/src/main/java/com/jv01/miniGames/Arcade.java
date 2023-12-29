@@ -7,6 +7,7 @@ import org.w3c.dom.Element;
 
 import com.jv01.miniGames.games.horsesRace.HorsesRace;
 import com.jv01.miniGames.games.roulette.Roulette;
+import com.jv01.screens.GameWindowsSize;
 import com.jv01.miniGames.games.NoGame.NoGame;
 import com.jv01.miniGames.games.blackjack.Blackjack;
 import com.jv01.fonctionals.Save;
@@ -20,6 +21,7 @@ import java.time.LocalTime;
 
 public class Arcade {
     public Save save = new Save();
+
     public int boxSize;
 
     private JPanel panel;
@@ -50,8 +52,9 @@ public class Arcade {
     public Arcade(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
 
-        this.boxSize = mainGameWindow.boxSize;
-        this.panel = mainGameWindow.backgroundPanel;
+        this.boxSize = 800;
+
+        this.panel = mainGameWindow.backgroundPanel.panel;
 
         this.idGame = mainGameWindow.arcadeGameId;
 

@@ -3,6 +3,7 @@ package com.jv01.buildings;
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
 import com.jv01.generations.Chunks;
+import com.jv01.screens.GameWindowsSize;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,8 @@ import org.w3c.dom.Element;
 public class Inside {
     private Save save = new Save();
     private Chunks chunk;
+
+    public GameWindowsSize GWS = new GameWindowsSize(false);
 
     public String gameName;
     public String name;
@@ -40,7 +43,8 @@ public class Inside {
 
         soundManager = new SoundManager(gameName);
 
-        this.boxSize =  chunk.boxSize;
+        this.boxSize =  GWS.boxSize;
+
         this.isInsideBuilding = chunk.isInsideBuilding;
         this.backgroundPanel = chunk.backgroundPanel;
 
@@ -91,23 +95,23 @@ public class Inside {
     private void addRestrictedBorders(){
         this.restrictedAreas.add(new int[][]{ 
             {0,0},
-            {120,boxSize} 
+            {120*GWS.boxScale,boxSize} 
         });
         this.restrictedAreas.add(new int[][]{ 
             {0,0},
-            {boxSize,190} 
+            {boxSize,190*GWS.boxScale} 
         });
         this.restrictedAreas.add(new int[][]{ 
-            {boxSize-120,0},
-            {boxSize-120,boxSize} 
+            {boxSize-120*GWS.boxScale,0},
+            {boxSize,boxSize} 
         });
         this.restrictedAreas.add(new int[][]{ 
-            {0,boxSize-100},
-            {(boxSize/2) - 50,boxSize} 
+            {0,boxSize-100*GWS.boxScale},
+            {(boxSize/2) - 50*GWS.boxScale,boxSize} 
         });
         this.restrictedAreas.add(new int[][]{ 
-            {(boxSize/2) + 80,boxSize-100},
-            {boxSize-50,boxSize}  
+            {(boxSize/2) + 80*GWS.boxScale,boxSize-100*GWS.boxScale},
+            {boxSize-50*GWS.boxScale,boxSize}  
         });
     }
 
@@ -127,7 +131,7 @@ public class Inside {
 
     private void createBakeryInside(){
         if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        Bakery bakery = new Bakery(gameName,boxSize, backgroundPanel);
+        Bakery bakery = new Bakery(gameName, backgroundPanel);
         addRestrictedAreas(bakery.restrictedAreas);
         addTrigerEventsAreas(bakery.trigerEvents);
     }

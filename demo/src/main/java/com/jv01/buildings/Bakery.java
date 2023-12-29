@@ -8,10 +8,13 @@ import javax.swing.JPanel;
 import com.jv01.generations.Dealers;
 import com.jv01.generations.Objects;
 import com.jv01.generations.Tools;
+import com.jv01.screens.GameWindowsSize;
 
 public class Bakery {
     public String gameName;
     public int boxSize;
+
+    public GameWindowsSize GWS = new GameWindowsSize(false);
 
     public JPanel backgroundPanel;
 
@@ -19,9 +22,9 @@ public class Bakery {
     public List<Object[]> trigerEvents = new ArrayList<>();
     public int trigerSize = 50;
 
-    public Bakery(String gameName, int boxSize, JPanel backgroundPanel){
+    public Bakery(String gameName, JPanel backgroundPanel){
         this.gameName = gameName;
-        this.boxSize = boxSize;
+        this.boxSize = GWS.boxSize;
 
         this.backgroundPanel = backgroundPanel;
 
@@ -31,7 +34,7 @@ public class Bakery {
 
     public void addTools(){
         Dealers appleStand = new Dealers(gameName, 0);
-        Objects obj = new Objects(boxSize /2 -120, appleStand.size[1] + 225, appleStand.size, appleStand.imageUrl, 1, backgroundPanel);
+        Objects obj = new Objects(boxSize /2 -(int)(boxSize*0.15), appleStand.size[1] + (int)(boxSize*0.32), appleStand.size, appleStand.imageUrl, 1, backgroundPanel);
 
         Object[] item = {
             new int[]{
@@ -45,7 +48,7 @@ public class Bakery {
         trigerEvents.add(item);
 
         Dealers chocoStand = new Dealers(gameName, 1);
-        obj = new Objects(boxSize /2 + 60, chocoStand.size[1] + 225, chocoStand.size, chocoStand.imageUrl, 1, backgroundPanel);
+        obj = new Objects(boxSize /2 + (int)(boxSize*0.075), chocoStand.size[1] + (int)(boxSize*0.32), chocoStand.size, chocoStand.imageUrl, 1, backgroundPanel);
 
         Object[] item01 = {
             new int[]{
@@ -59,7 +62,7 @@ public class Bakery {
         trigerEvents.add(item01);
 
         Dealers croissantStand = new Dealers(gameName, 2);
-        obj = new Objects(boxSize /2 + 155, croissantStand.size[1] + 225, croissantStand.size, croissantStand.imageUrl, 1, backgroundPanel);
+        obj = new Objects(boxSize /2 + (int)(boxSize*0.19), croissantStand.size[1] + (int)(boxSize*0.32), croissantStand.size, croissantStand.imageUrl, 1, backgroundPanel);
 
         Object[] item02 = {
             new int[]{
@@ -73,7 +76,7 @@ public class Bakery {
         trigerEvents.add(item02);
 
         Tools dump = new Tools(gameName, 5, 0);
-        obj = new Objects(dump.size[0]/2 + boxSize/2 -150 , boxSize - 80 - dump.size[1]/2, dump.size, dump.imageUrl, 0, backgroundPanel);
+        obj = new Objects(dump.size[0]/2 + boxSize/2 -(int)(boxSize*0.19) , boxSize - (int)(boxSize*0.1) - dump.size[1]/2, dump.size, dump.imageUrl, 0, backgroundPanel);
         
         Object[] item4 = {
             new int[]{
@@ -90,23 +93,23 @@ public class Bakery {
 
     public void addRestrictedAreas(){
         restrictedAreas.add(new int[][]{ 
-            {240, 0},
-            {boxSize , 310},
+            {(int)(boxSize*0.31), 0},
+            {boxSize , (int)(boxSize*0.39)},
         });
 
         restrictedAreas.add(new int[][]{ 
-            {0, 380},
-            {260 , boxSize},
+            {0, (int)(boxSize*0.5)},
+            {(int)(boxSize*0.32) , boxSize},
         });
 
         restrictedAreas.add(new int[][]{ 
-            {boxSize - 270, 380},
+            {boxSize - (int)(boxSize*0.32), (int)(boxSize*0.5)},
             {boxSize , boxSize},
         });
 
         restrictedAreas.add(new int[][]{ 
             {0, 0},
-            {boxSize , 220},
+            {boxSize , (int)(boxSize*0.305)},
         });
     }
     
