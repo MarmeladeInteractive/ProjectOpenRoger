@@ -8,6 +8,7 @@ import com.jv01.fonctionals.Time;
 import com.jv01.generations.Panels.BackgroundPanel;
 import com.jv01.generations.Panels.FrontPanel;
 import com.jv01.generations.Panels.NightPanel;
+import com.jv01.generations.Panels.PhonePanel.PhonePanel;
 import com.jv01.player.Player;
 
 import com.jv01.screens.AlertWindow;
@@ -41,6 +42,7 @@ public class MainGameWindow{
     public FrontPanel frontPanel;
     public BackgroundPanel backgroundPanel;
     public NightPanel nightPanel;
+    public PhonePanel phonePanel;
 
     public long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
@@ -127,6 +129,7 @@ public class MainGameWindow{
         frame.requestFocusInWindow();
         frame.setVisible(true);
         
+        this.phonePanel = new PhonePanel(this);
         this.frontPanel = new FrontPanel(this);
         this.backgroundPanel = new BackgroundPanel(this);
         this.nightPanel = new NightPanel(this);
@@ -148,6 +151,7 @@ public class MainGameWindow{
         frame.getContentPane().removeAll();
         key = getKey();
  
+        phonePanel.createPhonePanel();
         frontPanel.createFrontPanel();
         nightPanel.createNightPanel();
         backgroundPanel.createBackgroundPanel(GWS);

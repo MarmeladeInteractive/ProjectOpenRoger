@@ -1,0 +1,11 @@
+<phone>
+    <phone id="phone">
+        <phoneWidth>300</phoneWidth>
+        <phoneHeight>533</phoneHeight>
+        <backPic>
+            {
+                demo/img/phone/backPhone.png
+            }
+        </backPic>
+    </phone>
+</phone>
