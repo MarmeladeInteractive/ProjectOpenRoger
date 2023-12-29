@@ -22,8 +22,6 @@ import java.time.LocalTime;
 public class Arcade {
     public Save save = new Save();
 
-    public GameWindowsSize GWS = new GameWindowsSize(false);
-
     public int boxSize;
 
     private JPanel panel;
@@ -54,7 +52,8 @@ public class Arcade {
     public Arcade(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
 
-        this.boxSize = GWS.boxSize;
+        this.boxSize = 800;
+
         this.panel = mainGameWindow.backgroundPanel.panel;
 
         this.idGame = mainGameWindow.arcadeGameId;

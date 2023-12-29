@@ -48,4 +48,10 @@ public class BackgroundPanel {
 
         frame.add(panel);
     }
+
+    public void clearPanel() {
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+    }
 }

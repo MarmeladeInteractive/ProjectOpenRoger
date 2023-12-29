@@ -37,8 +37,9 @@ public class ShowNewWindow {
         this.mainGameWindow = mainGameWindow;
 
         this.boxSize = GWS.boxSize;
-        this.panel = mainGameWindow.backgroundPanel.panel;
-
+        mainGameWindow.frontPanel.clearPanel();
+        this.panel = mainGameWindow.frontPanel.panel;
+        
         this.idWindow = mainGameWindow.newWindowId;
 
         focusOnNewWindow();

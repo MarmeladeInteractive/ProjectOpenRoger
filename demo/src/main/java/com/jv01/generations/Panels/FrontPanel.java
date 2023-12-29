@@ -112,4 +112,10 @@ public class FrontPanel {
             "</html>"
         );
     }
+
+    public void clearPanel() {
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+    }
 }

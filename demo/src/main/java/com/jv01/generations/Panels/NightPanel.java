@@ -39,4 +39,10 @@ public class NightPanel {
             panel.setBackground(new Color(0, 0, 0, date.nightFilterOpacity));
         }
     }
+
+    public void clearPanel() {
+        panel.removeAll();
+        panel.revalidate();
+        panel.repaint();
+    }
 }

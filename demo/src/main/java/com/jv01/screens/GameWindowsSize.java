@@ -17,6 +17,9 @@ public class GameWindowsSize {
 
     public int boxSize = 800;
 
+    private int boxSizeBase = 800;
+    public int boxScale;
+
     public GameWindowsSize(boolean isFullScreen){
         this.isFullScreen = isFullScreen;
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -26,6 +29,8 @@ public class GameWindowsSize {
         int minScreenDimension = Math.min(screenSizeHeight, screenSizeWidth);
 
         boxSize = minScreenDimension;
+        boxScale = (boxSize*1)/boxSizeBase;
+        
         cellSize = minScreenDimension/3;
 
         cellHeight = screenSizeHeight/3;

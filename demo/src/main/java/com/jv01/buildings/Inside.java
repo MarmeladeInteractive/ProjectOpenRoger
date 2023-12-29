@@ -95,23 +95,23 @@ public class Inside {
     private void addRestrictedBorders(){
         this.restrictedAreas.add(new int[][]{ 
             {0,0},
-            {120,boxSize} 
+            {120*GWS.boxScale,boxSize} 
         });
         this.restrictedAreas.add(new int[][]{ 
             {0,0},
-            {boxSize,190} 
+            {boxSize,190*GWS.boxScale} 
         });
         this.restrictedAreas.add(new int[][]{ 
-            {boxSize-120,0},
-            {boxSize-120,boxSize} 
+            {boxSize-120*GWS.boxScale,0},
+            {boxSize,boxSize} 
         });
         this.restrictedAreas.add(new int[][]{ 
-            {0,boxSize-100},
-            {(boxSize/2) - 50,boxSize} 
+            {0,boxSize-100*GWS.boxScale},
+            {(boxSize/2) - 50*GWS.boxScale,boxSize} 
         });
         this.restrictedAreas.add(new int[][]{ 
-            {(boxSize/2) + 80,boxSize-100},
-            {boxSize-50,boxSize}  
+            {(boxSize/2) + 80*GWS.boxScale,boxSize-100*GWS.boxScale},
+            {boxSize-50*GWS.boxScale,boxSize}  
         });
     }
 
@@ -131,7 +131,7 @@ public class Inside {
 
     private void createBakeryInside(){
         if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        Bakery bakery = new Bakery(gameName,boxSize, backgroundPanel);
+        Bakery bakery = new Bakery(gameName, backgroundPanel);
         addRestrictedAreas(bakery.restrictedAreas);
         addTrigerEventsAreas(bakery.trigerEvents);
     }
