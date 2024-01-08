@@ -5,6 +5,8 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.generations.MainGameWindow;
+import com.jv01.generations.Panels.PhonePanel.PhonePanel;
 import com.jv01.player.Player;
 import com.jv01.screens.GameWindowsSize;
 import com.jv01.screens.ShowNewWindow;
@@ -43,12 +45,17 @@ public class GameMap extends JPanel {
     public Document doc;
     public Player player;
 
+    MainGameWindow mainGameWindow;
+    PhonePanel phonePanel;
+
     public GameWindowsSize GWS = new GameWindowsSize(true);
 
     private JPanel newWindowPanel;
 
     private JButton zoomInButton;
     private JButton zoomOutButton;
+    private int zoomMax = 50;
+    private int zoomMin = 10;
     
     public String[] buildingsIcons = {
         "demo\\img\\buildings\\partyHouse01.png",
@@ -71,16 +78,25 @@ public class GameMap extends JPanel {
     public int boxSize = 800;
     public int cellSize = 0;
 
+    public int phoneWidth;
+    public int phoneHeight;
+
     private Map<int[], Chunk01> chunks;
 
-    public GameMap(ShowNewWindow showNewWindow) {
-        this.player = showNewWindow.mainGameWindow.player;
-        this.newWindowPanel = showNewWindow.newWindowPanel; 
-        this.newWindowPanel.setLayout(null);
+    public GameMap(MainGameWindow mainGameWindow) {
+        this.mainGameWindow = mainGameWindow;
+        this.player = mainGameWindow.player;
+        //this.newWindowPanel = showNewWindow.newWindowPanel; 
+        //this.newWindowPanel.setLayout(null);
+        this.phonePanel = mainGameWindow.phonePanel;
+        this.phoneWidth = (int)(this.phonePanel.phoneWidth*this.phonePanel.phoneScale);
+        this.phoneHeight = (int)(this.phonePanel.phoneHeight*this.phonePanel.phoneScale);;
+
+        this.newWindowPanel = mainGameWindow.phonePanel.screenPanel;
         this.boxSize = GWS.boxSize;
         this.cellSize = boxSize/grideSize;
 
-        doc = save.getDocumentXml(showNewWindow.mainGameWindow.gameName, "chunks");
+        doc = save.getDocumentXml(mainGameWindow.gameName, "chunks");
         chunks = new HashMap<>();
 
         loadChunksFromDocument(doc, player.chunk);
@@ -105,12 +121,14 @@ public class GameMap extends JPanel {
         });
         newWindowPanel.add(zoomOutButton);
 
-        this.setSize(boxSize, boxSize);
+        this.setOpaque(false);
+        this.setSize(phoneHeight, phoneWidth);
         newWindowPanel.add(this);
     }
 
     private void loadChunksFromDocument(Document doc, long[] currentChunk) {
         NodeList chunkNodes = doc.getElementsByTagName("chunk");
+        grideSize=zoomMax;
         for (int i = 0; i < chunkNodes.getLength(); i++) {
             if (chunkNodes.item(i).getNodeType() == Node.ELEMENT_NODE) {
                 Element chunkElement = (Element) chunkNodes.item(i);
@@ -139,6 +157,10 @@ public class GameMap extends JPanel {
                 }            
             }
         }
+        grideSize = (int)Math.sqrt(chunkNodes.getLength());
+        if(grideSize>=zoomMax)grideSize=zoomMax;
+        if(grideSize<=zoomMin)grideSize=zoomMin;
+        zoomIn();
     }
 
     public void addChunk(int[] cellCoords, Chunk01 chunk) {
@@ -153,8 +175,8 @@ public class GameMap extends JPanel {
             int[] cellCoords = entry.getKey();
             Chunk01 chunk = entry.getValue();
     
-            int x = cellCoords[0] * cellSize + boxSize/2 - cellSize/2;
-            int y = cellCoords[1] * cellSize + boxSize/2 - cellSize/2;
+            int x = cellCoords[0] * cellSize + phoneWidth/2 - cellSize/2;
+            int y = cellCoords[1] * cellSize + phoneHeight/2 - cellSize/2;
     
             g.setColor(getBiomeColor(chunk.biome));
             g.fillRect(y, x, cellSize, cellSize);
@@ -214,6 +236,7 @@ public class GameMap extends JPanel {
     private ImageIcon getIcon(int buildingType) {
         ImageIcon imageIcon01 = null;
         ImageIcon imageIcon = null;
+        cellSize = 50;
         if(buildingType>=0 && buildingType!=7){
             imageIcon01 = new ImageIcon(buildingsIcons[buildingType]);
             Image scaledImage = imageIcon01.getImage().getScaledInstance(cellSize, cellSize, Image.SCALE_SMOOTH);
@@ -223,18 +246,22 @@ public class GameMap extends JPanel {
     }
 
     private void zoomIn() {
-        if (grideSize > 10) {
+        if (grideSize > zoomMin) {
             grideSize -= 10;
+            if(grideSize<=zoomMin)grideSize=zoomMin;
             cellSize = boxSize / grideSize;
             repaint();
         }
+        mainGameWindow.phonePanel.focusOnMainFrame();
     }
 
     private void zoomOut() {
-        if (grideSize < 100) {
+        if (grideSize < zoomMax) {
             grideSize += 10;
+            if(grideSize>=zoomMax)grideSize=zoomMax;
             cellSize = boxSize / grideSize;
             repaint();
         }
+        mainGameWindow.phonePanel.focusOnMainFrame();
     }
 }

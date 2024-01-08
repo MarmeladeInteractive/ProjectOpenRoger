@@ -81,7 +81,7 @@ public class ShowNewWindow {
                 new Inventory(this);
                 break;
             case "Map":
-                new GameMap(this);
+                //new GameMap(this);
                 break;
         
             default:

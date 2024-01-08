@@ -106,7 +106,7 @@ public class Items {
     }
 
     public void interact(Player player){
-        if(player.keyBord.interactKeyPressed){
+        if(player.inputsManager.interactKeyPressed){
  
             switch (id) {
                 case 0:

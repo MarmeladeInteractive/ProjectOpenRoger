@@ -7,5 +7,10 @@
                 demo/img/phone/backPhone.png
             }
         </backPic>
+        <backPicLandscape>
+            {
+                demo/img/phone/backPhonePaysage.png
+            }
+        </backPicLandscape>
     </phone>
 </phone>

@@ -79,7 +79,7 @@ public class Dealers {
     public void interact(Player player){
         doc = save.getDocumentXml(player.gameName, "partyHouse");
 
-        if(player.keyBord.interactKeyPressed){
+        if(player.inputsManager.interactKeyPressed){
 
                 switch (id) {
                     case 0:
@@ -94,7 +94,7 @@ public class Dealers {
 
                             refreshDisplay = true;
                                                       
-                            player.keyBord.interactKeyPressed = false;
+                            player.inputsManager.interactKeyPressed = false;
                         }
                         break;
 
@@ -110,7 +110,7 @@ public class Dealers {
 
                             refreshDisplay = true;
                                                       
-                            player.keyBord.interactKeyPressed = false;
+                            player.inputsManager.interactKeyPressed = false;
                         }
                         break;
 
@@ -126,7 +126,7 @@ public class Dealers {
 
                             refreshDisplay = true;
                                                       
-                            player.keyBord.interactKeyPressed = false;
+                            player.inputsManager.interactKeyPressed = false;
                         }
                         break;
                         
@@ -135,7 +135,7 @@ public class Dealers {
                         break;
                 }
 
-        }else if(player.keyBord.upgradeKeyPressed){
+        }else if(player.inputsManager.upgradeKeyPressed){
 
                 if(player.isEnoughMoney(buyPrice,false))
                 switch (id) {
@@ -148,7 +148,7 @@ public class Dealers {
 
                             refreshDisplay = true;
                                                                        
-                            player.keyBord.upgradeKeyPressed = false;
+                            player.inputsManager.upgradeKeyPressed = false;
                         }
                         break;
 
@@ -161,7 +161,7 @@ public class Dealers {
 
                             refreshDisplay = true;
                                                                        
-                            player.keyBord.upgradeKeyPressed = false;
+                            player.inputsManager.upgradeKeyPressed = false;
                         }
                         break;
 
@@ -174,7 +174,7 @@ public class Dealers {
 
                             refreshDisplay = true;
                                                                        
-                            player.keyBord.upgradeKeyPressed = false;
+                            player.inputsManager.upgradeKeyPressed = false;
                         }
                         break;
                 

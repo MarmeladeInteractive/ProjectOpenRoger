@@ -83,10 +83,10 @@ public class Arcades {
     }
 
     public void interact(MainGameWindow mainGameWindow){
-        if(mainGameWindow.player.keyBord.interactKeyPressed){
+        if(mainGameWindow.player.inputsManager.interactKeyPressed){
             if(level==0){
                 mainGameWindow.runArcade(id); 
-                mainGameWindow.player.keyBord.interactKeyPressed = false;  
+                mainGameWindow.player.inputsManager.interactKeyPressed = false;  
             }else{
                 
             }

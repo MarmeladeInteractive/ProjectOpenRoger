@@ -85,14 +85,14 @@ public class Tools {
     public void interact(MainGameWindow mainGameWindow){
         doc = save.getDocumentXml(mainGameWindow.player.gameName, "partyHouse");
 
-        if(mainGameWindow.player.keyBord.interactKeyPressed){
+        if(mainGameWindow.player.inputsManager.interactKeyPressed){
             if(level==0){
                 switch (id) {
                     case 0:
                         if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
                             save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "printerLevel", String.valueOf(1));
-                            mainGameWindow.player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.inputsManager.interactKeyPressed = false;
                             refresh = true;
                         }
                         break;
@@ -100,7 +100,7 @@ public class Tools {
                         if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
                             save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "ovenLevel", String.valueOf(1));
-                            mainGameWindow.player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.inputsManager.interactKeyPressed = false;
                             refresh = true;
                         }
                         break;
@@ -108,7 +108,7 @@ public class Tools {
                         if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
                             save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "transportationLevel", String.valueOf(1));
-                            mainGameWindow.player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.inputsManager.interactKeyPressed = false;
                             refresh = true;
                         }
                         break;
@@ -118,7 +118,7 @@ public class Tools {
                             
                             save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,0);
                                                       
-                            mainGameWindow.player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.inputsManager.interactKeyPressed = false;
                             mainGameWindow.player.positionX = -100;
                         }
                         break;
@@ -127,7 +127,7 @@ public class Tools {
                             
                             save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,0);
                                                       
-                            mainGameWindow.player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.inputsManager.interactKeyPressed = false;
                             mainGameWindow.player.positionX = -100;
                         }
                         break;
@@ -145,12 +145,12 @@ public class Tools {
 
                             refreshDisplay = true;
                                                       
-                            mainGameWindow.player.keyBord.interactKeyPressed = false;
+                            mainGameWindow.player.inputsManager.interactKeyPressed = false;
                         }
                         break;
                     case 6:
                         mainGameWindow.runArcade(0); 
-                        mainGameWindow.player.keyBord.interactKeyPressed = false;         
+                        mainGameWindow.player.inputsManager.interactKeyPressed = false;         
                         break;
                 
                     default:
@@ -186,7 +186,7 @@ public class Tools {
                         break;
                 }
             }
-        }else if(mainGameWindow.player.keyBord.upgradeKeyPressed){
+        }else if(mainGameWindow.player.inputsManager.upgradeKeyPressed){
             if(level<3){
                 switch (id) {
                     case 0:
@@ -194,7 +194,7 @@ public class Tools {
                             level++;
                             
                             save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "printerLevel", String.valueOf(level));
-                            mainGameWindow.player.keyBord.upgradeKeyPressed = false;
+                            mainGameWindow.player.inputsManager.upgradeKeyPressed = false;
                             refresh = true;
                         }
                         break;
@@ -203,7 +203,7 @@ public class Tools {
                             level++;
                             
                             save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "ovenLevel", String.valueOf(level));
-                            mainGameWindow.player.keyBord.upgradeKeyPressed = false;
+                            mainGameWindow.player.inputsManager.upgradeKeyPressed = false;
                             refresh = true;
                         }
                         break;
@@ -212,7 +212,7 @@ public class Tools {
                             level++;
                             
                             save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "transportationLevel", String.valueOf(level));
-                            mainGameWindow.player.keyBord.upgradeKeyPressed = false;
+                            mainGameWindow.player.inputsManager.upgradeKeyPressed = false;
                             refresh = true;
                         }
                         break;
