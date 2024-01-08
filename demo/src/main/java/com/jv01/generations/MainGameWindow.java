@@ -8,6 +8,7 @@ import com.jv01.fonctionals.Time;
 import com.jv01.generations.Panels.BackgroundPanel;
 import com.jv01.generations.Panels.FrontPanel;
 import com.jv01.generations.Panels.NightPanel;
+import com.jv01.generations.Panels.PhonePanel.PhonePanel;
 import com.jv01.player.Player;
 
 import com.jv01.screens.AlertWindow;
@@ -41,6 +42,7 @@ public class MainGameWindow{
     public FrontPanel frontPanel;
     public BackgroundPanel backgroundPanel;
     public NightPanel nightPanel;
+    public PhonePanel phonePanel;
 
     public long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
@@ -55,7 +57,7 @@ public class MainGameWindow{
 
     public Player player;
     public Chunks chunk;
-    GameMap map;
+    public GameMap map;
     InfoMenuScreen infoMenu;
     CheatCodeMenu cheatCodeMenu = new CheatCodeMenu();
 
@@ -115,7 +117,8 @@ public class MainGameWindow{
         currentChunk = player.chunk;
         isInsideBuilding = player.isInsideBuilding;
 
-        frame.addKeyListener(player.keyBord.keyListener);
+        frame.addKeyListener(player.inputsManager.keyListener);
+        frame.addMouseMotionListener(player.inputsManager.mouseAdapter);
 
         player.positionX = (GWS.gameWindowWidth - player.playerSize) / 2;
         player.positionY = (GWS.gameWindowHeight - player.playerSize) / 2;
@@ -127,6 +130,7 @@ public class MainGameWindow{
         frame.requestFocusInWindow();
         frame.setVisible(true);
         
+        this.phonePanel = new PhonePanel(this);
         this.frontPanel = new FrontPanel(this);
         this.backgroundPanel = new BackgroundPanel(this);
         this.nightPanel = new NightPanel(this);
@@ -148,8 +152,12 @@ public class MainGameWindow{
         frame.getContentPane().removeAll();
         key = getKey();
  
-        frontPanel.createFrontPanel();
-        nightPanel.createNightPanel();
+        if(displayChunks){
+            phonePanel.createPhonePanel();
+            phonePanel.createPhonePanelPortrait();
+        }
+        if(displayChunks)frontPanel.createFrontPanel();
+        if(displayChunks)nightPanel.createNightPanel();
         backgroundPanel.createBackgroundPanel(GWS);
 
         addMsgLabel();
@@ -228,7 +236,7 @@ public class MainGameWindow{
                     //openMsgLabels("'e' Pour entrer dans la " +b.name);
                     spam = "'e' Pour entrer dans la " +b.name;
                     displaySpam = true;
-                    if(player.keyBord.interactKeyPressed)enterBuilding();
+                    if(player.inputsManager.interactKeyPressed)enterBuilding();
                     
                 }else{
                     //coloseMsgLabels();
@@ -342,28 +350,29 @@ public class MainGameWindow{
             }
         
 
-        if(player.keyBord.mapKeyPressed){
-            player.keyBord.mapKeyPressed = false;
+        if(player.inputsManager.mapKeyPressed){
+            player.inputsManager.mapKeyPressed = false;
             //map = new GameMap(gameName,player);  
-            displayNewWindow("Map");
+            //displayNewWindow("Map");
+            phonePanel.open("Map");
         }
 
-        if(player.keyBord.inventoryKeyPressed){
-            player.keyBord.inventoryKeyPressed = false;
+        if(player.inputsManager.inventoryKeyPressed){
+            player.inputsManager.inventoryKeyPressed = false;
             displayNewWindow("Inventory");
         }
 
-        if(player.keyBord.menuKeyPressed){
-            player.keyBord.menuKeyPressed = false;
+        if(player.inputsManager.menuKeyPressed){
+            player.inputsManager.menuKeyPressed = false;
             infoMenu = new InfoMenuScreen(gameName,player);
         }
 
-        if(player.keyBord.quitKeyPressed){
-            player.keyBord.quitKeyPressed = false;
+        if(player.inputsManager.quitKeyPressed){
+            player.inputsManager.quitKeyPressed = false;
         }
 
-        if(player.keyBord.cheatCodeMenuKeyPressed){
-            player.keyBord.cheatCodeMenuKeyPressed = false;
+        if(player.inputsManager.cheatCodeMenuKeyPressed){
+            player.inputsManager.cheatCodeMenuKeyPressed = false;
             cheatCodeMenu.open(this);
         }
 
@@ -539,25 +548,26 @@ public class MainGameWindow{
 
     public void updateLabels(){
         updatePositionTextLabels();
-        updateMoneyTextLabels();
-        updateDateTextLabels();
+        updatePhoneMoneyLabels();
+        updatePhoneDateLabels();
     }
 
     public void updateDate(){
         nightPanel.updateNight(isInsideBuilding, date);
-        updateDateTextLabels();
+        updatePhoneDateLabels();
     }
 
     public void updatePositionTextLabels(){
         frontPanel.updatePositionTextLabels(currentChunk,new long[] {player.positionX,player.positionY});
     }
 
-    public void updateMoneyTextLabels(){
-        frontPanel.updateMoneyTextLabels(player.money);
+    public void updatePhoneMoneyLabels(){
+        phonePanel.updateMoneyLabel(String.valueOf(player.money));
     }
 
-    public void updateDateTextLabels(){
-        frontPanel.updateDateTextLabels(date.getDate(), date.getHour());
+    public void updatePhoneDateLabels(){
+        phonePanel.updateDateLabel(date.getDate());
+        phonePanel.updateHourLabel(date.getHour());
     }
 
     public void openMsgLabels(String msg){

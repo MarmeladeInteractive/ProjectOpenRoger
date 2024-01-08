@@ -2,6 +2,8 @@ package com.jv01.generations;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import java.util.List;
 import java.util.Map;
@@ -14,10 +16,11 @@ import org.w3c.dom.Element;
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.Tempo;
 
-public class KeyBord {
+public class InputsManager{
     public Save save = new Save();
 
     public KeyListener keyListener;
+    public MouseAdapter mouseAdapter;
 
     public int leftKey = 81; //
     public int rightKey = 68; //
@@ -63,13 +66,19 @@ public class KeyBord {
     public Tempo tempoCheatCodeMenuKey = new Tempo();
     
     public String gameName;
+
+    public int ff = 100;
+    public int mouse1stClickX = 0;
+    public int mouse1stClickY = 0;
+
     
-    public KeyBord(String gameName){
+    public InputsManager(String gameName){
         this.gameName = gameName;
 
         getKeyBoardValues();  
 
         initializeKeyListener();
+        initializeMouseListener();
     }
 
     public void getKeyBoardValues(){
@@ -203,6 +212,72 @@ public class KeyBord {
              }
          };
      }
+
+     public void initializeMouseListener(){
+        mouseAdapter = new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                clearKeys();
+            }
+    
+            @Override
+            public void mousePressed(MouseEvent e) {
+                clearKeys();
+            }
+    
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                clearKeys();
+            }
+    
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                clearKeys();
+            }
+    
+            @Override
+            public void mouseExited(MouseEvent e) {
+                clearKeys();
+            }
+            
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int xStep = mouse1stClickX-e.getX();
+                int yStep = mouse1stClickY-e.getY();
+
+                if(xStep<0 && Math.abs(yStep)<ff){
+                    clearKeys();
+                    rightKeyPressed = true;
+                }else if(xStep>0 && Math.abs(yStep)<ff){
+                    clearKeys();
+                    leftKeyPressed = true;
+                }else if(yStep>0 && Math.abs(xStep)<ff){
+                    clearKeys();
+                    upKeyPressed = true;
+                }else if(yStep<0 && Math.abs(xStep)<ff){
+                    clearKeys();
+                    downKeyPressed = true;
+                }else{
+                    clearKeys();
+                }
+            }
+    
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                mouse1stClickX = e.getX();
+                mouse1stClickY = e.getY();
+            }
+        };
+    }
+
+
+    public void clearKeys(){
+        rightKeyPressed = false;
+        leftKeyPressed = false;
+        upKeyPressed = false;
+        downKeyPressed = false;
+    }
+    
 
      
 }

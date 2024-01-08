@@ -6,7 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
-import com.jv01.generations.KeyBord;
+import com.jv01.generations.InputsManager;
 import com.jv01.generations.MainGameWindow;
 
 import java.awt.*;
@@ -23,7 +23,7 @@ public class Player{
     public MainGameWindow mainGameWindow;
 
     public PlayerInventory inventory;
-    public KeyBord keyBord;
+    public InputsManager inputsManager;
 
     public String gameName;
 
@@ -110,7 +110,7 @@ public class Player{
         playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         inventory = new PlayerInventory(gameName);
-        keyBord = new KeyBord(gameName);
+        inputsManager = new InputsManager(gameName);
     }
 
     public void initializeWalkingFrames() {
@@ -206,45 +206,45 @@ public class Player{
 
     public void updatePlayerLocation() {
         if(canWalk){
-            if (keyBord.runKeyPressed){
+            if (inputsManager.runKeyPressed){
                 movementType = 1;
             } else {
                 movementType = 2;
             }
 
-            if (keyBord.leftKeyPressed && keyBord.upKeyPressed) {
+            if (inputsManager.leftKeyPressed && inputsManager.upKeyPressed) {
                 positionX -= step*speed;
                 positionY -= step*speed;
                 currentFrameIndex = 5;
                 currentFramePicIndex++;
-            } else if (keyBord.leftKeyPressed && keyBord.downKeyPressed) {
+            } else if (inputsManager.leftKeyPressed && inputsManager.downKeyPressed) {
                 positionX -= step*speed;
                 positionY += step*speed;
                 currentFrameIndex = 7;
                 currentFramePicIndex++;
-            } else if (keyBord.rightKeyPressed && keyBord.upKeyPressed) {
+            } else if (inputsManager.rightKeyPressed && inputsManager.upKeyPressed) {
                 positionX += step*speed;
                 positionY -= step*speed;
                 currentFrameIndex = 4;
                 currentFramePicIndex++;
-            } else if (keyBord.rightKeyPressed && keyBord.downKeyPressed) {
+            } else if (inputsManager.rightKeyPressed && inputsManager.downKeyPressed) {
                 positionX += step*speed;
                 positionY += step*speed;
                 currentFrameIndex = 6;
                 currentFramePicIndex++;
-            } else if (keyBord.leftKeyPressed) {
+            } else if (inputsManager.leftKeyPressed) {
                 positionX -= step*speed;
                 currentFrameIndex = 0;
                 currentFramePicIndex++;
-            } else if (keyBord.rightKeyPressed) {
+            } else if (inputsManager.rightKeyPressed) {
                 positionX += step*speed;
                 currentFrameIndex = 1;
                 currentFramePicIndex++;
-            } else if (keyBord.upKeyPressed) {
+            } else if (inputsManager.upKeyPressed) {
                 positionY -= step*speed;
                 currentFrameIndex = 2;
                 currentFramePicIndex++;
-            } else if (keyBord.downKeyPressed) {
+            } else if (inputsManager.downKeyPressed) {
                 positionY += step*speed;
                 currentFrameIndex = 3;
                 currentFramePicIndex++;
@@ -258,11 +258,11 @@ public class Player{
     }
 
     public void stopPlayer(){
-        keyBord.rightKeyPressed = false;
-        keyBord.leftKeyPressed = false;
-        keyBord.upKeyPressed = false;
-        keyBord.downKeyPressed = false;
-        keyBord.runKeyPressed = false;
+        inputsManager.rightKeyPressed = false;
+        inputsManager.leftKeyPressed = false;
+        inputsManager.upKeyPressed = false;
+        inputsManager.downKeyPressed = false;
+        inputsManager.runKeyPressed = false;
     }
 
     public boolean isEnoughMoney(int price, boolean takeOff){
