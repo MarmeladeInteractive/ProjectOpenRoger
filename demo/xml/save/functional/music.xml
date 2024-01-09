@@ -4,6 +4,11 @@
         <musicDuration>45</musicDuration>
         <musicUrl>demo/sounds/musics/OmeletteChampiChampetre.wav</musicUrl>
     </music>
+    <music id="theme_02">
+        <name>Roger_s_Adventures_The_Political</name>
+        <musicDuration>138</musicDuration>
+        <musicUrl>demo/sounds/musics/Roger_s_Adventures_The_Political.wav</musicUrl>
+    </music>
     <music id="1">
         <name>GameLoop</name>
         <musicDuration>120</musicDuration>
