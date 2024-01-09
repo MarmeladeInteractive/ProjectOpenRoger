@@ -110,7 +110,7 @@ public class Player{
         playerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
         inventory = new PlayerInventory(gameName);
-        inputsManager = new InputsManager(gameName);
+        inputsManager = new InputsManager(mainGameWindow);
     }
 
     public void initializeWalkingFrames() {

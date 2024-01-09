@@ -1,26 +1,34 @@
 package com.jv01.generations;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.awt.event.MouseListener;
+import java.time.format.SignStyle;
 import java.util.List;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
+import javax.swing.text.Style;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.Tempo;
+import com.jv01.generations.Panels.JoystickPanel.JoystickPanel;
 
 public class InputsManager{
     public Save save = new Save();
+    public MainGameWindow mainGameWindow;
 
     public KeyListener keyListener;
     public MouseAdapter mouseAdapter;
+    public MouseListener mouseListener;
 
     public int leftKey = 81; //
     public int rightKey = 68; //
@@ -67,13 +75,18 @@ public class InputsManager{
     
     public String gameName;
 
-    public int ff = 100;
+    public boolean joystickIsVisible = false;
+
+    public int diagonalSensitivity = 20;
     public int mouse1stClickX = 0;
     public int mouse1stClickY = 0;
+    public int currentMouseLocationX = 0;
+    public int currentMouseLocationY = 0;
 
     
-    public InputsManager(String gameName){
-        this.gameName = gameName;
+    public InputsManager(MainGameWindow mainGameWindow){
+        this.mainGameWindow = mainGameWindow;
+        this.gameName = mainGameWindow.gameName;
 
         getKeyBoardValues();  
 
@@ -214,49 +227,49 @@ public class InputsManager{
      }
 
      public void initializeMouseListener(){
-        mouseAdapter = new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                clearKeys();
-            }
-    
-            @Override
-            public void mousePressed(MouseEvent e) {
-                clearKeys();
-            }
-    
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                clearKeys();
-            }
-    
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                clearKeys();
-            }
-    
-            @Override
-            public void mouseExited(MouseEvent e) {
-                clearKeys();
-            }
-            
+        mouseAdapter = new MouseAdapter() {           
             @Override
             public void mouseDragged(MouseEvent e) {
+                mainGameWindow.joystickPanel.updateJoystickLocation(e.getX(), e.getY());
+                currentMouseLocationX = e.getX();
+                currentMouseLocationY = e.getY();
+
                 int xStep = mouse1stClickX-e.getX();
                 int yStep = mouse1stClickY-e.getY();
 
-                if(xStep<0 && Math.abs(yStep)<ff){
-                    clearKeys();
-                    rightKeyPressed = true;
-                }else if(xStep>0 && Math.abs(yStep)<ff){
-                    clearKeys();
-                    leftKeyPressed = true;
-                }else if(yStep>0 && Math.abs(xStep)<ff){
-                    clearKeys();
-                    upKeyPressed = true;
-                }else if(yStep<0 && Math.abs(xStep)<ff){
-                    clearKeys();
-                    downKeyPressed = true;
+                int joystickDiameter = mainGameWindow.joystickPanel.joystickDiameter;
+                if (Math.sqrt(xStep * xStep + yStep * yStep) < joystickDiameter) {
+                    runKeyPressed = false;
+                } else {
+                    runKeyPressed = true;
+                }
+
+                if (Math.sqrt(xStep * xStep + yStep * yStep) > diagonalSensitivity) {
+                    if (Math.abs(xStep) > diagonalSensitivity) {
+                        if (xStep > 0) {
+                            rightKeyPressed = false;
+                            leftKeyPressed = true;
+                        } else {
+                            leftKeyPressed = false;
+                            rightKeyPressed = true;
+                        }
+                    }else{
+                        rightKeyPressed = false;
+                        leftKeyPressed = false;
+                    }
+
+                    if (Math.abs(yStep) > diagonalSensitivity) {
+                        if (yStep > 0) {
+                            downKeyPressed = false;
+                            upKeyPressed = true;
+                        } else {
+                            upKeyPressed = false;
+                            downKeyPressed = true;
+                        }
+                    }else{
+                        downKeyPressed = false;
+                        upKeyPressed = false;
+                    }
                 }else{
                     clearKeys();
                 }
@@ -266,6 +279,36 @@ public class InputsManager{
             public void mouseMoved(MouseEvent e) {
                 mouse1stClickX = e.getX();
                 mouse1stClickY = e.getY();
+            }
+        };
+
+        mouseListener = new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            }
+    
+            @Override
+            public void mousePressed(MouseEvent e) {
+                mainGameWindow.joystickPanel.addJoystick(mouse1stClickX, mouse1stClickY,diagonalSensitivity);
+                joystickIsVisible=true;
+            }
+    
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                clearKeys();
+                mainGameWindow.joystickPanel.clearJoystickPanel();
+                joystickIsVisible=false;
+            }
+    
+            @Override
+            public void mouseEntered(MouseEvent e) {
+            }
+    
+            @Override
+            public void mouseExited(MouseEvent e) {
+                clearKeys();
+                mainGameWindow.joystickPanel.clearJoystickPanel();
+                joystickIsVisible=false;
             }
         };
     }

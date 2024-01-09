@@ -8,6 +8,7 @@ import com.jv01.fonctionals.Time;
 import com.jv01.generations.Panels.BackgroundPanel;
 import com.jv01.generations.Panels.FrontPanel;
 import com.jv01.generations.Panels.NightPanel;
+import com.jv01.generations.Panels.JoystickPanel.JoystickPanel;
 import com.jv01.generations.Panels.PhonePanel.PhonePanel;
 import com.jv01.player.Player;
 
@@ -43,6 +44,7 @@ public class MainGameWindow{
     public BackgroundPanel backgroundPanel;
     public NightPanel nightPanel;
     public PhonePanel phonePanel;
+    public JoystickPanel joystickPanel;
 
     public long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
@@ -119,6 +121,7 @@ public class MainGameWindow{
 
         frame.addKeyListener(player.inputsManager.keyListener);
         frame.addMouseMotionListener(player.inputsManager.mouseAdapter);
+        frame.addMouseListener(player.inputsManager.mouseListener);
 
         player.positionX = (GWS.gameWindowWidth - player.playerSize) / 2;
         player.positionY = (GWS.gameWindowHeight - player.playerSize) / 2;
@@ -131,6 +134,7 @@ public class MainGameWindow{
         frame.setVisible(true);
         
         this.phonePanel = new PhonePanel(this);
+        this.joystickPanel = new JoystickPanel(this);
         this.frontPanel = new FrontPanel(this);
         this.backgroundPanel = new BackgroundPanel(this);
         this.nightPanel = new NightPanel(this);
@@ -155,9 +159,11 @@ public class MainGameWindow{
         if(displayChunks){
             phonePanel.createPhonePanel();
             phonePanel.createPhonePanelPortrait();
+            joystickPanel.createJoystickPanel();
+            frontPanel.createFrontPanel();
+            nightPanel.createNightPanel();
         }
-        if(displayChunks)frontPanel.createFrontPanel();
-        if(displayChunks)nightPanel.createNightPanel();
+
         backgroundPanel.createBackgroundPanel(GWS);
 
         addMsgLabel();
