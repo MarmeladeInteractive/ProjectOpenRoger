@@ -13,7 +13,7 @@
                 demo/img/items/waste04.png,
             }
         </imagesUrls>
-        <interactsSpam>pour ramasser les déchets</interactsSpam>
+        <interactsSpam>Ramasser les déchets</interactsSpam>
         <interactsSoundId>waste01</interactsSoundId>
     </item>
 
@@ -31,7 +31,7 @@
                 demo/img/items/apple04.png,
             }
         </imagesUrls>
-        <interactsSpam>pour ramasser la pomme</interactsSpam>
+        <interactsSpam>Ramasser la pomme</interactsSpam>
         <interactsSoundId>null</interactsSoundId>
     </item>
 
@@ -49,7 +49,7 @@
                 demo/img/items/chocolatine01.png,
             }
         </imagesUrls>
-        <interactsSpam>pour ramasser la chocolatine</interactsSpam>
+        <interactsSpam>Ramasser la chocolatine</interactsSpam>
         <interactsSoundId>null</interactsSoundId>
     </item>
 
@@ -67,7 +67,7 @@
                 demo/img/items/croissant01.png,
             }
         </imagesUrls>
-        <interactsSpam>pour ramasser le croissant</interactsSpam>
+        <interactsSpam>Ramasser le croissant</interactsSpam>
         <interactsSoundId>null</interactsSoundId>
     </item>
 </items>
