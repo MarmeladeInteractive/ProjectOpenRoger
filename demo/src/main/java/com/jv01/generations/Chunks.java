@@ -462,6 +462,14 @@ public class Chunks {
             bCellY[i-1] = cell[1];
             bType[i-1] = 7;
         }
+        if(buildingType == 6){
+            char key01 = key.charAt(4); 
+            if(key01 <= getCharComparedToPercentage(50)){
+                Biomes biome = new Biomes(gameName, key);
+                biome.changeBiomeInfos(8);
+                changeBiome(biome.biomeType, biome.imageUrl);
+            }
+        }
     }
     private char getCharComparedToPercentage(int percentage) {
         if (percentage < 0 || percentage > 100) {
