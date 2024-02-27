@@ -48,5 +48,5 @@ A big thank you to the individuals who contributed to the development and graphi
 - [Dourel Andy] - [@Andy31700](https://github.com/Andy31700) (Developer)
 
 <p align="center">
-   <img src="https://github.com/MarmeladeInteractive/ProjectOpenRoger/assets/73821252/d0b420b0-1260-41af-addf-c804b3ae2ff9" alt="Mamelade Studio Logo" width="300" height="300">
+   <img src="https://github.com/MarmeladeInteractive/ProjectOpenRoger/assets/73821252/eff23783-d65a-4995-863b-938afcf899e0" alt="Mamelade Studio Logo" width="512" height="512">
 </p>
