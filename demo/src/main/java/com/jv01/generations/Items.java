@@ -1,6 +1,7 @@
 package com.jv01.generations;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -13,6 +14,7 @@ import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
 import com.jv01.player.Player;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
 public class Items {
@@ -33,6 +35,8 @@ public class Items {
     public String imageUrl;
     public String defaultImageUrl;
     public String spam;
+
+    public DefaultListModel<List<String>> listModelInteractive = new DefaultListModel<>();
 
     public int offsetX;
     public int offsetY;
@@ -78,13 +82,15 @@ public class Items {
         this.defaultImageUrl = save.dropSpaceFromString(this.defaultImageUrl);
 
         this.spam = save.getChildFromElement(element, "interactsSpam");
+        List<String> row = new ArrayList<>(Arrays.asList(spam, "item"));
+        this.listModelInteractive.addElement(row);
 
         this.interactsSoundId = save.getChildFromElement(element, "interactsSoundId");
     }
 
     public Object[] addItem(int x, int y, JPanel backgroundPanel){
         Objects obj = new Objects(x+offsetX, y+ offsetY, size, imageUrl, 0, backgroundPanel);  
-        
+
         Object[] item01 = {
             new int[]{
                 obj.position[0],
@@ -105,32 +111,32 @@ public class Items {
         backgroundPanel.remove(objectLabel);
     }
 
-    public void interact(Player player){
-        if(player.inputsManager.interactKeyPressed){
+    public void interact(MainGameWindow mainGameWindow){
+        if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.interactiveListPanel.isSelectedValue && mainGameWindow.interactiveListPanel.selectedValue.get(1) == "item")){
  
             switch (id) {
                 case 0:
-                    if(player.inventory.wastes < player.inventory.maxWastes){
+                    if(mainGameWindow.player.inventory.wastes < mainGameWindow.player.inventory.maxWastes){
                         removeItem();
 
                         soundManager.playSFX(interactsSoundId);
 
                         this.isExist = false;
                         //player.money += 1;
-                        player.wasteCollected ++;
-                        player.inventory.wastes ++;
+                        mainGameWindow.player.wasteCollected ++;
+                        mainGameWindow.player.inventory.wastes ++;
 
-                        player.save();
-                        player.inventory.saveWastes();
+                        mainGameWindow.player.save();
+                        mainGameWindow.player.inventory.saveWastes();
 
                         refreshDisplay = true;
                     }else{
-                        player.alertMessage = "Plus d'espace dans l'inventaire";
-                        player.displayAlert = true;
+                        mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                        mainGameWindow.player.displayAlert = true;
                     }
                     break;
                 case 1:
-                    if(player.inventory.apples < player.inventory.maxApples){
+                    if(mainGameWindow.player.inventory.apples < mainGameWindow.player.inventory.maxApples){
                         removeItem();
 
                         soundManager.playSFX(interactsSoundId);
@@ -138,15 +144,15 @@ public class Items {
                         this.isExist = false;
                         //player.money += 1;
                         //player.wasteCollected ++;
-                        player.inventory.apples ++;
+                        mainGameWindow.player.inventory.apples ++;
 
-                        player.save();
-                        player.inventory.saveApples();
+                        mainGameWindow.player.save();
+                        mainGameWindow.player.inventory.saveApples();
 
                         refreshDisplay = true;
                     }else{
-                        player.alertMessage = "Plus d'espace dans l'inventaire";
-                        player.displayAlert = true;
+                        mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                        mainGameWindow.player.displayAlert = true;
                     }
                     break;
             

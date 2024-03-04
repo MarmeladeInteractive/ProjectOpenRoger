@@ -8,6 +8,7 @@ import com.jv01.fonctionals.Time;
 import com.jv01.generations.Panels.BackgroundPanel;
 import com.jv01.generations.Panels.FrontPanel;
 import com.jv01.generations.Panels.NightPanel;
+import com.jv01.generations.Panels.InteractiveListPanel.InteractiveListPanel;
 import com.jv01.generations.Panels.JoystickPanel.JoystickPanel;
 import com.jv01.generations.Panels.PhonePanel.PhonePanel;
 import com.jv01.player.Player;
@@ -26,6 +27,11 @@ import java.awt.image.BufferedImage;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 
 public class MainGameWindow{
@@ -46,6 +52,7 @@ public class MainGameWindow{
     public NightPanel nightPanel;
     public PhonePanel phonePanel;
     public JoystickPanel joystickPanel;
+    public InteractiveListPanel interactiveListPanel;
 
     public long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
@@ -69,6 +76,8 @@ public class MainGameWindow{
     private JLabel msgLabel;
     private int msgBoxSizeX = 380;
     private int msgBoxSizeY = 100;
+
+    public DefaultListModel<List<String>> listModelInteractive = new DefaultListModel<>();
 
     public boolean isInsideBuilding = false;
 
@@ -141,6 +150,7 @@ public class MainGameWindow{
         this.frontPanel = new FrontPanel(this);
         this.backgroundPanel = new BackgroundPanel(this);
         this.nightPanel = new NightPanel(this);
+        this.interactiveListPanel = new InteractiveListPanel(this);
 
         this.selectionWheel = new SelectionWheel(this);
 
@@ -165,6 +175,7 @@ public class MainGameWindow{
             phonePanel.createPhonePanel();
             phonePanel.createPhonePanelPortrait();
             joystickPanel.createJoystickPanel();
+            interactiveListPanel.createInteractiveListPanel();
             frontPanel.createFrontPanel();
             nightPanel.createNightPanel();
         }
@@ -229,6 +240,7 @@ public class MainGameWindow{
         boolean isNpc = false;
 
         String spam = "";
+
         Tools tool = new Tools(gameName, 0, 0);
         Items item = new Items(gameName,0);
         Dealers dealer = new Dealers(gameName, 0);
@@ -245,9 +257,17 @@ public class MainGameWindow{
                 if(distance <= (b.dimension[0]+b.dimension[1])/2){
 
                     //openMsgLabels("'e' Pour entrer dans la " +b.name);
-                    spam = "'e' Pour entrer dans la " +b.name;
+                    spam = "Entrer dans " +b.name;
                     displaySpam = true;
+                    List<String> row = new ArrayList<>(Arrays.asList(spam, "building"));
+                    listModelInteractive.addElement(row);
+
                     if(player.inputsManager.interactKeyPressed)enterBuilding();
+                    if(interactiveListPanel.isSelectedValue){
+                        if(interactiveListPanel.selectedValue.get(1)=="building"){
+                            enterBuilding();
+                        }
+                    }
                     
                 }else{
                     //coloseMsgLabels();
@@ -270,6 +290,7 @@ public class MainGameWindow{
                         displaySpam = true;
                         isTool = true;
                         spam = tool.spam;
+                        listModelInteractive = tool.listModelInteractive;
                         break;
                     }else{
                         //isTool = false;
@@ -284,6 +305,7 @@ public class MainGameWindow{
                         displaySpam = true;
                         isItem = true;
                         spam = item.spam;
+                        listModelInteractive = item.listModelInteractive;
                         break;
                     }else{
                         //isItem = false;
@@ -298,6 +320,8 @@ public class MainGameWindow{
                         displaySpam = true;
                         isDealer = true;
                         spam = dealer.spam;
+                        List<String> row = new ArrayList<>(Arrays.asList(spam, "dealer"));
+                        listModelInteractive.addElement(row);
                         break;
                     }else{
                         //isItem = false;
@@ -312,6 +336,8 @@ public class MainGameWindow{
                         displaySpam = true;
                         isArcade = true;
                         spam = arcade.spam;
+                        List<String> row = new ArrayList<>(Arrays.asList(spam, "arcade"));
+                        listModelInteractive.addElement(row);
                         break;
                     }else{
                         //isItem = false;
@@ -326,6 +352,8 @@ public class MainGameWindow{
                         displaySpam = true;
                         isNpc = true;
                         spam = String.valueOf(npc.name);
+                        List<String> row = new ArrayList<>(Arrays.asList(spam, "npc"));
+                        listModelInteractive.addElement(row);
                         break;
                     }else{
                         //isItem = false;
@@ -336,14 +364,17 @@ public class MainGameWindow{
             }
 
             if(displaySpam){
-                openMsgLabels(spam);
-
+                //openMsgLabels(spam);
+                if(!interactiveListPanel.isOpen){
+                    interactiveListPanel.openInteractiveList(listModelInteractive);
+                }
+                
                 if(isTool){
                     tool.interact(this);
                     refresh = tool.refresh;
                     refreshDisplay = tool.refreshDisplay;
                 }else if(isItem){
-                    item.interact(player);
+                    item.interact(this);
                     refreshDisplay = item.refreshDisplay;
                 }else if(isDealer){
                     dealer.interact(player);
@@ -354,17 +385,18 @@ public class MainGameWindow{
                     refreshDisplay = arcade.refreshDisplay;
                 }else if(isNpc){
                     
-                }
+                } 
+                   
 
             }else{
-                coloseMsgLabels();
+                //coloseMsgLabels();
+                listModelInteractive.clear();
+                interactiveListPanel.clearInteractiveListPanel();
             }
         
 
         if(player.inputsManager.mapKeyPressed){
             player.inputsManager.mapKeyPressed = false;
-            //map = new GameMap(gameName,player);  
-            //displayNewWindow("Map");
             phonePanel.open("Map");
         }
 

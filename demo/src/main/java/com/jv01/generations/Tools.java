@@ -1,5 +1,11 @@
 package com.jv01.generations;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.DefaultListModel;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -29,6 +35,9 @@ public class Tools {
 
     public String spam;
 
+    public DefaultListModel<List<String>> listModelInteractive = new DefaultListModel<>();
+    private List<String> row;
+
     public Document doc;
     public Element element;
 
@@ -46,15 +55,25 @@ public class Tools {
 
         if(level==0){
             if(buySpam != ""){
-                this.spam = "'e' pour "+ buySpam + " " + price + "€"; 
+                spam = buySpam + " " + price + "€"; 
+                row = new ArrayList<>(Arrays.asList(buySpam + " " + price + "€", "tool", "interact"));
+                listModelInteractive.addElement(row);
             }else{
-                this.spam = "'e' pour "+ useSpam + " " + price + "€";
+                spam = "'e' pour "+ useSpam + " " + price + "€";
+                row = new ArrayList<>(Arrays.asList(useSpam + " " + price + "€", "tool", "interact"));
+                listModelInteractive.addElement(row);
             }   
         }else if(level < 3){
-            this.spam = "'e' pour "+ useSpam + " " + usePrice + "€"+ "<br>"+
-                        "'u' pour "+ updateSpam  + " " + price + "€";
+            spam = "'e' pour "+ useSpam + " " + usePrice + "€"+ "<br>"+
+                    "'u' pour "+ updateSpam  + " " + price + "€";
+            row = new ArrayList<>(Arrays.asList(useSpam + " " + usePrice + "€", "tool", "interact"));
+            listModelInteractive.addElement(row);
+            row = new ArrayList<>(Arrays.asList(updateSpam + " " + price + "€", "tool", "upgrade"));
+            listModelInteractive.addElement(row);
         }else{
-            this.spam = "'e' pour "+ useSpam + " " + usePrice + "€";
+            spam = "'e' pour "+ useSpam + " " + usePrice + "€";
+            row = new ArrayList<>(Arrays.asList(useSpam + " " + usePrice + "€", "tool", "interact"));
+            listModelInteractive.addElement(row);
         }
 
     }
@@ -85,7 +104,26 @@ public class Tools {
     public void interact(MainGameWindow mainGameWindow){
         doc = save.getDocumentXml(mainGameWindow.player.gameName, "partyHouse");
 
-        if(mainGameWindow.player.inputsManager.interactKeyPressed){
+        String action = "null";
+
+        try {
+            if(mainGameWindow.interactiveListPanel.isSelectedValue && mainGameWindow.interactiveListPanel.selectedValue.get(1) == "tool"){
+                switch (mainGameWindow.interactiveListPanel.selectedValue.get(2)) {
+                    case "interact":
+                        action = "interact";
+                        break;
+                    case "upgrade":
+                        action = "upgrade";
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        } catch (Exception e) {
+        }
+
+        if(mainGameWindow.player.inputsManager.interactKeyPressed || action == "interact"){
             if(level==0){
                 switch (id) {
                     case 0:
@@ -186,7 +224,7 @@ public class Tools {
                         break;
                 }
             }
-        }else if(mainGameWindow.player.inputsManager.upgradeKeyPressed){
+        }else if(mainGameWindow.player.inputsManager.upgradeKeyPressed || action == "upgrade"){
             if(level<3){
                 switch (id) {
                     case 0:
