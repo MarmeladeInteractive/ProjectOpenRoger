@@ -180,7 +180,7 @@ public class MainGameWindow{
             nightPanel.createNightPanel();
         }
 
-        backgroundPanel.createBackgroundPanel(GWS);
+        if(!isInsideBuilding){backgroundPanel.createBackgroundPanel(GWS);}else{backgroundPanel.createInsideBackgroundPanel(GWS);}
 
         addMsgLabel();
 
