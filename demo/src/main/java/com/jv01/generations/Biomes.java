@@ -44,8 +44,12 @@ public class Biomes {
             biomeType = 7;
         }
 
+        changeBiomeInfos(biomeType);
+    }
+
+    public void changeBiomeInfos(int type){
         Document doc = save.getDocumentXml(gameName,"functional/biomes");
-        Element element = save.getElementById(doc, "biome", String.valueOf(biomeType));
+        Element element = save.getElementById(doc, "biome", String.valueOf(type));
 
         this.description = save.getChildFromElement(element, "description");
         this.name = save.getChildFromElement(element, "name");

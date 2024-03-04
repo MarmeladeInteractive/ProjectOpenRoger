@@ -4,7 +4,7 @@
         <description></description>
         <imagesUrls>
             {
-                demo/img/back/herbe02.jpg
+                demo/img/back/Terrains/Roger-Terrain-02.png
             }
         </imagesUrls>
     </biome>
@@ -14,7 +14,7 @@
         <description></description>
         <imagesUrls>
             {
-                demo/img/back/herbe02.jpg
+                demo/img/back/Terrains/Roger-Terrain-02.png
             }
         </imagesUrls>
     </biome>
@@ -24,7 +24,7 @@
         <description></description>
         <imagesUrls>
             {
-                demo/img/back/herbe.jpg
+                demo/img/back/Terrains/Roger-herbe-02.png
             }
         </imagesUrls>
     </biome>
@@ -34,7 +34,7 @@
         <description></description>
         <imagesUrls>
             {
-                demo/img/back/herbe.jpg
+                demo/img/back/Terrains/Roger-herbe-09.png
             }
         </imagesUrls>
     </biome>
@@ -44,7 +44,7 @@
         <description></description>
         <imagesUrls>
             {
-                demo/img/back/herbe.jpg
+                demo/img/back/Terrains/Roger-herbe-010.png
             }
         </imagesUrls>
     </biome>
@@ -79,4 +79,13 @@
         </imagesUrls>
     </biome>
 
+    <biome id="8">
+        <name></name>
+        <description></description>
+        <imagesUrls>
+            {
+                demo/img/back/Terrains/Roger-herbe-05.png
+            }
+        </imagesUrls>
+    </biome>
 </biomes>
