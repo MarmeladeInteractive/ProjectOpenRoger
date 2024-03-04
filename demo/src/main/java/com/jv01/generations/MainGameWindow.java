@@ -16,6 +16,7 @@ import com.jv01.screens.AlertWindow;
 import com.jv01.screens.CheatCodeMenu;
 import com.jv01.screens.GameWindowsSize;
 import com.jv01.screens.InfoMenuScreen;
+import com.jv01.screens.Menus.SelectionWheel;
 import com.jv01.screens.Windows.GameMap;
 
 import java.awt.*;
@@ -62,6 +63,8 @@ public class MainGameWindow{
     public GameMap map;
     InfoMenuScreen infoMenu;
     CheatCodeMenu cheatCodeMenu = new CheatCodeMenu();
+
+    public SelectionWheel selectionWheel;
 
     private JLabel msgLabel;
     private int msgBoxSizeX = 380;
@@ -138,6 +141,8 @@ public class MainGameWindow{
         this.frontPanel = new FrontPanel(this);
         this.backgroundPanel = new BackgroundPanel(this);
         this.nightPanel = new NightPanel(this);
+
+        this.selectionWheel = new SelectionWheel(this);
 
         showMainGameWindow();
     }

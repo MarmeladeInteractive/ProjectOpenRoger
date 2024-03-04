@@ -68,7 +68,7 @@ public class Npcs {
     }
 
     public void interact(MainGameWindow mainGameWindow){
-
+        mainGameWindow.selectionWheel.openSelectionWheel(4);
     }
 
     public void getOffset(){
