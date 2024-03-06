@@ -83,6 +83,9 @@ public class InputsManager{
     public int currentMouseLocationX = 0;
     public int currentMouseLocationY = 0;
 
+    public double perX;
+    public double perY;
+
     
     public InputsManager(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
@@ -238,6 +241,14 @@ public class InputsManager{
                 int yStep = mouse1stClickY-e.getY();
 
                 int joystickDiameter = mainGameWindow.joystickPanel.joystickDiameter;
+
+                perX = 1.0;
+                if(xStep<=0)perX=-1.0;
+                if(Math.abs(xStep) <= joystickDiameter)perX = (double)(xStep)/(double)joystickDiameter;
+                perY = 1.0;
+                if(yStep<=0)perY=-1.0;
+                if(Math.abs(yStep) <= joystickDiameter)perY = (double)(yStep)/(double)joystickDiameter;
+
                 if (Math.sqrt(xStep * xStep + yStep * yStep) < joystickDiameter) {
                     runKeyPressed = false;
                 } else {

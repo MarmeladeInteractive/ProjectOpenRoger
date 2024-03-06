@@ -212,6 +212,9 @@ public class Player{
                 movementType = 2;
             }
 
+            int lastPositionX = positionX;
+            int lastPositionY = positionY;
+
             if (inputsManager.leftKeyPressed && inputsManager.upKeyPressed) {
                 positionX -= step*speed;
                 positionY -= step*speed;
@@ -248,6 +251,11 @@ public class Player{
                 positionY += step*speed;
                 currentFrameIndex = 3;
                 currentFramePicIndex++;
+            }
+
+            if(inputsManager.joystickIsVisible){
+                positionX = lastPositionX - (int)((double)(step*speed)*inputsManager.perX);
+                positionY = lastPositionY - (int)((double)(step*speed)*inputsManager.perY);
             }
 
             currentFramePicIndex = (currentFramePicIndex) % walkingFrames[currentFrameIndex].length;

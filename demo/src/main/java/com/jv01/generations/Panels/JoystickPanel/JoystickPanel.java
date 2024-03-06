@@ -55,6 +55,9 @@ public class JoystickPanel {
 
     private JPanel joystick;
 
+    public int mouse1stClickX;
+    public int mouse1stClickY;
+
     public JoystickPanel(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
         this.gameName = mainGameWindow.gameName;
@@ -68,6 +71,9 @@ public class JoystickPanel {
         panel.setOpaque(false);
         panel.setBackground(new Color(0, 0, 0, 0));
         frame.add(panel);
+
+        mouse1stClickX = mainGameWindow.player.inputsManager.mouse1stClickX;
+        mouse1stClickY = mainGameWindow.player.inputsManager.mouse1stClickY;
 
         if(mainGameWindow.player.inputsManager.joystickIsVisible){
             addJoystick(mainGameWindow.player.inputsManager.mouse1stClickX,mainGameWindow.player.inputsManager.mouse1stClickY,mainGameWindow.player.inputsManager.diagonalSensitivity);
@@ -168,7 +174,10 @@ public class JoystickPanel {
     }
 
     public void updateJoystickLocation(int x, int y){
+        //int xStep = mouse1stClickX-(x - joystickDiameter / 2);
+        //int yStep = mouse1stClickY-(y - joystickDiameter / 2);
+        System.out.println(x + " : " + mouse1stClickX);
+        //if (Math.sqrt(xStep * xStep + yStep * yStep) < joystickDiameter)
         joystick.setBounds(x - joystickDiameter / 2, y - joystickDiameter / 2, joystickDiameter, joystickDiameter);
     }
-
 }
