@@ -1,4 +1,4 @@
-package com.jv01.screens.Menus;
+package com.jv01.generations.Panels.Menus;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;
