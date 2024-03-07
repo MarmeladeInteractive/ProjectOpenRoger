@@ -72,9 +72,6 @@ public class JoystickPanel {
         panel.setBackground(new Color(0, 0, 0, 0));
         frame.add(panel);
 
-        mouse1stClickX = mainGameWindow.player.inputsManager.mouse1stClickX;
-        mouse1stClickY = mainGameWindow.player.inputsManager.mouse1stClickY;
-
         if(mainGameWindow.player.inputsManager.joystickIsVisible){
             addJoystick(mainGameWindow.player.inputsManager.mouse1stClickX,mainGameWindow.player.inputsManager.mouse1stClickY,mainGameWindow.player.inputsManager.diagonalSensitivity);
             updateJoystickLocation(mainGameWindow.player.inputsManager.currentMouseLocationX,mainGameWindow.player.inputsManager.currentMouseLocationY);
@@ -90,6 +87,9 @@ public class JoystickPanel {
         centerCircleDiameter = diagonalSensitivity*2;
         borderCircleDiameter = joystickDiameter*2;
         diagonalSensitivity = newDiagonalSensitivity;
+
+        mouse1stClickX = x;
+        mouse1stClickY = y;
 
         JPanel centerCirclePanel = new JPanel() {
             @Override
@@ -174,10 +174,17 @@ public class JoystickPanel {
     }
 
     public void updateJoystickLocation(int x, int y){
-        //int xStep = mouse1stClickX-(x - joystickDiameter / 2);
-        //int yStep = mouse1stClickY-(y - joystickDiameter / 2);
-        System.out.println(x + " : " + mouse1stClickX);
-        //if (Math.sqrt(xStep * xStep + yStep * yStep) < joystickDiameter)
+        int distanceMax = joystickDiameter + 10;
+        int deltaX = x - mouse1stClickX;
+        int deltaY = y - mouse1stClickY;
+        double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+        if(distance > distanceMax){
+            double ratio = distanceMax / distance;
+            x = mouse1stClickX + (int)(deltaX * ratio);
+            y = mouse1stClickY + (int)(deltaY * ratio);
+        }
+
         joystick.setBounds(x - joystickDiameter / 2, y - joystickDiameter / 2, joystickDiameter, joystickDiameter);
     }
 }
