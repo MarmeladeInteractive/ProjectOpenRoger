@@ -55,6 +55,9 @@ public class JoystickPanel {
 
     private JPanel joystick;
 
+    public int mouse1stClickX;
+    public int mouse1stClickY;
+
     public JoystickPanel(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
         this.gameName = mainGameWindow.gameName;
@@ -84,6 +87,9 @@ public class JoystickPanel {
         centerCircleDiameter = diagonalSensitivity*2;
         borderCircleDiameter = joystickDiameter*2;
         diagonalSensitivity = newDiagonalSensitivity;
+
+        mouse1stClickX = x;
+        mouse1stClickY = y;
 
         JPanel centerCirclePanel = new JPanel() {
             @Override
@@ -168,7 +174,17 @@ public class JoystickPanel {
     }
 
     public void updateJoystickLocation(int x, int y){
+        int distanceMax = joystickDiameter + 10;
+        int deltaX = x - mouse1stClickX;
+        int deltaY = y - mouse1stClickY;
+        double distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+        if(distance > distanceMax){
+            double ratio = distanceMax / distance;
+            x = mouse1stClickX + (int)(deltaX * ratio);
+            y = mouse1stClickY + (int)(deltaY * ratio);
+        }
+
         joystick.setBounds(x - joystickDiameter / 2, y - joystickDiameter / 2, joystickDiameter, joystickDiameter);
     }
-
 }
