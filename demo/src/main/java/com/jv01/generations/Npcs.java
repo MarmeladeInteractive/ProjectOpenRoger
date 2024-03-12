@@ -1,5 +1,7 @@
 package com.jv01.generations;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JLabel;
@@ -32,6 +34,9 @@ public class Npcs {
     public int offsetX;
     public int offsetY;
 
+    public int x;
+    public int y;
+
     public Npcs(String gameName){
         this.gameName = gameName;
     }
@@ -47,8 +52,10 @@ public class Npcs {
         getOffset();
     }
 
-    public Object[] addNpc(int x, int y, JPanel backgroundPanel){
-        Objects obj = new Objects(x+offsetX, y+offsetY, size, imageUrl, 0, backgroundPanel);  
+    public Object[] addNpc(int newX, int newY, JPanel backgroundPanel){
+        x = newX + offsetX;
+        y = newY + offsetY;
+        Objects obj = new Objects(x, y, size, imageUrl, 0, backgroundPanel);  
         //restrictedAreas = obj.restrictedAreas;
         
         Object[] npc01 = {
@@ -68,7 +75,12 @@ public class Npcs {
     }
 
     public void interact(MainGameWindow mainGameWindow){
-        mainGameWindow.selectionWheel.openSelectionWheel(4);
+        List<String> test = new ArrayList<>();
+        test.add("eeeeeee1");
+        test.add("ttttttt2");
+        test.add("uuuuuuu3");
+        test.add("yyyyyyy4");
+        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y, test);
     }
 
     public void getOffset(){

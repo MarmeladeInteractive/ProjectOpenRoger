@@ -365,10 +365,10 @@ public class MainGameWindow{
 
             if(displaySpam){
                 //openMsgLabels(spam);
-                if(!interactiveListPanel.isOpen){
+                if(!interactiveListPanel.isOpen && !isNpc){
                     interactiveListPanel.openInteractiveList(listModelInteractive);
                 }
-                
+
                 if(isTool){
                     tool.interact(this);
                     refresh = tool.refresh;
@@ -392,6 +392,7 @@ public class MainGameWindow{
                 //coloseMsgLabels();
                 listModelInteractive.clear();
                 interactiveListPanel.clearInteractiveListPanel();
+                selectionWheel.clearSelectionWheel();
             }
         
 
