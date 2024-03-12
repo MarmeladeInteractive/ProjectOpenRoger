@@ -10,15 +10,21 @@ import java.awt.geom.Arc2D;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import com.jv01.fonctionals.Save;
 import com.jv01.generations.MainGameWindow;
 import com.jv01.screens.GameWindowsSize;
 
 public class SelectionWheel extends JPanel {
+    public Save save = new Save();
     private List<String> options = new ArrayList<>();
     private int centreX = 0;
     private int centreY = 0;
@@ -32,9 +38,25 @@ public class SelectionWheel extends JPanel {
 
     public GameWindowsSize GWS = new GameWindowsSize(true);
 
+    public int extWheelRadius = 200;
+    public int intWheelRadius = 100;
+    public Color wheelColor = new Color(226,233,255,160);
+
     public SelectionWheel(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
         this.frame = mainGameWindow.frame;
+
+        getSelectionWheelValues();
+    }
+
+    public void getSelectionWheelValues(){
+        Document doc = save.getDocumentXml(mainGameWindow.gameName,"functional/selectionWheel/selectionWheel");
+        Element element = save.getElementById(doc, "options", "options");
+
+        Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
+
+        this.extWheelRadius = Integer.parseInt(save.getChildFromMapElements(allElements,"extWheelRadius"));
+        this.intWheelRadius = Integer.parseInt(save.getChildFromMapElements(allElements,"intWheelRadius"));
     }
 
     public void createSelectionWheelPanel(){
@@ -46,23 +68,21 @@ public class SelectionWheel extends JPanel {
     }
 
     public void openSelectionWheel(int x, int y, List<String> options) {
-        final int rayon = 200; 
-
         int ajustedX = x;
         int ajustedY = y;
     
-        if (x + rayon > GWS.gameWindowWidth) {
-            ajustedX = GWS.gameWindowWidth - rayon;
+        if (x + extWheelRadius > GWS.gameWindowWidth) {
+            ajustedX = GWS.gameWindowWidth - extWheelRadius;
         }
-        if (y + rayon > GWS.gameWindowHeight) {
-            ajustedY = GWS.gameWindowHeight - rayon;
+        if (y + extWheelRadius > GWS.gameWindowHeight) {
+            ajustedY = GWS.gameWindowHeight - extWheelRadius;
         }
     
-        if (x - rayon < 0) {
-            ajustedX = rayon;
+        if (x - extWheelRadius < 0) {
+            ajustedX = extWheelRadius;
         }
-        if (y - rayon < 0) {
-            ajustedY = rayon;
+        if (y - extWheelRadius < 0) {
+            ajustedY = extWheelRadius;
         }
 
         this.centreX = ajustedX;
@@ -87,31 +107,29 @@ public class SelectionWheel extends JPanel {
         }
 
         Graphics2D g2d = (Graphics2D) g.create();
-        final int rayon = 200;
-        final int diametre = rayon * 2;
+        final int diametre = extWheelRadius * 2;
         final double angleSection = 360.0 / options.size();
 
         Area wheelArea = new Area();
 
         for (int i = 0; i < options.size(); i++) {
             double startAngle = i * angleSection;
-            Arc2D.Double segment = new Arc2D.Double(centreX - rayon, centreY - rayon, diametre, diametre, startAngle, angleSection, Arc2D.PIE);
+            Arc2D.Double segment = new Arc2D.Double(centreX - extWheelRadius, centreY - extWheelRadius, diametre, diametre, startAngle, angleSection, Arc2D.PIE);
             wheelArea.add(new Area(segment));
         }
 
-        final int rayonVideCentral = 100;
-        Ellipse2D.Double centralHole = new Ellipse2D.Double(centreX - rayonVideCentral, centreY - rayonVideCentral, rayonVideCentral * 2, rayonVideCentral * 2);
+        Ellipse2D.Double centralHole = new Ellipse2D.Double(centreX - intWheelRadius, centreY - intWheelRadius, intWheelRadius * 2, intWheelRadius * 2);
         wheelArea.subtract(new Area(centralHole));
 
         g2d.setClip(wheelArea);
-        g2d.setColor(new Color(255,255,255,122));
+        g2d.setColor(wheelColor);
         g2d.fill(wheelArea);
 
         for (int i = 0; i < options.size(); i++) {
             String text = options.get(i);
             FontMetrics metrics = g.getFontMetrics();
             double textAngle = Math.toRadians((i * angleSection) + angleSection / 2);
-            int textRadius = rayon / 2 + (rayon / 4); 
+            int textRadius = extWheelRadius / 2 + (extWheelRadius / 4); 
             int textX = (int) (centreX + Math.cos(textAngle) * textRadius) - metrics.stringWidth(text) / 2;
             int textY = (int) (centreY + Math.sin(textAngle) * textRadius) + (metrics.getAscent() - metrics.getDescent()) / 2;
 

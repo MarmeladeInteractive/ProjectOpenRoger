@@ -1,0 +1,6 @@
+<selectionWheel>
+    <options id="options">
+        <extWheelRadius>130</extWheelRadius>
+        <intWheelRadius>60</intWheelRadius>
+    </options>
+</selectionWheel>
