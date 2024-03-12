@@ -307,6 +307,8 @@ public class InputsManager{
             @Override
             public void mouseReleased(MouseEvent e) {
                 clearKeys();
+                mouse1stClickX = e.getX();
+                mouse1stClickY = e.getY();
                 mainGameWindow.joystickPanel.clearJoystickPanel();
                 joystickIsVisible=false;
             }
@@ -318,6 +320,8 @@ public class InputsManager{
             @Override
             public void mouseExited(MouseEvent e) {
                 clearKeys();
+                mouse1stClickX = e.getX();
+                mouse1stClickY = e.getY();
                 mainGameWindow.joystickPanel.clearJoystickPanel();
                 joystickIsVisible=false;
             }
@@ -330,6 +334,8 @@ public class InputsManager{
         leftKeyPressed = false;
         upKeyPressed = false;
         downKeyPressed = false;
+        perX = 0;
+        perY = 0;
     }
     
 
