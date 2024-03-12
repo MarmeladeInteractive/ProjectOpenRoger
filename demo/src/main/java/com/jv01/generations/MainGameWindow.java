@@ -10,6 +10,7 @@ import com.jv01.generations.Panels.FrontPanel;
 import com.jv01.generations.Panels.NightPanel;
 import com.jv01.generations.Panels.InteractiveListPanel.InteractiveListPanel;
 import com.jv01.generations.Panels.JoystickPanel.JoystickPanel;
+import com.jv01.generations.Panels.Menus.SelectionWheel;
 import com.jv01.generations.Panels.PhonePanel.PhonePanel;
 import com.jv01.player.Player;
 
@@ -52,6 +53,7 @@ public class MainGameWindow{
     public PhonePanel phonePanel;
     public JoystickPanel joystickPanel;
     public InteractiveListPanel interactiveListPanel;
+    public SelectionWheel selectionWheel;
 
     public long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
@@ -149,6 +151,8 @@ public class MainGameWindow{
         this.nightPanel = new NightPanel(this);
         this.interactiveListPanel = new InteractiveListPanel(this);
 
+        this.selectionWheel = new SelectionWheel(this);
+
         showMainGameWindow();
     }
 
@@ -171,6 +175,7 @@ public class MainGameWindow{
             phonePanel.createPhonePanelPortrait();
             joystickPanel.createJoystickPanel();
             interactiveListPanel.createInteractiveListPanel();
+            selectionWheel.createSelectionWheelPanel();
             frontPanel.createFrontPanel();
             nightPanel.createNightPanel();
         }
@@ -360,10 +365,10 @@ public class MainGameWindow{
 
             if(displaySpam){
                 //openMsgLabels(spam);
-                if(!interactiveListPanel.isOpen){
+                if(!interactiveListPanel.isOpen && !isNpc){
                     interactiveListPanel.openInteractiveList(listModelInteractive);
                 }
-                
+
                 if(isTool){
                     tool.interact(this);
                     refresh = tool.refresh;
@@ -379,7 +384,7 @@ public class MainGameWindow{
                     refresh = arcade.refresh;
                     refreshDisplay = arcade.refreshDisplay;
                 }else if(isNpc){
-                    
+                    npc.interact(this);
                 } 
                    
 
@@ -387,6 +392,7 @@ public class MainGameWindow{
                 //coloseMsgLabels();
                 listModelInteractive.clear();
                 interactiveListPanel.clearInteractiveListPanel();
+                selectionWheel.clearSelectionWheel();
             }
         
 
