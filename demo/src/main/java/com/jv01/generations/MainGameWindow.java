@@ -392,7 +392,7 @@ public class MainGameWindow{
                 //coloseMsgLabels();
                 listModelInteractive.clear();
                 interactiveListPanel.clearInteractiveListPanel();
-                selectionWheel.clearSelectionWheel();
+                selectionWheel.resetSelectionWheel();
             }
         
 

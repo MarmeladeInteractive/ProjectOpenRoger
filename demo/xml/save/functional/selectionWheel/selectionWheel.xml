@@ -1,6 +1,7 @@
 <selectionWheel>
     <options id="options">
-        <extWheelRadius>130</extWheelRadius>
+        <extWheelRadius>140</extWheelRadius>
         <intWheelRadius>60</intWheelRadius>
+        <iconSize>60</iconSize>
     </options>
 </selectionWheel>

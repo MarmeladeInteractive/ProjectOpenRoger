@@ -1,0 +1,6 @@
+<interactions>
+    <interaction id="interactHello">
+        <logoPath>demo/img/selectionWheel/interactions/t.png</logoPath>
+        <description></description>
+    </interaction>
+</interactions>

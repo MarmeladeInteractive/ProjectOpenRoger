@@ -76,10 +76,10 @@ public class Npcs {
 
     public void interact(MainGameWindow mainGameWindow){
         List<String> test = new ArrayList<>();
-        test.add("eeeeeee1");
-        test.add("ttttttt2");
-        test.add("uuuuuuu3");
-        test.add("yyyyyyy4");
+        test.add("interactHello");
+        test.add("interactBad");
+        test.add("interactJoinMe");
+        test.add("interactGiveItem");
         if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y, test);
     }
 
