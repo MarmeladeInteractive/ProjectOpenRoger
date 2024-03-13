@@ -41,10 +41,9 @@ public class SelectionWheel extends JPanel {
     public JLabel selectionWheelLabel;
 
     public boolean isOpen = false;
+
     public boolean isIconSelected = false;
-
     public String iconSelectedId = null;
-
 
     public GameWindowsSize GWS = new GameWindowsSize(true);
 
@@ -56,14 +55,8 @@ public class SelectionWheel extends JPanel {
     public SelectionWheel(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
         this.frame = mainGameWindow.frame;
-        selectionWheelIcons = new SelectionWheelIcons(mainGameWindow);
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if(isOpen)checkClickOnIcon(e.getX(), e.getY());
-            }
-        });
+        this.selectionWheelIcons = new SelectionWheelIcons(mainGameWindow);
+
         getSelectionWheelValues();
     }
 
@@ -104,19 +97,19 @@ public class SelectionWheel extends JPanel {
             ajustedY = extWheelRadius;
         }
 
-        centreX = ajustedX;
-        centreY = ajustedY;
-        options.clear();
-        options.addAll(options);
-        isOpen = true;
-        isIconSelected = false;
-        iconSelectedId = null;
+        this.centreX = ajustedX;
+        this.centreY = ajustedY;
+        this.options.clear();
+        this.options.addAll(options);
+        this.isOpen = true;
+        this.isIconSelected = false;
+        this.iconSelectedId = null;
         repaint();
     }
     
     
     public void clearSelectionWheel() {
-        isOpen = false;
+        this.isOpen = false;
         repaint();
     }
 
@@ -169,7 +162,7 @@ public class SelectionWheel extends JPanel {
         g2d.dispose();
     }
 
-    private void checkClickOnIcon(int x, int y) {
+    public void checkClickOnIcon(int x, int y) {
         double dx = x - centreX;
         double dy = y - centreY;
         double distance = Point2D.distance(centreX, centreY, x, y);

@@ -296,6 +296,7 @@ public class InputsManager{
         mouseListener = new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                mainGameWindow.selectionWheel.checkClickOnIcon(e.getX(),e.getY());
             }
     
             @Override
