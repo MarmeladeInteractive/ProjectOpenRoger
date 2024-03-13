@@ -77,10 +77,10 @@ public class Npcs {
     public void interact(MainGameWindow mainGameWindow){
         List<String> test = new ArrayList<>();
         test.add("interactHello");
-        test.add("interactBad");
-        test.add("interactJoinMe");
-        test.add("interactGiveItem");
-        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y, test);
+        test.add("interactHello");
+        test.add("interactHello");
+        test.add("interactHello");
+        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"npc", test);
     }
 
     public void getOffset(){

@@ -44,6 +44,7 @@ public class SelectionWheel extends JPanel {
 
     public boolean isIconSelected = false;
     public String iconSelectedId = null;
+    public String interactType = null;
 
     public GameWindowsSize GWS = new GameWindowsSize(true);
 
@@ -79,7 +80,8 @@ public class SelectionWheel extends JPanel {
         frame.add(this);
     }
 
-    public void openSelectionWheel(int x, int y, List<String> options) {
+    public void openSelectionWheel(int x, int y, String type,List<String> options) {
+        this.interactType = type;
         int ajustedX = x;
         int ajustedY = y;
     
@@ -109,7 +111,6 @@ public class SelectionWheel extends JPanel {
     
     
     public void clearSelectionWheel() {
-        this.isOpen = false;
         repaint();
     }
 
@@ -147,7 +148,7 @@ public class SelectionWheel extends JPanel {
         g2d.fill(wheelArea);
     
         for (int i = 0; i < options.size(); i++) {
-            ImageIcon icon = selectionWheelIcons.getIconById("interactHello");
+            ImageIcon icon = selectionWheelIcons.getIconById(options.get(i));
             Image image = icon.getImage();
     
             double iconAngle = Math.toRadians((i * angleSection) + angleSection / 2);
@@ -177,5 +178,6 @@ public class SelectionWheel extends JPanel {
     private void iconClicked(int iconIndex) {
         isIconSelected = true;
         iconSelectedId = options.get(iconIndex);
+        clearSelectionWheel();
     }
 }

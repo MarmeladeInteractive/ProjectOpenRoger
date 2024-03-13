@@ -37,9 +37,13 @@ public class Items {
     public String spam;
 
     public DefaultListModel<List<String>> listModelInteractive = new DefaultListModel<>();
+    List<String> interactIconsList = new ArrayList<>();
 
     public int offsetX;
     public int offsetY;
+
+    public int x;
+    public int y;
 
     public List<Object[]> trigerEvents = new ArrayList<>();
     public int trigerSize = 50;
@@ -86,10 +90,15 @@ public class Items {
         this.listModelInteractive.addElement(row);
 
         this.interactsSoundId = save.getChildFromElement(element, "interactsSoundId");
+
+        this.interactIconsList.add("interactPickUp");
     }
 
-    public Object[] addItem(int x, int y, JPanel backgroundPanel){
-        Objects obj = new Objects(x+offsetX, y+ offsetY, size, imageUrl, 0, backgroundPanel);  
+    public Object[] addItem(int newX, int newY, JPanel backgroundPanel){
+        x = newX + offsetX;
+        y = newY + offsetY;
+
+        Objects obj = new Objects(x, y, size, imageUrl, 0, backgroundPanel);  
 
         Object[] item01 = {
             new int[]{
@@ -112,8 +121,10 @@ public class Items {
     }
 
     public void interact(MainGameWindow mainGameWindow){
-        if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.interactiveListPanel.isSelectedValue && mainGameWindow.interactiveListPanel.selectedValue.get(1) == "item")){
- 
+        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"item",interactIconsList);
+        //if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.interactiveListPanel.isSelectedValue && mainGameWindow.interactiveListPanel.selectedValue.get(1) == "item")){
+        if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType == "item")){
+
             switch (id) {
                 case 0:
                     if(mainGameWindow.player.inventory.wastes < mainGameWindow.player.inventory.maxWastes){
