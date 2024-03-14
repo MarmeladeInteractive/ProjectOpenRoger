@@ -150,13 +150,18 @@ public class SelectionWheel extends JPanel {
         for (int i = 0; i < options.size(); i++) {
             ImageIcon icon = selectionWheelIcons.getIconById(options.get(i));
             Image image = icon.getImage();
-    
-            double iconAngle = Math.toRadians((i * angleSection) + angleSection / 2);
-            
+        
+            double iconAngle;
+            if (options.size() == 1) {
+                iconAngle = Math.toRadians(-90);
+            } else {
+                iconAngle = Math.toRadians((i * angleSection) + angleSection / 2);
+            }
+        
             int iconRadius = (intWheelRadius + extWheelRadius) / 2;
             int iconX = (int) (centreX + Math.cos(iconAngle) * iconRadius) - (iconSize / 2);
             int iconY = (int) (centreY + Math.sin(iconAngle) * iconRadius) - (iconSize / 2);
-    
+        
             g2d.drawImage(image, iconX, iconY, iconSize, iconSize, null);
         }
     
