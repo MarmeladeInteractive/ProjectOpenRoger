@@ -233,6 +233,10 @@ public class InputsManager{
         mouseAdapter = new MouseAdapter() {           
             @Override
             public void mouseDragged(MouseEvent e) {
+                if(!joystickIsVisible){
+                    mainGameWindow.joystickPanel.addJoystickBorders(mouse1stClickX, mouse1stClickY,diagonalSensitivity);
+                    joystickIsVisible=true;
+                }
                 mainGameWindow.joystickPanel.updateJoystickLocation(e.getX(), e.getY());
                 currentMouseLocationX = e.getX();
                 currentMouseLocationY = e.getY();
@@ -302,7 +306,6 @@ public class InputsManager{
             @Override
             public void mousePressed(MouseEvent e) {
                 mainGameWindow.joystickPanel.addJoystick(mouse1stClickX, mouse1stClickY,diagonalSensitivity);
-                joystickIsVisible=true;
             }
     
             @Override

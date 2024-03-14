@@ -73,7 +73,7 @@ public class JoystickPanel {
         frame.add(panel);
 
         if(mainGameWindow.player.inputsManager.joystickIsVisible){
-            addJoystick(mainGameWindow.player.inputsManager.mouse1stClickX,mainGameWindow.player.inputsManager.mouse1stClickY,mainGameWindow.player.inputsManager.diagonalSensitivity);
+            addTheWholeJoystick(mainGameWindow.player.inputsManager.mouse1stClickX,mainGameWindow.player.inputsManager.mouse1stClickY,mainGameWindow.player.inputsManager.diagonalSensitivity);
             updateJoystickLocation(mainGameWindow.player.inputsManager.currentMouseLocationX,mainGameWindow.player.inputsManager.currentMouseLocationY);
         }
     }
@@ -83,7 +83,51 @@ public class JoystickPanel {
         panel.repaint();  
     }
 
+    public void addTheWholeJoystick(int x, int y, int newDiagonalSensitivity) {
+        addJoystick(x, y, newDiagonalSensitivity);
+        addJoystickBorders(x, y, newDiagonalSensitivity);
+    }
+
     public void addJoystick(int x, int y, int newDiagonalSensitivity) {
+        centerCircleDiameter = diagonalSensitivity*2;
+        borderCircleDiameter = joystickDiameter*2;
+        diagonalSensitivity = newDiagonalSensitivity;
+
+        mouse1stClickX = x;
+        mouse1stClickY = y;
+ 
+        joystick = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Graphics2D g2d = (Graphics2D) g;
+                Color newColor = new Color(joystickColor.getRed(), joystickColor.getGreen(), joystickColor.getBlue(), joystickAlpha);
+                g2d.setColor(newColor);
+                
+                Stroke oldStroke = g2d.getStroke();
+                g2d.setStroke(new BasicStroke(3));
+                
+                g2d.fillOval(0, 0, joystickDiameter, joystickDiameter);
+                
+                g2d.setStroke(oldStroke);
+            }
+    
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(100, 100);
+            }
+        };
+
+        joystick.setBounds(x - joystickDiameter / 2, y - joystickDiameter / 2, joystickDiameter, joystickDiameter);
+        joystick.setOpaque(false);
+
+        panel.add(joystick); 
+
+        panel.revalidate();
+        panel.repaint();
+    }
+
+    public void addJoystickBorders(int x, int y, int newDiagonalSensitivity) {
         centerCircleDiameter = diagonalSensitivity*2;
         borderCircleDiameter = joystickDiameter*2;
         diagonalSensitivity = newDiagonalSensitivity;
@@ -133,28 +177,6 @@ public class JoystickPanel {
                 return new Dimension(100, 100);
             }
         };
-        
-        joystick = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
-                Color newColor = new Color(joystickColor.getRed(), joystickColor.getGreen(), joystickColor.getBlue(), joystickAlpha);
-                g2d.setColor(newColor);
-                
-                Stroke oldStroke = g2d.getStroke();
-                g2d.setStroke(new BasicStroke(3));
-                
-                g2d.fillOval(0, 0, joystickDiameter, joystickDiameter);
-                
-                g2d.setStroke(oldStroke);
-            }
-    
-            @Override
-            public Dimension getPreferredSize() {
-                return new Dimension(100, 100);
-            }
-        };
     
         centerCirclePanel.setBounds(x - centerCircleDiameter / 2, y - centerCircleDiameter / 2, centerCircleDiameter, centerCircleDiameter);
         centerCirclePanel.setOpaque(false);
@@ -162,10 +184,6 @@ public class JoystickPanel {
         borderCirclePanel.setBounds(x - borderCircleDiameter / 2, y - borderCircleDiameter / 2, borderCircleDiameter, borderCircleDiameter);
         borderCirclePanel.setOpaque(false);
 
-        joystick.setBounds(x - joystickDiameter / 2, y - joystickDiameter / 2, joystickDiameter, joystickDiameter);
-        joystick.setOpaque(false);
-
-        panel.add(joystick);
         panel.add(centerCirclePanel);
         panel.add(borderCirclePanel);  
 
