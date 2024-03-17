@@ -338,6 +338,7 @@ public class InputsManager{
         leftKeyPressed = false;
         upKeyPressed = false;
         downKeyPressed = false;
+        runKeyPressed = false;
         perX = 0;
         perY = 0;
     }
