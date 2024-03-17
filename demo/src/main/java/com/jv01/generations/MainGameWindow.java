@@ -238,6 +238,7 @@ public class MainGameWindow{
         boolean isDealer = false;
         boolean isArcade = false;
         boolean isNpc = false;
+        boolean isBuilding = false;
 
         String spam = "";
 
@@ -255,16 +256,20 @@ public class MainGameWindow{
                 int distance = getDistanceFromPlayer(bX, bY);
 
                 if(distance <= (b.dimension[0]+b.dimension[1])/2){
+                    isBuilding = true;
 
                     //openMsgLabels("'e' Pour entrer dans la " +b.name);
                     spam = "Entrer dans " +b.name;
                     displaySpam = true;
                     List<String> row = new ArrayList<>(Arrays.asList(spam, "building"));
                     listModelInteractive.addElement(row);
+                    List<String> interactIconsList = new ArrayList<>();
+                    interactIconsList.add("interactEnter");
+                    if(!selectionWheel.isOpen)selectionWheel.openSelectionWheel(bX, bY,"building",interactIconsList);
 
                     if(player.inputsManager.interactKeyPressed)enterBuilding();
-                    if(interactiveListPanel.isSelectedValue){
-                        if(interactiveListPanel.selectedValue.get(1)=="building"){
+                    if(selectionWheel.isIconSelected){
+                        if(selectionWheel.interactType=="building"){
                             enterBuilding();
                         }
                     }
@@ -365,7 +370,7 @@ public class MainGameWindow{
 
             if(displaySpam){
                 //openMsgLabels(spam);
-                if(!interactiveListPanel.isOpen && !isNpc){
+                if(!interactiveListPanel.isOpen && !isNpc && !isItem && !isBuilding){
                     interactiveListPanel.openInteractiveList(listModelInteractive);
                 }
 
@@ -392,7 +397,7 @@ public class MainGameWindow{
                 //coloseMsgLabels();
                 listModelInteractive.clear();
                 interactiveListPanel.clearInteractiveListPanel();
-                selectionWheel.clearSelectionWheel();
+                selectionWheel.resetSelectionWheel();
             }
         
 

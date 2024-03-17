@@ -4,25 +4,37 @@ import java.awt.Color;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.geom.Point2D;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Arc2D;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
+import com.jv01.fonctionals.Save;
 import com.jv01.generations.MainGameWindow;
 import com.jv01.screens.GameWindowsSize;
 
 public class SelectionWheel extends JPanel {
+    public Save save = new Save();
     private List<String> options = new ArrayList<>();
     private int centreX = 0;
     private int centreY = 0;
     public MainGameWindow mainGameWindow;
+    public SelectionWheelIcons selectionWheelIcons;
     public JFrame frame;
     public JPanel panel;
     public JPanel backPanel;
@@ -30,11 +42,34 @@ public class SelectionWheel extends JPanel {
 
     public boolean isOpen = false;
 
+    public boolean isIconSelected = false;
+    public String iconSelectedId = null;
+    public String interactType = null;
+
     public GameWindowsSize GWS = new GameWindowsSize(true);
+
+    public int extWheelRadius = 200;
+    public int intWheelRadius = 100;
+    public int iconSize = 40;
+    public Color wheelColor = new Color(226,233,255,86);
 
     public SelectionWheel(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
         this.frame = mainGameWindow.frame;
+        this.selectionWheelIcons = new SelectionWheelIcons(mainGameWindow);
+
+        getSelectionWheelValues();
+    }
+
+    public void getSelectionWheelValues(){
+        Document doc = save.getDocumentXml(mainGameWindow.gameName,"functional/selectionWheel/selectionWheel");
+        Element element = save.getElementById(doc, "options", "options");
+
+        Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
+
+        this.extWheelRadius = Integer.parseInt(save.getChildFromMapElements(allElements,"extWheelRadius"));
+        this.intWheelRadius = Integer.parseInt(save.getChildFromMapElements(allElements,"intWheelRadius"));
+        this.iconSize = Integer.parseInt(save.getChildFromMapElements(allElements,"iconSize"));
     }
 
     public void createSelectionWheelPanel(){
@@ -45,24 +80,23 @@ public class SelectionWheel extends JPanel {
         frame.add(this);
     }
 
-    public void openSelectionWheel(int x, int y, List<String> options) {
-        final int rayon = 200; 
-
+    public void openSelectionWheel(int x, int y, String type,List<String> options) {
+        this.interactType = type;
         int ajustedX = x;
         int ajustedY = y;
     
-        if (x + rayon > GWS.gameWindowWidth) {
-            ajustedX = GWS.gameWindowWidth - rayon;
+        if (x + extWheelRadius > GWS.gameWindowWidth) {
+            ajustedX = GWS.gameWindowWidth - extWheelRadius;
         }
-        if (y + rayon > GWS.gameWindowHeight) {
-            ajustedY = GWS.gameWindowHeight - rayon;
+        if (y + extWheelRadius > GWS.gameWindowHeight) {
+            ajustedY = GWS.gameWindowHeight - extWheelRadius;
         }
     
-        if (x - rayon < 0) {
-            ajustedX = rayon;
+        if (x - extWheelRadius < 0) {
+            ajustedX = extWheelRadius;
         }
-        if (y - rayon < 0) {
-            ajustedY = rayon;
+        if (y - extWheelRadius < 0) {
+            ajustedY = extWheelRadius;
         }
 
         this.centreX = ajustedX;
@@ -70,12 +104,20 @@ public class SelectionWheel extends JPanel {
         this.options.clear();
         this.options.addAll(options);
         this.isOpen = true;
+        this.isIconSelected = false;
+        this.iconSelectedId = null;
         repaint();
     }
     
     
     public void clearSelectionWheel() {
-        this.isOpen = false;
+        repaint();
+    }
+
+    public void resetSelectionWheel(){
+        isOpen = false;
+        isIconSelected = false;
+        iconSelectedId = null;
         repaint();
     }
 
@@ -85,40 +127,62 @@ public class SelectionWheel extends JPanel {
         if (!isOpen || options.isEmpty()) {
             return;
         }
-
+    
         Graphics2D g2d = (Graphics2D) g.create();
-        final int rayon = 200;
-        final int diametre = rayon * 2;
+        final int diametre = extWheelRadius * 2;
         final double angleSection = 360.0 / options.size();
-
+    
         Area wheelArea = new Area();
-
+    
         for (int i = 0; i < options.size(); i++) {
             double startAngle = i * angleSection;
-            Arc2D.Double segment = new Arc2D.Double(centreX - rayon, centreY - rayon, diametre, diametre, startAngle, angleSection, Arc2D.PIE);
+            Arc2D.Double segment = new Arc2D.Double(centreX - extWheelRadius, centreY - extWheelRadius, diametre, diametre, startAngle, angleSection, Arc2D.PIE);
             wheelArea.add(new Area(segment));
         }
-
-        final int rayonVideCentral = 100;
-        Ellipse2D.Double centralHole = new Ellipse2D.Double(centreX - rayonVideCentral, centreY - rayonVideCentral, rayonVideCentral * 2, rayonVideCentral * 2);
+    
+        Ellipse2D.Double centralHole = new Ellipse2D.Double(centreX - intWheelRadius, centreY - intWheelRadius, intWheelRadius * 2, intWheelRadius * 2);
         wheelArea.subtract(new Area(centralHole));
-
+    
         g2d.setClip(wheelArea);
-        g2d.setColor(new Color(255,255,255,122));
+        g2d.setColor(wheelColor);
         g2d.fill(wheelArea);
-
+    
         for (int i = 0; i < options.size(); i++) {
-            String text = options.get(i);
-            FontMetrics metrics = g.getFontMetrics();
-            double textAngle = Math.toRadians((i * angleSection) + angleSection / 2);
-            int textRadius = rayon / 2 + (rayon / 4); 
-            int textX = (int) (centreX + Math.cos(textAngle) * textRadius) - metrics.stringWidth(text) / 2;
-            int textY = (int) (centreY + Math.sin(textAngle) * textRadius) + (metrics.getAscent() - metrics.getDescent()) / 2;
-
-            g2d.setColor(Color.BLACK);
-            g2d.drawString(text, textX, textY);
+            ImageIcon icon = selectionWheelIcons.getIconById(options.get(i));
+            Image image = icon.getImage();
+        
+            double iconAngle;
+            if (options.size() == 1) {
+                iconAngle = Math.toRadians(-90);
+            } else {
+                iconAngle = Math.toRadians((i * angleSection) + angleSection / 2);
+            }
+        
+            int iconRadius = (intWheelRadius + extWheelRadius) / 2;
+            int iconX = (int) (centreX + Math.cos(iconAngle) * iconRadius) - (iconSize / 2);
+            int iconY = (int) (centreY + Math.sin(iconAngle) * iconRadius) - (iconSize / 2);
+        
+            g2d.drawImage(image, iconX, iconY, iconSize, iconSize, null);
         }
-
+    
         g2d.dispose();
+    }
+
+    public void checkClickOnIcon(int x, int y) {
+        double dx = x - centreX;
+        double dy = y - centreY;
+        double distance = Point2D.distance(centreX, centreY, x, y);
+
+        if (distance >= intWheelRadius && distance <= extWheelRadius) {
+            double angle = Math.toDegrees(Math.atan2(dy, dx)) + 180;
+            int iconIndex = (int) Math.floor(angle / (360.0 / options.size()));
+
+            iconClicked(iconIndex);
+        }
+    }
+    private void iconClicked(int iconIndex) {
+        isIconSelected = true;
+        iconSelectedId = options.get(iconIndex);
+        clearSelectionWheel();
     }
 }

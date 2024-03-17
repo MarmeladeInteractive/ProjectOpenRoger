@@ -1,0 +1,14 @@
+<interactions>
+    <interaction id="interactHello">
+        <logoPath>demo/img/selectionWheel/interactions/t.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactPickUp">
+        <logoPath>demo/img/selectionWheel/interactions/interactPickUp.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactEnter">
+        <logoPath>demo/img/selectionWheel/interactions/interactEnter.png</logoPath>
+        <description></description>
+    </interaction>
+</interactions>
