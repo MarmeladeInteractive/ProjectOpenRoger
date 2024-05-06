@@ -11,4 +11,8 @@
         <logoPath>demo/img/selectionWheel/interactions/interactEnter.png</logoPath>
         <description></description>
     </interaction>
+    <interaction id="interactThrow">
+        <logoPath>demo/img/selectionWheel/interactions/interactThrow.png</logoPath>
+        <description></description>
+    </interaction>
 </interactions>
