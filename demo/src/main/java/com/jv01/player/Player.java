@@ -17,6 +17,7 @@ import java.util.Map;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.lang.invoke.StringConcatException;
 
 public class Player{
     public Save save = new Save();
@@ -57,6 +58,7 @@ public class Player{
 
     public int partyID = 1;
 
+    public String ideologicalCode = "";
 
     public Player(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
@@ -89,6 +91,13 @@ public class Player{
 
         this.wasteCollected = Integer.parseInt(save.getChildFromMapElements(allElements,"wasteCollected"));
         this.partyID = Integer.parseInt(save.getChildFromMapElements(allElements,"partyID"));
+
+        doc = save.getDocumentXml(gameName,"parties");
+        element = save.getElementById(doc, "party", String.valueOf(this.partyID));
+
+        allElements = save.getAllChildsFromElement(element);
+
+        this.ideologicalCode = save.getChildFromMapElements(allElements,"ideologicalCode");
 
     }
 

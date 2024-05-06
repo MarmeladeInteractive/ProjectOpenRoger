@@ -1,5 +1,5 @@
 <responses>
-    <accepted id="accepted">
+    <response id="accepted">
         <res1>Votre parti est la lueur d'espoir dont notre pays a besoin. Je suis prêt à m'engager pour un avenir meilleur.</res1>
         <res2>Je vois en vous un véritable leader, et je suis honoré de rejoindre votre parti politique.</res2>
         <res3>Je suis convaincu que votre parti est la voie à suivre pour créer un monde plus juste. Je suis prêt à me battre à vos côtés.</res3>
@@ -30,8 +30,8 @@
         <res28>Votre intégrité et votre engagement pour le bien commun me poussent à vous rejoindre. Je suis enthousiaste à l'idée de contribuer.</res28>
         <res29>Je suis convaincu que votre parti peut faire une différence réelle. Je suis honoré de me joindre à votre lutte pour le progrès.</res29>
         <res30>Votre parti incarne les valeurs qui sont chères à mon cœur. Je suis prêt à m'impliquer activement pour les faire avancer.</res30>
-    </accepted>
-    <denied id="denied">
+    </response>
+    <response id="denied">
         <res1>Je préfère garder ma liberté de pensée et rester en dehors de tout parti politique pour le moment.</res1>
         <res2>Je respecte votre parti, mais je ne pense pas que vous soyez la meilleure option pour moi en ce moment.</res2>
         <res3>Mes priorités politiques sont ailleurs, et je ne pense pas que votre parti puisse les représenter.</res3>
@@ -62,8 +62,8 @@
         <res28>Je préfère ne pas être affilié à un parti politique en ce moment. Je veux garder ma liberté de pensée.</res28>
         <res29>Je ne me sens pas vraiment connecté(e) à votre parti. Je vais chercher d'autres options politiques.</res29>
         <res30>Je pense que mon temps et mes ressources seraient mieux utilisés ailleurs. Je vais poursuivre d'autres intérêts.</res30>
-    </denied>
-    <undecided id="undecided">
+    </response>
+    <response id="undecided">
         <res1>Je suis en train d'explorer toutes les options politiques avant de prendre une décision définitive.</res1>
         <res2>Je suis dans une période de recherche et de réflexion. Je vais prendre le temps nécessaire pour prendre une décision éclairée.</res2>
         <res3>Je veux être sûr de faire le choix qui correspond le mieux à mes valeurs et convictions. Laissez-moi du temps pour réfléchir.</res3>
@@ -94,8 +94,8 @@
         <res28>Je suis encore en train d'examiner toutes les options politiques. Je ne suis pas encore décidé.</res28>
         <res29>Je veux être sûr de faire le choix qui correspond le mieux à mes valeurs. Laissez-moi du temps pour réfléchir.</res29>
         <res30>Je suis dans une phase de recherche et d'analyse. Je prendrai ma décision lorsque je me sentirai prêt.</res30>
-    </undecided>
-    <angry id="angry">
+    </response>
+    <response id="angry">
         <res1>Je suis furieux que vous ayez même envisagé que je pourrais rejoindre votre parti. C'est une insulte.</res1>
         <res2>Vos politiques sont une farce totale. Je ne peux pas croire que vous essayiez de me recruter.</res2>
         <res3>Je n'ai aucune intention de vous rejoindre, point final. Laissez-moi tranquille.</res3>
@@ -126,5 +126,71 @@
         <res28>Je ne vais même pas perdre mon souffle à vous dire à quel point je suis en colère contre votre parti.</res28>
         <res29>Je n'ai pas de temps à perdre avec vous. Foutez le camp de ma vue.</res29>
         <res30>Je ne vous rejoindrais même pas si vous étiez le dernier parti politique sur Terre.</res30>
-    </angry>
+    </response>
+
+
+    <response id="greet">
+        <res1>Je vous souhaite une agréable journée et j'espère que vous allez bien.</res1>
+        <res2>Que la journée vous soit douce et pleine de réussite.</res2>
+        <res3>Bonjour! J'espère que vous passez une excellente journée jusqu'à présent.</res3>
+        <res4>Je vous salue respectueusement et vous souhaite une matinée lumineuse.</res4>
+        <res5>Bonjour! Que la journée vous réserve de belles surprises et des rencontres enrichissantes.</res5>
+        <res6>Je vous adresse mes salutations les plus cordiales en ce début de journée.</res6>
+        <res7>Que cette journée vous soit propice et pleine de moments agréables.</res7>
+        <res8>Je vous souhaite un bonjour empli de joie et de sérénité.</res8>
+        <res9>Bonjour! Puissiez-vous profiter pleinement de chaque instant qui s'offre à vous aujourd'hui.</res9>
+        <res10>Je vous adresse mes respectueuses salutations et vous souhaite une journée pleine de succès.</res10>
+        <res11>Que cette journée soit pour vous le début d'une semaine exceptionnelle.</res11>
+        <res12>Je vous souhaite un bonjour rempli de bonheur et de réussite.</res12>
+        <res13>Bonjour! Que la journée vous apporte son lot de bonnes nouvelles et de moments précieux.</res13>
+        <res14>Je vous adresse mes vœux les plus chaleureux pour une journée des plus agréables.</res14>
+        <res15>Que cette journée soit pour vous l'occasion de réaliser vos projets les plus chers.</res15>
+        <res16>Je vous souhaite un bonjour radieux et plein d'énergie positive.</res16>
+        <res17>Bonjour! Puissiez-vous savourer chaque instant de cette journée qui commence.</res17>
+        <res18>Je vous adresse mes salutations les plus distinguées en ce début de journée.</res18>
+        <res19>Que cette journée soit le prélude à une semaine exceptionnelle et fructueuse pour vous.</res19>
+        <res20>Je vous souhaite un bonjour empreint de paix et de tranquillité intérieure.</res20>
+        <res21>Je vous souhaite une journée remplie de succès et d'accomplissement.</res21>
+        <res22>Que cette journée soit le début d'une période prospère et enrichissante pour vous.</res22>
+        <res23>Je vous adresse mes meilleurs vœux pour une journée paisible et harmonieuse.</res23>
+        <res24>Que chaque instant de cette journée vous apporte son lot de bonheur et de satisfaction.</res24>
+        <res25>Je vous souhaite un bonjour lumineux, comme la promesse d'une journée pleine de belles surprises.</res25>
+        <res26>Que cette journée soit le reflet de toutes vos aspirations et de vos plus grands rêves.</res26>
+        <res27>Je vous adresse mes pensées les plus positives pour une journée empreinte de réussite.</res27>
+        <res28>Que cette journée soit le prélude à de grands accomplissements et à de nouvelles perspectives.</res28>
+        <res29>Je vous souhaite un bonjour empli de vitalité et de dynamisme pour relever tous les défis.</res29>
+        <res30>Que cette journée soit pour vous le point de départ vers de nouveaux horizons et de belles opportunités.</res30>
+    </response>
+    <response id="reject">
+        <res1>Qu'est-ce que tu veux?</res1>
+        <res2>Quoi? Tu veux quelque chose?</res2>
+        <res3>Qu'est-ce qu'il y a?</res3>
+        <res4>Qu'est-ce que c'est que ça?</res4>
+        <res5>Qu'est-ce qui t'amène?</res5>
+        <res6>Et bien, qu'est-ce que tu veux maintenant?</res6>
+        <res7>Qu'est-ce que tu veux que je fasse?</res7>
+        <res8>Tu veux quoi, exactement?</res8>
+        <res9>Qu'est-ce qui te prend?</res9>
+        <res10>Quoi encore?</res10>
+        <res11>Qu'est-ce que tu fous là?</res11>
+        <res12>Qu'est-ce que tu veux que je te dise?</res12>
+        <res13>Qu'est-ce que tu me veux?</res13>
+        <res14>Qu'est-ce que tu viens faire ici?</res14>
+        <res15>Quoi maintenant?</res15>
+        <res16>Qu'est-ce que tu veux que je te dise?</res16>
+        <res17>Qu'est-ce que tu as encore besoin?</res17>
+        <res18>Qu'est-ce que tu veux que je te fasse?</res18>
+        <res19>Qu'est-ce que tu espères en venant me parler?</res19>
+        <res20>Qu'est-ce que tu cherches?</res20>
+        <res21>Qu'est-ce qui te prend de venir me parler maintenant?</res21>
+        <res22>Qu'est-ce que tu veux que je te dise?</res22>
+        <res23>Qu'est-ce que tu veux que je fasse pour toi?</res23>
+        <res24>Tu veux quoi, encore?</res24>
+        <res25>Qu'est-ce qui t'amène ici?</res25>
+        <res26>Tu veux quoi, sérieusement?</res26>
+        <res27>Quoi maintenant, encore?</res27>
+        <res28>Qu'est-ce que tu veux que je te dise de plus?</res28>
+        <res29>Qu'est-ce que tu cherches à la fin?</res29>
+        <res30>Qu'est-ce que tu veux que je te dise?</res30>
+    </response>
 </responses>

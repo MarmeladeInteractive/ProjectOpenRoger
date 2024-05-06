@@ -91,7 +91,7 @@ public class Ideology {
             sum += difference;
         }
         
-        return sum;
+        return (100 - ((100 * sum) / 18));
     }
 
     public int calculateLeftRightDifference(String ideologicalCode) {
