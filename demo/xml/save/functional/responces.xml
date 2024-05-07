@@ -60,7 +60,7 @@
         <res26>Je préfère garder un esprit ouvert et explorer toutes les possibilités avant de m'engager dans un parti politique.</res26>
         <res27>Je ne suis pas convaincu que vous puissiez vraiment réaliser ce que vous promettez. Je préfère ne pas m'engager.</res27>
         <res28>Je préfère ne pas être affilié à un parti politique en ce moment. Je veux garder ma liberté de pensée.</res28>
-        <res29>Je ne me sens pas vraiment connecté(e) à votre parti. Je vais chercher d'autres options politiques.</res29>
+        <res29>Je ne me sens pas vraiment connecté à votre parti. Je vais chercher d'autres options politiques.</res29>
         <res30>Je pense que mon temps et mes ressources seraient mieux utilisés ailleurs. Je vais poursuivre d'autres intérêts.</res30>
     </response>
     <response id="undecided">
@@ -128,6 +128,39 @@
         <res30>Je ne vous rejoindrais même pas si vous étiez le dernier parti politique sur Terre.</res30>
     </response>
 
+    <response id="dontSayHello">
+        <res1>Hey, tu peux dire bonjour, tu sais?</res1>
+        <res2>T'as oublié comment dire bonjour ou quoi?</res2>
+        <res3>Salut, c'est quoi, tu ne sais plus dire bonjour?</res3>
+        <res4>Alors, on oublie de dire bonjour maintenant?</res4>
+        <res5>Wow, quel accueil chaleureux! T'as pas entendu parler du bonjour?</res5>
+        <res6>T'as un problème avec les salutations ou quoi?</res6>
+        <res7>Eh, tu sais que dire bonjour, ça se fait, hein?</res7>
+        <res8>Bonjour, c'est une notion difficile à comprendre, apparemment.</res8>
+        <res9>T'as vraiment oublié comment dire bonjour? C'est pathétique.</res9>
+        <res10>Franchement, un bonjour ça t'aurait pas tué.</res10>
+        <res11>Hé, t'as oublié le bonjour, ou c'est un choix délibéré?</res11>
+        <res12>Est-ce que dire bonjour est devenu trop difficile pour toi?</res12>
+        <res13>Je me demande si le bonjour est sorti de ton vocabulaire.</res13>
+        <res14>Bonjour, c'est le minimum syndical, tu crois pas?</res14>
+        <res15>Oh, on est passé devant l'étiquette du bonjour, apparemment.</res15>
+        <res16>Dis-moi, c'est une stratégie spéciale de ne pas dire bonjour?</res16>
+        <res17>Je suppose que dire bonjour est devenu optionnel pour toi.</res17>
+        <res18>Bonjour, c'est comme une formule magique, tu devrais essayer.</res18>
+        <res19>T'as vraiment oublié les règles de base de la politesse, hein?</res19>
+        <res20>Je sais pas, t'as pas appris que dire bonjour c'est poli?</res20>
+        <res21>Hey, t'es passé en mode avion ou quoi? Pas de bonjour?</res21>
+        <res22>Dis donc, on t'a jamais appris à dire bonjour?</res22>
+        <res23>Je crois qu'on a perdu le concept du bonjour quelque part.</res23>
+        <res24>Bonjour, ça te rappelle quelque chose ou c'est juste moi?</res24>
+        <res25>Salut, c'est le signal pour dire bonjour, tu devrais essayer.</res25>
+        <res26>Apparemment, le bonjour est en rupture de stock chez toi.</res26>
+        <res27>Je suppose que le bonjour est optionnel pour toi, maintenant.</res27>
+        <res28>Wow, j'ai cru que t'avais oublié comment dire bonjour.</res28>
+        <res29>Je crois que le bonjour a disparu de ton vocabulaire, non?</res29>
+        <res30>Salut, c'est le moment où tu dis bonjour, tu sais?</res30>
+    </response>
+
 
     <response id="greet">
         <res1>Je vous souhaite une agréable journée et j'espère que vous allez bien.</res1>
@@ -193,4 +226,69 @@
         <res29>Qu'est-ce que tu cherches à la fin?</res29>
         <res30>Qu'est-ce que tu veux que je te dise?</res30>
     </response>
+    <response id="acceptedGift">
+        <res1>Je vous suis vraiment reconnaissant pour ce merveilleux cadeau. C'est très attentionné de votre part.</res1>
+        <res2>Merci infiniment pour ce magnifique cadeau! Cela signifie énormément pour moi.</res2>
+        <res3>Je suis profondément touché par votre générosité. Merci beaucoup pour ce superbe cadeau!</res3>
+        <res4>Je tiens à vous exprimer toute ma gratitude pour ce cadeau exceptionnel. C'est vraiment gentil de votre part.</res4>
+        <res5>Je suis vraiment heureux et reconnaissant d'avoir reçu un tel cadeau de votre part. Merci du fond du cœur.</res5>
+        <res6>Ce cadeau est absolument charmant! Je vous remercie sincèrement pour cette délicate attention.</res6>
+        <res7>Merci beaucoup pour ce cadeau si généreux. Cela me touche énormément.</res7>
+        <res8>Recevoir ce cadeau m'a vraiment rempli de joie. Je vous en suis extrêmement reconnaissant.</res8>
+        <res9>Je suis tellement reconnaissant d'avoir quelqu'un comme vous dans ma vie. Merci pour ce cadeau extraordinaire.</res9>
+        <res10>Je suis comblé par ce cadeau incroyable. Merci infiniment pour votre gentillesse et votre générosité.</res10>
+        <res11>Votre cadeau est un vrai trésor! Je vous remercie du fond du cœur pour cette belle surprise.</res11>
+        <res12>Je suis profondément touché par votre geste attentionné. Merci pour ce cadeau merveilleux.</res12>
+        <res13>Merci infiniment pour ce cadeau qui me va droit au cœur. Je suis très reconnaissant de votre générosité.</res13>
+        <res14>Recevoir ce cadeau m'a rempli de bonheur. Je vous adresse toute ma gratitude pour cette belle attention.</res14>
+        <res15>Votre cadeau est une véritable bénédiction. Merci beaucoup pour cette marque de gentillesse.</res15>
+        <res16>Je suis vraiment touché par ce geste généreux. Merci pour ce cadeau magnifique.</res16>
+        <res17>Merci du fond du cœur pour ce cadeau si spécial. Je suis vraiment reconnaissant de votre générosité.</res17>
+        <res18>Ce cadeau est tout simplement merveilleux! Merci beaucoup pour cette délicate attention.</res18>
+        <res19>Je suis enchanté par ce cadeau! Merci infiniment pour cette belle surprise.</res19>
+        <res20>Je suis sans mots devant ce cadeau exceptionnel. Merci beaucoup pour votre générosité et votre gentillesse.</res20>
+        <res21>Votre cadeau est un vrai rayon de soleil dans ma journée! Merci pour cette délicate attention.</res21>
+        <res22>Je vous remercie du fond du cœur pour ce cadeau si touchant. C'est vraiment apprécié.</res22>
+        <res23>Je suis profondément reconnaissant pour ce cadeau incroyable. Merci pour votre gentillesse et votre générosité.</res23>
+        <res24>Recevoir ce cadeau m'a énormément touché. Merci beaucoup pour cette belle surprise.</res24>
+        <res25>Votre cadeau est un véritable trésor pour moi. Je vous adresse toute ma gratitude pour cette délicate attention.</res25>
+        <res26>Je suis comblé par ce cadeau extraordinaire. Merci du fond du cœur pour cette belle surprise.</res26>
+        <res27>Je tiens à vous exprimer toute ma gratitude pour ce cadeau exceptionnel. C'est vraiment apprécié.</res27>
+        <res28>Merci beaucoup pour ce cadeau si spécial. Cela signifie énormément pour moi.</res28>
+        <res29>Je suis profondément touché par ce cadeau magnifique. Merci infiniment pour votre générosité.</res29>
+        <res30>Recevoir ce cadeau m'a vraiment mis du baume au cœur. Merci pour cette attention si délicate.</res30>
+    </response>
+    <response id="deniedGift">
+        <res1>Je n'ai vraiment pas besoin de ça, tu peux le garder.</res1>
+        <res2>Merci, mais franchement, ça ne me plaît pas du tout.</res2>
+        <res3>Je suis désolé, mais je ne veux pas de ce truc. Garde-le pour quelqu'un d'autre.</res3>
+        <res4>Je te remercie, mais ce n'est vraiment pas ce que je voulais.</res4>
+        <res5>Non merci, c'est pas du tout mon style.</res5>
+        <res6>Je suis vraiment pas fan de ce genre de cadeau, désolé.</res6>
+        <res7>Oh, non merci. Je préfère m'en passer, vraiment.</res7>
+        <res8>Désolé, mais ce cadeau ne me convient pas du tout.</res8>
+        <res9>Je ne veux pas paraître impoli, mais je ne veux vraiment pas de ce cadeau.</res9>
+        <res10>C'est gentil à toi, mais je n'en veux vraiment pas.</res10>
+        <res11>Franchement, ce cadeau ne me fait pas du tout plaisir.</res11>
+        <res12>Merci, mais je pense que tu devrais le garder pour toi-même.</res12>
+        <res13>Désolé, mais je ne peux pas accepter ça. Ça ne me plaît pas.</res13>
+        <res14>Je n'ai aucun intérêt pour ce cadeau, merci quand même.</res14>
+        <res15>Je ne sais pas comment te le dire, mais je ne veux pas de ce cadeau.</res15>
+        <res16>Non, merci. Je préfère ne pas avoir ça chez moi.</res16>
+        <res17>Ce n'est pas du tout ce que j'attendais comme cadeau, désolé.</res17>
+        <res18>Merci, mais je préfère ne pas l'accepter. Ça ne me convient pas.</res18>
+        <res19>Non, vraiment, je n'en veux pas. Garde-le pour toi.</res19>
+        <res20>Désolé, mais je ne veux pas encombrer ma vie avec ça.</res20>
+        <res21>Non merci, c'est vraiment pas mon truc. Tu peux le garder.</res21>
+        <res22>Je ne veux pas être méchant, mais ce cadeau ne me plaît pas du tout.</res22>
+        <res23>J'apprécie l'intention, mais ce cadeau ne me convient pas du tout.</res23>
+        <res24>Non, merci. Ce cadeau ne correspond pas du tout à ce que j'aime.</res24>
+        <res25>Je suis désolé, mais je ne peux pas accepter ça. Ça ne me plaît pas du tout.</res25>
+        <res26>Franchement, je ne veux pas de ce cadeau. Ça ne me dit rien du tout.</res26>
+        <res27>Ce cadeau ne me fait pas du tout plaisir, je suis désolé.</res27>
+        <res28>Non merci, je préfère ne pas avoir ça. Tu ferais mieux de le garder.</res28>
+        <res29>Je ne veux pas être impoli, mais ce cadeau ne me convient pas du tout.</res29>
+        <res30>Non, merci. Je ne vois vraiment pas l'intérêt d'avoir ça.</res30>
+    </response>
+
 </responses>

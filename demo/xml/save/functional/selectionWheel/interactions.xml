@@ -1,6 +1,14 @@
 <interactions>
     <interaction id="interactHello">
-        <logoPath>demo/img/selectionWheel/interactions/t.png</logoPath>
+        <logoPath>demo/img/selectionWheel/interactions/interactHello.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactJoinUs">
+        <logoPath>demo/img/selectionWheel/interactions/interactJoinUs.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactGiveBread">
+        <logoPath>demo/img/selectionWheel/interactions/interactGiveBread.png</logoPath>
         <description></description>
     </interaction>
     <interaction id="interactPickUp">

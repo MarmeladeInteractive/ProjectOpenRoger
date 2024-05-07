@@ -44,6 +44,8 @@ public class Npcs {
     public int y;
 
     public String currentResponce = "";
+    public int interactScore = 0;
+    public boolean sayHello = false;
 
     public Npcs(String gameName){
         this.gameName = gameName;
@@ -85,9 +87,8 @@ public class Npcs {
     public void interact(MainGameWindow mainGameWindow){
         List<String> test = new ArrayList<>();
         test.add("interactHello");
-        test.add("interactHello");
-        test.add("interactHello");
-        test.add("interactHello");
+        test.add("interactGiveBread");
+        test.add("interactJoinUs");
 
         Document doc = save.getDocumentXml(gameName,"functional/responces");
         Element element = save.getElementById(doc, "response", "greet");
@@ -98,27 +99,123 @@ public class Npcs {
         try {
             if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType == "npc")){
                 int compatibility = ideology.ideologicalCompatibility(character.ideologicalCode,mainGameWindow.player.ideologicalCode);
-                Random rand = new Random();
-                int randomNumber = rand.nextInt(30) + 1;
+                
+                int randomNumber = random.nextInt(30) + 1;
+                String response = "null";
 
                 switch (mainGameWindow.selectionWheel.iconSelectedId) {
                     case "interactHello":
                         if(!currentResponce.equals("interactHello")){
-                            if(compatibility > 30){
+                            if((compatibility+interactScore*5) > 80){
+                                response = "greet";
                                 mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                             }else{
                                 element = save.getElementById(doc, "response", "reject");
                                 allElements = save.getAllChildsFromElement(element);
 
+                                response = "reject";
                                 mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                             }
                             currentResponce = "interactHello";
+                            sayHello = true;
+                        }
+                        break;
+
+                        case "interactGiveBread":
+                        if(!currentResponce.equals("interactGiveBread")){
+                            if((compatibility + interactScore*5) > 30){
+                                element = save.getElementById(doc, "response", "acceptedGift");
+                                allElements = save.getAllChildsFromElement(element);
+
+                                response = "acceptedGift";
+                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                interactScore ++;
+                            }else{
+                                element = save.getElementById(doc, "response", "deniedGift");
+                                allElements = save.getAllChildsFromElement(element);
+
+                                response = "deniedGift";
+                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                            }
+                            currentResponce = "interactGiveBread";
+                        }
+                        break;
+
+                        case "interactJoinUs":
+
+                        if(!currentResponce.equals("interactJoinUs")){
+                            if(!sayHello){
+                                if((compatibility) > 70){
+                
+                                }else{
+                                    element = save.getElementById(doc, "response", "dontSayHello");
+                                    allElements = save.getAllChildsFromElement(element);
+                                    response = "dontSayHello";
+                                    mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                    interactScore --;
+                                    currentResponce = "interactJoinUs";
+                                    break;
+                                }
+                            }
+                            if((interactScore >= -1)){
+                                element = save.getElementById(doc, "response", "angry");
+                                allElements = save.getAllChildsFromElement(element);
+    
+                                response = "angry";
+                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                interactScore --;
+                                currentResponce = "interactJoinUs";
+                                break;
+                            }
+                            if((compatibility + interactScore*5) > 80){
+                                if(random.nextInt(6) == 1){
+                                    element = save.getElementById(doc, "response", "undecided");
+                                    allElements = save.getAllChildsFromElement(element);
+                                    response = "undecided";
+                                }else{
+                                    element = save.getElementById(doc, "response", "accepted");
+                                    allElements = save.getAllChildsFromElement(element);
+                                    response = "accepted";
+                                    interactScore ++;
+                                }
+
+                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));   
+                            }else if((compatibility + interactScore*5) > 60){
+                                if(random.nextInt(4) == 1){
+                                    element = save.getElementById(doc, "response", "accepted");
+                                    allElements = save.getAllChildsFromElement(element);
+                                    response = "accepted";
+                                    interactScore ++;
+                                }else{
+                                    element = save.getElementById(doc, "response", "undecided");
+                                    allElements = save.getAllChildsFromElement(element);
+                                    response = "undecided";
+                                }
+                                
+                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                            }else if((compatibility + interactScore*5) > 30){
+                                element = save.getElementById(doc, "response", "denied");
+                                allElements = save.getAllChildsFromElement(element);
+
+                                response = "denied";
+                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                interactScore --;
+                            }else{
+                                element = save.getElementById(doc, "response", "angry");
+                                allElements = save.getAllChildsFromElement(element);
+
+                                response = "angry";
+                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                interactScore --;
+                            }
+                            currentResponce = "interactJoinUs";
                         }
                         break;
 
                     default:
                         break;
                 }
+                
             }
         } catch (Exception e) {
         }
