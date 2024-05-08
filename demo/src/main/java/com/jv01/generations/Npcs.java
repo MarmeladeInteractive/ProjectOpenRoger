@@ -98,6 +98,7 @@ public class Npcs {
         if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"npc", test);
         try {
             if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType == "npc")){
+
                 int compatibility = ideology.ideologicalCompatibility(character.ideologicalCode,mainGameWindow.player.ideologicalCode);
                 
                 int randomNumber = random.nextInt(30) + 1;
@@ -106,15 +107,15 @@ public class Npcs {
                 switch (mainGameWindow.selectionWheel.iconSelectedId) {
                     case "interactHello":
                         if(!currentResponce.equals("interactHello")){
-                            if((compatibility+interactScore*5) > 80){
+                            if((compatibility+interactScore*5) > 40){
                                 response = "greet";
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                             }else{
                                 element = save.getElementById(doc, "response", "reject");
                                 allElements = save.getAllChildsFromElement(element);
 
                                 response = "reject";
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                             }
                             currentResponce = "interactHello";
                             sayHello = true;
@@ -128,14 +129,14 @@ public class Npcs {
                                 allElements = save.getAllChildsFromElement(element);
 
                                 response = "acceptedGift";
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                                 interactScore ++;
                             }else{
                                 element = save.getElementById(doc, "response", "deniedGift");
                                 allElements = save.getAllChildsFromElement(element);
 
                                 response = "deniedGift";
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                             }
                             currentResponce = "interactGiveBread";
                         }
@@ -151,18 +152,18 @@ public class Npcs {
                                     element = save.getElementById(doc, "response", "dontSayHello");
                                     allElements = save.getAllChildsFromElement(element);
                                     response = "dontSayHello";
-                                    mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                    mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                                     interactScore --;
                                     currentResponce = "interactJoinUs";
                                     break;
                                 }
                             }
-                            if((interactScore >= -1)){
+                            if((interactScore <= -2) || (interactScore >= 5)){
                                 element = save.getElementById(doc, "response", "angry");
                                 allElements = save.getAllChildsFromElement(element);
     
                                 response = "angry";
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                                 interactScore --;
                                 currentResponce = "interactJoinUs";
                                 break;
@@ -179,7 +180,7 @@ public class Npcs {
                                     interactScore ++;
                                 }
 
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));   
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));   
                             }else if((compatibility + interactScore*5) > 60){
                                 if(random.nextInt(4) == 1){
                                     element = save.getElementById(doc, "response", "accepted");
@@ -192,20 +193,20 @@ public class Npcs {
                                     response = "undecided";
                                 }
                                 
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                             }else if((compatibility + interactScore*5) > 30){
                                 element = save.getElementById(doc, "response", "denied");
                                 allElements = save.getAllChildsFromElement(element);
 
                                 response = "denied";
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                                 interactScore --;
                             }else{
                                 element = save.getElementById(doc, "response", "angry");
                                 allElements = save.getAllChildsFromElement(element);
 
                                 response = "angry";
-                                mainGameWindow.openMsgLabels(save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
+                                mainGameWindow.openChatPanel("Roger", "hjjhkhkhj", "test Name", save.getChildFromMapElements(allElements, "res"+String.valueOf(randomNumber)));
                                 interactScore --;
                             }
                             currentResponce = "interactJoinUs";
