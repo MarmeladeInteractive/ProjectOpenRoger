@@ -10,6 +10,7 @@ import com.jv01.generations.MainGameWindow;
 import com.jv01.screens.GameWindowsSize;
 
 import java.awt.*;
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -24,6 +25,8 @@ public class ChatPanel {
     public GameWindowsSize GWS = new GameWindowsSize(true);
 
     public boolean isOpen = false;
+
+    public List<SimpleEntry<String, Color>> historyChat = new ArrayList<>();
 
     public ChatPanel(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
@@ -42,6 +45,7 @@ public class ChatPanel {
         panel.removeAll();
         panel.revalidate();
         panel.repaint();  
+        historyChat.clear();
         isOpen = false;
     }
 
@@ -51,14 +55,17 @@ public class ChatPanel {
         int baseY = GWS.gameWindowHeight - 150;
         int labelHeight = 30;
         int labelWidth = GWS.gameWindowWidth - 40; 
-        int spaceBetween = 40;
     
-        JLabel playerLabel = createStyledLabel(playerName + ": " + playerText, baseY - spaceBetween - labelHeight, labelWidth, labelHeight, Color.WHITE, new Color(0, 0, 0, 180));
+        historyChat.add(0, new SimpleEntry<>(playerName + ": " + playerText, Color.WHITE));
+        historyChat.add(0, new SimpleEntry<>(npcName + ": " + npcText, Color.YELLOW));
         
-        JLabel npcLabel = createStyledLabel(npcName + ": " + npcText, baseY, labelWidth, labelHeight, Color.YELLOW, new Color(0, 0, 0, 180));
-        
-        panel.add(npcLabel);
-        panel.add(playerLabel);
+        JLabel labelMsg;
+        int numberOfMessagesToShow = Math.min(historyChat.size(), 6);
+        for  (int i = 0; i < numberOfMessagesToShow ; i++) {
+            SimpleEntry<String, Color> entry = historyChat.get(i);
+            labelMsg = createStyledLabel(entry.getKey(), baseY - labelHeight*i, labelWidth, labelHeight, entry.getValue(), new Color(0, 0, 0, 180));
+            panel.add(labelMsg);
+        }
 
         panel.revalidate();
         panel.repaint();
