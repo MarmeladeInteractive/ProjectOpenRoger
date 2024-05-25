@@ -52,19 +52,19 @@ public class ChatPanel {
     public void openChatPanel(String playerName, String playerText, String npcName, String npcText) {
         panel.removeAll();
 
-        int baseY = GWS.gameWindowHeight - 150;
-        int labelHeight = 30;
-        int labelWidth = GWS.gameWindowWidth - 40; 
+        int baseY = GWS.gameWindowHeight - 50;
+        int labelHeight = 36;
+        int labelWidth = Math.max(GWS.gameWindowWidth/2, 400);
     
         historyChat.add(0, new SimpleEntry<>(playerName + ": " + playerText, Color.WHITE));
         historyChat.add(0, new SimpleEntry<>(npcName + ": " + npcText, Color.YELLOW));
         
-        JLabel labelMsg;
+        JTextArea TextAreaMsg;
         int numberOfMessagesToShow = Math.min(historyChat.size(), 6);
         for  (int i = 0; i < numberOfMessagesToShow ; i++) {
             SimpleEntry<String, Color> entry = historyChat.get(i);
-            labelMsg = createStyledLabel(entry.getKey(), baseY - labelHeight*i, labelWidth, labelHeight, entry.getValue(), new Color(0, 0, 0, 180));
-            panel.add(labelMsg);
+            TextAreaMsg = createStyledLabel(entry.getKey(), baseY - labelHeight*i, labelWidth, labelHeight, entry.getValue(), new Color(0, 0, 0, 180));
+            panel.add(TextAreaMsg);
         }
 
         panel.revalidate();
@@ -73,16 +73,22 @@ public class ChatPanel {
         isOpen = true;
     }
 
-    private JLabel createStyledLabel(String text, int y, int width, int height, Color textColor, Color backgroundColor) {
-        JLabel label = new JLabel(text);
-        label.setForeground(textColor);
-        label.setFont(new Font("Arial", Font.BOLD, 14));
-        label.setBounds((GWS.gameWindowWidth - width) / 2, y, width, height);
-        label.setHorizontalAlignment(SwingConstants.CENTER);
-        label.setOpaque(true);
-        label.setBackground(backgroundColor);
-        return label;
+    private JTextArea createStyledLabel(String text, int y, int width, int height, Color textColor, Color backgroundColor) {
+        JTextArea textArea = new JTextArea(text);
+        textArea.setForeground(textColor);
+        textArea.setFont(new Font("Arial", Font.BOLD, 14));
+        textArea.setBounds((GWS.gameWindowWidth - width) / 2, y, width, height);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setEditable(false);
+        textArea.setOpaque(true);
+        textArea.setBackground(backgroundColor);
+
+        textArea.setMargin(new Insets(1, 10, 0, 10));
+
+        return textArea;
     }
+    
     
 
     public void focusOnMainFrame(){
