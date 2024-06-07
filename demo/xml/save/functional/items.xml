@@ -8,7 +8,7 @@
         <hungerValue>50</hungerValue>
         <thirstValue>50</thirstValue>
         <tiringValue>0</tiringValue>
-        <cleanlynessValue>0</cleanlynessValue>
+        <cleanlynessValue>-50</cleanlynessValue>
         <imagesUrls>
             {
                 demo/img/items/waste01.png,

@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
 import com.jv01.player.Player;
+import com.mifmif.common.regex.Main;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -165,7 +166,7 @@ public class Items {
                     // Affichez un message de débogage pour vérifier l'interaction sélectionnée
                     System.out.println("Interaction sélectionnée : " + mainGameWindow.selectionWheel.iconSelectedId);
                     // Traitez l'interaction sélectionnée
-                    handleInteraction(mainGameWindow.selectionWheel.iconSelectedId, mainGameWindow.player);
+                    handleInteraction(mainGameWindow.selectionWheel.iconSelectedId, mainGameWindow.player, mainGameWindow);
                     // Marquez l'élément comme utilisé
                     this.used = true;
                 } else {
@@ -179,7 +180,7 @@ public class Items {
         }
     }
 
-    private void handleInteraction(String interaction, Player player) {
+    private void handleInteraction(String interaction, Player player, MainGameWindow mainGameWindow) {
         switch (interaction) {
             case "interactPickUp":
                 System.out.println("Picked up the item.");
@@ -187,7 +188,7 @@ public class Items {
                 removeItem();
                 this.isExist = false;
                 refreshDisplay = true;
-                //player.pickup(this);
+                pickupItem(mainGameWindow, id);
                 break;
             case "interactConsume":
                 System.out.println("Consumed the item.");
@@ -195,12 +196,81 @@ public class Items {
                 removeItem();
                 this.isExist = false;
                 refreshDisplay = true;
-                //player.consume(this);
+                consumeItem();
                 break;
             default:
                 System.out.println("Unknown interaction: " + interaction);
                 break;
         }
+    }
+
+    private void pickupItem(MainGameWindow mainGameWindow, int id)
+    {
+        switch (id) {
+            case 0:
+                if(mainGameWindow.player.inventory.wastes < mainGameWindow.player.inventory.maxWastes){
+                    
+                    mainGameWindow.player.wasteCollected ++;
+                    mainGameWindow.player.inventory.wastes ++;
+
+                    mainGameWindow.player.save();
+                    mainGameWindow.player.inventory.saveWastes();
+                }else{
+                    mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                    mainGameWindow.player.displayAlert = true;
+                }
+                break;
+            case 1:
+                if(mainGameWindow.player.inventory.apples < mainGameWindow.player.inventory.maxApples){
+
+                    mainGameWindow.player.inventory.apples ++;
+
+                    mainGameWindow.player.save();
+                    mainGameWindow.player.inventory.saveApples();
+
+                    refreshDisplay = true;
+                }else{
+                    mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                    mainGameWindow.player.displayAlert = true;
+                }
+                break;
+            case 2:
+                if(mainGameWindow.player.inventory.chocolatines < mainGameWindow.player.inventory.maxChocolatines){
+
+                    mainGameWindow.player.inventory.chocolatines ++;
+
+                    mainGameWindow.player.save();
+                    mainGameWindow.player.inventory.saveChocolatines();
+
+                    refreshDisplay = true;
+                }else{
+                    mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                    mainGameWindow.player.displayAlert = true;
+                }
+                break;
+            case 3:
+                if(mainGameWindow.player.inventory.croissants < mainGameWindow.player.inventory.maxCroissants){
+
+                    mainGameWindow.player.inventory.croissants ++;
+
+                    mainGameWindow.player.save();
+                    mainGameWindow.player.inventory.saveCroissants();
+
+                    refreshDisplay = true;
+                }else{
+                    mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                    mainGameWindow.player.displayAlert = true;
+                }
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    private void consumeItem()
+    {
+        System.out.println("crounch crounch");
     }
 
     public void getOffset(){
