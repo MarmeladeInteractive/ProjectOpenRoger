@@ -184,18 +184,10 @@ public class Items {
         switch (interaction) {
             case "interactPickUp":
                 System.out.println("Picked up the item.");
-                soundManager.playSFX(interactsSoundId);
-                removeItem();
-                this.isExist = false;
-                refreshDisplay = true;
                 pickupItem(mainGameWindow, id);
                 break;
             case "interactConsume":
                 System.out.println("Consumed the item.");
-                soundManager.playSFX(interactsSoundId);
-                removeItem();
-                this.isExist = false;
-                refreshDisplay = true;
                 consumeItem();
                 break;
             default:
@@ -215,6 +207,11 @@ public class Items {
 
                     mainGameWindow.player.save();
                     mainGameWindow.player.inventory.saveWastes();
+
+                    soundManager.playSFX(interactsSoundId);
+                    removeItem();
+                    this.isExist = false;
+                    refreshDisplay = true;
                 }else{
                     mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
                     mainGameWindow.player.displayAlert = true;
@@ -228,6 +225,9 @@ public class Items {
                     mainGameWindow.player.save();
                     mainGameWindow.player.inventory.saveApples();
 
+                    soundManager.playSFX(interactsSoundId);
+                    removeItem();
+                    this.isExist = false;
                     refreshDisplay = true;
                 }else{
                     mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
@@ -242,6 +242,9 @@ public class Items {
                     mainGameWindow.player.save();
                     mainGameWindow.player.inventory.saveChocolatines();
 
+                    soundManager.playSFX(interactsSoundId);
+                    removeItem();
+                    this.isExist = false;
                     refreshDisplay = true;
                 }else{
                     mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
@@ -256,6 +259,9 @@ public class Items {
                     mainGameWindow.player.save();
                     mainGameWindow.player.inventory.saveCroissants();
 
+                    soundManager.playSFX(interactsSoundId);
+                    removeItem();
+                    this.isExist = false;
                     refreshDisplay = true;
                 }else{
                     mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
@@ -271,6 +277,10 @@ public class Items {
     private void consumeItem()
     {
         System.out.println("crounch crounch");
+        soundManager.playSFX(interactsSoundId);
+        removeItem();
+        this.isExist = false;
+        refreshDisplay = true;
     }
 
     public void getOffset(){
