@@ -34,6 +34,7 @@ public class Items {
     public int thirstValue;
     public int tiringValue;
     public int cleanlynessValue;
+    public boolean used = false;
 
     public String description;
     public int[] size;
@@ -152,12 +153,53 @@ public class Items {
         backgroundPanel.remove(objectLabel);
     }
 
-    public void interact(MainGameWindow mainGameWindow){
-        List<String> possibleInteractions = new ArrayList<>();
-        possibleInteractions = interactIconsList;
-        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"npc", possibleInteractions);
-        {
+    public void interact(MainGameWindow mainGameWindow) {
+        List<String> possibleInteractions = new ArrayList<>(interactIconsList);
+        if (!mainGameWindow.selectionWheel.isOpen) {
+            mainGameWindow.selectionWheel.openSelectionWheel(x, y, "item", possibleInteractions);
+        } else {
+            // Si la roue de sélection est ouverte et une interaction est sélectionnée
+            if (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType.equals("item")) {
+                // Vérifiez si l'élément n'a pas déjà été utilisé
+                if (!this.used) {
+                    // Affichez un message de débogage pour vérifier l'interaction sélectionnée
+                    System.out.println("Interaction sélectionnée : " + mainGameWindow.selectionWheel.iconSelectedId);
+                    // Traitez l'interaction sélectionnée
+                    handleInteraction(mainGameWindow.selectionWheel.iconSelectedId, mainGameWindow.player);
+                    // Marquez l'élément comme utilisé
+                    this.used = true;
+                } else {
+                    // Affichez un message de débogage si l'élément a déjà été utilisé
+                    System.out.println("L'élément a déjà été utilisé.");
+                }
+            } else {
+                // Affichez un message de débogage si aucune interaction n'est sélectionnée
+                System.out.println("Aucune interaction sélectionnée ou type incorrect.");
+            }
+        }
+    }
 
+    private void handleInteraction(String interaction, Player player) {
+        switch (interaction) {
+            case "interactPickUp":
+                System.out.println("Picked up the item.");
+                soundManager.playSFX(interactsSoundId);
+                removeItem();
+                this.isExist = false;
+                refreshDisplay = true;
+                //player.pickup(this);
+                break;
+            case "interactConsume":
+                System.out.println("Consumed the item.");
+                soundManager.playSFX(interactsSoundId);
+                removeItem();
+                this.isExist = false;
+                refreshDisplay = true;
+                //player.consume(this);
+                break;
+            default:
+                System.out.println("Unknown interaction: " + interaction);
+                break;
         }
     }
 
