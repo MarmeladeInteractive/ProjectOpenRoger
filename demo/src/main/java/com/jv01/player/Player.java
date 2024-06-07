@@ -8,6 +8,7 @@ import org.w3c.dom.Element;
 import com.jv01.fonctionals.Save;
 import com.jv01.generations.InputsManager;
 import com.jv01.generations.MainGameWindow;
+import com.jv01.generations.Items;
 
 import java.awt.*;
 
@@ -57,13 +58,11 @@ public class Player{
 
     public int partyID = 1;
 
-
     // player needs
     public int hunger = 0;
     public int thirst = 0;
     public int tiredness = 0;
     public int hygiene = 100;
-
 
     public Player(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
@@ -284,17 +283,15 @@ public class Player{
         inputsManager.runKeyPressed = false;
     }
 
-    public void Eat()
+    public void Consume(Items consummed)
     {
-        this.hunger=0;
+        this.hunger=this.hunger+consummed.hungerValue;
+        this.thirst=this.thirst+consummed.thirstValue;
+        this.tiredness=this.tiredness+consummed.tiringValue;
+        this.hygiene=this.hygiene+consummed.cleanlynessValue;
     }
 
-    public void Drink()
-    {
-        this.thirst=0;
-    }
-
-    public void Sleep()
+        public void Sleep()
     {
         this.tiredness=0;
     }

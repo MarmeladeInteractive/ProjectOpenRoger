@@ -32,6 +32,8 @@ public class Items {
 
     public int hungerValue;
     public int thirstValue;
+    public int tiringValue;
+    public int cleanlynessValue;
 
     public String description;
     public int[] size;
@@ -81,6 +83,8 @@ public class Items {
 
         this.hungerValue = Integer.parseInt(save.getChildFromElement(element, "hungerValue"));
         this.thirstValue = Integer.parseInt(save.getChildFromElement(element, "thirstValue"));
+        this.tiringValue = Integer.parseInt(save.getChildFromElement(element, "tiringValue"));
+        this.cleanlynessValue = Integer.parseInt(save.getChildFromElement(element, "cleanlynessValue"));
 
         this.description = save.getChildFromElement(element, "description");
         this.size = save.stringToIntArray(save.getChildFromElement(element, "size"));
@@ -91,6 +95,8 @@ public class Items {
         this.defaultImageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[0];
         this.defaultImageUrl = save.dropSpaceFromString(this.defaultImageUrl);
 
+        this.interactIconsList = this.getInteractionTypes();
+
         this.spam = save.getChildFromElement(element, "interactsSpam");
         List<String> row = new ArrayList<>(Arrays.asList(spam, "item"));
         this.listModelInteractive.addElement(row);
@@ -99,9 +105,25 @@ public class Items {
         this.listModelInteractive.addElement(row);
 
         this.interactsSoundId = save.getChildFromElement(element, "interactsSoundId");
+    }
 
-        this.interactIconsList.add("interactPickUp");
-        this.interactIconsList.add("interactConsume");
+    public List<String> getInteractionTypes() {
+        List<String> interactionTypesList = new ArrayList<>();
+        Document doc = save.getDocumentXml(gameName, "functional/items");
+        Element element = save.getElementById(doc, "item", String.valueOf(id));
+
+        String interactionTypesString = save.getChildFromElement(element, "interactionTypes");
+        // Supprimer les accolades et les espaces
+        interactionTypesString = interactionTypesString.replace("{", "").replace("}", "").trim();
+        // Diviser la chaîne en fonction des virgules
+        String[] interactionTypesArray = interactionTypesString.split(",");
+
+        // Ajouter chaque interaction type à la liste en supprimant les espaces
+        for (String interactionType : interactionTypesArray) {
+            interactionTypesList.add(interactionType.trim());
+        }
+
+        return interactionTypesList;
     }
 
     public Object[] addItem(int newX, int newY, JPanel backgroundPanel){
@@ -131,55 +153,11 @@ public class Items {
     }
 
     public void interact(MainGameWindow mainGameWindow){
-        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"item",interactIconsList);
-        //if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.interactiveListPanel.isSelectedValue && mainGameWindow.interactiveListPanel.selectedValue.get(1) == "item")){
-        if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType == "item")){
+        List<String> possibleInteractions = new ArrayList<>();
+        possibleInteractions = interactIconsList;
+        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"npc", possibleInteractions);
+        {
 
-            switch (id) {
-                case 0:
-                    if(mainGameWindow.player.inventory.wastes < mainGameWindow.player.inventory.maxWastes){
-                        removeItem();
-
-                        soundManager.playSFX(interactsSoundId);
-
-                        this.isExist = false;
-                        //player.money += 1;
-                        mainGameWindow.player.wasteCollected ++;
-                        mainGameWindow.player.inventory.wastes ++;
-
-                        mainGameWindow.player.save();
-                        mainGameWindow.player.inventory.saveWastes();
-
-                        refreshDisplay = true;
-                    }else{
-                        mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
-                        mainGameWindow.player.displayAlert = true;
-                    }
-                    break;
-                case 1:
-                    if(mainGameWindow.player.inventory.apples < mainGameWindow.player.inventory.maxApples){
-                        removeItem();
-
-                        soundManager.playSFX(interactsSoundId);
-                        
-                        this.isExist = false;
-                        //player.money += 1;
-                        //player.wasteCollected ++;
-                        mainGameWindow.player.inventory.apples ++;
-
-                        mainGameWindow.player.save();
-                        mainGameWindow.player.inventory.saveApples();
-
-                        refreshDisplay = true;
-                    }else{
-                        mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
-                        mainGameWindow.player.displayAlert = true;
-                    }
-                    break;
-            
-                default:
-                    break;
-            }
         }
     }
 
