@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
 import com.jv01.player.Player;
+import com.mifmif.common.regex.Main;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
@@ -29,6 +30,12 @@ public class Items {
 
     public int buyPrice;
     public int sellPrice;
+
+    public int hungerValue;
+    public int thirstValue;
+    public int tiringValue;
+    public int cleanlynessValue;
+    public boolean used = false;
 
     public String description;
     public int[] size;
@@ -76,6 +83,11 @@ public class Items {
         this.buyPrice = Integer.parseInt(save.getChildFromElement(element, "purchasePrice"));
         this.sellPrice = Integer.parseInt(save.getChildFromElement(element, "sellingPrice"));
 
+        this.hungerValue = Integer.parseInt(save.getChildFromElement(element, "hungerValue"));
+        this.thirstValue = Integer.parseInt(save.getChildFromElement(element, "thirstValue"));
+        this.tiringValue = Integer.parseInt(save.getChildFromElement(element, "tiringValue"));
+        this.cleanlynessValue = Integer.parseInt(save.getChildFromElement(element, "cleanlynessValue"));
+
         this.description = save.getChildFromElement(element, "description");
         this.size = save.stringToIntArray(save.getChildFromElement(element, "size"));
 
@@ -85,13 +97,35 @@ public class Items {
         this.defaultImageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[0];
         this.defaultImageUrl = save.dropSpaceFromString(this.defaultImageUrl);
 
+        this.interactIconsList = this.getInteractionTypes();
+
         this.spam = save.getChildFromElement(element, "interactsSpam");
         List<String> row = new ArrayList<>(Arrays.asList(spam, "item"));
         this.listModelInteractive.addElement(row);
+        this.spam = save.getChildFromElement(element, "consumeSpam");
+        row = new ArrayList<>(Arrays.asList(spam, "item"));
+        this.listModelInteractive.addElement(row);
 
         this.interactsSoundId = save.getChildFromElement(element, "interactsSoundId");
+    }
 
-        this.interactIconsList.add("interactPickUp");
+    public List<String> getInteractionTypes() {
+        List<String> interactionTypesList = new ArrayList<>();
+        Document doc = save.getDocumentXml(gameName, "functional/items");
+        Element element = save.getElementById(doc, "item", String.valueOf(id));
+
+        String interactionTypesString = save.getChildFromElement(element, "interactionTypes");
+        // Supprimer les accolades et les espaces
+        interactionTypesString = interactionTypesString.replace("{", "").replace("}", "").trim();
+        // Diviser la chaîne en fonction des virgules
+        String[] interactionTypesArray = interactionTypesString.split(",");
+
+        // Ajouter chaque interaction type à la liste en supprimant les espaces
+        for (String interactionType : interactionTypesArray) {
+            interactionTypesList.add(interactionType.trim());
+        }
+
+        return interactionTypesList;
     }
 
     public Object[] addItem(int newX, int newY, JPanel backgroundPanel){
@@ -120,60 +154,134 @@ public class Items {
         backgroundPanel.remove(objectLabel);
     }
 
-    public void interact(MainGameWindow mainGameWindow){
-        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"item",interactIconsList);
-        //if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.interactiveListPanel.isSelectedValue && mainGameWindow.interactiveListPanel.selectedValue.get(1) == "item")){
-        if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType == "item")){
-
-            switch (id) {
-                case 0:
-                    if(mainGameWindow.player.inventory.wastes < mainGameWindow.player.inventory.maxWastes){
-                        removeItem();
-
-                        soundManager.playSFX(interactsSoundId);
-
-                        this.isExist = false;
-                        //player.money += 1;
-                        mainGameWindow.player.wasteCollected ++;
-                        mainGameWindow.player.inventory.wastes ++;
-
-                        mainGameWindow.player.save();
-                        mainGameWindow.player.inventory.saveWastes();
-
-                        refreshDisplay = true;
-                    }else{
-                        mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
-                        mainGameWindow.player.displayAlert = true;
-                    }
-                    break;
-                case 1:
-                    if(mainGameWindow.player.inventory.apples < mainGameWindow.player.inventory.maxApples){
-                        removeItem();
-
-                        soundManager.playSFX(interactsSoundId);
-                        
-                        this.isExist = false;
-                        //player.money += 1;
-                        //player.wasteCollected ++;
-                        mainGameWindow.player.inventory.apples ++;
-
-                        mainGameWindow.player.save();
-                        mainGameWindow.player.inventory.saveApples();
-
-                        refreshDisplay = true;
-                    }else{
-                        mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
-                        mainGameWindow.player.displayAlert = true;
-                    }
-                    break;
-            
-                default:
-                    break;
+    public void interact(MainGameWindow mainGameWindow) {
+        List<String> possibleInteractions = new ArrayList<>(interactIconsList);
+        if (!mainGameWindow.selectionWheel.isOpen) {
+            mainGameWindow.selectionWheel.openSelectionWheel(x, y, "item", possibleInteractions);
+        } else {
+            // Si la roue de sélection est ouverte et une interaction est sélectionnée
+            if (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType.equals("item")) {
+                // Vérifiez si l'élément n'a pas déjà été utilisé
+                if (!this.used) {
+                    // Affichez un message de débogage pour vérifier l'interaction sélectionnée
+                    System.out.println("Interaction sélectionnée : " + mainGameWindow.selectionWheel.iconSelectedId);
+                    // Traitez l'interaction sélectionnée
+                    handleInteraction(mainGameWindow.selectionWheel.iconSelectedId, mainGameWindow.player, mainGameWindow);
+                    // Marquez l'élément comme utilisé
+                    this.used = true;
+                } else {
+                    // Affichez un message de débogage si l'élément a déjà été utilisé
+                    System.out.println("L'élément a déjà été utilisé.");
+                }
+            } else {
+                // Affichez un message de débogage si aucune interaction n'est sélectionnée
+                System.out.println("Aucune interaction sélectionnée ou type incorrect.");
             }
-
         }
-    }    
+    }
 
+    private void handleInteraction(String interaction, Player player, MainGameWindow mainGameWindow) {
+        switch (interaction) {
+            case "interactPickUp":
+                System.out.println("Picked up the item.");
+                pickupItem(mainGameWindow, id);
+                break;
+            case "interactConsume":
+                System.out.println("Consumed the item.");
+                consumeItem();
+                break;
+            default:
+                System.out.println("Unknown interaction: " + interaction);
+                break;
+        }
+    }
+
+    private void pickupItem(MainGameWindow mainGameWindow, int id)
+    {
+        switch (id) {
+            case 0:
+                if(mainGameWindow.player.inventory.wastes < mainGameWindow.player.inventory.maxWastes){
+                    
+                    mainGameWindow.player.wasteCollected ++;
+                    mainGameWindow.player.inventory.wastes ++;
+
+                    mainGameWindow.player.save();
+                    mainGameWindow.player.inventory.saveWastes();
+
+                    soundManager.playSFX(interactsSoundId);
+                    removeItem();
+                    this.isExist = false;
+                    refreshDisplay = true;
+                }else{
+                    mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                    mainGameWindow.player.displayAlert = true;
+                }
+                break;
+            case 1:
+                if(mainGameWindow.player.inventory.apples < mainGameWindow.player.inventory.maxApples){
+
+                    mainGameWindow.player.inventory.apples ++;
+
+                    mainGameWindow.player.save();
+                    mainGameWindow.player.inventory.saveApples();
+
+                    soundManager.playSFX(interactsSoundId);
+                    removeItem();
+                    this.isExist = false;
+                    refreshDisplay = true;
+                }else{
+                    mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                    mainGameWindow.player.displayAlert = true;
+                }
+                break;
+            case 2:
+                if(mainGameWindow.player.inventory.chocolatines < mainGameWindow.player.inventory.maxChocolatines){
+
+                    mainGameWindow.player.inventory.chocolatines ++;
+
+                    mainGameWindow.player.save();
+                    mainGameWindow.player.inventory.saveChocolatines();
+
+                    soundManager.playSFX(interactsSoundId);
+                    removeItem();
+                    this.isExist = false;
+                    refreshDisplay = true;
+                }else{
+                    mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                    mainGameWindow.player.displayAlert = true;
+                }
+                break;
+            case 3:
+                if(mainGameWindow.player.inventory.croissants < mainGameWindow.player.inventory.maxCroissants){
+
+                    mainGameWindow.player.inventory.croissants ++;
+
+                    mainGameWindow.player.save();
+                    mainGameWindow.player.inventory.saveCroissants();
+
+                    soundManager.playSFX(interactsSoundId);
+                    removeItem();
+                    this.isExist = false;
+                    refreshDisplay = true;
+                }else{
+                    mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
+                    mainGameWindow.player.displayAlert = true;
+                }
+                break;
+        
+            default:
+                break;
+        }
+    }
+
+    private void consumeItem()
+    {
+        System.out.println("crounch crounch");
+        soundManager.playSFX(interactsSoundId);
+        removeItem();
+        this.isExist = false;
+        refreshDisplay = true;
+    }
 
     public void getOffset(){
         this.offsetX = random.nextInt(20 + 20) - 20;

@@ -5,6 +5,10 @@
         <description></description>
         <purchasePrice>0</purchasePrice>
         <sellingPrice>1</sellingPrice>
+        <hungerValue>50</hungerValue>
+        <thirstValue>50</thirstValue>
+        <tiringValue>0</tiringValue>
+        <cleanlynessValue>-50</cleanlynessValue>
         <imagesUrls>
             {
                 demo/img/items/waste01.png,
@@ -13,7 +17,13 @@
                 demo/img/items/waste04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactPickUp,
+            }
+        </interactionTypes>
         <interactsSpam>Ramasser les déchets</interactsSpam>
+        <consumeSpam>Manger les déchets</consumeSpam>
         <interactsSoundId>waste01</interactsSoundId>
     </item>
 
@@ -23,6 +33,10 @@
         <description></description>
         <purchasePrice>3</purchasePrice>
         <sellingPrice>2</sellingPrice>
+        <hungerValue>-15</hungerValue>
+        <thirstValue>-10</thirstValue>
+        <tiringValue>0</tiringValue>
+        <cleanlynessValue>0</cleanlynessValue>
         <imagesUrls>
             {
                 demo/img/items/apple01.png,
@@ -31,7 +45,14 @@
                 demo/img/items/apple04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactPickUp,
+                interactConsume,
+            }
+        </interactionTypes>
         <interactsSpam>Ramasser la pomme</interactsSpam>
+        <consumeSpam>Manger la pomme</consumeSpam>
         <interactsSoundId>null</interactsSoundId>
     </item>
 
@@ -41,6 +62,10 @@
         <description></description>
         <purchasePrice>4</purchasePrice>
         <sellingPrice>2</sellingPrice>
+        <hungerValue>-25</hungerValue>
+        <thirstValue>5</thirstValue>
+        <tiringValue>0</tiringValue>
+        <cleanlynessValue>0</cleanlynessValue>
         <imagesUrls>
             {
                 demo/img/items/chocolatine01.png,
@@ -49,7 +74,14 @@
                 demo/img/items/chocolatine01.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactPickUp,
+                interactConsume,
+            }
+        </interactionTypes>
         <interactsSpam>Ramasser la chocolatine</interactsSpam>
+        <consumeSpam>Manger la chocolatine</consumeSpam>
         <interactsSoundId>null</interactsSoundId>
     </item>
 
@@ -59,6 +91,10 @@
         <description></description>
         <purchasePrice>3</purchasePrice>
         <sellingPrice>2</sellingPrice>
+        <hungerValue>-20</hungerValue>
+        <thirstValue>0</thirstValue>
+        <tiringValue>0</tiringValue>
+        <cleanlynessValue>0</cleanlynessValue>
         <imagesUrls>
             {
                 demo/img/items/croissant01.png,
@@ -67,7 +103,14 @@
                 demo/img/items/croissant01.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactPickUp,
+                interactConsume,
+            }
+        </interactionTypes>
         <interactsSpam>Ramasser le croissant</interactsSpam>
+        <consumeSpam>Manger le croissant</consumeSpam>
         <interactsSoundId>null</interactsSoundId>
     </item>
 </items>
