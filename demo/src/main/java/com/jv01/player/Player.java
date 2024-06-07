@@ -58,6 +58,13 @@ public class Player{
     public int partyID = 1;
 
 
+    // player needs
+    public int hunger = 0;
+    public int thirst = 0;
+    public int tiredness = 0;
+    public int hygiene = 100;
+
+
     public Player(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
         this.gameName = mainGameWindow.gameName; 
@@ -90,6 +97,10 @@ public class Player{
         this.wasteCollected = Integer.parseInt(save.getChildFromMapElements(allElements,"wasteCollected"));
         this.partyID = Integer.parseInt(save.getChildFromMapElements(allElements,"partyID"));
 
+        this.hunger = Integer.parseInt(save.getChildFromMapElements(allElements,"hunger"));
+        this.thirst = Integer.parseInt(save.getChildFromMapElements(allElements,"thirst"));
+        this.tiredness = Integer.parseInt(save.getChildFromMapElements(allElements,"tiredness"));
+        this.hygiene = Integer.parseInt(save.getChildFromMapElements(allElements,"hygiene"));
     }
 
     public void initializePlayer(){
@@ -273,6 +284,26 @@ public class Player{
         inputsManager.runKeyPressed = false;
     }
 
+    public void Eat()
+    {
+        this.hunger=0;
+    }
+
+    public void Drink()
+    {
+        this.thirst=0;
+    }
+
+    public void Sleep()
+    {
+        this.tiredness=0;
+    }
+
+    public void Wash()
+    {
+        this.hygiene=100;
+    }
+
     public boolean isEnoughMoney(int price, boolean takeOff){
         boolean isEnought = false;
         if(money>=price){
@@ -316,6 +347,22 @@ public class Player{
         savePlayerValue("speed",String.valueOf(speed));
     }
 
+    public void saveHunger(){        
+        savePlayerValue("hunger",String.valueOf(hunger));
+    }
+
+    public void saveThirst(){
+        savePlayerValue("thirst",String.valueOf(thirst));
+    }
+
+    public void saveTiredness(){
+        savePlayerValue("tiredness",String.valueOf(tiredness));
+    }
+
+    public void saveHygiene(){
+        savePlayerValue("hygiene",String.valueOf(hygiene));
+    }
+
     public void save(){
         saveMoney();
         saveChunk();
@@ -323,6 +370,10 @@ public class Player{
         savePartyID();
         saveStep();
         saveSpeed();
+        saveHunger();
+        saveThirst();
+        saveTiredness();
+        saveHygiene();
     }
 
     private void displayAlert(String msg){

@@ -30,6 +30,9 @@ public class Items {
     public int buyPrice;
     public int sellPrice;
 
+    public int hungerValue;
+    public int thirstValue;
+
     public String description;
     public int[] size;
     public String imageUrl;
@@ -76,6 +79,9 @@ public class Items {
         this.buyPrice = Integer.parseInt(save.getChildFromElement(element, "purchasePrice"));
         this.sellPrice = Integer.parseInt(save.getChildFromElement(element, "sellingPrice"));
 
+        this.hungerValue = Integer.parseInt(save.getChildFromElement(element, "hungerValue"));
+        this.thirstValue = Integer.parseInt(save.getChildFromElement(element, "thirstValue"));
+
         this.description = save.getChildFromElement(element, "description");
         this.size = save.stringToIntArray(save.getChildFromElement(element, "size"));
 
@@ -88,10 +94,14 @@ public class Items {
         this.spam = save.getChildFromElement(element, "interactsSpam");
         List<String> row = new ArrayList<>(Arrays.asList(spam, "item"));
         this.listModelInteractive.addElement(row);
+        this.spam = save.getChildFromElement(element, "consumeSpam");
+        row = new ArrayList<>(Arrays.asList(spam, "item"));
+        this.listModelInteractive.addElement(row);
 
         this.interactsSoundId = save.getChildFromElement(element, "interactsSoundId");
 
         this.interactIconsList.add("interactPickUp");
+        this.interactIconsList.add("interactConsume");
     }
 
     public Object[] addItem(int newX, int newY, JPanel backgroundPanel){
@@ -170,10 +180,8 @@ public class Items {
                 default:
                     break;
             }
-
         }
-    }    
-
+    }
 
     public void getOffset(){
         this.offsetX = random.nextInt(20 + 20) - 20;

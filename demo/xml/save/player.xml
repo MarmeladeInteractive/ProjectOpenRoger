@@ -9,5 +9,9 @@
         <isInsideBuildingInt>0</isInsideBuildingInt>
         <wasteCollected>0</wasteCollected>
         <partyID>1</partyID>
+        <hunger>0</hunger>
+        <thirst>0</thirst>
+        <tiredness>0</tiredness>
+        <hygiene>100</hygiene>
     </player>
 </player>
