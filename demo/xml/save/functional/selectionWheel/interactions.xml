@@ -15,6 +15,10 @@
         <logoPath>demo/img/selectionWheel/interactions/interactPickUp.png</logoPath>
         <description></description>
     </interaction>
+    <interaction id="interactConsume">
+        <logoPath>demo/img/selectionWheel/interactions/interactConsume.png</logoPath>
+        <description></description>
+    </interaction>
     <interaction id="interactEnter">
         <logoPath>demo/img/selectionWheel/interactions/interactEnter.png</logoPath>
         <description></description>

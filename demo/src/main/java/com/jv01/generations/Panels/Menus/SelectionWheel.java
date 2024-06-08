@@ -72,6 +72,11 @@ public class SelectionWheel extends JPanel {
         this.iconSize = Integer.parseInt(save.getChildFromMapElements(allElements,"iconSize"));
     }
 
+    public String getSelectedInteraction()
+    {
+        return iconSelectedId;
+    }
+
     public void createSelectionWheelPanel(){
         setLayout(null);
         setBounds(0, 0, GWS.gameWindowWidth, GWS.gameWindowHeight);
@@ -180,6 +185,7 @@ public class SelectionWheel extends JPanel {
             iconClicked(iconIndex);
         }
     }
+
     private void iconClicked(int iconIndex) {
         isIconSelected = true;
         iconSelectedId = options.get(iconIndex);
