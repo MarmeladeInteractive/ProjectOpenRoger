@@ -1,3 +1,5 @@
 saves
 demo/target
 .vscode
+
+*.class
