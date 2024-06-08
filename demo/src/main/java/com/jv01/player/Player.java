@@ -98,17 +98,17 @@ public class Player{
         this.wasteCollected = Integer.parseInt(save.getChildFromMapElements(allElements,"wasteCollected"));
         this.partyID = Integer.parseInt(save.getChildFromMapElements(allElements,"partyID"));
 
+        this.hunger = Integer.parseInt(save.getChildFromMapElements(allElements,"hunger"));
+        this.thirst = Integer.parseInt(save.getChildFromMapElements(allElements,"thirst"));
+        this.tiredness = Integer.parseInt(save.getChildFromMapElements(allElements,"tiredness"));
+        this.hygiene = Integer.parseInt(save.getChildFromMapElements(allElements,"hygiene"));
+
         doc = save.getDocumentXml(gameName,"parties");
         element = save.getElementById(doc, "party", String.valueOf(this.partyID));
 
         allElements = save.getAllChildsFromElement(element);
 
-        this.ideologicalCode = save.getChildFromMapElements(allElements,"ideologicalCode");
-
-        this.hunger = Integer.parseInt(save.getChildFromMapElements(allElements,"hunger"));
-        this.thirst = Integer.parseInt(save.getChildFromMapElements(allElements,"thirst"));
-        this.tiredness = Integer.parseInt(save.getChildFromMapElements(allElements,"tiredness"));
-        this.hygiene = Integer.parseInt(save.getChildFromMapElements(allElements,"hygiene"));
+        this.ideologicalCode = save.getChildFromMapElements(allElements,"ideologicalCode");   
     }
 
     public void initializePlayer(){

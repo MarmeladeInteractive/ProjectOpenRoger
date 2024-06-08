@@ -180,8 +180,11 @@ public class SelectionWheel extends JPanel {
 
         if (distance >= intWheelRadius && distance <= extWheelRadius) {
             double angle = Math.toDegrees(Math.atan2(dy, dx)) + 180;
+            System.out.println("angle : " + angle);
             int iconIndex = (int) Math.floor((angle) / (360.0 / options.size()));
-
+            System.out.println("index initial : " + iconIndex);
+            iconIndex = (iconIndex + (options.size()-1)) % options.size();
+            System.out.println("index corrige : " + iconIndex);
             iconClicked(iconIndex);
         }
     }
