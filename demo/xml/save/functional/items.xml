@@ -23,6 +23,9 @@
                 interactConsume,
                 interactTEST1,
                 interactTEST2,
+                interactTEST3,
+                interactGiveBread,
+                interactJoinUs,
             }
         </interactionTypes>
         <interactsSpam>Ramasser les déchets</interactsSpam>
