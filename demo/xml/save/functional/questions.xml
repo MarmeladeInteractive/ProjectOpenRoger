@@ -1,0 +1,98 @@
+<questions>
+    <question id="join">
+    <res1>Voulez-vous rejoindre notre parti politique?</res1>
+    <res2>Seriez-vous intéressé à devenir membre de notre parti politique?</res2>
+    <res3>Souhaitez-vous participer activement à notre parti politique?</res3>
+    <res4>Voulez-vous vous engager avec nous pour un avenir meilleur en rejoignant notre parti?</res4>
+    <res5>Êtes-vous prêt à rejoindre notre équipe politique pour défendre nos valeurs?</res5>
+    <res6>Avez-vous envie de contribuer à notre vision en devenant membre de notre parti?</res6>
+    <res7>Voulez-vous faire partie de notre mouvement politique?</res7>
+    <res8>Souhaitez-vous soutenir notre cause en rejoignant notre parti politique?</res8>
+    <res9>Êtes-vous intéressé à vous impliquer dans notre parti politique?</res9>
+    <res10>Voulez-vous travailler avec nous pour réaliser notre programme politique?</res10>
+    <res11>Souhaitez-vous apporter votre soutien à notre parti en devenant membre?</res11>
+    <res12>Seriez-vous prêt à rejoindre notre parti pour aider à construire un avenir prospère?</res12>
+    <res13>Voulez-vous devenir un membre actif de notre équipe politique?</res13>
+    <res14>Êtes-vous intéressé par l'idée de participer à nos activités politiques en rejoignant notre parti?</res14>
+    <res15>Voulez-vous nous aider à réaliser notre vision en adhérant à notre parti politique?</res15>
+    <res16>Souhaitez-vous contribuer à notre lutte pour le progrès en rejoignant notre parti?</res16>
+    <res17>Êtes-vous motivé à rejoindre notre parti politique pour défendre nos idées?</res17>
+    <res18>Voulez-vous prendre part à notre mouvement politique en devenant membre?</res18>
+    <res19>Souhaitez-vous vous engager à nos côtés en rejoignant notre parti politique?</res19>
+    <res20>Voulez-vous participer à nos efforts pour un avenir meilleur en adhérant à notre parti?</res20>
+    <res21>Êtes-vous prêt à vous impliquer dans notre parti politique pour faire avancer nos valeurs?</res21>
+    <res22>Voulez-vous rejoindre notre équipe pour soutenir notre vision politique?</res22>
+    <res23>Souhaitez-vous apporter votre énergie et vos compétences à notre parti en devenant membre?</res23>
+    <res24>Êtes-vous intéressé à faire partie de notre parti pour promouvoir nos idées?</res24>
+    <res25>Voulez-vous nous rejoindre pour contribuer à notre programme politique?</res25>
+    <res26>Souhaitez-vous vous investir dans notre parti pour aider à réaliser nos objectifs?</res26>
+    <res27>Êtes-vous prêt à rejoindre notre mouvement pour défendre nos valeurs communes?</res27>
+    <res28>Voulez-vous travailler avec nous pour un avenir meilleur en devenant membre de notre parti?</res28>
+    <res29>Êtes-vous intéressé à vous engager activement dans notre parti politique?</res29>
+    <res30>Souhaitez-vous nous rejoindre pour promouvoir notre vision politique?</res30>
+    </question>
+    <question id="gift">
+    <res1>Tiens, voici un cadeau.</res1>
+    <res2>Je t'ai apporté un cadeau.</res2>
+    <res3>Voici un petit présent pour toi.</res3>
+    <res4>J'ai quelque chose pour toi : un cadeau.</res4>
+    <res5>Tiens, un cadeau spécialement pour toi.</res5>
+    <res6>Voici un cadeau, j'espère qu'il te plaira.</res6>
+    <res7>Je t'offre ce cadeau avec plaisir.</res7>
+    <res8>J'ai un présent pour toi, prends-le.</res8>
+    <res9>Voici un cadeau pour toi.</res9>
+    <res10>Tiens, ceci est pour toi : un cadeau.</res10>
+    <res11>Je voulais te donner ceci, un cadeau pour toi.</res11>
+    <res12>Voici un petit quelque chose pour toi.</res12>
+    <res13>Tiens, c'est un cadeau de ma part.</res13>
+    <res14>J'ai pensé à toi et voici un cadeau.</res14>
+    <res15>Je t'ai apporté ceci, un cadeau pour toi.</res15>
+    <res16>Voici un présent pour toi.</res16>
+    <res17>J'ai un petit cadeau pour toi.</res17>
+    <res18>Tiens, prends ce cadeau.</res18>
+    <res19>Je t'offre ce présent avec tout mon cœur.</res19>
+    <res20>Voici quelque chose pour toi : un cadeau.</res20>
+    <res21>Tiens, c'est un petit cadeau pour toi.</res21>
+    <res22>J'ai ceci pour toi, un cadeau.</res22>
+    <res23>Voici un cadeau que j'ai choisi pour toi.</res23>
+    <res24>Je t'ai pris ceci, c'est un cadeau.</res24>
+    <res25>Tiens, un présent pour toi.</res25>
+    <res26>Voici quelque chose que j'ai pour toi : un cadeau.</res26>
+    <res27>J'ai un cadeau pour toi, prends-le.</res27>
+    <res28>Tiens, c'est un petit présent pour toi.</res28>
+    <res29>Je t'offre ce cadeau avec joie.</res29>
+    <res30>Voici un cadeau que je t'ai apporté.</res30>
+    </question>
+    <question id="hello">
+    <res1>Bonjour!</res1>
+    <res2>Salut!</res2>
+    <res3>Bonjour, comment ça va?</res3>
+    <res4>Salut, comment vas-tu?</res4>
+    <res5>Bonjour, j'espère que tu vas bien.</res5>
+    <res6>Salut, quoi de neuf?</res6>
+    <res7>Bonjour, ravi de te voir.</res7>
+    <res8>Salut, ça fait plaisir de te voir.</res8>
+    <res9>Bonjour, comment s'est passée ta journée?</res9>
+    <res10>Salut, comment ça se passe?</res10>
+    <res11>Bonjour, content de te retrouver.</res11>
+    <res12>Salut, comment ça va aujourd'hui?</res12>
+    <res13>Bonjour, j'espère que tout va bien pour toi.</res13>
+    <res14>Salut, quoi de nouveau?</res14>
+    <res15>Bonjour, comment te sens-tu?</res15>
+    <res16>Salut, ça fait longtemps!</res16>
+    <res17>Bonjour, j'espère que tu passes une bonne journée.</res17>
+    <res18>Salut, comment ça roule?</res18>
+    <res19>Bonjour, prêt pour une nouvelle journée?</res19>
+    <res20>Salut, comment ça se passe pour toi?</res20>
+    <res21>Bonjour, ça va bien?</res21>
+    <res22>Salut, j'espère que tu as bien dormi.</res22>
+    <res23>Bonjour, prêt pour aujourd'hui?</res23>
+    <res24>Salut, ça boume?</res24>
+    <res25>Bonjour, tout se passe bien?</res25>
+    <res26>Salut, comment vas-tu aujourd'hui?</res26>
+    <res27>Bonjour, content de te voir.</res27>
+    <res28>Salut, quoi de beau aujourd'hui?</res28>
+    <res29>Bonjour, comment s'est passé ton week-end?</res29>
+    <res30>Salut, tout roule?</res30>
+    </question>
+</questions>
