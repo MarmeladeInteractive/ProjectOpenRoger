@@ -160,7 +160,7 @@ public class SelectionWheel extends JPanel {
             if (options.size() == 1) {
                 iconAngle = Math.toRadians(-90);
             } else {
-                iconAngle = Math.toRadians((i * angleSection) + angleSection / 2);
+                iconAngle = Math.toRadians((i * angleSection) - angleSection);
             }
         
             int iconRadius = (intWheelRadius + extWheelRadius) / 2;
@@ -180,8 +180,31 @@ public class SelectionWheel extends JPanel {
 
         if (distance >= intWheelRadius && distance <= extWheelRadius) {
             double angle = Math.toDegrees(Math.atan2(dy, dx)) + 180;
-            int iconIndex = (int) Math.floor(angle / (360.0 / options.size()));
+            int iconIndex = (int) Math.floor((angle) / (360.0 / options.size()));
 
+            switch (options.size()) {
+                case 2:
+                    iconIndex = (int) Math.floor((angle - 90) / (360.0 / options.size()));
+                    iconIndex = (iconIndex + (options.size()-1) - 1) % options.size();
+                    break;
+                case 4:
+                    iconIndex = (int) Math.floor((angle + 45) / (360.0 / options.size()));
+                    iconIndex = (iconIndex + (options.size()-1)) % options.size();
+                    break;
+                case 5:
+                    iconIndex = (iconIndex + (options.size()-1)) % options.size();
+                    break;
+                case 6:
+                    iconIndex = (int) Math.floor((angle - 30) / (360.0 / options.size()));
+                    iconIndex = (iconIndex + (options.size()-1)) % options.size();
+                    break;
+                case 7:
+                    iconIndex = (iconIndex + (options.size()-1) - 1) % options.size();
+                    break;
+                default: //ok pour 1, 3
+                    break;
+            }
+            
             iconClicked(iconIndex);
         }
     }

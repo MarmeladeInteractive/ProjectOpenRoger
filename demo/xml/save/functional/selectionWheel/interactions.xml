@@ -1,6 +1,14 @@
 <interactions>
     <interaction id="interactHello">
-        <logoPath>demo/img/selectionWheel/interactions/t.png</logoPath>
+        <logoPath>demo/img/selectionWheel/interactions/interactHello.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactJoinUs">
+        <logoPath>demo/img/selectionWheel/interactions/interactJoinUs.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactGiveBread">
+        <logoPath>demo/img/selectionWheel/interactions/interactGiveBread.png</logoPath>
         <description></description>
     </interaction>
     <interaction id="interactPickUp">
@@ -17,6 +25,18 @@
     </interaction>
     <interaction id="interactThrow">
         <logoPath>demo/img/selectionWheel/interactions/interactThrow.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactTEST1">
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST1.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactTEST2">
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST2.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactTEST3">
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST3.png</logoPath>
         <description></description>
     </interaction>
 </interactions>

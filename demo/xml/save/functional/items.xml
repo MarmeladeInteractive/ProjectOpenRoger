@@ -20,6 +20,12 @@
         <interactionTypes>
             {
                 interactPickUp,
+                interactConsume,
+                interactTEST1,
+                interactTEST2,
+                interactTEST3,
+                interactGiveBread,
+                interactJoinUs,
             }
         </interactionTypes>
         <interactsSpam>Ramasser les déchets</interactsSpam>
@@ -49,6 +55,7 @@
             {
                 interactPickUp,
                 interactConsume,
+                interactTEST3,
             }
         </interactionTypes>
         <interactsSpam>Ramasser la pomme</interactsSpam>

@@ -10,6 +10,7 @@ import com.jv01.generations.Panels.FrontPanel;
 import com.jv01.generations.Panels.NightPanel;
 import com.jv01.generations.Panels.InteractiveListPanel.InteractiveListPanel;
 import com.jv01.generations.Panels.JoystickPanel.JoystickPanel;
+import com.jv01.generations.Panels.Menus.ChatPanel;
 import com.jv01.generations.Panels.Menus.SelectionWheel;
 import com.jv01.generations.Panels.PhonePanel.PhonePanel;
 import com.jv01.player.Player;
@@ -53,6 +54,7 @@ public class MainGameWindow{
     public PhonePanel phonePanel;
     public JoystickPanel joystickPanel;
     public InteractiveListPanel interactiveListPanel;
+    public ChatPanel chatPanel;
     public SelectionWheel selectionWheel;
 
     public long[] currentChunk = {0,0};
@@ -150,6 +152,7 @@ public class MainGameWindow{
         this.backgroundPanel = new BackgroundPanel(this);
         this.nightPanel = new NightPanel(this);
         this.interactiveListPanel = new InteractiveListPanel(this);
+        this.chatPanel = new ChatPanel(this);
 
         this.selectionWheel = new SelectionWheel(this);
 
@@ -175,6 +178,7 @@ public class MainGameWindow{
             phonePanel.createPhonePanelPortrait();
             joystickPanel.createJoystickPanel();
             interactiveListPanel.createInteractiveListPanel();
+            chatPanel.createChatPanel();
             selectionWheel.createSelectionWheelPanel();
             frontPanel.createFrontPanel();
             nightPanel.createNightPanel();
@@ -395,6 +399,7 @@ public class MainGameWindow{
 
             }else{
                 //coloseMsgLabels();
+                chatPanel.clearChatPanel();
                 listModelInteractive.clear();
                 interactiveListPanel.clearInteractiveListPanel();
                 selectionWheel.resetSelectionWheel();
@@ -632,6 +637,13 @@ public class MainGameWindow{
             ""
         );
         msgLabel.setVisible(false);
+    }
+
+    public void openChatPanel(String playerName, String playerText, String npcName, String npcText){
+        chatPanel.openChatPanel(playerName, playerText, npcName, npcText);
+    }
+    public void closeChatPanle(){
+        chatPanel.clearChatPanel();
     }
 
     public void displayAlert(){

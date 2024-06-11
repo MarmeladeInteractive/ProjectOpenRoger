@@ -168,14 +168,14 @@ public class Items {
                     // Traitez l'interaction sélectionnée
                     handleInteraction(mainGameWindow.selectionWheel.iconSelectedId, mainGameWindow.player, mainGameWindow);
                     // Marquez l'élément comme utilisé
-                    this.used = true;
+                    // this.used = true;
                 } else {
                     // Affichez un message de débogage si l'élément a déjà été utilisé
-                    System.out.println("L'élément a déjà été utilisé.");
+                    // System.out.println("L'élément a déjà été utilisé.");
                 }
             } else {
                 // Affichez un message de débogage si aucune interaction n'est sélectionnée
-                System.out.println("Aucune interaction sélectionnée ou type incorrect.");
+                // System.out.println("Aucune interaction sélectionnée ou type incorrect.");
             }
         }
     }
@@ -190,7 +190,18 @@ public class Items {
                 System.out.println("Consumed the item.");
                 consumeItem();
                 break;
+            case "interactTEST1":
+                System.out.println("interactTEST1 pipi.");
+                break;
+            case "interactTEST2":
+                System.out.println("interactTEST2 caca.");
+                break;
+            case "interactTEST3":
+                System.out.println("interactTEST3 prout.");
+                break;
             default:
+                if (interaction == null)
+                    interaction = "ERROR";
                 System.out.println("Unknown interaction: " + interaction);
                 break;
         }
