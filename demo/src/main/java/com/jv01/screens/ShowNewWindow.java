@@ -78,7 +78,7 @@ public class ShowNewWindow {
         mainGameWindow.player.canWalk = false;
         switch (idWindow) {
             case "Inventory":
-                new Inventory(this);
+                //new Inventory(this);
                 break;
             case "Map":
                 //new GameMap(this);
