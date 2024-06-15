@@ -2,6 +2,7 @@ package com.jv01.generations.Panels.InventoryPanel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
 import java.awt.image.BufferedImage;
@@ -9,6 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
 import javax.imageio.ImageIO;
 
 import com.jv01.fonctionals.Save;
@@ -26,11 +29,14 @@ public class InteractiveInventory {
     public Player player;
     public GameWindowsSize GWS = new GameWindowsSize(true);
 
-    private boolean isInventoryOpen = false;
+    public boolean isInventoryOpen = false;
     List<String> itemPaths = new ArrayList<>();
+    List<String> currentItemsKey = new ArrayList<>();
     List<BufferedImage> currentItemsImagesList = new ArrayList<>();
     List<JLabel> currentItemsLabels = new ArrayList<>();
     JPanel infoPanel;
+
+    String hoveredItemName = "";
 
     public InteractiveInventory(MainGameWindow mainGameWindow) {
         this.mainGameWindow = mainGameWindow;
@@ -59,6 +65,8 @@ public class InteractiveInventory {
         panel.revalidate();
         panel.repaint();
         player.canWalk = true;
+        hoveredItemName = "";
+        isInventoryOpen = false;
     }
 
     public void open(Player player) {
@@ -66,22 +74,17 @@ public class InteractiveInventory {
 
         if (isInventoryOpen) {
             clearInventoryPanel();
-            isInventoryOpen = false;
         } else {
             clearInventoryPanel();
             player.canWalk = false;
-
-            itemPaths.add("demo/img/inventory/inventoryItems/Apple.png");
-            itemPaths.add("demo/img/inventory/inventoryItems/Waste.png");
-            itemPaths.add("demo/img/inventory/inventoryItems/Chocolatine.png");
-            itemPaths.add("demo/img/inventory/inventoryItems/Croissant.png");
+            player.inventory.getInventoryValues();
 
             overlayPanel = new JPanel();
             overlayPanel.setBounds(0, 0, GWS.gameWindowWidth, GWS.gameWindowHeight);
             overlayPanel.setBackground(new Color(0, 0, 0, 128));
             overlayPanel.setLayout(null);
 
-            BufferedImage originalImage = loadImage("demo/img/inventory/Inventory.png");
+            BufferedImage originalImage = loadImage(player.inventory.backPic);
 
             if (originalImage != null) {
                 ImageIcon inventoryIcon = new ImageIcon(resizeImageToScreen(originalImage));
@@ -99,7 +102,7 @@ public class InteractiveInventory {
             frame.repaint();
 
             isInventoryOpen = true;
-            addItems(itemPaths);
+            addItems();
         }
     }
 
@@ -123,11 +126,13 @@ public class InteractiveInventory {
         return originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
     }
 
-    public void addItems(List<String> itemPaths) {
-        for (String path : itemPaths) {
-            BufferedImage itemImage = loadImage(path);
+    public void addItems() {
+        for (Map.Entry<String, String> entry : player.inventory.itemsPics.entrySet()) {   
+            BufferedImage itemImage = loadImage(entry.getValue());
+            if(player.inventory.itemsCount.get(entry.getKey()).equals(0))itemImage = null;
             if (itemImage != null) {
                 currentItemsImagesList.add(itemImage);
+                currentItemsKey.add(entry.getKey());
                 ImageIcon itemIcon = new ImageIcon(resizeImageToScreen(itemImage));
                 JLabel itemLabel = new JLabel(itemIcon);
 
@@ -141,22 +146,44 @@ public class InteractiveInventory {
             }
         }
 
-        currentItemsLabels.get(currentItemsLabels.size() - 1).addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                int moveX = e.getX();
-                int moveY = e.getY();
-                isPixelOpaque(moveX, moveY);
-            }
-        });
+        if (!currentItemsLabels.isEmpty()) {
+            JLabel lastLabel = currentItemsLabels.get(currentItemsLabels.size() - 1);
+            
+            lastLabel.addMouseMotionListener(new MouseMotionAdapter() {
+                @Override
+                public void mouseMoved(MouseEvent e) {
+                    int moveX = e.getX();
+                    int moveY = e.getY();
+                    lastLabelMouseMoved(moveX, moveY);
+                }
+            });
+            
+            lastLabel.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    int clickX = e.getX();
+                    int clickY = e.getY();
+                    lastLabelMouseClicked(clickX, clickY);
+                }
+            });
+        }
 
         frame.revalidate();
         frame.repaint();
     }
 
+    private void lastLabelMouseMoved(int x, int y){
+        isPixelOpaque(x, y);
+    }
+
+    private void lastLabelMouseClicked(int x, int y){
+        System.out.println("click on : " + hoveredItemName);
+    }
+
     private boolean isPixelOpaque(int x, int y) {
         disposeInfoPanel();
         for (int i = 0; i < currentItemsImagesList.size(); i++) {
+            if(currentItemsImagesList.get(i).equals(null))break;
             BufferedImage itemImage = currentItemsImagesList.get(i);
             int originalX = (int) ((double) x / currentItemsLabels.get(i).getWidth() * itemImage.getWidth());
             int originalY = (int) ((double) y / currentItemsLabels.get(i).getHeight() * itemImage.getHeight());
@@ -166,6 +193,7 @@ public class InteractiveInventory {
                 int alpha = (pixel >> 24) & 0xff;
 
                 if (alpha != 0) {
+                    hoveredItemName = currentItemsKey.get(i);
                     displayInfos(i, x, y);
                     return true;
                 }
@@ -176,21 +204,30 @@ public class InteractiveInventory {
 
     private void displayInfos(int index, int x, int y) {
         disposeInfoPanel();
-
+    
         infoPanel = new JPanel();
-        infoPanel.setBounds(x + GWS.gameWindowWidth / 2 - GWS.gameWindowHeight / 2, y, 50, 20);
+        infoPanel.setBounds(x + GWS.gameWindowWidth / 2 - GWS.gameWindowHeight / 2, y, 50, 40);
         infoPanel.setBackground(new Color(255, 255, 255, 200));
         infoPanel.setLayout(new FlowLayout());
+        int itemCount = player.inventory.itemsCount.get(hoveredItemName);
+        int itemMax = player.inventory.itemsMax.get(hoveredItemName);
+        JLabel infoLabel = new JLabel("<html>"
 
-        JLabel infoLabel = new JLabel("Item: " + index);
+            + hoveredItemName 
+            + "<br>" 
+            + itemCount + "/" + itemMax
+
+            + "</html>"
+        );
         infoPanel.add(infoLabel);
-
+    
         overlayPanel.add(infoPanel, 0);
         overlayPanel.setComponentZOrder(infoPanel, 0);
-
+    
         frame.revalidate();
         frame.repaint();
     }
+    
 
     private void disposeInfoPanel() {
         if (infoPanel != null) {

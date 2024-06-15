@@ -211,10 +211,10 @@ public class Items {
     {
         switch (id) {
             case 0:
-                if(mainGameWindow.player.inventory.wastes < mainGameWindow.player.inventory.maxWastes){
+                if(mainGameWindow.player.inventory.getValue("wastes") < mainGameWindow.player.inventory.maxWastes){
                     
                     mainGameWindow.player.wasteCollected ++;
-                    mainGameWindow.player.inventory.wastes ++;
+                    mainGameWindow.player.inventory.changeValue("wastes", mainGameWindow.player.inventory.getValue("wastes") + 1);
 
                     mainGameWindow.player.save();
                     mainGameWindow.player.inventory.saveWastes();
@@ -229,9 +229,9 @@ public class Items {
                 }
                 break;
             case 1:
-                if(mainGameWindow.player.inventory.apples < mainGameWindow.player.inventory.maxApples){
+                if(mainGameWindow.player.inventory.getValue("apples") < mainGameWindow.player.inventory.maxApples){
 
-                    mainGameWindow.player.inventory.apples ++;
+                    mainGameWindow.player.inventory.changeValue("apples", mainGameWindow.player.inventory.getValue("apples") + 1);
 
                     mainGameWindow.player.save();
                     mainGameWindow.player.inventory.saveApples();
@@ -246,9 +246,9 @@ public class Items {
                 }
                 break;
             case 2:
-                if(mainGameWindow.player.inventory.chocolatines < mainGameWindow.player.inventory.maxChocolatines){
+                if(mainGameWindow.player.inventory.getValue("chocolatines") < mainGameWindow.player.inventory.maxChocolatines){
 
-                    mainGameWindow.player.inventory.chocolatines ++;
+                    mainGameWindow.player.inventory.changeValue("chocolatines", mainGameWindow.player.inventory.getValue("chocolatines") + 1);
 
                     mainGameWindow.player.save();
                     mainGameWindow.player.inventory.saveChocolatines();
@@ -263,9 +263,9 @@ public class Items {
                 }
                 break;
             case 3:
-                if(mainGameWindow.player.inventory.croissants < mainGameWindow.player.inventory.maxCroissants){
+                if(mainGameWindow.player.inventory.getValue("croissants") < mainGameWindow.player.inventory.maxCroissants){
 
-                    mainGameWindow.player.inventory.croissants ++;
+                    mainGameWindow.player.inventory.changeValue("croissants", mainGameWindow.player.inventory.getValue("croissants") + 1);
 
                     mainGameWindow.player.save();
                     mainGameWindow.player.inventory.saveCroissants();
