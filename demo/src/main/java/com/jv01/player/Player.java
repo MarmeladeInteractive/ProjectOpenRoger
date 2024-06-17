@@ -5,6 +5,7 @@ import javax.swing.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.jv01.fonctionals.InteractionManager;
 import com.jv01.fonctionals.Save;
 import com.jv01.generations.InputsManager;
 import com.jv01.generations.MainGameWindow;
@@ -26,6 +27,7 @@ public class Player{
 
     public PlayerInventory inventory;
     public InputsManager inputsManager;
+    public InteractionManager interactionManager;
 
     public String gameName;
 
@@ -130,6 +132,7 @@ public class Player{
 
         inventory = new PlayerInventory(gameName);
         inputsManager = new InputsManager(mainGameWindow);
+        interactionManager = new InteractionManager();
     }
 
     public void initializeWalkingFrames() {
@@ -300,14 +303,15 @@ public class Player{
         this.hygiene=this.hygiene+consummed.cleanlynessValue;
     }
 
-        public void Sleep()
+        public void Sleep(Items bed)
     {
-        this.tiredness=0;
+        this.tiredness=this.tiredness+bed.tiringValue;
+        this.hygiene=this.hygiene+bed.cleanlynessValue;
     }
 
-    public void Wash()
+    public void Wash(Items cleanser)
     {
-        this.hygiene=100;
+        this.hygiene=this.tiredness+cleanser.cleanlynessValue;
     }
 
     public boolean isEnoughMoney(int price, boolean takeOff){

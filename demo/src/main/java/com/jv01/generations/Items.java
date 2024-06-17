@@ -299,4 +299,8 @@ public class Items {
         this.offsetY = random.nextInt(20 + 20) - 20;
     }
 
+    public int getId() {
+        return id;
+    }
+
 }

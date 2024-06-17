@@ -240,5 +240,17 @@ public class Npcs {
         this.offsetX = random.nextInt(20 + 20) - 20;
         this.offsetY = random.nextInt(20 + 20) - 20;
     }
+
+    public int getId() {
+        // Remove any non-numeric characters from id
+        String cleanId = id.replaceAll("[^\\d-]", ""); // Keep digits and minus sign
+    
+        try {
+            return Integer.parseInt(cleanId); // Parse cleaned id to integer
+        } catch (NumberFormatException e) {
+            e.printStackTrace(); // Handle or log the exception as needed
+            return -1; // Or return some default value to indicate failure
+        }
+    }
     
 }

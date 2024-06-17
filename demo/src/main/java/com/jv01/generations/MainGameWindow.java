@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import com.jv01.buildings.Buildings;
+import com.jv01.fonctionals.InteractionManager;
 import com.jv01.fonctionals.Time;
 import com.jv01.generations.Panels.BackgroundPanel;
 import com.jv01.generations.Panels.FrontPanel;
@@ -13,6 +14,7 @@ import com.jv01.generations.Panels.JoystickPanel.JoystickPanel;
 import com.jv01.generations.Panels.Menus.ChatPanel;
 import com.jv01.generations.Panels.Menus.SelectionWheel;
 import com.jv01.generations.Panels.PhonePanel.PhonePanel;
+import com.jv01.models.InteractionModel;
 import com.jv01.player.Player;
 
 import com.jv01.screens.AlertWindow;
@@ -371,34 +373,55 @@ public class MainGameWindow{
                 }
                 //System.out.println("spam");
             }
-
+            
+            // INTERACTION HANDLING
             if(displaySpam){
                 //openMsgLabels(spam);
                 if(!interactiveListPanel.isOpen && !isNpc && !isItem && !isBuilding){
                     interactiveListPanel.openInteractiveList(listModelInteractive);
                 }
 
-                if(isTool){
-                    tool.interact(this);
-                    refresh = tool.refresh;
-                    refreshDisplay = tool.refreshDisplay;
-                }else if(isItem){
-                    item.interact(this);
-                    refreshDisplay = item.refreshDisplay;
-                }else if(isDealer){
-                    dealer.interact(player);
-                    refreshDisplay = dealer.refreshDisplay;
-                }else if(isArcade){
-                    arcade.interact(this);
-                    refresh = arcade.refresh;
-                    refreshDisplay = arcade.refreshDisplay;
-                }else if(isNpc){
-                    npc.interact(this);
-                } 
-                   
+                InteractionManager interactionManager = new InteractionManager();
+                InteractionModel interactionModel = null;
+                int entityId = -1;
+                int entityX = -1;
+                int entityY = -1;
+                if (isTool) {
+                    interactionModel = InteractionModel.TOOLS;
+                    entityId = tool.getId();
+                    entityX = player.positionX;
+                    entityX = player.positionY;
+                } else if (isItem) {
+                    interactionModel = InteractionModel.ITEMS;
+                    entityId = item.getId();
+                    entityX = item.x;
+                    entityX = item.y;
+                } else if (isDealer) {
+                    interactionModel = InteractionModel.MERCHANTS;
+                    entityId = dealer.getId();
+                    entityX = player.positionX;
+                    entityX = player.positionY;
+                } else if (isArcade) {
+                    interactionModel = InteractionModel.ARCADES;
+                    entityId = arcade.getId();
+                    entityX = player.positionX;
+                    entityX = player.positionY;
+                } else if (isNpc) {
+                    interactionModel = InteractionModel.NPCS;
+                    entityId = npc.getId();
+                    entityX = npc.x;
+                    entityX = npc.y;
+                } else if (isBuilding) {
+                    interactionModel = InteractionModel.BUILDINGS;
+                    //entityId = building.getId();
+                    //entityX = player.positionX;
+                    //entityX = player.positionY;
+                }
 
-            }else{
-                //coloseMsgLabels();
+                if (interactionModel != null || entityId >= 0) {
+                    interactionManager.HandleInteraction(player, interactionModel, String.valueOf(entityId), entityX, entityY);
+                }
+            } else {
                 chatPanel.clearChatPanel();
                 listModelInteractive.clear();
                 interactiveListPanel.clearInteractiveListPanel();

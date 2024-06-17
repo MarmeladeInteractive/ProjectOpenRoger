@@ -11,6 +11,11 @@
                 demo/img/buildings/partyHouse04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+            }
+        </interactionTypes>
     </building>
 
     <building id="1">
@@ -25,6 +30,12 @@
                 demo/img/buildings/emptyProperty04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+                interactBuyBuilding,
+            }
+        </interactionTypes>
     </building>
 
     <building id="2">
@@ -39,6 +50,11 @@
                 demo/img/buildings/cityHall04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+            }
+        </interactionTypes>
     </building>
 
     <building id="3">
@@ -53,6 +69,11 @@
                 demo/img/buildings/printingPress04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+            }
+        </interactionTypes>
     </building>
 
     <building id="4">
@@ -67,6 +88,11 @@
                 demo/img/buildings/bakery04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+            }
+        </interactionTypes>
     </building>
 
     <building id="5">
@@ -81,6 +107,11 @@
                 demo/img/buildings/store04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+            }
+        </interactionTypes>
     </building>
 
     <building id="6">
@@ -95,6 +126,12 @@
                 demo/img/buildings/abandonedHouse04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+                interactBuyBuilding,
+            }
+        </interactionTypes>
     </building>
 
     <building id="7">
@@ -109,6 +146,11 @@
                 demo/img/buildings/house04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+            }
+        </interactionTypes>
     </building>
 
     <building id="8">
@@ -123,6 +165,11 @@
                 demo/img/buildings/corpo04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+            }
+        </interactionTypes>
     </building>
 
     <building id="9">
@@ -137,5 +184,10 @@
                 demo/img/buildings/bar04.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactEnter,
+            }
+        </interactionTypes>
     </building>
 </buildings>

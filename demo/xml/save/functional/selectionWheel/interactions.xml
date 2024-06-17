@@ -1,41 +1,76 @@
 <interactions>
     <interaction id="interactHello">
+        <interactionType>npc</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactHello.png</logoPath>
         <description></description>
     </interaction>
     <interaction id="interactJoinUs">
+        <interactionType>npc</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactJoinUs.png</logoPath>
         <description></description>
     </interaction>
     <interaction id="interactGiveBread">
+        <interactionType>npc</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactGiveBread.png</logoPath>
         <description></description>
     </interaction>
     <interaction id="interactPickUp">
+        <interactionType>item</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactPickUp.png</logoPath>
         <description></description>
     </interaction>
     <interaction id="interactConsume">
+        <interactionType>item</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactConsume.png</logoPath>
         <description></description>
     </interaction>
-    <interaction id="interactEnter">
-        <logoPath>demo/img/selectionWheel/interactions/interactEnter.png</logoPath>
-        <description></description>
-    </interaction>
     <interaction id="interactThrow">
+        <interactionType>item</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactThrow.png</logoPath>
         <description></description>
     </interaction>
-    <interaction id="interactTEST1">
+    <interaction id="interactEnter">
+        <interactionType>building</interactionType>
+        <logoPath>demo/img/selectionWheel/interactions/interactEnter.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactBuyBuilding">
+        <interactionType>building</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactTEST1.png</logoPath>
         <description></description>
     </interaction>
-    <interaction id="interactTEST2">
+    <interaction id="interactPlayArcade">
+        <interactionType>arcade</interactionType>
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST1.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactTESTbuilding">
+        <interactionType>building</interactionType>
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST1.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactTESTtool">
+        <interactionType>tool</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactTEST2.png</logoPath>
         <description></description>
     </interaction>
-    <interaction id="interactTEST3">
+    <interaction id="interactTESTitem">
+        <interactionType>item</interactionType>
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST3.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactTESTmerchant">
+        <interactionType>merchant</interactionType>
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST3.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactTESTnpc">
+        <interactionType>npc</interactionType>
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST3.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactTESTarcade">
+        <interactionType>arcade</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactTEST3.png</logoPath>
         <description></description>
     </interaction>

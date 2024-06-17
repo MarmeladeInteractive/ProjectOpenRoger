@@ -261,5 +261,9 @@ public class Tools {
             }
         }
     }
+
+    public int getId() {
+        return id;
+    }
     
 }

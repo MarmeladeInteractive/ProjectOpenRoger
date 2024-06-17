@@ -92,5 +92,8 @@ public class Arcades {
             }
         }
     }
-    
+
+    public int getId() {
+        return id;
+    }
 }

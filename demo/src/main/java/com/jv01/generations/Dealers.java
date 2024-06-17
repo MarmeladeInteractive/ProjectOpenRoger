@@ -183,5 +183,10 @@ public class Dealers {
                 }
             }
     }
+
+    public int getId()
+    {
+        return id;
+    }
     
 }

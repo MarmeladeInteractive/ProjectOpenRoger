@@ -129,5 +129,7 @@ public class Buildings {
         return minOutput + ((value - minInput) / (maxInput - minInput)) * (maxOutput - minOutput);
     }
 
-
+    public int getId() {
+        return id;
+    }
 }
