@@ -32,6 +32,11 @@
                 demo/img/tools/imprimante01.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactTESTtool,
+            }
+        </interactionTypes>
     </tool>
 
     <tool id="1">
@@ -67,6 +72,11 @@
                 demo/img/tools/four01.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactTESTtool,
+            }
+        </interactionTypes>
     </tool>
 
     <tool id="2">
@@ -102,6 +112,11 @@
                 demo/img/tools/voiture01.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactTESTtool,
+            }
+        </interactionTypes>
     </tool>
 
     <tool id="3">
@@ -128,6 +143,11 @@
                 demo/img/achat.png
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactTESTtool,
+            }
+        </interactionTypes>
     </tool>
 
     <tool id="4">
@@ -154,6 +174,11 @@
                 demo/img/achat.png
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactTESTtool,
+            }
+        </interactionTypes>
     </tool>
 
     <tool id="5">
@@ -180,5 +205,10 @@
                 demo/img/tools/poubelle01.png
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactTESTtool,
+            }
+        </interactionTypes>
     </tool>
 </tools>

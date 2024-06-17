@@ -23,6 +23,12 @@
                 demo/img/arcades/arcade01.png
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactPlayArcade,
+                interactTESTarcade,
+            }
+        </interactionTypes>
     </arcade>
 
     <arcade id="1">
@@ -49,5 +55,11 @@
                 demo/img/arcades/arcade01.png
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactPlayArcade,
+                interactTESTarcade,
+            }
+        </interactionTypes>
     </arcade>
 </arcades>

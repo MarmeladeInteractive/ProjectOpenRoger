@@ -12,6 +12,11 @@
                 demo/img/null.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactBuy,
+            }
+        </interactionTypes>
     </dealer>
 
     <dealer id="1">
@@ -27,6 +32,11 @@
                 demo/img/null.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactBuy,
+            }
+        </interactionTypes>
     </dealer>
 
     <dealer id="2">
@@ -42,5 +52,10 @@
                 demo/img/null.png,
             }
         </imagesUrls>
+        <interactionTypes>
+            {
+                interactBuy,
+            }
+        </interactionTypes>
     </dealer>
 </dealers>

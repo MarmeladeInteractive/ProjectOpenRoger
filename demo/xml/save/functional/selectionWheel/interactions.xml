@@ -44,6 +44,11 @@
         <logoPath>demo/img/selectionWheel/interactions/interactTEST1.png</logoPath>
         <description></description>
     </interaction>
+        <interaction id="interactBuy">
+        <interactionType>merchant</interactionType>
+        <logoPath>demo/img/selectionWheel/interactions/interactTEST1.png</logoPath>
+        <description></description>
+    </interaction>
     <interaction id="interactTESTbuilding">
         <interactionType>building</interactionType>
         <logoPath>demo/img/selectionWheel/interactions/interactTEST1.png</logoPath>
