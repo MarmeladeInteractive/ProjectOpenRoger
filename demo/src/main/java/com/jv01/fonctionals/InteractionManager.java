@@ -26,6 +26,8 @@ public class InteractionManager {
   public void HandleInteraction(Player player, InteractionModel interactionModel, String objectID, int x, int y){
     this.possibleInteractions = GetInteractionTypes(player.gameName, interactionModel, objectID);
     System.out.println("interaction model : " + interactionModel.toStringSingular());
+    System.out.println(" x : " + x);
+    System.out.println(" y : " + y);
     System.out.println("interaction model : " + interactionModel.toStringPlural());
     System.out.println("gamneme : " + player.gameName);
     System.out.println("obj id : " + objectID);

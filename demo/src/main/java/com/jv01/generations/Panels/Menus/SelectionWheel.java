@@ -79,7 +79,7 @@ public class SelectionWheel extends JPanel {
         frame.add(this);
     }
 
-    public void openSelectionWheel(int x, int y, String type,List<String> options) {
+    public void openSelectionWheel(int x, int y, String type, List<String> options) {
         this.interactType = type;
         int ajustedX = x;
         int ajustedY = y;
