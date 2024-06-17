@@ -1,29 +1,24 @@
 package com.jv01.generations.Panels.Menus;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
-import com.jv01.generations.MainGameWindow;
 
 public class SelectionWheelIcons {
     private Save save = new Save();
-    private MainGameWindow mainGameWindow;
+    private String gameName;
     private Document doc;
 
-    public SelectionWheelIcons(MainGameWindow mainGameWindow){
-        this.mainGameWindow = mainGameWindow;
+    public SelectionWheelIcons(String gameName){
+        this.gameName = gameName;
         getDoc();
     }
 
     private void getDoc(){
-        doc = save.getDocumentXml(mainGameWindow.gameName,"functional/selectionWheel/interactions");
+        doc = save.getDocumentXml(this.gameName,"functional/selectionWheel/interactions");
     }
 
     private String getIconUrlById(String id){

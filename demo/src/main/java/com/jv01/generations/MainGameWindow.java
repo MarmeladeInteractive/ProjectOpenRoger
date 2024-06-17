@@ -156,7 +156,7 @@ public class MainGameWindow{
         this.interactiveListPanel = new InteractiveListPanel(this);
         this.chatPanel = new ChatPanel(this);
 
-        this.selectionWheel = new SelectionWheel(this);
+        this.selectionWheel = new SelectionWheel(this.gameName, this.frame);
 
         showMainGameWindow();
     }
@@ -287,7 +287,7 @@ public class MainGameWindow{
             }
         }
             
-    
+            // INTERACTION HANDLING 2
             for(Object[] trigEvent: chunk.trigerEvents){
 
                 int[] position = (int[]) trigEvent[0];
@@ -374,14 +374,14 @@ public class MainGameWindow{
                 //System.out.println("spam");
             }
             
-            // INTERACTION HANDLING
+            // INTERACTION HANDLING 2
             if(displaySpam){
                 //openMsgLabels(spam);
                 if(!interactiveListPanel.isOpen && !isNpc && !isItem && !isBuilding){
                     interactiveListPanel.openInteractiveList(listModelInteractive);
                 }
 
-                InteractionManager interactionManager = new InteractionManager();
+                InteractionManager interactionManager = new InteractionManager(this.gameName, this.frame);
                 InteractionModel interactionModel = null;
                 int entityId = -1;
                 int entityX = -1;

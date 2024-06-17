@@ -1,12 +1,9 @@
 package com.jv01.generations.Panels.Menus;
 
 import java.awt.Color;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
@@ -25,7 +22,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
-import com.jv01.generations.MainGameWindow;
 import com.jv01.screens.GameWindowsSize;
 
 public class SelectionWheel extends JPanel {
@@ -33,7 +29,6 @@ public class SelectionWheel extends JPanel {
     private List<String> options = new ArrayList<>();
     private int centreX = 0;
     private int centreY = 0;
-    public MainGameWindow mainGameWindow;
     public SelectionWheelIcons selectionWheelIcons;
     public JFrame frame;
     public JPanel panel;
@@ -53,16 +48,15 @@ public class SelectionWheel extends JPanel {
     public int iconSize = 40;
     public Color wheelColor = new Color(226,233,255,86);
 
-    public SelectionWheel(MainGameWindow mainGameWindow){
-        this.mainGameWindow = mainGameWindow;
-        this.frame = mainGameWindow.frame;
-        this.selectionWheelIcons = new SelectionWheelIcons(mainGameWindow);
+    public SelectionWheel(String gameName, JFrame mainFrame){
+        this.frame = mainFrame;
+        this.selectionWheelIcons = new SelectionWheelIcons(gameName);
 
-        getSelectionWheelValues();
+        getSelectionWheelValues(gameName);
     }
 
-    public void getSelectionWheelValues(){
-        Document doc = save.getDocumentXml(mainGameWindow.gameName,"functional/selectionWheel/selectionWheel");
+    public void getSelectionWheelValues(String gameName){
+        Document doc = save.getDocumentXml(gameName,"functional/selectionWheel/selectionWheel");
         Element element = save.getElementById(doc, "options", "options");
 
         Map<String, List<String>> allElements = save.getAllChildsFromElement(element);

@@ -3,6 +3,8 @@ package com.jv01.fonctionals;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -16,13 +18,13 @@ public class InteractionManager {
   List<String> possibleInteractions;
   Save save;
 
-  public InteractionManager(){
+  public InteractionManager(String gameName, JFrame mainFrame){
     this.save = new Save();
+    this.selectWheel = new SelectionWheel(gameName, mainFrame);
   }
 
   public void HandleInteraction(Player player, InteractionModel interactionModel, String objectID, int x, int y){
-    List<String> possibleInteractions;
-    possibleInteractions = GetInteractionTypes(player.gameName, interactionModel, objectID);
+    this.possibleInteractions = GetInteractionTypes(player.gameName, interactionModel, objectID);
     System.out.println("interaction model : " + interactionModel.toStringSingular());
     System.out.println("interaction model : " + interactionModel.toStringPlural());
     System.out.println("gamneme : " + player.gameName);
@@ -30,21 +32,27 @@ public class InteractionManager {
       switch(interactionModel) {
           case NPCS:
             System.out.println("NPCS level");
+            OpenInteractionList(interactionModel,x,y);
             break;
           case BUILDINGS:
             System.out.println("BUILDINGS level");
+            OpenInteractionList(interactionModel,x,y);
             break;
           case ITEMS:
             System.out.println("ITEMS level");
+            OpenInteractionList(interactionModel,x,y);
             break;
           case TOOLS:
             System.out.println("TOOLS level");
+            OpenInteractionList(interactionModel,x,y);
             break;
           case MERCHANTS:
             System.out.println("MERCHANTS level");
+            OpenInteractionList(interactionModel,x,y);
             break;
           case ARCADES:
             System.out.println("ARCADES level");
+            OpenInteractionList(interactionModel,x,y);
             break;
           default :
             System.out.println("unrecognized interaction");
@@ -66,6 +74,7 @@ public class InteractionManager {
       // Ajouter chaque interaction type à la liste en supprimant les espaces
       for (String interactionTypeEntry : interactionTypesArray) {
         interactionTypesList.add(interactionTypeEntry.trim());
+        System.out.println(interactionTypeEntry.trim());
       }
     } else {
       System.out.println("Element not found for ID: " + id);
@@ -77,7 +86,7 @@ public class InteractionManager {
   public void OpenInteractionList(InteractionModel interactionModel, int x, int y)
   {
     if (!selectWheel.isOpen) {
-      selectWheel.openSelectionWheel(x, y, interactionModel.toStringSingular(), possibleInteractions);
+      this.selectWheel.openSelectionWheel(x, y, interactionModel.toStringSingular(), this.possibleInteractions);
     }
   }
 }

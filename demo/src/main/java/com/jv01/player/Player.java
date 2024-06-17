@@ -5,7 +5,7 @@ import javax.swing.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import com.jv01.fonctionals.InteractionManager;
+//import com.jv01.fonctionals.InteractionManager;
 import com.jv01.fonctionals.Save;
 import com.jv01.generations.InputsManager;
 import com.jv01.generations.MainGameWindow;
@@ -19,7 +19,6 @@ import java.util.Map;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.lang.invoke.StringConcatException;
 
 public class Player{
     public Save save = new Save();
@@ -27,7 +26,7 @@ public class Player{
 
     public PlayerInventory inventory;
     public InputsManager inputsManager;
-    public InteractionManager interactionManager;
+    //public InteractionManager interactionManager;
 
     public String gameName;
 
@@ -132,7 +131,7 @@ public class Player{
 
         inventory = new PlayerInventory(gameName);
         inputsManager = new InputsManager(mainGameWindow);
-        interactionManager = new InteractionManager();
+        //interactionManager = new InteractionManager(gameName, mainGameWindow.frame);
     }
 
     public void initializeWalkingFrames() {
