@@ -184,8 +184,8 @@ public class SelectionWheel extends JPanel {
 
             switch (options.size()) {
                 case 2:
-                    iconIndex = (int) Math.floor((angle - 90) / (360.0 / options.size()));
-                    iconIndex = (iconIndex + (options.size()-1) - 1) % options.size();
+                    iconIndex = (int) Math.floor((angle + 90 +180) / (360.0 / options.size()));
+                    iconIndex = (iconIndex + (options.size()-1)) % options.size();
                     break;
                 case 4:
                     iconIndex = (int) Math.floor((angle + 45) / (360.0 / options.size()));

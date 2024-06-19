@@ -36,7 +36,8 @@ public class InteractiveInventory {
     List<JLabel> currentItemsLabels = new ArrayList<>();
     JPanel infoPanel;
 
-    String hoveredItemName = "";
+    public String hoveredItemName = "";
+    public String clickedItemName = "";
 
     public InteractiveInventory(MainGameWindow mainGameWindow) {
         this.mainGameWindow = mainGameWindow;
@@ -61,11 +62,13 @@ public class InteractiveInventory {
         itemPaths.clear();
         currentItemsImagesList.clear();
         currentItemsLabels.clear();
+        currentItemsKey.clear();
         panel.removeAll();
         panel.revalidate();
         panel.repaint();
         player.canWalk = true;
         hoveredItemName = "";
+        clickedItemName = "";
         isInventoryOpen = false;
     }
 
@@ -177,7 +180,7 @@ public class InteractiveInventory {
     }
 
     private void lastLabelMouseClicked(int x, int y){
-        System.out.println("click on : " + hoveredItemName);
+        clickedItemName = hoveredItemName;
     }
 
     private boolean isPixelOpaque(int x, int y) {
@@ -204,7 +207,6 @@ public class InteractiveInventory {
 
     private void displayInfos(int index, int x, int y) {
         disposeInfoPanel();
-    
         infoPanel = new JPanel();
         infoPanel.setBounds(x + GWS.gameWindowWidth / 2 - GWS.gameWindowHeight / 2, y, 50, 40);
         infoPanel.setBackground(new Color(255, 255, 255, 200));

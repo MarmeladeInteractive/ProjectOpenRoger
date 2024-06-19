@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.DocFlavor.READER;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -138,6 +139,18 @@ public class PlayerInventory {
         saveApples();
         saveChocolatines();
         saveCroissants();
+    }
+
+    public boolean incrementValue(String key, int increment){
+        int currentVal = getValue(key);
+        int newVal = 0;
+        boolean isIncremented = false;
+        if((currentVal + increment) <= itemsMax.get(key)){
+            if((currentVal + increment) >= 0)newVal = currentVal + increment;
+            changeValue(key, newVal);
+            isIncremented = true;
+        }
+        return isIncremented;
     }
 
     public void changeValue(String key, int value){
