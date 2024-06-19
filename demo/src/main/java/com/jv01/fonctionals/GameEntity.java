@@ -3,9 +3,10 @@ package com.jv01.fonctionals;
 import com.jv01.models.InteractionModel;
 
 public class GameEntity {
-    int[] position;
-    String entityType;
-    InteractionModel entityModel;
+    public int[] position;
+    public String entityType;
+    public InteractionModel entityModel;
+    public int range;
 
     public GameEntity(String type) {
         this.entityType = type;
@@ -27,6 +28,20 @@ public class GameEntity {
         this.position = position;
         this.entityModel = interactionModel;
         this.entityType = GetTypeFromInteractionModel(interactionModel);
+    }
+
+    public GameEntity(int[] position, String type, int distance) {
+        this.position = position;
+        this.entityType = type;
+        this.entityModel = GetInteractionModelFromType(type);
+        this.range = distance;
+    }
+
+    public GameEntity(int[] position, InteractionModel interactionModel, int distance) {
+        this.position = position;
+        this.entityModel = interactionModel;
+        this.entityType = GetTypeFromInteractionModel(interactionModel);
+        this.range = distance;
     }
 
     public InteractionModel GetInteractionModelFromType(String type) {
