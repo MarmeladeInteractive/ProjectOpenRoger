@@ -381,7 +381,7 @@ public class MainGameWindow{
                     interactiveListPanel.openInteractiveList(listModelInteractive);
                 }
 
-                InteractionManager interactionManager = new InteractionManager(this.gameName, this.frame);
+                InteractionManager interactionManager = new InteractionManager(this.selectionWheel);
                 InteractionModel interactionModel = null;
                 int entityId = -1;
                 int entityX = -1;

@@ -14,13 +14,13 @@ import com.jv01.player.Player;
 
 public class InteractionManager {
 
-  SelectionWheel selectWheel;
+  SelectionWheel selectionWheel;
   List<String> possibleInteractions;
   Save save;
 
-  public InteractionManager(String gameName, JFrame mainFrame){
+  public InteractionManager(SelectionWheel selectWheel){
     this.save = new Save();
-    this.selectWheel = new SelectionWheel(gameName, mainFrame);
+    this.selectionWheel = selectWheel;
   }
 
   public void HandleInteraction(Player player, InteractionModel interactionModel, String objectID, int x, int y){
@@ -87,8 +87,8 @@ public class InteractionManager {
 
   public void OpenInteractionList(InteractionModel interactionModel, int x, int y)
   {
-    if (!selectWheel.isOpen) {
-      this.selectWheel.openSelectionWheel(x, y, interactionModel.toStringSingular(), this.possibleInteractions);
+    if (!selectionWheel.isOpen) {
+      this.selectionWheel.openSelectionWheel(x, y, interactionModel.toStringSingular(), this.possibleInteractions);
     }
   }
 }
