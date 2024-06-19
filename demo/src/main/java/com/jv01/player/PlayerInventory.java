@@ -1,8 +1,10 @@
 package com.jv01.player;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.print.DocFlavor.READER;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -26,15 +28,15 @@ public class PlayerInventory {
     public int inventoryWidth = 380;
     public int[] cellSize = {(inventoryWidth/3),(inventoryWidth/3)};
 
-    public int wastes = 0;
-    public int apples = 0;
-    public int chocolatines = 0;
-    public int croissants = 0;
-
     public int maxWastes = 10;
     public int maxApples = 10;
     public int maxChocolatines = 10;
     public int maxCroissants = 10;
+
+    public Map<String, Integer> itemsCount = new HashMap<>();
+    public Map<String, Integer> itemsMax = new HashMap<>();
+    public Map<String, String> itemsPics = new HashMap<>();
+    public String backPic;
 
     public PlayerInventory(String gameName){
         this.gameName = gameName;
@@ -75,15 +77,41 @@ public class PlayerInventory {
 
         Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
 
-        this.wastes = Integer.parseInt(save.getChildFromMapElements(allElements,"wastes"));
-        this.apples = Integer.parseInt(save.getChildFromMapElements(allElements,"apples"));
-        this.chocolatines = Integer.parseInt(save.getChildFromMapElements(allElements,"chocolatines"));
-        this.croissants = Integer.parseInt(save.getChildFromMapElements(allElements,"croissants"));
-
         this.maxWastes = Integer.parseInt(save.getChildFromMapElements(allElements,"maxWastes"));
         this.maxApples = Integer.parseInt(save.getChildFromMapElements(allElements,"maxApples"));
         this.maxChocolatines = Integer.parseInt(save.getChildFromMapElements(allElements,"maxChocolatines"));
         this.maxCroissants = Integer.parseInt(save.getChildFromMapElements(allElements,"maxCroissants"));
+        
+        itemsMax.put("wastes",this.maxWastes);
+        itemsMax.put("apples",this.maxApples);
+        itemsMax.put("chocolatines",this.maxChocolatines);
+        itemsMax.put("croissants",this.maxCroissants);
+
+        itemsCount.put("wastes",Integer.parseInt(save.getChildFromMapElements(allElements,"wastes")));
+        itemsCount.put("apples",Integer.parseInt(save.getChildFromMapElements(allElements,"apples")));
+        itemsCount.put("chocolatines",Integer.parseInt(save.getChildFromMapElements(allElements,"chocolatines")));
+        itemsCount.put("croissants",Integer.parseInt(save.getChildFromMapElements(allElements,"croissants")));
+
+        element = save.getElementById(doc, "inventory", "items");
+        allElements = save.getAllChildsFromElement(element);
+
+        String path = save.stringToStringArray(save.getChildFromElement(element, "wastes"))[0];
+        itemsPics.put("wastes",save.dropSpaceFromString(path));
+
+        path = save.stringToStringArray(save.getChildFromElement(element, "apples"))[0];
+        itemsPics.put("apples",save.dropSpaceFromString(path));
+
+        path = save.stringToStringArray(save.getChildFromElement(element, "chocolatines"))[0];
+        itemsPics.put("chocolatines",save.dropSpaceFromString(path));
+
+        path = save.stringToStringArray(save.getChildFromElement(element, "croissants"))[0];
+        itemsPics.put("croissants",save.dropSpaceFromString(path));
+
+        element = save.getElementById(doc, "inventory", "back");
+        allElements = save.getAllChildsFromElement(element);
+
+        backPic = save.stringToStringArray(save.getChildFromElement(element, "back"))[0];
+        backPic = save.dropSpaceFromString(backPic);
     }
 
     public void saveInventoryValue( String childName, String newValue){
@@ -91,19 +119,19 @@ public class PlayerInventory {
     }
 
     public void saveWastes(){
-        saveInventoryValue("wastes",String.valueOf(wastes));
+        saveInventoryValue("wastes",String.valueOf(itemsCount.get("wastes")));
     }
 
     public void saveApples(){
-        saveInventoryValue("apples",String.valueOf(apples));
+        saveInventoryValue("apples",String.valueOf(itemsCount.get("apples")));
     }
 
     public void saveChocolatines(){
-        saveInventoryValue("chocolatines",String.valueOf(chocolatines));
+        saveInventoryValue("chocolatines",String.valueOf(itemsCount.get("chocolatines")));
     }
 
     public void saveCroissants(){
-        saveInventoryValue("croissants",String.valueOf(croissants));
+        saveInventoryValue("croissants",String.valueOf(itemsCount.get("croissants")));
     }
 
     public void saveAll(){
@@ -113,18 +141,49 @@ public class PlayerInventory {
         saveCroissants();
     }
 
+    public boolean incrementValue(String key, int increment){
+        int currentVal = getValue(key);
+        int newVal = 0;
+        boolean isIncremented = false;
+        if((currentVal + increment) <= itemsMax.get(key)){
+            if((currentVal + increment) >= 0)newVal = currentVal + increment;
+            changeValue(key, newVal);
+            isIncremented = true;
+        }
+        return isIncremented;
+    }
+
+    public void changeValue(String key, int value){
+        try{
+            itemsCount.replace(key, value);
+        }catch(Exception e){
+            System.err.println("inventory key dont exist!");
+        }
+    }
+
+    public int getValue(String key){
+        try{
+            return itemsCount.get(key);
+        }catch(Exception e){
+            System.err.println("inventory key dont exist!");
+        }
+        return 0;
+    }
+
     public void fillInventory(){
-        wastes = maxWastes;
-        apples = maxApples;
-        chocolatines = maxChocolatines;
-        croissants = maxCroissants;
+        itemsCount.replace("wastes", maxWastes);
+        itemsCount.replace("apples", maxApples);
+        itemsCount.replace("chocolatines", maxChocolatines);
+        itemsCount.replace("croissants", maxCroissants);
+
     }
 
     public void emptyInventory(){
         soundManager.playSFX("waste01");
-        wastes = 0;
-        apples = 0;
-        chocolatines = 0;
-        croissants = 0;
+
+        itemsCount.replace("wastes", 0);
+        itemsCount.replace("apples", 0);
+        itemsCount.replace("chocolatines", 0);
+        itemsCount.replace("croissants", 0);
     }
 }

@@ -100,7 +100,7 @@ public class Npcs {
 
         Map<String, List<String>> allElementsRoger = save.getAllChildsFromElement(elementRoger);
 
-        if(!mainGameWindow.selectionWheel.isOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"npc", test);
+        if(!mainGameWindow.selectionWheel.isOpen && !mainGameWindow.interactiveInventory.isInventoryOpen)mainGameWindow.selectionWheel.openSelectionWheel(x, y,"npc", test);
         try {
             if(mainGameWindow.player.inputsManager.interactKeyPressed || (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType == "npc")){
 
@@ -132,24 +132,34 @@ public class Npcs {
 
                         case "interactGiveBread":
                         if(!currentResponce.equals("interactGiveBread")){
-                            elementRoger = save.getElementById(docRoger, "question", "gift");
-                            allElementsRoger = save.getAllChildsFromElement(elementRoger);
-
-                            if((compatibility + interactScore*5) > 30){
-                                element = save.getElementById(doc, "response", "acceptedGift");
-                                allElementsNPCs = save.getAllChildsFromElement(element);
-
-                                response = "acceptedGift";
-                                mainGameWindow.openChatPanel("Roger", save.getChildFromMapElements(allElementsRoger, "res"+String.valueOf(randomNumber)), name, save.getChildFromMapElements(allElementsNPCs, "res"+String.valueOf(randomNumber)));
-                                interactScore ++;
-                            }else{
-                                element = save.getElementById(doc, "response", "deniedGift");
-                                allElementsNPCs = save.getAllChildsFromElement(element);
-
-                                response = "deniedGift";
-                                mainGameWindow.openChatPanel("Roger", save.getChildFromMapElements(allElementsRoger, "res"+String.valueOf(randomNumber)), name, save.getChildFromMapElements(allElementsNPCs, "res"+String.valueOf(randomNumber)));
-                            }
                             currentResponce = "interactGiveBread";
+                            if(!mainGameWindow.interactiveInventory.isInventoryOpen)mainGameWindow.interactiveInventory.open(mainGameWindow.player);
+                        }else if(currentResponce.equals("interactGiveBread")){
+                            if(mainGameWindow.interactiveInventory.clickedItemName != ""){
+                                if(mainGameWindow.player.inventory.incrementValue(mainGameWindow.interactiveInventory.clickedItemName, -1)){
+                                    elementRoger = save.getElementById(docRoger, "question", "gift");
+                                    allElementsRoger = save.getAllChildsFromElement(elementRoger);
+        
+                                    if((compatibility + interactScore*5) > 30){
+                                        element = save.getElementById(doc, "response", "acceptedGift");
+                                        allElementsNPCs = save.getAllChildsFromElement(element);
+        
+                                        response = "acceptedGift";
+                                        mainGameWindow.openChatPanel("Roger", save.getChildFromMapElements(allElementsRoger, "res"+String.valueOf(randomNumber)), name, save.getChildFromMapElements(allElementsNPCs, "res"+String.valueOf(randomNumber)));
+                                        interactScore ++;
+                                    }else{
+                                        element = save.getElementById(doc, "response", "deniedGift");
+                                        allElementsNPCs = save.getAllChildsFromElement(element);
+        
+                                        response = "deniedGift";
+                                        mainGameWindow.openChatPanel("Roger", save.getChildFromMapElements(allElementsRoger, "res"+String.valueOf(randomNumber)), name, save.getChildFromMapElements(allElementsNPCs, "res"+String.valueOf(randomNumber)));
+                                        mainGameWindow.player.inventory.incrementValue(mainGameWindow.interactiveInventory.clickedItemName, 1);
+                                    }
+                                    mainGameWindow.player.save();
+                                    mainGameWindow.player.inventory.saveAll();
+                                    mainGameWindow.interactiveInventory.clearInventoryPanel();
+                                }
+                            }
                         }
                         break;
 

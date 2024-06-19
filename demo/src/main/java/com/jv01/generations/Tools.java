@@ -170,13 +170,13 @@ public class Tools {
                         }
                         break;
                     case 5:
-                        if(mainGameWindow.player.inventory.wastes >= 0){
+                        if(mainGameWindow.player.inventory.itemsCount.get("wastes") >= 0){
 
                             soundManager.playSFX("waste01");
                             
-                            mainGameWindow.player.money += mainGameWindow.player.inventory.wastes;
+                            mainGameWindow.player.money += mainGameWindow.player.inventory.itemsCount.get("wastes");
 
-                            mainGameWindow.player.inventory.wastes = 0;
+                            mainGameWindow.player.inventory.itemsCount.replace("wastes", 0);
 
                             mainGameWindow.player.save();
                             mainGameWindow.player.inventory.saveWastes();
@@ -200,16 +200,18 @@ public class Tools {
                         
                         break;
                     case 1:
-                        if((mainGameWindow.player.inventory.maxChocolatines != mainGameWindow.player.inventory.chocolatines)&&(mainGameWindow.player.inventory.maxCroissants != mainGameWindow.player.inventory.croissants))if(mainGameWindow.player.isEnoughMoney(usePrice,true)){
-                            if((mainGameWindow.player.inventory.maxChocolatines - mainGameWindow.player.inventory.chocolatines)>=(level*2)){
-                                mainGameWindow.player.inventory.chocolatines += level*2;
+                        if((mainGameWindow.player.inventory.maxChocolatines != mainGameWindow.player.inventory.itemsCount.get("chocolatines"))&&(mainGameWindow.player.inventory.maxCroissants != mainGameWindow.player.inventory.itemsCount.get("croissants")))if(mainGameWindow.player.isEnoughMoney(usePrice,true)){
+                            if((mainGameWindow.player.inventory.maxChocolatines - mainGameWindow.player.inventory.itemsCount.get("chocolatines"))>=(level*2)){
+                                int val = mainGameWindow.player.inventory.itemsCount.get("chocolatines") + level*2;
+                                mainGameWindow.player.inventory.itemsCount.replace("chocolatines",val);
                             }else{
-                                mainGameWindow.player.inventory.chocolatines = mainGameWindow.player.inventory.maxChocolatines;
+                                mainGameWindow.player.inventory.itemsCount.replace("chocolatines",mainGameWindow.player.inventory.maxChocolatines);
                             }
-                            if((mainGameWindow.player.inventory.maxCroissants - mainGameWindow.player.inventory.croissants)>=(level*2)){
-                                mainGameWindow.player.inventory.croissants += level*2;
+                            if((mainGameWindow.player.inventory.maxCroissants - mainGameWindow.player.inventory.itemsCount.get("croissants"))>=(level*2)){
+                                int val = mainGameWindow.player.inventory.itemsCount.get("croissants") + level*2;
+                                mainGameWindow.player.inventory.itemsCount.replace("croissants",val);
                             }else{
-                                mainGameWindow.player.inventory.croissants = mainGameWindow.player.inventory.maxCroissants;
+                                mainGameWindow.player.inventory.itemsCount.replace("croissants",mainGameWindow.player.inventory.maxCroissants);
                             }
                             mainGameWindow.player.inventory.saveChocolatines();
                             mainGameWindow.player.inventory.saveCroissants();

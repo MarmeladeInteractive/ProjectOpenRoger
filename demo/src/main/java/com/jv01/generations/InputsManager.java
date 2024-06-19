@@ -161,17 +161,21 @@ public class InputsManager{
 
                  else if (keyCode == quitKey) {
                      quitKeyPressed = true;
-                     int result = JOptionPane.showConfirmDialog(
-                        null,
-                        "Are you sure you want to quit the game?",
-                        "Quit Game Confirmation",
-                        JOptionPane.YES_NO_OPTION
-                    );
-
-                    if (result == JOptionPane.YES_OPTION) {
-                        // User clicked "Yes," so exit the game.
-                        System.exit(0);
-                    }
+                     if(mainGameWindow.interactiveInventory.isInventoryOpen){
+                        mainGameWindow.interactiveInventory.clearInventoryPanel();
+                     }else{
+                        int result = JOptionPane.showConfirmDialog(
+                            null,
+                            "Are you sure you want to quit the game?",
+                            "Quit Game Confirmation",
+                            JOptionPane.YES_NO_OPTION
+                        );
+    
+                        if (result == JOptionPane.YES_OPTION) {
+                            // User clicked "Yes," so exit the game.
+                            System.exit(0);
+                        }
+                     }  
                  }
                  else if (keyCode == menuKey && !tempoMenuKey.isRunning()) {
                     menuKeyPressed = true;

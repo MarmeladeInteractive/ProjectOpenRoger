@@ -83,11 +83,11 @@ public class Dealers {
 
                 switch (id) {
                     case 0:
-                        if(player.inventory.apples >= 0){
+                        if(player.inventory.getValue("apples") >= 0){
                             
-                            player.money += player.inventory.apples * sellPrice;
+                            player.money += player.inventory.getValue("apples") * sellPrice;
 
-                            player.inventory.apples = 0;
+                            player.inventory.changeValue("apples", 0);;
 
                             player.save();
                             player.inventory.saveApples();
@@ -99,11 +99,11 @@ public class Dealers {
                         break;
 
                     case 1:
-                        if(player.inventory.chocolatines >= 0){
+                        if(player.inventory.getValue("chocolatines") >= 0){
                             
-                            player.money += player.inventory.chocolatines * sellPrice;
+                            player.money += player.inventory.getValue("chocolatines") * sellPrice;
 
-                            player.inventory.chocolatines = 0;
+                            player.inventory.changeValue("chocolatines", 0);
 
                             player.save();
                             player.inventory.saveChocolatines();
@@ -115,11 +115,11 @@ public class Dealers {
                         break;
 
                     case 2:
-                        if(player.inventory.croissants >= 0){
+                        if(player.inventory.getValue("croissants") >= 0){
                             
-                            player.money += player.inventory.croissants * sellPrice;
+                            player.money += player.inventory.getValue("croissants") * sellPrice;
 
-                            player.inventory.croissants = 0;
+                            player.inventory.changeValue("chocolatines", 0);
 
                             player.save();
                             player.inventory.saveCroissants();
@@ -140,8 +140,8 @@ public class Dealers {
                 if(player.isEnoughMoney(buyPrice,false))
                 switch (id) {
                     case 0:
-                        if(player.inventory.apples < player.inventory.maxApples){
-                            player.inventory.apples ++;
+                        if(player.inventory.getValue("apples") < player.inventory.maxApples){
+                            player.inventory.changeValue("apples", player.inventory.getValue("apples") + 1);
                             player.money -= buyPrice;
                             player.save();
                             player.inventory.saveApples();
@@ -153,8 +153,8 @@ public class Dealers {
                         break;
 
                     case 1:
-                        if(player.inventory.chocolatines < player.inventory.maxChocolatines){
-                            player.inventory.chocolatines ++;
+                        if(player.inventory.getValue("chocolatines") < player.inventory.maxChocolatines){
+                            player.inventory.changeValue("chocolatines", player.inventory.getValue("chocolatines") + 1);
                             player.money -= buyPrice;
                             player.save();
                             player.inventory.saveChocolatines();
@@ -166,8 +166,8 @@ public class Dealers {
                         break;
 
                     case 2:
-                        if(player.inventory.croissants < player.inventory.maxCroissants){
-                            player.inventory.croissants ++;
+                        if(player.inventory.getValue("croissants") < player.inventory.maxCroissants){
+                            player.inventory.changeValue("croissants", player.inventory.getValue("croissants") + 1);
                             player.money -= buyPrice;
                             player.save();
                             player.inventory.saveCroissants();

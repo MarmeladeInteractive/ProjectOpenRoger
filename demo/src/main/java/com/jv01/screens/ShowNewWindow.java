@@ -8,7 +8,6 @@ import org.w3c.dom.Element;
 import com.jv01.fonctionals.Save;
 import com.jv01.generations.MainGameWindow;
 import com.jv01.screens.Windows.GameMap;
-import com.jv01.screens.Windows.Inventory;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -78,7 +77,7 @@ public class ShowNewWindow {
         mainGameWindow.player.canWalk = false;
         switch (idWindow) {
             case "Inventory":
-                new Inventory(this);
+                //new Inventory(this);
                 break;
             case "Map":
                 //new GameMap(this);

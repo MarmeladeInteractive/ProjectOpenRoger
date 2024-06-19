@@ -9,4 +9,13 @@
         <maxChocolatines>10</maxChocolatines>
         <maxCroissants>10</maxCroissants>
     </inventory>
+    <inventory id="back">
+        <back>{demo/img/inventory/Inventory.png}</back>
+    </inventory>
+    <inventory id="items">
+        <wastes>{demo/img/inventory/inventoryItems/Waste.png}</wastes>
+        <apples>{demo/img/inventory/inventoryItems/Apple.png}</apples>
+        <chocolatines>{demo/img/inventory/inventoryItems/Chocolatine.png}</chocolatines>
+        <croissants>{demo/img/inventory/inventoryItems/Croissant.png}</croissants>
+    </inventory>
 </inventory>

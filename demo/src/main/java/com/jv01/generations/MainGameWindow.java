@@ -13,6 +13,8 @@ import com.jv01.generations.Panels.JoystickPanel.JoystickPanel;
 import com.jv01.generations.Panels.Menus.ChatPanel;
 import com.jv01.generations.Panels.Menus.SelectionWheel;
 import com.jv01.generations.Panels.PhonePanel.PhonePanel;
+import com.jv01.generations.Panels.InventoryPanel.InteractiveInventory;
+
 import com.jv01.player.Player;
 
 import com.jv01.screens.AlertWindow;
@@ -56,6 +58,7 @@ public class MainGameWindow{
     public InteractiveListPanel interactiveListPanel;
     public ChatPanel chatPanel;
     public SelectionWheel selectionWheel;
+    public InteractiveInventory interactiveInventory;
 
     public long[] currentChunk = {0,0};
     boolean isCenterChunk = false;
@@ -146,6 +149,7 @@ public class MainGameWindow{
         frame.requestFocusInWindow();
         frame.setVisible(true);
         
+        this.interactiveInventory = new InteractiveInventory(this);
         this.phonePanel = new PhonePanel(this);
         this.joystickPanel = new JoystickPanel(this);
         this.frontPanel = new FrontPanel(this);
@@ -174,6 +178,7 @@ public class MainGameWindow{
         key = getKey();
  
         if(displayChunks){
+            interactiveInventory.createInventoryPanel();
             phonePanel.createPhonePanel();
             phonePanel.createPhonePanelPortrait();
             joystickPanel.createJoystickPanel();
@@ -413,7 +418,7 @@ public class MainGameWindow{
 
         if(player.inputsManager.inventoryKeyPressed){
             player.inputsManager.inventoryKeyPressed = false;
-            displayNewWindow("Inventory");
+            interactiveInventory.open(player);
         }
 
         if(player.inputsManager.menuKeyPressed){
