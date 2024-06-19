@@ -6,13 +6,14 @@ public enum InteractionModel {
     ITEMS,
     TOOLS,
     MERCHANTS,
-    ARCADES;
+    ARCADES,
+    UNDEFINED;
 
-    public String toStringSingular(){
+    public String toStringSingular() {
         return name().toLowerCase().substring(0, name().length() - 1);
     }
-    
-    public String toStringPlural(){
+
+    public String toStringPlural() {
         return name().toLowerCase();
     }
 
@@ -31,45 +32,47 @@ public enum InteractionModel {
                 return pathToMERCHANTS();
             case ARCADES:
                 return pathToARCADES();
+            case UNDEFINED:
+                throw new IllegalArgumentException("Interaction not found: " + this);
             default:
                 throw new IllegalArgumentException("Unsupported enum constant: " + this);
         }
     }
 
-    public String pathToNPCS(){
+    public String pathToNPCS() {
         String s;
         s = "characters";
         return s;
     }
 
-    public String pathToBUILDINGS(){
+    public String pathToBUILDINGS() {
         String s;
-        s = "functional/"+name().toLowerCase();
+        s = "functional/" + name().toLowerCase();
         return s;
     }
 
-    public String pathToITEMS(){
+    public String pathToITEMS() {
         String s;
-        s = "functional/"+name().toLowerCase();
+        s = "functional/" + name().toLowerCase();
         return s;
-        
+
     }
 
-    public String pathToTOOLS(){
+    public String pathToTOOLS() {
         String s;
-        s = "functional/"+name().toLowerCase();
+        s = "functional/" + name().toLowerCase();
         return s;
     }
 
-    public String pathToMERCHANTS(){
+    public String pathToMERCHANTS() {
         String s;
         s = "functional/dealers";
         return s;
     }
 
-    public String pathToARCADES(){
+    public String pathToARCADES() {
         String s;
-        s = "functional/"+name().toLowerCase();
+        s = "functional/" + name().toLowerCase();
         return s;
     }
 }

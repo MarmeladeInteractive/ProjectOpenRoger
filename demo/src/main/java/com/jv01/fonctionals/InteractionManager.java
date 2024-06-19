@@ -31,12 +31,6 @@ public class InteractionManager {
     this.selectionWheel = selectWheel;
   }
 
-  public void OpenInteractionList(InteractionModel interactionModel, int x, int y) {
-    if (!selectionWheel.isOpen) {
-      this.selectionWheel.openSelectionWheel(x, y, interactionModel.toStringSingular(), this.possibleInteractions);
-    }
-  }
-
   public void ProcessInteraction(Player player, boolean isTool, boolean isItem, boolean isDealer, boolean isArcade,
       boolean isNpc, boolean isBuilding,
       Tools tool, Items item, Dealers dealer, Arcades arcade, Npcs npc, String spam,
@@ -90,6 +84,12 @@ public class InteractionManager {
       System.out.println("obj id : " + entityId);
 
       OpenInteractionList(interactionModel, entityX, entityY);
+    }
+  }
+
+  public void OpenInteractionList(InteractionModel interactionModel, int x, int y) {
+    if (!selectionWheel.isOpen) {
+      this.selectionWheel.openSelectionWheel(x, y, interactionModel.toStringSingular(), this.possibleInteractions);
     }
   }
 

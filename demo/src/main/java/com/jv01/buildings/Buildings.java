@@ -7,9 +7,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.jv01.fonctionals.Atlas;
+import com.jv01.fonctionals.GameEntity;
 import com.jv01.fonctionals.Save;
 
-public class Buildings {
+public class Buildings extends GameEntity {
     public Save save = new Save();
     public Atlas atlas;
     public String gameName;
@@ -31,7 +32,8 @@ public class Buildings {
     public String seed;
     public String mapKey;
 
-    public Buildings(String gameName, int id, long[] chunk, int[] cell, String buildingKey){
+    public Buildings(String gameName, int id, long[] chunk, int[] cell, String buildingKey) {
+        super("building");
         this.gameName = gameName;
         this.atlas = new Atlas(gameName);
 
@@ -45,15 +47,31 @@ public class Buildings {
 
         getBuildingValues();
 
-        if(id == 8)getCorporationHouseValues();
+        if (id == 8)
+            getCorporationHouseValues();
     }
 
-    public Buildings(){
+    public Buildings(String gameName, int id, long[] chunk, int[] cell, String buildingKey, int[] position) {
+        super(position, "building");
+        this.gameName = gameName;
+        this.atlas = new Atlas(gameName);
 
+        this.id = id;
+
+        this.buildingKey = buildingKey;
+        this.chunk = chunk;
+        this.cell = cell;
+
+        this.type = getBuildingVariety();
+
+        getBuildingValues();
+
+        if (id == 8)
+            getCorporationHouseValues();
     }
 
-    private void getBuildingValues(){
-        Document doc = save.getDocumentXml(gameName,"functional/buildings");
+    private void getBuildingValues() {
+        Document doc = save.getDocumentXml(gameName, "functional/buildings");
         Element element = save.getElementById(doc, "building", String.valueOf(id));
 
         this.name = save.getChildFromElement(element, "name");
@@ -67,62 +85,64 @@ public class Buildings {
         this.defaultImageUrl = save.dropSpaceFromString(this.imageUrl);
     }
 
-    private void getCorporationHouseValues(){
-        Document doc = save.getDocumentXml(gameName,"corporations");
+    private void getCorporationHouseValues() {
+        Document doc = save.getDocumentXml(gameName, "corporations");
         NodeList corporationNodes = doc.getElementsByTagName("corporation");
         int numberOfCorporations = corporationNodes.getLength();
 
         int unassignedId = -1;
         boolean corporationHouseExist = false;
 
-        for(int i = 1; i <= numberOfCorporations; i++){
-            Element corp = save.getElementById(doc, "corporation",String.valueOf(i));
+        for (int i = 1; i <= numberOfCorporations; i++) {
+            Element corp = save.getElementById(doc, "corporation", String.valueOf(i));
             int[] chunkInt = save.stringToIntArray(save.getChildFromElement(corp, "corporationHouseChunk"));
-            long[] chunk = {(long)chunkInt[0],(long)chunkInt[1]};
+            long[] chunk = { (long) chunkInt[0], (long) chunkInt[1] };
 
-            if(Arrays.equals(chunk, this.chunk)){
+            if (Arrays.equals(chunk, this.chunk)) {
                 this.name = save.getChildFromElement(corp, "corporationName");
                 this.description = save.getChildFromElement(corp, "catchPhrase");
                 corporationHouseExist = true;
                 break;
-            }else if(Arrays.equals(chunk, new long[]{0, 0})){
+            } else if (Arrays.equals(chunk, new long[] { 0, 0 })) {
                 unassignedId = i;
             }
         }
 
-        if(!corporationHouseExist){
-            if(unassignedId>0){
-                save.changeElementChildValue(gameName,"corporations","corporation",String.valueOf(unassignedId),"corporationHouseChunk",'{'+String.valueOf(this.chunk[0])+','+String.valueOf(this.chunk[1])+'}');
+        if (!corporationHouseExist) {
+            if (unassignedId > 0) {
+                save.changeElementChildValue(gameName, "corporations", "corporation", String.valueOf(unassignedId),
+                        "corporationHouseChunk",
+                        '{' + String.valueOf(this.chunk[0]) + ',' + String.valueOf(this.chunk[1]) + '}');
                 getCorporationHouseValues();
-            }else{
+            } else {
                 this.id = 7;
                 getBuildingValues();
             }
         }
     }
 
-    public int getBuildingVariety(){
+    public int getBuildingVariety() {
         int variety = 0;
         char key01 = buildingKey.charAt(1);
-        
-        if(key01 >= '0' && key01 <= '3'){
+
+        if (key01 >= '0' && key01 <= '3') {
             variety = 0;
-        }else if(key01 >= '4' && key01 <= '7'){
+        } else if (key01 >= '4' && key01 <= '7') {
             variety = 1;
-        }else if(key01 >= '8' && key01 <= 'b'){
+        } else if (key01 >= '8' && key01 <= 'b') {
             variety = 2;
-        }else{
+        } else {
             variety = 3;
         }
         return variety;
     }
 
-    public void getOffset(){
+    public void getOffset() {
         int key02 = Integer.parseInt(String.valueOf(buildingKey.charAt(2)), 16);
-        int key03 = Integer.parseInt(String.valueOf(buildingKey.charAt(3)), 16);   
+        int key03 = Integer.parseInt(String.valueOf(buildingKey.charAt(3)), 16);
 
-        offsetX = (int)mapRange(key02,0,16,-20,20);
-        offsetY = (int)mapRange(key03,0,16,-20,20);
+        offsetX = (int) mapRange(key02, 0, 16, -20, 20);
+        offsetY = (int) mapRange(key03, 0, 16, -20, 20);
     }
 
     public double mapRange(double value, double minInput, double maxInput, double minOutput, double maxOutput) {

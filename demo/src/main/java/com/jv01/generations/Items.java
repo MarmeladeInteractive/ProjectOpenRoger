@@ -10,15 +10,15 @@ import javax.swing.JPanel;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.jv01.fonctionals.GameEntity;
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
 import com.jv01.player.Player;
-import com.mifmif.common.regex.Main;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
 
-public class Items {
+public class Items extends GameEntity {
     private Save save = new Save();
     private SoundManager soundManager;
     public String gameName;
@@ -63,7 +63,8 @@ public class Items {
 
     private Random random = new Random();
 
-    public Items(String gameName, int id){
+    public Items(String gameName, int id) {
+        super("item");
         this.gameName = gameName;
 
         soundManager = new SoundManager(gameName);
@@ -74,8 +75,20 @@ public class Items {
         getOffset();
     }
 
-    private void getItemsValues(){
-        Document doc = save.getDocumentXml(gameName,"functional/items");
+    public Items(String gameName, int id, int[] position) {
+        super(position, "item");
+        this.gameName = gameName;
+
+        soundManager = new SoundManager(gameName);
+        this.id = id;
+
+        getItemsValues();
+
+        getOffset();
+    }
+
+    private void getItemsValues() {
+        Document doc = save.getDocumentXml(gameName, "functional/items");
         Element element = save.getElementById(doc, "item", String.valueOf(id));
 
         this.name = save.getChildFromElement(element, "name");
@@ -128,19 +141,19 @@ public class Items {
         return interactionTypesList;
     }
 
-    public Object[] addItem(int newX, int newY, JPanel backgroundPanel){
+    public Object[] addItem(int newX, int newY, JPanel backgroundPanel) {
         x = newX + offsetX;
         y = newY + offsetY;
 
-        Objects obj = new Objects(x, y, size, imageUrl, 0, backgroundPanel);  
+        Objects obj = new Objects(x, y, size, imageUrl, 0, backgroundPanel);
 
         Object[] item01 = {
-            new int[]{
-                obj.position[0],
-                obj.position[1],
-            },
-            "item",
-            this
+                new int[] {
+                        obj.position[0],
+                        obj.position[1],
+                },
+                "item",
+                this
         };
 
         objectLabel = obj.objectLabel;
@@ -150,7 +163,7 @@ public class Items {
         return item01;
     }
 
-    public void removeItem(){
+    public void removeItem() {
         backgroundPanel.remove(objectLabel);
     }
 
@@ -160,13 +173,15 @@ public class Items {
             mainGameWindow.selectionWheel.openSelectionWheel(x, y, "item", possibleInteractions);
         } else {
             // Si la roue de sélection est ouverte et une interaction est sélectionnée
-            if (mainGameWindow.selectionWheel.isIconSelected && mainGameWindow.selectionWheel.interactType.equals("item")) {
+            if (mainGameWindow.selectionWheel.isIconSelected
+                    && mainGameWindow.selectionWheel.interactType.equals("item")) {
                 // Vérifiez si l'élément n'a pas déjà été utilisé
                 if (!this.used) {
                     // Affichez un message de débogage pour vérifier l'interaction sélectionnée
                     System.out.println("Interaction sélectionnée : " + mainGameWindow.selectionWheel.iconSelectedId);
                     // Traitez l'interaction sélectionnée
-                    handleInteraction(mainGameWindow.selectionWheel.iconSelectedId, mainGameWindow.player, mainGameWindow);
+                    handleInteraction(mainGameWindow.selectionWheel.iconSelectedId, mainGameWindow.player,
+                            mainGameWindow);
                     // Marquez l'élément comme utilisé
                     // this.used = true;
                 } else {
@@ -207,13 +222,12 @@ public class Items {
         }
     }
 
-    private void pickupItem(MainGameWindow mainGameWindow, int id)
-    {
+    private void pickupItem(MainGameWindow mainGameWindow, int id) {
         switch (id) {
             case 0:
-                if(mainGameWindow.player.inventory.getValue("wastes") < mainGameWindow.player.inventory.maxWastes){
-                    
-                    mainGameWindow.player.wasteCollected ++;
+                if (mainGameWindow.player.inventory.getValue("wastes") < mainGameWindow.player.inventory.maxWastes) {
+
+                    mainGameWindow.player.wasteCollected++;
                     mainGameWindow.player.inventory.incrementValue("wastes", 1);
 
                     mainGameWindow.player.save();
@@ -223,13 +237,13 @@ public class Items {
                     removeItem();
                     this.isExist = false;
                     refreshDisplay = true;
-                }else{
+                } else {
                     mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
                     mainGameWindow.player.displayAlert = true;
                 }
                 break;
             case 1:
-                if(mainGameWindow.player.inventory.getValue("apples") < mainGameWindow.player.inventory.maxApples){
+                if (mainGameWindow.player.inventory.getValue("apples") < mainGameWindow.player.inventory.maxApples) {
                     mainGameWindow.player.inventory.incrementValue("apples", 1);
 
                     mainGameWindow.player.save();
@@ -239,13 +253,14 @@ public class Items {
                     removeItem();
                     this.isExist = false;
                     refreshDisplay = true;
-                }else{
+                } else {
                     mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
                     mainGameWindow.player.displayAlert = true;
                 }
                 break;
             case 2:
-                if(mainGameWindow.player.inventory.getValue("chocolatines") < mainGameWindow.player.inventory.maxChocolatines){
+                if (mainGameWindow.player.inventory
+                        .getValue("chocolatines") < mainGameWindow.player.inventory.maxChocolatines) {
                     mainGameWindow.player.inventory.incrementValue("chocolatines", 1);
 
                     mainGameWindow.player.save();
@@ -255,13 +270,14 @@ public class Items {
                     removeItem();
                     this.isExist = false;
                     refreshDisplay = true;
-                }else{
+                } else {
                     mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
                     mainGameWindow.player.displayAlert = true;
                 }
                 break;
             case 3:
-                if(mainGameWindow.player.inventory.getValue("croissants") < mainGameWindow.player.inventory.maxCroissants){
+                if (mainGameWindow.player.inventory
+                        .getValue("croissants") < mainGameWindow.player.inventory.maxCroissants) {
                     mainGameWindow.player.inventory.incrementValue("croissants", 1);
 
                     mainGameWindow.player.save();
@@ -271,19 +287,18 @@ public class Items {
                     removeItem();
                     this.isExist = false;
                     refreshDisplay = true;
-                }else{
+                } else {
                     mainGameWindow.player.alertMessage = "Plus d'espace dans l'inventaire";
                     mainGameWindow.player.displayAlert = true;
                 }
                 break;
-        
+
             default:
                 break;
         }
     }
 
-    private void consumeItem()
-    {
+    private void consumeItem() {
         System.out.println("crounch crounch");
         soundManager.playSFX(interactsSoundId);
         removeItem();
@@ -291,7 +306,7 @@ public class Items {
         refreshDisplay = true;
     }
 
-    public void getOffset(){
+    public void getOffset() {
         this.offsetX = random.nextInt(20 + 20) - 20;
         this.offsetY = random.nextInt(20 + 20) - 20;
     }

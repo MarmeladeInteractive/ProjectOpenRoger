@@ -3,10 +3,11 @@ package com.jv01.generations;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.jv01.fonctionals.GameEntity;
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
 
-public class Arcades {
+public class Arcades extends GameEntity {
     public Save save = new Save();
     public SoundManager soundManager;
     public String gameName;
@@ -32,7 +33,8 @@ public class Arcades {
     public Document doc;
     public Element element;
 
-    public Arcades(String gameName, int id, int level){
+    public Arcades(String gameName, int id, int level) {
+        super("arcade");
         this.gameName = gameName;
 
         soundManager = new SoundManager(gameName);
@@ -40,27 +42,51 @@ public class Arcades {
         this.id = id;
         this.level = level;
 
-
         getArcadeValues();
 
-
-        if(level==0){
-            if(buySpam != ""){
-                this.spam = "'e' pour "+ buySpam + " " + price + "€"; 
-            }else{
-                this.spam = "'e' pour "+ useSpam + " " + price + "€";
-            }   
-        }else if(level < 3){
-            this.spam = "'e' pour "+ useSpam + " " + usePrice + "€"+ "<br>"+
-                        "'u' pour "+ updateSpam  + " " + price + "€";
-        }else{
-            this.spam = "'e' pour "+ useSpam + " " + usePrice + "€";
+        if (level == 0) {
+            if (buySpam != "") {
+                this.spam = "'e' pour " + buySpam + " " + price + "€";
+            } else {
+                this.spam = "'e' pour " + useSpam + " " + price + "€";
+            }
+        } else if (level < 3) {
+            this.spam = "'e' pour " + useSpam + " " + usePrice + "€" + "<br>" +
+                    "'u' pour " + updateSpam + " " + price + "€";
+        } else {
+            this.spam = "'e' pour " + useSpam + " " + usePrice + "€";
         }
 
     }
 
-    public void getArcadeValues(){
-        Document doc = save.getDocumentXml(gameName,"functional/arcades");
+    public Arcades(String gameName, int id, int level, int[] position) {
+        super(position, "arcade");
+        this.gameName = gameName;
+
+        soundManager = new SoundManager(gameName);
+
+        this.id = id;
+        this.level = level;
+
+        getArcadeValues();
+
+        if (level == 0) {
+            if (buySpam != "") {
+                this.spam = "'e' pour " + buySpam + " " + price + "€";
+            } else {
+                this.spam = "'e' pour " + useSpam + " " + price + "€";
+            }
+        } else if (level < 3) {
+            this.spam = "'e' pour " + useSpam + " " + usePrice + "€" + "<br>" +
+                    "'u' pour " + updateSpam + " " + price + "€";
+        } else {
+            this.spam = "'e' pour " + useSpam + " " + usePrice + "€";
+        }
+
+    }
+
+    public void getArcadeValues() {
+        Document doc = save.getDocumentXml(gameName, "functional/arcades");
         Element element = save.getElementById(doc, "arcade", String.valueOf(id));
 
         this.name = save.getChildFromElement(element, "name");
@@ -82,13 +108,13 @@ public class Arcades {
 
     }
 
-    public void interact(MainGameWindow mainGameWindow){
-        if(mainGameWindow.player.inputsManager.interactKeyPressed){
-            if(level==0){
-                mainGameWindow.runArcade(id); 
-                mainGameWindow.player.inputsManager.interactKeyPressed = false;  
-            }else{
-                
+    public void interact(MainGameWindow mainGameWindow) {
+        if (mainGameWindow.player.inputsManager.interactKeyPressed) {
+            if (level == 0) {
+                mainGameWindow.runArcade(id);
+                mainGameWindow.player.inputsManager.interactKeyPressed = false;
+            } else {
+
             }
         }
     }
