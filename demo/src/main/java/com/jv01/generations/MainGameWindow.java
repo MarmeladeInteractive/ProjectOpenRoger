@@ -287,7 +287,7 @@ public class MainGameWindow{
             }
         }
             
-            // INTERACTION HANDLING 2
+            // INTERACTION HANDLING Part1
             for(Object[] trigEvent: chunk.trigerEvents){
 
                 int[] position = (int[]) trigEvent[0];
@@ -374,7 +374,7 @@ public class MainGameWindow{
                 //System.out.println("spam");
             }
             
-            // INTERACTION HANDLING 2
+            // INTERACTION HANDLING Part2
             if(displaySpam){
                 //openMsgLabels(spam);
                 if(!interactiveListPanel.isOpen && !isNpc && !isItem && !isBuilding){
@@ -382,52 +382,13 @@ public class MainGameWindow{
                 }
 
                 InteractionManager interactionManager = new InteractionManager(this.selectionWheel);
-                InteractionModel interactionModel = null;
-                int entityId = -1;
-                int entityX = -1;
-                int entityY = -1;
-                if (isTool) {
-                    interactionModel = InteractionModel.TOOLS;
-                    entityId = tool.getId();
-                    entityX = player.positionX;
-                    entityX = player.positionY;
-                } else if (isItem) {
-                    interactionModel = InteractionModel.ITEMS;
-                    entityId = item.getId();
-                    entityX = item.x;
-                    entityX = item.y;
-                } else if (isDealer) {
-                    interactionModel = InteractionModel.MERCHANTS;
-                    entityId = dealer.getId();
-                    entityX = player.positionX;
-                    entityX = player.positionY;
-                } else if (isArcade) {
-                    interactionModel = InteractionModel.ARCADES;
-                    entityId = arcade.getId();
-                    entityX = player.positionX;
-                    entityX = player.positionY;
-                } else if (isNpc) {
-                    interactionModel = InteractionModel.NPCS;
-                    entityId = npc.getId();
-                    entityX = npc.x;
-                    entityX = npc.y;
-                } else if (isBuilding) {
-                    interactionModel = InteractionModel.BUILDINGS;
-                    //entityId = building.getId();
-                    //entityX = player.positionX;
-                    //entityX = player.positionY;
-                }
-
-                if (interactionModel != null || entityId >= 0) {
-                    interactionManager.HandleInteraction(player, interactionModel, String.valueOf(entityId), entityX, entityY);
-                }
+                interactionManager.ProcessInteraction(player, isTool, isItem, isDealer, isArcade, isNpc, isBuilding, tool, item, dealer, arcade, npc, spam, chatPanel, listModelInteractive, interactiveListPanel, selectionWheel);
             } else {
                 chatPanel.clearChatPanel();
                 listModelInteractive.clear();
                 interactiveListPanel.clearInteractiveListPanel();
                 selectionWheel.resetSelectionWheel();
             }
-        
 
         if(player.inputsManager.mapKeyPressed){
             player.inputsManager.mapKeyPressed = false;

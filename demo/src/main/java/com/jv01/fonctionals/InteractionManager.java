@@ -1,13 +1,21 @@
 package com.jv01.fonctionals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-import javax.swing.JFrame;
+import javax.swing.DefaultListModel;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import com.jv01.generations.Arcades;
+import com.jv01.generations.Dealers;
+import com.jv01.generations.Items;
+import com.jv01.generations.Npcs;
+import com.jv01.generations.Tools;
+import com.jv01.generations.Panels.InteractiveListPanel.InteractiveListPanel;
+import com.jv01.generations.Panels.Menus.ChatPanel;
 import com.jv01.generations.Panels.Menus.SelectionWheel;
 import com.jv01.models.InteractionModel;
 import com.jv01.player.Player;
@@ -18,47 +26,71 @@ public class InteractionManager {
   List<String> possibleInteractions;
   Save save;
 
-  public InteractionManager(SelectionWheel selectWheel){
+  public InteractionManager(SelectionWheel selectWheel) {
     this.save = new Save();
     this.selectionWheel = selectWheel;
   }
 
-  public void HandleInteraction(Player player, InteractionModel interactionModel, String objectID, int x, int y){
-    this.possibleInteractions = GetInteractionTypes(player.gameName, interactionModel, objectID);
-    System.out.println("interaction model : " + interactionModel.toStringSingular());
-    System.out.println(" x : " + x);
-    System.out.println(" y : " + y);
-    System.out.println("interaction model : " + interactionModel.toStringPlural());
-    System.out.println("gamneme : " + player.gameName);
-    System.out.println("obj id : " + objectID);
-      switch(interactionModel) {
-          case NPCS:
-            System.out.println("NPCS level");
-            OpenInteractionList(interactionModel,x,y);
-            break;
-          case BUILDINGS:
-            System.out.println("BUILDINGS level");
-            OpenInteractionList(interactionModel,x,y);
-            break;
-          case ITEMS:
-            System.out.println("ITEMS level");
-            OpenInteractionList(interactionModel,x,y);
-            break;
-          case TOOLS:
-            System.out.println("TOOLS level");
-            OpenInteractionList(interactionModel,x,y);
-            break;
-          case MERCHANTS:
-            System.out.println("MERCHANTS level");
-            OpenInteractionList(interactionModel,x,y);
-            break;
-          case ARCADES:
-            System.out.println("ARCADES level");
-            OpenInteractionList(interactionModel,x,y);
-            break;
-          default :
-            System.out.println("unrecognized interaction");
-      }
+  public void OpenInteractionList(InteractionModel interactionModel, int x, int y) {
+    if (!selectionWheel.isOpen) {
+      this.selectionWheel.openSelectionWheel(x, y, interactionModel.toStringSingular(), this.possibleInteractions);
+    }
+  }
+
+  public void ProcessInteraction(Player player, boolean isTool, boolean isItem, boolean isDealer, boolean isArcade,
+      boolean isNpc, boolean isBuilding,
+      Tools tool, Items item, Dealers dealer, Arcades arcade, Npcs npc, String spam,
+      ChatPanel chatPanel, DefaultListModel<List<String>> listModelInteractive,
+      InteractiveListPanel interactiveListPanel, SelectionWheel selectionWheel) {
+
+    InteractionModel interactionModel = null;
+    int entityId = -1;
+    int entityX = -1;
+    int entityY = -1;
+
+    if (isTool) {
+      interactionModel = InteractionModel.TOOLS;
+      entityId = tool.getId();
+      entityX = player.positionX;
+      entityY = player.positionY;
+    } else if (isItem) {
+      interactionModel = InteractionModel.ITEMS;
+      entityId = item.getId();
+      entityX = item.x;
+      entityY = item.y;
+    } else if (isDealer) {
+      interactionModel = InteractionModel.MERCHANTS;
+      entityId = dealer.getId();
+      entityX = player.positionX;
+      entityY = player.positionY;
+    } else if (isArcade) {
+      interactionModel = InteractionModel.ARCADES;
+      entityId = arcade.getId();
+      entityX = player.positionX;
+      entityY = player.positionY;
+    } else if (isNpc) {
+      interactionModel = InteractionModel.NPCS;
+      entityId = npc.getId();
+      entityX = npc.x;
+      entityY = npc.y;
+    } else if (isBuilding) {
+      interactionModel = InteractionModel.BUILDINGS;
+      // entityId = building.getId();
+      // entityX = player.positionX;
+      // entityY = player.positionY;
+    }
+
+    if (interactionModel != null && entityId >= 0) {
+      this.possibleInteractions = GetInteractionTypes(player.gameName, interactionModel, String.valueOf(entityId));
+      System.out.println("interaction model : " + interactionModel.toStringSingular());
+      System.out.println(" x : " + entityX);
+      System.out.println(" y : " + entityY);
+      System.out.println("interaction model : " + interactionModel.toStringPlural());
+      System.out.println("gamneme : " + player.gameName);
+      System.out.println("obj id : " + entityId);
+
+      OpenInteractionList(interactionModel, entityX, entityY);
+    }
   }
 
   public List<String> GetInteractionTypes(String gameName, InteractionModel interactionModel, String id) {
@@ -85,10 +117,12 @@ public class InteractionManager {
     return interactionTypesList;
   }
 
-  public void OpenInteractionList(InteractionModel interactionModel, int x, int y)
-  {
-    if (!selectionWheel.isOpen) {
-      this.selectionWheel.openSelectionWheel(x, y, interactionModel.toStringSingular(), this.possibleInteractions);
-    }
+  public int getDistanceFromPlayer(Player player, int x, int y) {
+    int distance = 0;
+
+    distance = (int) Math
+        .sqrt(((x - player.positionX) * (x - player.positionX)) + ((y - player.positionY) * (y - player.positionY)));
+
+    return distance;
   }
 }
