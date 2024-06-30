@@ -6,6 +6,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.fonctionals.SoundManager;
 import com.jv01.generations.InputsManager;
 import com.jv01.generations.MainGameWindow;
 import com.jv01.generations.Items;
@@ -22,6 +23,7 @@ import java.lang.invoke.StringConcatException;
 
 public class Player{
     public Save save = new Save();
+    private SoundManager soundManager;
     public MainGameWindow mainGameWindow;
 
     public PlayerInventory inventory;
@@ -35,6 +37,7 @@ public class Player{
     public int playerSize = 100;
 
     public int step = 10;
+    private int indexStep = 0;
     public int movementType = 2;
     public int speed = 1;
     public boolean canWalk = true;
@@ -69,6 +72,8 @@ public class Player{
     public Player(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
         this.gameName = mainGameWindow.gameName; 
+
+        soundManager = new SoundManager(gameName);
         
         getPlayerValues();
 
@@ -234,6 +239,8 @@ public class Player{
             int lastPositionX = positionX;
             int lastPositionY = positionY;
 
+            int lastFramePicIndex = currentFramePicIndex;
+
             if (inputsManager.leftKeyPressed && inputsManager.upKeyPressed) {
                 positionX -= step*speed;
                 positionY -= step*speed;
@@ -278,6 +285,14 @@ public class Player{
             }
 
             currentFramePicIndex = (currentFramePicIndex) % walkingFrames[currentFrameIndex].length;
+            if(lastFramePicIndex != currentFramePicIndex){
+                if(indexStep < 1){
+                    indexStep++;
+                }else{
+                    indexStep = 0;
+                    soundManager.playSFX("footprint_default");
+                }
+            }
             Image scaledImage = walkingFrames[currentFrameIndex][currentFramePicIndex].getImage().getScaledInstance(playerSize, playerSize, Image.SCALE_SMOOTH);
             ImageIcon scaledImageIcon = new ImageIcon(scaledImage);
             playerLabel.setIcon(scaledImageIcon);
