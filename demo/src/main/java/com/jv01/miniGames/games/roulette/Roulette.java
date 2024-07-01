@@ -107,7 +107,7 @@ public class Roulette{
         createFinalValueSquare();
         createTable();
         
-        
+        //gamePanel.setBackground(new Color(20, 20, 80));
 
         currentBet.setBounds((boxSize/2)-100, 50, 200, 50);
         currentBet.setHorizontalAlignment(SwingConstants.CENTER);
