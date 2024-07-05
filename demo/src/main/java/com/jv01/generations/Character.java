@@ -37,6 +37,7 @@ public class Character{
     int size[] = {100,100};
 
     public  String name;
+    public  String gender = "male";
     public  int age;
     public  int health;
     public  int energy;
@@ -79,7 +80,8 @@ public class Character{
             if(saveNpc)saveCharacter();
         }else{
             name = save.getChildFromElement(element, "name");   
-            npcPic = save.getChildFromElement(element, "npcPic");   
+            npcPic = save.getChildFromElement(element, "npcPic"); 
+            gender = save.getChildFromElement(element, "gender");
             /*size = save.stringToIntArray(save.getChildFromElement(element, "size"));   
             age = Integer.parseInt(save.getChildFromElement(element, "age"));
             health = Integer.parseInt(save.getChildFromElement(element, "health"));
@@ -107,6 +109,11 @@ public class Character{
 
     private void createCharacterValues(){
         name = faker.name().fullName();
+        if(faker.number().numberBetween(0, 2)==0){
+            gender = "female";
+        }else {
+            gender = "male";
+        }
         age = faker.number().numberBetween(ageMin, ageMax);
         health = faker.number().numberBetween(healthMin, valueMax) - ((age) * (faker.number().numberBetween(0, 10)))/20;
         energy = faker.number().numberBetween(energyMin, valueMax) - ((age) * (faker.number().numberBetween(0, 6)))/20;
@@ -129,7 +136,12 @@ public class Character{
         politicalPartyId = partyChoice(ideology, ideologicalCode);
 
         Document doc = save.getDocumentXml(gameName, "functional/npcsPics");
-        Element element = save.getElementById(doc, "npcsPic", "npcsPic");
+        Element element;
+        if(gender.equals("female")){
+            element = save.getElementById(doc, "npcsPic", "female");
+        }else{
+            element = save.getElementById(doc, "npcsPic", "male");
+        }
 
         String imageUrl = save.randomStringToStringArray(save.getChildFromElement(element, "imagesUrls"));
         npcPic = save.dropSpaceFromString(imageUrl);
@@ -165,6 +177,7 @@ public class Character{
         characterElement.setAttribute("id", newId);
         
         save.createXmlElement(characterElement,doc,"name",String.valueOf(name));
+        save.createXmlElement(characterElement,doc,"gender",String.valueOf(gender));
         save.createXmlElement(characterElement,doc,"npcPic",String.valueOf(npcPic));
         save.createXmlElement(characterElement,doc,"size","{"+String.valueOf(size[0])+","+String.valueOf(size[1])+"}");
         save.createXmlElement(characterElement,doc,"age",String.valueOf(age));
