@@ -1,15 +1,29 @@
 <npcsPics>
-    <npcsPic id="npcsPic">
+    <npcsPic id="male">
         <default>
             {
-                demo/img/characters/npc/npc_default.png
+                demo/img/characters/npc/males/npc_m_default.png
             }
         </default>
         <imagesUrls>
             {
-                demo/img/characters/npc/npc_0101.png,
-                demo/img/characters/npc/npc_0102.png,
-                demo/img/characters/npc/npc_0103.png
+                demo/img/characters/npc/males/npc_m_0101.png,
+                demo/img/characters/npc/males/npc_m_0102.png,
+                demo/img/characters/npc/males/npc_m_0103.png
+            }
+        </imagesUrls>
+    </npcsPic>
+    <npcsPic id="female">
+        <default>
+            {
+                demo/img/characters/npc/females/npc_f_default.png
+            }
+        </default>
+        <imagesUrls>
+            {
+                demo/img/characters/npc/females/npc_f_0101.png,
+                demo/img/characters/npc/females/npc_f_0102.png,
+                demo/img/characters/npc/females/npc_f_0103.png
             }
         </imagesUrls>
     </npcsPic>
