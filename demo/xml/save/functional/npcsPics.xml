@@ -1,0 +1,16 @@
+<npcsPics>
+    <npcsPic id="npcsPic">
+        <default>
+            {
+                demo/img/characters/npc/npc_default.png
+            }
+        </default>
+        <imagesUrls>
+            {
+                demo/img/characters/npc/npc_0101.png,
+                demo/img/characters/npc/npc_0102.png,
+                demo/img/characters/npc/npc_0103.png
+            }
+        </imagesUrls>
+    </npcsPic>
+</npcsPics>

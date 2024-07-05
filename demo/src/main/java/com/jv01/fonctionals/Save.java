@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
@@ -26,6 +27,7 @@ import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
 public class Save {
+    private Random random = new Random();
 
     public void createSaveFolder() {
         File savesDirectory = new File("saves");
@@ -247,6 +249,12 @@ public class Save {
             array[i] = valueStrings[i];
         }    
         return array;
+    }
+
+    public String randomStringToStringArray(String arrayString){
+        String[] stringArray = stringToStringArray(arrayString);
+        if(stringArray.length>0)return stringArray[random.nextInt(stringArray.length)];
+        return "";
     }
 
     public String dropSpaceFromString(String link){
