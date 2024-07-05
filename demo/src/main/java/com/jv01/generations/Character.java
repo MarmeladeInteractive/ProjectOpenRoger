@@ -1,5 +1,9 @@
 package com.jv01.generations;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javax.swing.JPanel;
 
 import org.w3c.dom.Document;
@@ -123,6 +127,19 @@ public class Character{
         ideologicalCode = ideology.ideologicalCode;
 
         politicalPartyId = partyChoice(ideology, ideologicalCode);
+
+        Document doc = save.getDocumentXml(gameName, "functional/npcsPics");
+        Element element = save.getElementById(doc, "npcsPic", "npcsPic");
+
+        String imageUrl = save.randomStringToStringArray(save.getChildFromElement(element, "imagesUrls"));
+        npcPic = save.dropSpaceFromString(imageUrl);
+
+        Path path = Paths.get(npcPic);
+        if(!Files.exists(path)){
+            imageUrl = save.randomStringToStringArray(save.getChildFromElement(element, "default"));
+            npcPic = save.dropSpaceFromString(imageUrl);
+        }
+
     }
 
     public  void createCharacterElement(Document doc){

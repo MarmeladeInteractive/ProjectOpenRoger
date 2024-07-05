@@ -94,7 +94,7 @@ public class Items {
         this.imageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[random.nextInt(4)];
         this.imageUrl = save.dropSpaceFromString(this.imageUrl);
 
-        this.defaultImageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[0];
+        this.defaultImageUrl = save.randomStringToStringArray(save.getChildFromElement(element, "imagesUrls"));
         this.defaultImageUrl = save.dropSpaceFromString(this.defaultImageUrl);
 
         this.interactIconsList = this.getInteractionTypes();
