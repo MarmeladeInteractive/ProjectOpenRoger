@@ -163,6 +163,8 @@ public class InputsManager{
                      quitKeyPressed = true;
                      if(mainGameWindow.interactiveInventory.isInventoryOpen){
                         mainGameWindow.interactiveInventory.clearInventoryPanel();
+                      }else if(mainGameWindow.phonePanel.mode.equals("Landscape")){
+                        mainGameWindow.phonePanel.open("");
                      }else{
                         int result = JOptionPane.showConfirmDialog(
                             null,
