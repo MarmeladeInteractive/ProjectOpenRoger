@@ -203,7 +203,7 @@ public class PhonePanel {
         dateLabel = new JLabel("22/12/2022");
         dateLabel.setForeground(Color.WHITE);
         dateLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        dateLabel.setBounds((int)(phoneWidth*phoneScale) - 120 - 20, 15, 120, 20);
+        dateLabel.setBounds((int)(phoneWidth*phoneScale) - 120 - 20, 15, 150, 20);
 
         screenPanel.add(dateLabel);
     }
