@@ -193,7 +193,7 @@ public class InputsManager{
  
                  else{
 
-                    if (keyCode == 97){
+                    /*if (keyCode == 97){
                         mainGameWindow.phonePanel.addNewNotification("Roberto", "Hey Roger!");
                     }
                     if (keyCode == 98){
@@ -201,7 +201,7 @@ public class InputsManager{
                     }
                     if (keyCode == 99){
                         mainGameWindow.phonePanel.addNewNotification("Roberto", "See you soon!");
-                    }
+                    }*/
             
                      System.out.println(keyCode);
                  }
