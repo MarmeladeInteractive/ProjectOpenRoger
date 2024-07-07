@@ -167,6 +167,17 @@ public class Save {
         return null;
     }
 
+    public Element[] getElementsByTagName(Document doc, String elementName) {
+        NodeList nodeList = doc.getElementsByTagName(elementName);
+        List<Element> elements = new ArrayList<>();
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            elements.add((Element) nodeList.item(i));
+        }
+
+        return elements.toArray(new Element[0]);
+    }
+
     public String getChildFromElement(Element element, String ChildName){
         Element ChildElement = (Element) element.getElementsByTagName(ChildName).item(0);
         String ChildElementContent = ChildElement.getTextContent();

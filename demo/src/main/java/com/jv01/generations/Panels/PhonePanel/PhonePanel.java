@@ -3,6 +3,9 @@ package com.jv01.generations.Panels.PhonePanel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
 import java.util.ArrayList;
@@ -14,6 +17,8 @@ import java.util.TimerTask;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -23,13 +28,24 @@ import com.jv01.screens.Windows.GameMap;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.fonctionals.SoundManager;
 import com.jv01.generations.MainGameWindow;
 
 public class PhonePanel {
     public Save save = new Save();
     public MainGameWindow mainGameWindow;
+    public Notifications notifications;
+    private SoundManager soundManager;
+
+    public String notificationVibrationSoundId;
+
+    public ArrayList<JPanel> notificationsList;
+
     public String gameName;
     public JPanel panel;
     public JFrame frame;
@@ -41,6 +57,9 @@ public class PhonePanel {
 
     public JPanel backPhonePanel;
     public JPanel screenPanel;
+
+    public JPanel notificationsPanel;
+    public JScrollPane notificationsScrollPane;
 
     public JLabel dateLabel;
     public JLabel hourLabel;
@@ -69,10 +88,21 @@ public class PhonePanel {
 
     public String mode = "Portrait";
 
+    public boolean isPhoneToggled = false;
+
+    public int lastY;
+
+    public Timer vibrationTimer = new Timer();
+    private int originalX;
+    private int originalY;
+
     public PhonePanel(MainGameWindow mainGameWindow){
         this.mainGameWindow = mainGameWindow;
         this.gameName = mainGameWindow.gameName;
         this.frame = mainGameWindow.frame;
+
+        this.notifications = new Notifications(gameName);
+        this.soundManager = new SoundManager(gameName);
 
         getPhoneValues();
     }
@@ -92,6 +122,8 @@ public class PhonePanel {
         this.backPicLandscape = save.stringToStringArray(save.getChildFromElement(element, "backPicLandscape"))[0];
         this.backPicLandscape = save.dropSpaceFromString(this.backPicLandscape);
 
+        this.notificationVibrationSoundId = save.getChildFromMapElements(allElements,"notificationVibrationSoundId");
+
         this.togglePhoneLogo = "demo/img/phone/logos/togglePhone.png";
         this.disablePhoneLogo = "demo/img/phone/logos/disablePhone.png";
     }
@@ -103,6 +135,8 @@ public class PhonePanel {
         panel.setOpaque(false);
         panel.setBackground(new Color(0, 0, 0, 0));
         frame.add(panel);
+        originalX = panel.getX();
+        originalY = panel.getY();
     }
     public void clearPhonePanel(){
         panel.removeAll();
@@ -124,6 +158,8 @@ public class PhonePanel {
         addDateLabel();
         addHourLabel();
         addMoneyLabel();
+
+        addNotificationsPanel();
 
         addBackPhonePortait();
 
@@ -235,6 +271,82 @@ public class PhonePanel {
         if(mode == "Portrait")moneyLabel.setText(value+"€");
     }
 
+    public void addNotificationsPanel(){
+        notificationsPanel = new JPanel();
+        notificationsPanel.setBounds(0, 70, (int)(phoneWidth*phoneScale), 200);
+        notificationsPanel.setLayout(null);
+        notificationsPanel.setOpaque(false);
+
+        addNotifications();
+
+        screenPanel.add(notificationsPanel);
+    }
+
+    public void addNotifications() {
+        notificationsPanel.removeAll();
+        // Create a JPanel to hold the notifications
+        JPanel notificationsContainer = new JPanel();
+        notificationsContainer.setOpaque(false);
+        notificationsContainer.setLayout(new BoxLayout(notificationsContainer, BoxLayout.Y_AXIS));
+    
+        // Create a MouseAdapter for handling touch scroll events
+        MouseAdapter scrollAdapter = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lastY = e.getY();
+            }
+    
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int deltaY = e.getY() - lastY;
+                JViewport viewport = notificationsScrollPane.getViewport();
+                Point viewPosition = viewport.getViewPosition();
+                viewPosition.y -= deltaY;
+                int maxY = notificationsScrollPane.getVerticalScrollBar().getMaximum() - viewport.getHeight();
+                if (viewPosition.y < 0) {
+                    viewPosition.y = 0;
+                } else if (viewPosition.y > maxY) {
+                    viewPosition.y = maxY;
+                }
+                viewport.setViewPosition(viewPosition);
+                lastY = e.getY();
+            }
+        };
+    
+        notifications = new Notifications(this, scrollAdapter);
+        notificationsList = notifications.getNotSeenNotificationsPanel();
+
+        // Add each notification to the container panel
+        for (int i = 0; i < notificationsList.size(); i++) {
+            notificationsContainer.add(notificationsList.get(i));
+        }
+    
+        // Create a JScrollPane to hold the notifications container
+        notificationsScrollPane = new JScrollPane(notificationsContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        notificationsScrollPane.setBounds(10, 0, (int) (phoneWidth * phoneScale) - 20, 200);
+        notificationsScrollPane.setOpaque(false);
+        notificationsScrollPane.setBorder(BorderFactory.createEmptyBorder()); // Remove the border
+        notificationsScrollPane.getViewport().setOpaque(false);
+        notificationsScrollPane.getViewport().setBorder(null); // Remove the viewport border
+    
+        // Make the scroll pane's vertical scrollbar invisible
+        notificationsScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+    
+        // Ensure the view starts at the top
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                notificationsScrollPane.getViewport().setViewPosition(new Point(0, 0));
+            }
+        });
+    
+        // Add the scroll adapter to the scroll pane
+        notificationsScrollPane.addMouseListener(scrollAdapter);
+        notificationsScrollPane.addMouseMotionListener(scrollAdapter);
+    
+        // Add the JScrollPane to the main notificationsPanel
+        notificationsPanel.add(notificationsScrollPane);
+    } 
+
     public void addTogglePhoneButton(){
         togglePhoneButton = new JButton(""){
             @Override
@@ -310,6 +422,7 @@ public class PhonePanel {
 
     public void togglePhone(){
         if(mode == "Portrait"){
+            isPhoneToggled = true;
             timerTogglePhone = new Timer();
             if(percentPhoneDisplayed<100){   
                 timerTogglePhone.scheduleAtFixedRate(new TimerTask() {
@@ -329,6 +442,7 @@ public class PhonePanel {
     
     public void disablePhone(){
         if(mode == "Portrait"){
+            isPhoneToggled = false;
             timerDisablePhone = new Timer();
             if(percentPhoneDisplayed>basePercentPhoneDisplayed){   
                 timerDisablePhone.scheduleAtFixedRate(new TimerTask() {
@@ -364,5 +478,43 @@ public class PhonePanel {
             createPhonePanelPortrait();
         }     
     }
+
+    public void addNewNotification(String title, String description){
+        notifications.createNewNotification(title, description);
+        addNotifications();
+        vibratePhonePanel();
+    }
+
+    public void vibratePhonePanel() {
+        soundManager.playSFX(notificationVibrationSoundId);
+
+        if (vibrationTimer != null) {
+            vibrationTimer.cancel(); // Cancel any ongoing vibration
+        }
     
+        vibrationTimer = new Timer();
+        final int vibrationAmplitude = 5; // Amplitude of the vibration
+        final int vibrationDuration = 500; // Duration of the vibration in milliseconds
+        final int vibrationInterval = 50; // Interval between vibration steps in milliseconds
+    
+        vibrationTimer.scheduleAtFixedRate(new TimerTask() {
+            private int elapsed = 0;
+            private boolean moveRight = true;
+    
+            @Override
+            public void run() {
+                if (elapsed >= vibrationDuration) {
+                    panel.setLocation(originalX, originalY);
+                    vibrationTimer.cancel();
+                    vibrationTimer = null; // Reset the timer
+                    return;
+                }
+    
+                int xOffset = moveRight ? vibrationAmplitude : -vibrationAmplitude;
+                panel.setLocation(originalX + xOffset, originalY);
+                moveRight = !moveRight;
+                elapsed += vibrationInterval;
+            }
+        }, 0, vibrationInterval);
+    }
 }

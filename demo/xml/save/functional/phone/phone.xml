@@ -2,6 +2,7 @@
     <phone id="phone">
         <phoneWidth>300</phoneWidth>
         <phoneHeight>533</phoneHeight>
+        <notificationVibrationSoundId>phone_notification_vwww_vwww</notificationVibrationSoundId>
         <backPic>
             {
                 demo/img/phone/backPhone.png

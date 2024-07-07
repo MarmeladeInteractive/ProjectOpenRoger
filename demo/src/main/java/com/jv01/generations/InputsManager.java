@@ -165,6 +165,8 @@ public class InputsManager{
                         mainGameWindow.interactiveInventory.clearInventoryPanel();
                       }else if(mainGameWindow.phonePanel.mode.equals("Landscape")){
                         mainGameWindow.phonePanel.open("");
+                     }else if(mainGameWindow.phonePanel.isPhoneToggled){
+                        mainGameWindow.phonePanel.disablePhone();
                      }else{
                         int result = JOptionPane.showConfirmDialog(
                             null,
@@ -190,6 +192,17 @@ public class InputsManager{
                  } 
  
                  else{
+
+                    if (keyCode == 97){
+                        mainGameWindow.phonePanel.addNewNotification("Roberto", "Hey Roger!");
+                    }
+                    if (keyCode == 98){
+                        mainGameWindow.phonePanel.addNewNotification("Roberto", "I'm happy to see you back around.");
+                    }
+                    if (keyCode == 99){
+                        mainGameWindow.phonePanel.addNewNotification("Roberto", "See you soon!");
+                    }
+            
                      System.out.println(keyCode);
                  }
              }
