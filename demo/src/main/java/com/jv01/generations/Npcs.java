@@ -211,6 +211,7 @@ public class Npcs {
                                     allElementsNPCs = save.getAllChildsFromElement(element);
                                     response = "accepted";
                                     interactScore ++;
+                                    save.changeElementChildValue(mainGameWindow.player.gameName, "partyHouse", "partyHouse", "partyHouse", "printerLevel", String.valueOf(1));
                                 }else{
                                     element = save.getElementById(doc, "response", "undecided");
                                     allElementsNPCs = save.getAllChildsFromElement(element);
