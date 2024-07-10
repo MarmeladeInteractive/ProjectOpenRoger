@@ -83,7 +83,7 @@ public class Game{
         name = gameName;
 
         if(seed == null){
-            seed = generateSeed();
+            seed = save.generateRandomString(20);
         }
         
         save.createAllFiles(gameName);
@@ -116,22 +116,6 @@ public class Game{
         } else {
             return null;
         }
-    }
-
-    public  String generateSeed(){
-        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        int SEED_LENGTH = 20;
-
-        SecureRandom random = new SecureRandom();
-        StringBuilder sb = new StringBuilder(SEED_LENGTH);
-
-        for (int i = 0; i < SEED_LENGTH; i++) {
-            int randomIndex = random.nextInt(CHARACTERS.length());
-            char randomChar = CHARACTERS.charAt(randomIndex);
-            sb.append(randomChar);
-        }
-
-        return sb.toString();
     }
 
     public  void generateParties(){

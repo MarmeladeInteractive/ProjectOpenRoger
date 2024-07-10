@@ -1,16 +1,3 @@
 <notifications>
-    <default id="default">
-        <title>No messages</title>
-        <description></description>
-    </default>
-    <notification>
-        <title>New Message 2</title>
-        <description>You have received a new message from Michel.</description>
-        <seen>true</seen>
-    </notification>
-    <notification>
-        <title>New Message 3</title>
-        <description>You have received a new message from Roger.</description>
-        <seen>true</seen>
-    </notification>
+
 </notifications>
