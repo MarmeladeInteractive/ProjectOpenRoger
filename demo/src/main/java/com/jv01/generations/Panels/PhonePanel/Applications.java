@@ -7,6 +7,11 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.swing.BorderFactory;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +33,11 @@ public class Applications {
 
     public Document doc;
     public Element[] elements;
+
+    public List<String> applicationTitles = new ArrayList<>();
+    public List<String> applicationDescriptions = new ArrayList<>();
+    public List<String> applicationIds = new ArrayList<>();
+    public List<String> applicationPicUrl = new ArrayList<>();
    
     public Applications(PhonePanel phonePanel, MouseAdapter scrollAdapter){
         this.phonePanel = phonePanel;
@@ -39,7 +49,10 @@ public class Applications {
     }
 
     public void clearAllArrays(){
-        
+        applicationTitles.clear();
+        applicationDescriptions.clear();
+        applicationIds.clear();
+        applicationPicUrl.clear();
     }
 
     public void getApplications(){
@@ -50,8 +63,29 @@ public class Applications {
 
         for (Element element : elements) {
             Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
-
+            applicationIds.add(element.getAttribute("id"));
+            applicationTitles.add(save.getChildFromMapElements(allElements, "name"));
+            applicationPicUrl.add(save.getChildFromMapElements(allElements, "picUrl"));
+            applicationDescriptions.add(save.getChildFromMapElements(allElements, "description"));
         }
+    }
+
+    public ArrayList<JPanel> getApplicationsPanel(){
+        ArrayList<JPanel> list = new ArrayList<>();
+
+        for (int i = 0; i < applicationTitles.size(); i++) {
+            list.add(createApplicationPanel(applicationIds.get(i), applicationTitles.get(i), applicationDescriptions.get(i)));
+        }
+
+        return list;
+    }
+
+    public JPanel createApplicationPanel(String id, String title, String description) {
+        final String newId = id;
+        JPanel applicationPanel = new RoundedPanel();
+        
+
+        return applicationPanel;
     }
 
 }

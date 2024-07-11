@@ -167,7 +167,7 @@ public class PhonePanel {
         addMoneyLabel();
 
         addNotificationsPanel();
-        addAplicationsPanel();
+        //addAplicationsPanel();
 
         addBackPhonePortait();
 
@@ -431,33 +431,28 @@ public class PhonePanel {
         };
     
         applications = new Applications(this, scrollAdapter);
-        notificationsList = notifications.getNotSeenNotificationsPanel();
+        applicationsList = applications.getApplicationsPanel();
 
-        // Add each notification to the container panel
-        for (int i = 0; i < notificationsList.size(); i++) {
-            applicationsContainer.add(notificationsList.get(i));
+        for (int i = 0; i < applicationsList.size(); i++) {
+            applicationsContainer.add(applicationsList.get(i));
         }
     
-        // Create a JScrollPane to hold the notifications container
-        notificationsScrollPane = new JScrollPane(applicationsContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        notificationsScrollPane.setBounds(10, 0, (int) (phoneWidth * phoneScale) - 20, 200);
-        notificationsScrollPane.setOpaque(false);
-        notificationsScrollPane.setBorder(BorderFactory.createEmptyBorder()); // Remove the border
-        notificationsScrollPane.getViewport().setOpaque(false);
-        notificationsScrollPane.getViewport().setBorder(null); // Remove the viewport border
+        applicationsScrollPane = new JScrollPane(applicationsContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        applicationsScrollPane.setBounds(10, 0, (int) (phoneWidth * phoneScale) - 20, 200);
+        applicationsScrollPane.setOpaque(false);
+        applicationsScrollPane.setBorder(BorderFactory.createEmptyBorder());
+        applicationsScrollPane.getViewport().setOpaque(false);
+        applicationsScrollPane.getViewport().setBorder(null);
     
-        // Make the scroll pane's vertical scrollbar invisible
-        notificationsScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-    
-        // Ensure the view starts at the top
+        applicationsScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                notificationsScrollPane.getViewport().setViewPosition(new Point(0, 0));
+                applicationsScrollPane.getViewport().setViewPosition(new Point(0, 0));
             }
         });
-    
-        // Add the JScrollPane to the main notificationsPanel
-        notificationsPanel.add(notificationsScrollPane);
+
+        applicationsPanel.add(applicationsScrollPane);
     }
 
     public void openNewPage(JPanel newPage){
