@@ -290,16 +290,19 @@ public class PhonePanel {
         newPagePanel.setLayout(null);
         newPagePanel.setOpaque(false);
 
-        int goBackBouttoSize = 70;
+        JPanel newPagePanelContent = new JPanel();
+        newPagePanelContent.setBounds(5, 0, (int)(phoneWidth*phoneScale) - 10, (int)(phoneHeight*phoneScale) - 70 - 50);
+        newPagePanelContent.setLayout(null);
+        newPagePanelContent.setOpaque(true);
+        newPagePanelContent.setBackground(Color.WHITE);
 
         JLabel goBackBouttoPanel = new JLabel();
-        goBackBouttoPanel.setBounds((int)(phoneWidth*phoneScale) - goBackBouttoSize, (int)(phoneHeight*phoneScale) - 70 - goBackBouttoSize, goBackBouttoSize, goBackBouttoSize);
+        goBackBouttoPanel.setBounds((int)(phoneWidth*phoneScale)/2 - 25 + 5, (int)(phoneHeight*phoneScale) - 50 - 50 - 20, 50, 50);
         goBackBouttoPanel.setLayout(null);
-        goBackBouttoPanel.setOpaque(true);
-        goBackBouttoPanel.setBackground(Color.BLACK);
+        goBackBouttoPanel.setOpaque(false);
 
-        ImageIcon goBackIcon = new ImageIcon("demo/img/phone/logos/disablePhone.png");
-        Image goBackImage = goBackIcon.getImage().getScaledInstance(goBackBouttoSize, 70, Image.SCALE_SMOOTH);
+        ImageIcon goBackIcon = new ImageIcon("demo/img/phone/logos/home.png");
+        Image goBackImage = goBackIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
 
         goBackIcon = new ImageIcon(goBackImage);
         goBackBouttoPanel.setIcon(goBackIcon);
@@ -313,7 +316,8 @@ public class PhonePanel {
         goBackBouttoPanel.addMouseListener(goBackClicked);
 
         newPagePanel.add(goBackBouttoPanel);
-        newPagePanel.add(newPage);
+        newPagePanelContent.add(newPage);
+        newPagePanel.add(newPagePanelContent);
 
         screenPanel.add(newPagePanel);
     }
@@ -374,10 +378,6 @@ public class PhonePanel {
                 notificationsScrollPane.getViewport().setViewPosition(new Point(0, 0));
             }
         });
-    
-        // Add the scroll adapter to the scroll pane
-        //notificationsScrollPane.addMouseListener(scrollAdapter);
-        //notificationsScrollPane.addMouseMotionListener(scrollAdapter);
     
         // Add the JScrollPane to the main notificationsPanel
         notificationsPanel.add(notificationsScrollPane);
@@ -542,13 +542,13 @@ public class PhonePanel {
         soundManager.playSFX(notificationVibrationSoundId);
 
         if (vibrationTimer != null) {
-            vibrationTimer.cancel(); // Cancel any ongoing vibration
+            vibrationTimer.cancel();
         }
     
         vibrationTimer = new Timer();
-        final int vibrationAmplitude = 5; // Amplitude of the vibration
-        final int vibrationDuration = 500; // Duration of the vibration in milliseconds
-        final int vibrationInterval = 50; // Interval between vibration steps in milliseconds
+        final int vibrationAmplitude = 5;
+        final int vibrationDuration = 500; 
+        final int vibrationInterval = 50; 
     
         vibrationTimer.scheduleAtFixedRate(new TimerTask() {
             private int elapsed = 0;

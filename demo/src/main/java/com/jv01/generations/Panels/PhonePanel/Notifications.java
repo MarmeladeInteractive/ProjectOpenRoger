@@ -172,7 +172,7 @@ public class Notifications {
     public JPanel getNotificationDetailsPanel(String id) {
         JPanel notificationDetailPanel = new JPanel();
         notificationDetailPanel.setLayout(new BorderLayout());
-        notificationDetailPanel.setBounds(5, 0, phonePanel.phoneWidth - 10, phonePanel.phoneHeight - 70 - 50);
+        notificationDetailPanel.setBounds(5, 0, phonePanel.phoneWidth - 20, phonePanel.phoneHeight - 70 - 50 - 5);
         notificationDetailPanel.setOpaque(false);
     
         Map<String, String> elementsMap = getNotificationElementsMapById(id);
@@ -182,6 +182,7 @@ public class Notifications {
 
         JPanel headerPanel = new JPanel();
         headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
+        headerPanel.setOpaque(false);
     
         JLabel titleLabel = new JLabel(title);
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -204,6 +205,7 @@ public class Notifications {
         JScrollPane scrollPane = new JScrollPane(contentArea);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setOpaque(false);
 
         notificationDetailPanel.add(headerPanel, BorderLayout.NORTH);
 
