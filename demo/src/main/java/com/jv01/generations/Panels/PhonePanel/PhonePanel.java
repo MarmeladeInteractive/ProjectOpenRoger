@@ -538,6 +538,10 @@ public class PhonePanel {
         vibratePhonePanel();
     }
 
+    public void addNewNotification(String title, String description){
+        addNewNotification(title,description,"");
+    }
+
     public void vibratePhonePanel() {
         soundManager.playSFX(notificationVibrationSoundId);
 
