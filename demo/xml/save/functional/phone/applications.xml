@@ -1,0 +1,9 @@
+<applications>
+
+    <application>
+        <name>App01</name>
+        <description></description>
+        <picUrl>demo/img/achat.png</picUrl>
+    </application>
+    
+</applications>
