@@ -82,9 +82,16 @@ public class Applications {
 
     public JPanel createApplicationPanel(String id, String title, String description) {
         final String newId = id;
+        int nAppByRows = 4;
+        int appIconSize = ((phonePanel.phoneNewWidth - 10) / nAppByRows) - 4 ;
+        appIconSize = 70;
         JPanel applicationPanel = new RoundedPanel();
+        applicationPanel.setLayout(new BorderLayout());
+        applicationPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        applicationPanel.setBackground(new Color(255, 255, 255, 200));
+        applicationPanel.setOpaque(false); 
+        applicationPanel.setMaximumSize(new Dimension(appIconSize, appIconSize));
         
-
         return applicationPanel;
     }
 

@@ -167,7 +167,7 @@ public class PhonePanel {
         addMoneyLabel();
 
         addNotificationsPanel();
-        //addAplicationsPanel();
+        addAplicationsPanel();
 
         addBackPhonePortait();
 
@@ -401,7 +401,7 @@ public class PhonePanel {
         notificationsPanel.add(notificationsScrollPane);
     } 
 
-    public void addApplications(){
+    public void addApplications() {
         applicationsPanel.removeAll();
         JPanel applicationsContainer = new JPanel();
         applicationsContainer.setOpaque(false);
@@ -432,12 +432,23 @@ public class PhonePanel {
     
         applications = new Applications(this, scrollAdapter);
         applicationsList = applications.getApplicationsPanel();
-
-        for (int i = 0; i < applicationsList.size(); i++) {
-            applicationsContainer.add(applicationsList.get(i));
-        }
     
-        applicationsScrollPane = new JScrollPane(applicationsContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        int appsPerRow = 4;
+        int totalApps = applicationsList.size();
+    
+        for (int i = 0; i < totalApps; i += appsPerRow) {
+            JPanel rowPanel = new JPanel();
+            rowPanel.setOpaque(false);
+            rowPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+    
+            for (int j = i; j < i + appsPerRow && j < totalApps; j++) {
+                rowPanel.add(applicationsList.get(j));
+            }
+    
+            applicationsContainer.add(rowPanel);
+        }
+        applicationsScrollPane = new JScrollPane(applicationsContainer,
+        JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         applicationsScrollPane.setBounds(10, 0, (int) (phoneWidth * phoneScale) - 20, 200);
         applicationsScrollPane.setOpaque(false);
         applicationsScrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -445,13 +456,13 @@ public class PhonePanel {
         applicationsScrollPane.getViewport().setBorder(null);
     
         applicationsScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-
+    
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 applicationsScrollPane.getViewport().setViewPosition(new Point(0, 0));
             }
         });
-
+    
         applicationsPanel.add(applicationsScrollPane);
     }
 
