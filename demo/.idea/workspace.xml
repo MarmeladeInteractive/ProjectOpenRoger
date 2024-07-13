@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b44d1ba6-7e1f-4e4c-9d89-0f9917f10be1" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/App$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/App.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/FastRunAppDev$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/FastRunAppDev.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/buildings/AbandonedHouse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/buildings/Bakery.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/buildings/BarHouse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/buildings/Buildings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/buildings/CorporationHouse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/buildings/EmptyHouse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/buildings/Inside.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/buildings/PartieHouse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/fonctionals/Atlas.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/fonctionals/Save.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/fonctionals/SoundManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/fonctionals/SoundManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/fonctionals/Tempo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/fonctionals/Time$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/fonctionals/Time$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/fonctionals/Time.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Arcades.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Biomes.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Character.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Chunks.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Corporation.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/CorporationsHousesFirstGeneration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Dealers.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Decorations.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Game$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Game.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Ideology.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/InputsManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/InputsManager$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/InputsManager$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/InputsManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Items.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/MainGameWindow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/MainGameWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Npcs.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Objects.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/BackgroundPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/BackgroundPanel$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/BackgroundPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/FrontPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/InteractiveListPanel/InteractiveListPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/InteractiveListPanel/InteractiveListPanel$My2DListCellRenderer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/InteractiveListPanel/InteractiveListPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/JoystickPanel/JoystickPanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/JoystickPanel/JoystickPanel$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/JoystickPanel/JoystickPanel$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/JoystickPanel/JoystickPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/Menus/ChatPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/Menus/SelectionWheel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/Menus/SelectionWheelIcons.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/NightPanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/PhonePanel/PhonePanel$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/PhonePanel/PhonePanel$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/PhonePanel/PhonePanel$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/PhonePanel/PhonePanel$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/PhonePanel/PhonePanel$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/PhonePanel/PhonePanel$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Panels/PhonePanel/PhonePanel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Party.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/generations/Tools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/Arcade$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/Arcade$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/Arcade.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/NoGame/NoGame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/Blackjack$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/Blackjack$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/Blackjack$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/Blackjack$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/Blackjack.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/Cards.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/Decks.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/Hand.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/10_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/10_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/10_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/10_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/2_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/2_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/2_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/2_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/3_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/3_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/3_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/3_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/4_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/4_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/4_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/4_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/5_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/5_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/5_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/5_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/6_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/6_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/6_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/6_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/7_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/7_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/7_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/7_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/8_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/8_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/8_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/8_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/9_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/9_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/9_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/9_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/as_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/as_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/as_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/as_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/d_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/d_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/d_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/d_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/jokerA_jokerA.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/jokerJ_jokerJ.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/jokerK_jokerK.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/joker_joker.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/r_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/r_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/r_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/r_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/v_c.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/v_ca.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/v_p.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/cards/v_t.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/blackjack/img/table/table.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/Horse.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/Horses$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/Horses.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/HorsesRace$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/HorsesRace$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/HorsesRace$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/HorsesRace$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/HorsesRace$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/HorsesRace.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/Race$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/Race$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/Race.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horseRaceBack01.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse01/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse01/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse01/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse01/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse02/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse02/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse02/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse02/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse03/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse03/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse03/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse03/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse04/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse04/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse04/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse04/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse05/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse05/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse05/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse05/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse06/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse06/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse06/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse06/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse07/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse07/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse07/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse07/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse08/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse08/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse08/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse08/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse09/f01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse09/f02.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse09/f03.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/horses/horse09/f04.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/horsesRace/img/null.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Bet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Roulette.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/Tokens.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/img/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/img/ball.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/img/table.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/miniGames/games/roulette/img/wheel.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/player/Player.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/player/PlayerInventory$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/player/PlayerInventory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/AlertWindow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/AlertWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CheatCodeMenu$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CheatCodeMenu$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CheatCodeMenu$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CheatCodeMenu.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CustomizePartyScreen$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CustomizePartyScreen$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CustomizePartyScreen$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CustomizePartyScreen$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CustomizePartyScreen$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CustomizePartyScreen$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/CustomizePartyScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/Footer/Banner.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/GameWindowsSize.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/InfoMenuScreen$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/InfoMenuScreen$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/InfoMenuScreen$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/InfoMenuScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/LoadingScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$10.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$11.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$12.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$13.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen$9.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/MainMenuScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/NewsWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/PartyMenuScreen$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/PartyMenuScreen$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/PartyMenuScreen$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/PartyMenuScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/ShowNewWindow$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/ShowNewWindow$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/ShowNewWindow.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/Windows/Chunk01.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/Windows/GameMap$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/Windows/GameMap$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/Windows/GameMap.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/LoadScreen$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/LoadScreen$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/LoadScreen$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/LoadScreen$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/LoadScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/img/MS_CompanyLogo01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/img/MS_CompanyLogo01_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/img/MS_CompanyLogo01_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/img/MarmeladeStudioLogo01.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/img/MarmeladeStudioLogo01_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/img/MarmeladeStudioLogo01_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/img/marmeladeStudio.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/jv01/screens/loadScreen/img/mscompany.png" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="2ijFUCQ2oxOGp0Ki2N7KZ6PfIYs" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/dev/github/clones/perso/j3ux/v01/clone/JV01/ProjectOpenRoger/demo"
+  }
+}]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+      <command value="mvn compile" />
+      <command value="mvn install" />
+    </option>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b44d1ba6-7e1f-4e4c-9d89-0f9917f10be1" name="Changes" comment="" />
+      <created>1719996094379</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1719996094379</updated>
+    </task>
+    <servers />
+  </component>
+</project>

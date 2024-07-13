@@ -61,6 +61,8 @@ public class PhonePanel {
     public JPanel notificationsPanel;
     public JScrollPane notificationsScrollPane;
 
+    public JPanel newPagePanel;
+
     public JLabel dateLabel;
     public JLabel hourLabel;
     public JLabel moneyLabel;
@@ -282,6 +284,44 @@ public class PhonePanel {
         screenPanel.add(notificationsPanel);
     }
 
+    public void addNewPagePanel(JPanel newPage){
+        newPagePanel = new JPanel();
+        newPagePanel.setBounds(0, 70, (int)(phoneWidth*phoneScale), (int)(phoneHeight*phoneScale) - 70);
+        newPagePanel.setLayout(null);
+        newPagePanel.setOpaque(false);
+
+        JPanel newPagePanelContent = new JPanel();
+        newPagePanelContent.setBounds(5, 0, (int)(phoneWidth*phoneScale) - 10, (int)(phoneHeight*phoneScale) - 70 - 50);
+        newPagePanelContent.setLayout(null);
+        newPagePanelContent.setOpaque(true);
+        newPagePanelContent.setBackground(Color.WHITE);
+
+        JLabel goBackBouttoPanel = new JLabel();
+        goBackBouttoPanel.setBounds((int)(phoneWidth*phoneScale)/2 - 25 + 5, (int)(phoneHeight*phoneScale) - 50 - 50 - 20, 50, 50);
+        goBackBouttoPanel.setLayout(null);
+        goBackBouttoPanel.setOpaque(false);
+
+        ImageIcon goBackIcon = new ImageIcon("demo/img/phone/logos/home.png");
+        Image goBackImage = goBackIcon.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+
+        goBackIcon = new ImageIcon(goBackImage);
+        goBackBouttoPanel.setIcon(goBackIcon);
+
+        MouseAdapter goBackClicked = new MouseAdapter() {    
+            @Override
+            public void mouseClicked(MouseEvent e){
+                open("home");
+            }
+        };
+        goBackBouttoPanel.addMouseListener(goBackClicked);
+
+        newPagePanel.add(goBackBouttoPanel);
+        newPagePanelContent.add(newPage);
+        newPagePanel.add(newPagePanelContent);
+
+        screenPanel.add(newPagePanel);
+    }
+
     public void addNotifications() {
         notificationsPanel.removeAll();
         // Create a JPanel to hold the notifications
@@ -339,13 +379,15 @@ public class PhonePanel {
             }
         });
     
-        // Add the scroll adapter to the scroll pane
-        notificationsScrollPane.addMouseListener(scrollAdapter);
-        notificationsScrollPane.addMouseMotionListener(scrollAdapter);
-    
         // Add the JScrollPane to the main notificationsPanel
         notificationsPanel.add(notificationsScrollPane);
     } 
+
+    public void openNewPage(JPanel newPage){
+        notificationsPanel.removeAll();
+        addNewPagePanel(newPage);
+
+    }
 
     public void addTogglePhoneButton(){
         togglePhoneButton = new JButton(""){
@@ -367,7 +409,7 @@ public class PhonePanel {
         togglePhoneButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                togglePhone();
+                togglePhone(3);
             }
         });
 
@@ -420,23 +462,29 @@ public class PhonePanel {
         mainGameWindow.frame.requestFocus();
     }
 
-    public void togglePhone(){
+    public void togglePhone(int period){
         if(mode == "Portrait"){
             isPhoneToggled = true;
-            timerTogglePhone = new Timer();
-            if(percentPhoneDisplayed<100){   
-                timerTogglePhone.scheduleAtFixedRate(new TimerTask() {
-                    @Override
-                    public void run() {
-                        if (percentPhoneDisplayed < 100) {
-                            percentPhoneDisplayed++;
-                            updatePanelPortrait();
-                        } else {
-                            timerTogglePhone.cancel();
+            if(period == 0){
+                percentPhoneDisplayed = 100;
+                updatePanelPortrait();
+
+            }else{
+                timerTogglePhone = new Timer();
+                if(percentPhoneDisplayed<100){   
+                    timerTogglePhone.scheduleAtFixedRate(new TimerTask() {
+                        @Override
+                        public void run() {
+                            if (percentPhoneDisplayed < 100) {
+                                percentPhoneDisplayed++;
+                                updatePanelPortrait();
+                            } else {
+                                timerTogglePhone.cancel();
+                            }
                         }
-                    }
-                }, 0, 3);
-            } 
+                    }, 0, period); //period 3
+                } 
+            }
         } 
     }
     
@@ -468,6 +516,11 @@ public class PhonePanel {
                 case "Map":
                     mainGameWindow.map = new GameMap(mainGameWindow);
                     break;
+                case "home":
+                    clearPhonePanel();
+                    createPhonePanelPortrait();
+                    togglePhone(0);
+                    break;
             
                 default:
                     clearPhonePanel();
@@ -479,23 +532,27 @@ public class PhonePanel {
         }     
     }
 
-    public void addNewNotification(String title, String description){
-        notifications.createNewNotification(title, description);
+    public void addNewNotification(String title, String description, String content){
+        notifications.createNewNotification(title, description, content);
         addNotifications();
         vibratePhonePanel();
+    }
+
+    public void addNewNotification(String title, String description){
+        addNewNotification(title,description,"");
     }
 
     public void vibratePhonePanel() {
         soundManager.playSFX(notificationVibrationSoundId);
 
         if (vibrationTimer != null) {
-            vibrationTimer.cancel(); // Cancel any ongoing vibration
+            vibrationTimer.cancel();
         }
     
         vibrationTimer = new Timer();
-        final int vibrationAmplitude = 5; // Amplitude of the vibration
-        final int vibrationDuration = 500; // Duration of the vibration in milliseconds
-        final int vibrationInterval = 50; // Interval between vibration steps in milliseconds
+        final int vibrationAmplitude = 5;
+        final int vibrationDuration = 500; 
+        final int vibrationInterval = 50; 
     
         vibrationTimer.scheduleAtFixedRate(new TimerTask() {
             private int elapsed = 0;

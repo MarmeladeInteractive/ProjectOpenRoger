@@ -6,9 +6,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JViewport;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Timer;
@@ -45,17 +47,13 @@ public class Notifications {
     public Document doc;
     public Element[] elements;
 
-    public List<String> notificationTitles = new ArrayList<>();
-    public List<String> notificationDescriptions = new ArrayList<>();
-
     public List<String> notSeenNotificationTitles = new ArrayList<>();
     public List<String> notSeenNotificationDescriptions = new ArrayList<>();
+    public List<String> notSeenNotificationIds = new ArrayList<>();
 
     public List<String> seenNotificationTitles = new ArrayList<>();
     public List<String> seenNotificationDescriptions = new ArrayList<>();
-
-    public List<String> defaultNotificationTitles = new ArrayList<>();
-    public List<String> defaultNotificationDescriptions = new ArrayList<>();
+    public List<String> seenNotificationIds = new ArrayList<>();
 
     public Notifications(String gameName){
         this.gameName = gameName;
@@ -69,57 +67,68 @@ public class Notifications {
         getNotifications();
     }
 
-    public void getNotifications(){
-        notificationTitles.clear();
-        notificationDescriptions.clear();
+    public void clearAllArrays(){
+        notSeenNotificationTitles.clear();
+        notSeenNotificationDescriptions.clear();
+        notSeenNotificationIds.clear();
 
+        seenNotificationTitles.clear();
+        seenNotificationDescriptions.clear();
+        seenNotificationIds.clear();
+    }
+
+    public void getNotifications(){
         this.doc = save.getDocumentXml(gameName,"functional/phone/notifications");
         this.elements = save.getElementsByTagName(doc, "notification");
+
+        clearAllArrays();
 
         for (Element element : elements) {
             Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
             if(save.getChildFromMapElements(allElements, "seen").equals("false")){
+                notSeenNotificationIds.add(element.getAttribute("id"));
                 notSeenNotificationTitles.add(save.getChildFromMapElements(allElements, "title"));
                 notSeenNotificationDescriptions.add(save.getChildFromMapElements(allElements, "description"));
             }else{
+                seenNotificationIds.add(element.getAttribute("id"));
                 seenNotificationTitles.add(save.getChildFromMapElements(allElements, "title"));
                 seenNotificationDescriptions.add(save.getChildFromMapElements(allElements, "description"));
             }
         }
-
-        Element element = save.getElementById(doc, "default", "default");
-
-        defaultNotificationTitles.add(save.getChildFromElement(element, "title"));
-        defaultNotificationDescriptions.add(save.getChildFromElement(element, "description"));
-
-        notificationTitles.addAll(seenNotificationTitles);
-        notificationTitles.addAll(notSeenNotificationTitles);
-
-        notificationDescriptions.addAll(seenNotificationDescriptions);
-        notificationDescriptions.addAll(notSeenNotificationDescriptions);
     }
 
-    public ArrayList<JPanel> getDefaultNotificationsPanel(){
-        ArrayList<JPanel> list = new ArrayList<>();
+    public Map<String, String> getNotificationElementsMapById(String id){
+        Map<String, String> elementsMap = new HashMap<String, String>();
+        this.doc = save.getDocumentXml(gameName,"functional/phone/notifications");
+        Element element = save.getElementById(doc, "notification", id);
 
-        for (int i = 0; i < defaultNotificationTitles.size(); i++) {
-            list.add(createNotificationPanel(defaultNotificationTitles.get(i), defaultNotificationDescriptions.get(i)));
+        elementsMap.put("title",save.getChildFromElement(element, "title"));
+        String content = save.getChildFromElement(element, "content");
+        if(content.isEmpty()){
+            elementsMap.put("description","");
+            elementsMap.put("content",save.getChildFromElement(element, "description"));
+        }else{
+            elementsMap.put("description",save.getChildFromElement(element, "description"));
+            elementsMap.put("content",save.getChildFromElement(element, "content"));
         }
+        
+        save.changeElementChildValue(gameName,"functional/phone/notifications","notification",id,"seen","true");
 
-        return list;
+        return elementsMap;
     }
 
     public ArrayList<JPanel> getNotSeenNotificationsPanel(){
         ArrayList<JPanel> list = new ArrayList<>();
 
         for (int i = 0; i < notSeenNotificationTitles.size(); i++) {
-            list.add(createNotificationPanel(notSeenNotificationTitles.get(i), notSeenNotificationDescriptions.get(i)));
+            list.add(createNotificationPanel(notSeenNotificationIds.get(i), notSeenNotificationTitles.get(i), notSeenNotificationDescriptions.get(i)));
         }
 
         return list;
     }
 
-    public JPanel createNotificationPanel(String title, String description) {
+    public JPanel createNotificationPanel(String id, String title, String description) {
+        final String newId = id;
         JPanel notificationPanel = new RoundedPanel();
         notificationPanel.setLayout(new BorderLayout());
         notificationPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
@@ -140,22 +149,81 @@ public class Notifications {
         descriptionArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         descriptionArea.setMaximumSize(new Dimension(phonePanel.phoneWidth, 50));
 
+        MouseAdapter test = new MouseAdapter() {    
+            @Override
+            public void mouseClicked(MouseEvent e){
+                JPanel notificationDetailsPanel = getNotificationDetailsPanel(newId);
+                phonePanel.openNewPage(notificationDetailsPanel);
+            }
+        };
+
         // Add the scroll adapter to the description area
         descriptionArea.addMouseListener(scrollAdapter);
         descriptionArea.addMouseMotionListener(scrollAdapter);
+        descriptionArea.addMouseListener(test);
 
         notificationPanel.add(titleLabel, BorderLayout.NORTH);
         notificationPanel.add(descriptionArea, BorderLayout.CENTER);
+        notificationPanel.addMouseListener(test);
 
         return notificationPanel;
     }
 
-    public void createNewNotification(String title, String description){
+    public JPanel getNotificationDetailsPanel(String id) {
+        JPanel notificationDetailPanel = new JPanel();
+        notificationDetailPanel.setLayout(new BorderLayout());
+        notificationDetailPanel.setBounds(5, 0, phonePanel.phoneWidth - 20, phonePanel.phoneHeight - 70 - 50 - 5);
+        notificationDetailPanel.setOpaque(false);
+    
+        Map<String, String> elementsMap = getNotificationElementsMapById(id);
+        String title = elementsMap.get("title"); 
+        String description = elementsMap.get("description"); 
+        String content = elementsMap.get("content"); 
+
+        JPanel headerPanel = new JPanel();
+        headerPanel.setLayout(new BoxLayout(headerPanel, BoxLayout.Y_AXIS));
+        headerPanel.setOpaque(false);
+    
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        titleLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    
+        JLabel descriptionLabel = new JLabel(description);
+        descriptionLabel.setFont(new Font("Arial", Font.PLAIN, 14));
+        descriptionLabel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+    
+        headerPanel.add(titleLabel);
+        headerPanel.add(descriptionLabel);
+    
+        JTextArea contentArea = new JTextArea(content);
+        contentArea.setFont(new Font("Arial", Font.PLAIN, 14));
+        contentArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        contentArea.setLineWrap(true);
+        contentArea.setWrapStyleWord(true);
+        contentArea.setEditable(false);
+    
+        JScrollPane scrollPane = new JScrollPane(contentArea);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setOpaque(false);
+
+        notificationDetailPanel.add(headerPanel, BorderLayout.NORTH);
+
+        notificationDetailPanel.add(scrollPane, BorderLayout.CENTER);
+    
+        return notificationDetailPanel;
+    }
+
+    public void createNewNotification(String title, String description, String content){
         this.doc = save.getDocumentXml(gameName,"functional/phone/notifications");
         Element notificationElement = doc.createElement("notification");
 
+        notificationElement.setAttribute("id", save.generateRandomString(10));
+
         save.createXmlElement(notificationElement,doc,"title",title);
         save.createXmlElement(notificationElement,doc,"description",description);
+        save.createXmlElement(notificationElement,doc,"content",content);
+
         save.createXmlElement(notificationElement,doc,"seen","false");
 
         doc.getDocumentElement().appendChild(notificationElement);

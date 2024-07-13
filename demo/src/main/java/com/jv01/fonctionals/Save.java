@@ -1,7 +1,7 @@
 package com.jv01.fonctionals;
 
 import java.io.*;
-
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -260,6 +260,22 @@ public class Save {
             array[i] = valueStrings[i];
         }    
         return array;
+    }
+
+    public  String generateRandomString(int length){
+        String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        int SEED_LENGTH = length;
+
+        SecureRandom random = new SecureRandom();
+        StringBuilder sb = new StringBuilder(SEED_LENGTH);
+
+        for (int i = 0; i < SEED_LENGTH; i++) {
+            int randomIndex = random.nextInt(CHARACTERS.length());
+            char randomChar = CHARACTERS.charAt(randomIndex);
+            sb.append(randomChar);
+        }
+
+        return sb.toString();
     }
 
     public String randomStringToStringArray(String arrayString){
