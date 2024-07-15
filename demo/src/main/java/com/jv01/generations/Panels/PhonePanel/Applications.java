@@ -44,6 +44,8 @@ public class Applications {
     public List<String> applicationDescriptions = new ArrayList<>();
     public List<String> applicationIds = new ArrayList<>();
     public List<String> applicationPicUrl = new ArrayList<>();
+    public List<String> applicationClassesName = new ArrayList<>();
+    public List<String> applicationOrientation = new ArrayList<>();
    
     public Applications(PhonePanel phonePanel, MouseAdapter scrollAdapter){
         this.phonePanel = phonePanel;
@@ -59,6 +61,8 @@ public class Applications {
         applicationDescriptions.clear();
         applicationIds.clear();
         applicationPicUrl.clear();
+        applicationClassesName.clear();
+        applicationOrientation.clear();
     }
 
     public void getApplications(){
@@ -74,6 +78,10 @@ public class Applications {
 
             applicationPicUrl.add(save.dropSpaceFromString(save.getChildFromMapElements(allElements, "picUrl")));
             applicationDescriptions.add(save.getChildFromMapElements(allElements, "description"));
+
+            applicationClassesName.add(save.dropSpaceFromString(save.getChildFromMapElements(allElements, "classesName")));
+
+            applicationOrientation.add(save.getChildFromMapElements(allElements, "orientation"));
         }
     }
 
@@ -81,14 +89,15 @@ public class Applications {
         ArrayList<JPanel> list = new ArrayList<>();
 
         for (int i = 0; i < applicationTitles.size(); i++) {
-            list.add(createApplicationPanel(applicationIds.get(i), applicationTitles.get(i), applicationDescriptions.get(i), applicationPicUrl.get(i)));
+            list.add(createApplicationPanel(applicationClassesName.get(i), applicationTitles.get(i), applicationDescriptions.get(i), applicationPicUrl.get(i), applicationOrientation.get(i)));
         }
 
         return list;
     }
 
-    public JPanel createApplicationPanel(String id, String title, String description, String picUrl) {
-        final String newId = id;
+    public JPanel createApplicationPanel(String className, String title, String description, String picUrl, String orientation) {
+        final String NewClassName = className;
+        final String NewOrientation = orientation;
         int nAppByRows = 4;
         int appIconSize = (((int) (phonePanel.phoneWidth * phonePanel.phoneScale) - 10) / nAppByRows) - 10;
     
@@ -125,7 +134,7 @@ public class Applications {
         MouseAdapter listener = new MouseAdapter() {    
             @Override
             public void mouseClicked(MouseEvent e){
-                phonePanel.openNewPage("app", newId);
+                phonePanel.openNewPage("app", NewOrientation, NewClassName);
             }
         };
 

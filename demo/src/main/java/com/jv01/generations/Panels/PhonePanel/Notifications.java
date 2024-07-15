@@ -152,7 +152,7 @@ public class Notifications {
         MouseAdapter listener = new MouseAdapter() {    
             @Override
             public void mouseClicked(MouseEvent e){
-                phonePanel.openNewPage("msg", newId);
+                phonePanel.openNewPage("msg", "portrait", newId);
             }
         };
 

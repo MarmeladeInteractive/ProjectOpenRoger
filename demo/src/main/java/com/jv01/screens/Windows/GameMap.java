@@ -98,7 +98,7 @@ public class GameMap extends JPanel {
 
         doc = save.getDocumentXml(mainGameWindow.gameName, "chunks");
         chunks = new HashMap<>();
-
+        
         loadChunksFromDocument(doc, player.chunk);
 
         zoomInButton = new JButton("Zoom In (+)");
