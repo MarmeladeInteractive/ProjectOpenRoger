@@ -149,22 +149,25 @@ public class Notifications {
         descriptionArea.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         descriptionArea.setMaximumSize(new Dimension(phonePanel.phoneWidth, 50));
 
-        MouseAdapter test = new MouseAdapter() {    
+        MouseAdapter listener = new MouseAdapter() {    
             @Override
             public void mouseClicked(MouseEvent e){
-                JPanel notificationDetailsPanel = getNotificationDetailsPanel(newId);
-                phonePanel.openNewPage(notificationDetailsPanel);
+                phonePanel.openNewPage("msg", newId);
             }
         };
 
         // Add the scroll adapter to the description area
         descriptionArea.addMouseListener(scrollAdapter);
         descriptionArea.addMouseMotionListener(scrollAdapter);
-        descriptionArea.addMouseListener(test);
+        descriptionArea.addMouseListener(listener);
+
+        titleLabel.addMouseListener(scrollAdapter);
+        titleLabel.addMouseMotionListener(scrollAdapter);
+        titleLabel.addMouseListener(listener);
 
         notificationPanel.add(titleLabel, BorderLayout.NORTH);
         notificationPanel.add(descriptionArea, BorderLayout.CENTER);
-        notificationPanel.addMouseListener(test);
+        notificationPanel.addMouseListener(listener);
 
         return notificationPanel;
     }

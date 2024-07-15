@@ -40,11 +40,13 @@ public class PhonePanel {
     public Save save = new Save();
     public MainGameWindow mainGameWindow;
     public Notifications notifications;
+    public Applications applications;
     private SoundManager soundManager;
 
     public String notificationVibrationSoundId;
 
     public ArrayList<JPanel> notificationsList;
+    public ArrayList<JPanel> applicationsList;
 
     public String gameName;
     public JPanel panel;
@@ -60,6 +62,9 @@ public class PhonePanel {
 
     public JPanel notificationsPanel;
     public JScrollPane notificationsScrollPane;
+
+    public JPanel applicationsPanel;
+    public JScrollPane applicationsScrollPane;
 
     public JPanel newPagePanel;
 
@@ -162,6 +167,7 @@ public class PhonePanel {
         addMoneyLabel();
 
         addNotificationsPanel();
+        addAplicationsPanel();
 
         addBackPhonePortait();
 
@@ -284,6 +290,17 @@ public class PhonePanel {
         screenPanel.add(notificationsPanel);
     }
 
+    public void addAplicationsPanel(){
+        applicationsPanel = new JPanel();
+        applicationsPanel.setBounds(0, 70 + 200, (int)(phoneWidth*phoneScale), (int)(phoneHeight*phoneScale) - 200 - 70 - 50);
+        applicationsPanel.setLayout(null);
+        applicationsPanel.setOpaque(false);
+
+        addApplications();
+
+        screenPanel.add(applicationsPanel);
+    }
+
     public void addNewPagePanel(JPanel newPage){
         newPagePanel = new JPanel();
         newPagePanel.setBounds(0, 70, (int)(phoneWidth*phoneScale), (int)(phoneHeight*phoneScale) - 70);
@@ -356,37 +373,116 @@ public class PhonePanel {
         notifications = new Notifications(this, scrollAdapter);
         notificationsList = notifications.getNotSeenNotificationsPanel();
 
-        // Add each notification to the container panel
         for (int i = 0; i < notificationsList.size(); i++) {
             notificationsContainer.add(notificationsList.get(i));
         }
     
-        // Create a JScrollPane to hold the notifications container
         notificationsScrollPane = new JScrollPane(notificationsContainer, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         notificationsScrollPane.setBounds(10, 0, (int) (phoneWidth * phoneScale) - 20, 200);
         notificationsScrollPane.setOpaque(false);
-        notificationsScrollPane.setBorder(BorderFactory.createEmptyBorder()); // Remove the border
+        notificationsScrollPane.setBorder(BorderFactory.createEmptyBorder());
         notificationsScrollPane.getViewport().setOpaque(false);
-        notificationsScrollPane.getViewport().setBorder(null); // Remove the viewport border
+        notificationsScrollPane.getViewport().setBorder(null); 
     
-        // Make the scroll pane's vertical scrollbar invisible
         notificationsScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
-    
-        // Ensure the view starts at the top
+   
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 notificationsScrollPane.getViewport().setViewPosition(new Point(0, 0));
             }
         });
-    
-        // Add the JScrollPane to the main notificationsPanel
+
         notificationsPanel.add(notificationsScrollPane);
     } 
 
+    public void addApplications() {
+        applicationsPanel.removeAll();
+        applicationsPanel.setLayout(new BorderLayout()); 
+    
+        JPanel applicationsContainer = new JPanel();
+        applicationsContainer.setOpaque(false);
+        applicationsContainer.setLayout(new GridBagLayout()); 
+        
+        MouseAdapter scrollAdapter = new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                lastY = e.getY();
+            }
+    
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int deltaY = e.getY() - lastY;
+                JViewport viewport = applicationsScrollPane.getViewport();
+                Point viewPosition = viewport.getViewPosition();
+                viewPosition.y -= deltaY;
+                int maxY = applicationsScrollPane.getVerticalScrollBar().getMaximum() - viewport.getHeight();
+                if (viewPosition.y < 0) {
+                    viewPosition.y = 0;
+                } else if (viewPosition.y > maxY) {
+                    viewPosition.y = maxY;
+                }
+                viewport.setViewPosition(viewPosition);
+                lastY = e.getY();
+            }
+        };
+    
+        applications = new Applications(this, scrollAdapter);
+        applicationsList = applications.getApplicationsPanel();
+    
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.insets = new Insets(4, 4, 4, 4);
+        for (JPanel appPanel : applicationsList) {
+            applicationsContainer.add(appPanel, gbc);
+            gbc.gridx++;
+            if (gbc.gridx == 4) {
+                gbc.gridx = 0;
+                gbc.gridy++;
+            }
+        }
+    
+        applicationsScrollPane = new JScrollPane(applicationsContainer,
+            JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        applicationsScrollPane.setPreferredSize(new Dimension((int) (phoneWidth * phoneScale) - 20, (int) (phoneHeight * phoneScale) - 280));
+        applicationsScrollPane.setOpaque(false);
+        applicationsScrollPane.setBorder(BorderFactory.createEmptyBorder());
+        applicationsScrollPane.getViewport().setOpaque(false);
+        applicationsScrollPane.getViewport().setBorder(null);
+    
+        applicationsScrollPane.getVerticalScrollBar().setPreferredSize(new Dimension(0, 0));
+    
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                applicationsScrollPane.getViewport().setViewPosition(new Point(0, 0));
+            }
+        });
+    
+        applicationsPanel.add(applicationsScrollPane, BorderLayout.CENTER);
+    }
+    
+    
+    
+
     public void openNewPage(JPanel newPage){
         notificationsPanel.removeAll();
+        applicationsPanel.removeAll();
         addNewPagePanel(newPage);
+    }
 
+    public void openNewPage(String type, String id){
+        switch (type) {
+            case "app":
+                open(id);
+                break;
+            case "msg":
+                JPanel notificationDetailsPanel = notifications.getNotificationDetailsPanel(id);
+                openNewPage(notificationDetailsPanel);
+                break;
+        
+            default:
+                break;
+        }
     }
 
     public void addTogglePhoneButton(){

@@ -1,0 +1,33 @@
+<applications>
+    <application id="Map">
+        <name>Map</name>
+        <description></description>
+        <picUrl>demo/img/achat.png</picUrl>
+    </application>
+    <application id="app02">
+        <name>App02</name>
+        <description></description>
+        <picUrl>demo/img/achat.png</picUrl>
+    </application>
+    <application id="app03">
+        <name>App03</name>
+        <description></description>
+        <picUrl>demo/img/achat.png</picUrl>
+    </application>
+    <application id="app04">
+        <name>App04</name>
+        <description></description>
+        <picUrl>demo/img/achat.png</picUrl>
+    </application>
+    <application id="app05">
+        <name>App05</name>
+        <description></description>
+        <picUrl>demo/img/achat.png</picUrl>
+    </application>
+    <application id="app06">
+        <name>App06</name>
+        <description></description>
+        <picUrl>demo/img/achat.png</picUrl>
+    </application>
+
+</applications>
