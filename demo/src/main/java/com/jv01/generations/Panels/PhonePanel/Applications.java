@@ -7,7 +7,11 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -18,6 +22,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.io.IOException;
+import java.net.URL;
 import java.util.Map;
 
 import org.w3c.dom.Document;
@@ -65,7 +71,8 @@ public class Applications {
             Map<String, List<String>> allElements = save.getAllChildsFromElement(element);
             applicationIds.add(element.getAttribute("id"));
             applicationTitles.add(save.getChildFromMapElements(allElements, "name"));
-            applicationPicUrl.add(save.getChildFromMapElements(allElements, "picUrl"));
+
+            applicationPicUrl.add(save.dropSpaceFromString(save.getChildFromMapElements(allElements, "picUrl")));
             applicationDescriptions.add(save.getChildFromMapElements(allElements, "description"));
         }
     }
@@ -74,25 +81,59 @@ public class Applications {
         ArrayList<JPanel> list = new ArrayList<>();
 
         for (int i = 0; i < applicationTitles.size(); i++) {
-            list.add(createApplicationPanel(applicationIds.get(i), applicationTitles.get(i), applicationDescriptions.get(i)));
+            list.add(createApplicationPanel(applicationIds.get(i), applicationTitles.get(i), applicationDescriptions.get(i), applicationPicUrl.get(i)));
         }
 
         return list;
     }
 
-    public JPanel createApplicationPanel(String id, String title, String description) {
+    public JPanel createApplicationPanel(String id, String title, String description, String picUrl) {
         final String newId = id;
         int nAppByRows = 4;
-        int appIconSize = ((phonePanel.phoneNewWidth - 10) / nAppByRows) - 4 ;
-        appIconSize = 70;
+        int appIconSize = (((int) (phonePanel.phoneWidth * phonePanel.phoneScale) - 10) / nAppByRows) - 10;
+    
         JPanel applicationPanel = new RoundedPanel();
         applicationPanel.setLayout(new BorderLayout());
         applicationPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         applicationPanel.setBackground(new Color(255, 255, 255, 200));
-        applicationPanel.setOpaque(false); 
+        applicationPanel.setOpaque(false);
+        applicationPanel.setPreferredSize(new Dimension(appIconSize, appIconSize));
         applicationPanel.setMaximumSize(new Dimension(appIconSize, appIconSize));
-        
-        return applicationPanel;
-    }
+        applicationPanel.setMinimumSize(new Dimension(appIconSize, appIconSize));
+    
+        ImageIcon backgroundImageIcon = new ImageIcon(picUrl);
+        Image backgroundImage = backgroundImageIcon.getImage();
+        Image scaledBackgroundImage = backgroundImage.getScaledInstance(appIconSize, appIconSize, Image.SCALE_SMOOTH);
+        ImageIcon scaledBackgroundIcon = new ImageIcon(scaledBackgroundImage);
+        JLabel backgroundLabel = new JLabel(scaledBackgroundIcon);
+        backgroundLabel.setBounds(0, 0, appIconSize, appIconSize);
+    
+        applicationPanel.add(backgroundLabel, BorderLayout.CENTER);
 
+        JLabel titleLabel = new JLabel(title);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 14));
+        titleLabel.setForeground(Color.WHITE);
+
+        JPanel parentPanel = new JPanel();
+        parentPanel.setLayout(new BorderLayout());
+        parentPanel.setOpaque(false);
+        parentPanel.setPreferredSize(new Dimension(appIconSize, appIconSize + 15)); 
+        parentPanel.add(applicationPanel, BorderLayout.CENTER);
+        parentPanel.add(titleLabel, BorderLayout.SOUTH);
+
+        MouseAdapter listener = new MouseAdapter() {    
+            @Override
+            public void mouseClicked(MouseEvent e){
+                phonePanel.openNewPage("app", newId);
+            }
+        };
+
+        parentPanel.addMouseListener(scrollAdapter);
+        parentPanel.addMouseMotionListener(scrollAdapter);
+        parentPanel.addMouseListener(listener);
+
+    
+        return parentPanel;
+    }
 }
