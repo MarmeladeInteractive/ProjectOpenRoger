@@ -3,31 +3,43 @@
         <name>Map</name>
         <description></description>
         <picUrl>demo/img/achat.png</picUrl>
+        <classesName>com.jv01.screens.Windows.GameMap</classesName>
+        <orientation>landscape</orientation>
     </application>
     <application id="app02">
         <name>App02</name>
         <description></description>
         <picUrl>demo/img/achat.png</picUrl>
+        <classesName></classesName>
+        <orientation></orientation>
     </application>
     <application id="app03">
         <name>App03</name>
         <description></description>
         <picUrl>demo/img/achat.png</picUrl>
+        <classesName></classesName>
+        <orientation></orientation>
     </application>
     <application id="app04">
         <name>App04</name>
         <description></description>
         <picUrl>demo/img/achat.png</picUrl>
+        <classesName></classesName>
+        <orientation></orientation>
     </application>
     <application id="app05">
         <name>App05</name>
         <description></description>
         <picUrl>demo/img/achat.png</picUrl>
+        <classesName></classesName>
+        <orientation></orientation>
     </application>
     <application id="app06">
         <name>App06</name>
         <description></description>
         <picUrl>demo/img/achat.png</picUrl>
+        <classesName></classesName>
+        <orientation></orientation>
     </application>
 
 </applications>

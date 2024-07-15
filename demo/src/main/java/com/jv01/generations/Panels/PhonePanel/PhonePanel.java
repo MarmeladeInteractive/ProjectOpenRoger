@@ -17,6 +17,9 @@ import java.util.TimerTask;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -470,13 +473,26 @@ public class PhonePanel {
         addNewPagePanel(newPage);
     }
 
-    public void openNewPage(String type, String id){
+    public void openNewPage(String type, String orientation, String content){
         switch (type) {
             case "app":
-                open(id);
+                clearPhonePanel();
+                if(orientation.equals("landscape")){
+                    createPhonePanelLandscape();
+                }else{
+                    createPhonePanelPortrait();
+                }
+                try {
+                    Class<?> clazz = Class.forName(content);
+                    Constructor<?> constructor = clazz.getConstructor(MainGameWindow.class);
+                    constructor.newInstance(mainGameWindow);
+                } catch (Exception e) {
+                    clearPhonePanel();
+                    e.printStackTrace();
+                }
                 break;
             case "msg":
-                JPanel notificationDetailsPanel = notifications.getNotificationDetailsPanel(id);
+                JPanel notificationDetailsPanel = notifications.getNotificationDetailsPanel(content);
                 openNewPage(notificationDetailsPanel);
                 break;
         
@@ -610,7 +626,7 @@ public class PhonePanel {
             createPhonePanelLandscape();
             switch (idScreen) {
                 case "Map":
-                    mainGameWindow.map = new GameMap(mainGameWindow);
+                    new GameMap(mainGameWindow);
                     break;
                 case "home":
                     clearPhonePanel();
@@ -618,7 +634,7 @@ public class PhonePanel {
                     togglePhone(0);
                     break;
             
-                default:
+                default:   
                     clearPhonePanel();
                     createPhonePanelPortrait();
                     break;
