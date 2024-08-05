@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 
 import com.jv01.buildings.Buildings;
+import com.jv01.fonctionals.RevenueManager;
 import com.jv01.fonctionals.Time;
 import com.jv01.generations.Panels.BackgroundPanel;
 import com.jv01.generations.Panels.FrontPanel;
@@ -99,12 +100,15 @@ public class MainGameWindow{
 
     public Time date;
 
+    public RevenueManager revenueManager;
+
     public MainGameWindow(String gameName, String seed, boolean cheatCodesEnabled){
         this.gameName = gameName;
         this.seed = seed;
         this.cheatCodesEnabled = cheatCodesEnabled;
         
         this.date = new Time(gameName);
+        this.revenueManager = new RevenueManager(this);
 
         seedTimer = new Timer(50, new ActionListener() {
             @Override
@@ -114,6 +118,7 @@ public class MainGameWindow{
                     updatePlayerLocation();
                     displayAlert();
                     updateDate();
+                    updateLabels();
                     updateCounter = 0;
                 }
             }
@@ -613,7 +618,7 @@ public class MainGameWindow{
 
     public void updateDate(){
         nightPanel.updateNight(isInsideBuilding, date);
-        updatePhoneDateLabels();
+        //updatePhoneDateLabels();
     }
 
     public void updatePositionTextLabels(){
