@@ -287,7 +287,10 @@ public class Chunks {
                 number = 1;
                 if(key2 == '0')buildingType = 6;
                 if(key2 == '1')buildingType = 7;
-            }else{
+            }else if(key2 == '2'){
+                number = 1;
+                buildingType = 10;
+            }else {
                 number = 0;
             }
         }else if(biome >= 2 && biome <= 3){

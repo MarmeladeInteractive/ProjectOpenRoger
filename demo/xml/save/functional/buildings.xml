@@ -138,4 +138,18 @@
             }
         </imagesUrls>
     </building>
+
+    <building id="10">
+        <name>Farm</name>
+        <size>{220,220}</size>
+        <description></description>
+        <imagesUrls>
+            {
+                demo/img/buildings/farm01.png,
+                demo/img/buildings/farm02.png,
+                demo/img/buildings/farm03.png,
+                demo/img/buildings/farm04.png,
+            }
+        </imagesUrls>
+    </building>
 </buildings>

@@ -77,6 +77,10 @@ public class Inside {
             case 9:
                 createBarInside();
                 break;
+
+            case 10:
+                createFarmInside();
+                break;
         
             default:
                 break;
@@ -155,6 +159,13 @@ public class Inside {
         BarHouse barHouse = new BarHouse(gameName, boxSize, backgroundPanel);
         addRestrictedAreas(barHouse.restrictedAreas);
         addTrigerEventsAreas(barHouse.trigerEvents);
+    }
+
+    private void createFarmInside(){
+        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
+        Farm farm = new Farm(gameName, boxSize, backgroundPanel);
+        addRestrictedAreas(farm.restrictedAreas);
+        addTrigerEventsAreas(farm.trigerEvents);
     }
 
 
