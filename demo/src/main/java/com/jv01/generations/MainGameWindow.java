@@ -6,6 +6,7 @@ import javax.swing.border.Border;
 import com.jv01.buildings.Buildings;
 import com.jv01.fonctionals.RevenueManager;
 import com.jv01.fonctionals.Time;
+import com.jv01.fonctionals.ownerships.PlayerOwnerships;
 import com.jv01.generations.Panels.BackgroundPanel;
 import com.jv01.generations.Panels.FrontPanel;
 import com.jv01.generations.Panels.NightPanel;
@@ -101,6 +102,7 @@ public class MainGameWindow{
     public Time date;
 
     public RevenueManager revenueManager;
+    public PlayerOwnerships playerOwnerships;
 
     public MainGameWindow(String gameName, String seed, boolean cheatCodesEnabled){
         this.gameName = gameName;
@@ -108,6 +110,8 @@ public class MainGameWindow{
         this.cheatCodesEnabled = cheatCodesEnabled;
         
         this.date = new Time(gameName);
+
+        this.playerOwnerships = new PlayerOwnerships(this);
         this.revenueManager = new RevenueManager(this);
 
         seedTimer = new Timer(50, new ActionListener() {

@@ -29,7 +29,23 @@ public class Farm{
     }
 
     public void addTools(){
+        Tools farm = new Tools(gameName, 6, 0);
+        Objects obj = new Objects(boxSize /2 , farm.size[1] + 50, farm.size, farm.imageUrl, 1, backgroundPanel);
         
+        restrictedAreas.add(new int[][]{ 
+            {boxSize/2 - farm.size[0]/2,50},
+            {boxSize/2 + farm.size[0]/2,farm.size[1] +100},
+        });
+
+        Object[] item = {
+            new int[]{
+                obj.position[0],
+                obj.position[1],
+            },
+            "tool",
+            farm,
+            140
+        };
+        trigerEvents.add(item);
     }
-    
 }

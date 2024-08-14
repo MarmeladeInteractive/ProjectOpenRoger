@@ -16,6 +16,7 @@ import org.w3c.dom.Element;
 import com.jv01.buildings.Inside;
 import com.jv01.buildings.Buildings;
 import com.jv01.fonctionals.Save;
+import com.jv01.generations.specialStructures.SpecialStructures;
 import com.jv01.fonctionals.Atlas;
 import com.jv01.miniGames.Arcade;
 import com.jv01.screens.GameWindowsSize;
@@ -26,6 +27,7 @@ public class Chunks {
     public Save save = new Save();
     public Atlas atlas;
     public Npcs npc;
+    public SpecialStructures specialStructures;
 
     public boolean load = true;
     public MainGameWindow mainGameWindow;
@@ -51,6 +53,8 @@ public class Chunks {
     public boolean isCenterChunk = false;
 
     public boolean[] completedCell = {false,false,false,false};
+
+    public String[][] specialStructuresIds = {{"null","null","null"},{"null","null","null"},{"null","null","null"}};
 
     public JPanel backgroundPanel;
 
@@ -107,6 +111,8 @@ public class Chunks {
         this.environment = mainGameWindow.environment;
         this.gameName = mainGameWindow.gameName;
 
+        this.specialStructures = new SpecialStructures(gameName);
+
         this.npc = new Npcs(gameName);
 
         this.displayOnMap = true;
@@ -141,6 +147,8 @@ public class Chunks {
                 case "ext":
                     this.biome = Integer.parseInt(save.getChildFromMapElements(allElements,"biome"));
                     this.backPic = save.getChildFromMapElements(allElements,"backPic");
+                    this.specialStructuresIds = save.stringToStringArray2(save.getChildFromMapElements(allElements,"specialStructuresIds"));
+
                     try{
                         if(!Boolean.parseBoolean(save.getChildFromMapElements(allElements,"displayOnMap"))){
                             save.changeElementChildValue(gameName,"chunks","chunk",id,"displayOnMap","true");
@@ -250,6 +258,7 @@ public class Chunks {
         completedCellInt+='}';
 
         save.createXmlElement(chunkElement,doc,"completedCell",String.valueOf(completedCellInt));
+        save.createXmlElement(chunkElement,doc,"specialStructuresIds","{{null,null,null},{null,null,null},{null,null,null}}");
 
         doc.getDocumentElement().appendChild(chunkElement);
     }
@@ -377,7 +386,8 @@ public class Chunks {
 
         if(number != 0){
             if(this.load){
-                buildingType = createBuilding(number, cell01, buildingType).id;
+                Buildings build = createBuilding(number, cell01, buildingType);
+                buildingType = build.id;        
             }
             bCellX[0] = cell01[0];
             bCellY[0] = cell01[1];
@@ -491,12 +501,24 @@ public class Chunks {
         Buildings building01 = new Buildings(gameName, buildingType, chunk, cell, buildingKey);
         buildingType = building01.id;
 
+        if(save.areAllFieldsNull(specialStructuresIds)){
+            String[][] newSpecialStructuresIds = building01.createSpecialStructures();
+            if(!save.areAllFieldsNull(newSpecialStructuresIds)){
+                specialStructuresIds = newSpecialStructuresIds;
+                save.changeChunkSpecialStructures(gameName, chunk, save.convertArrayToString(newSpecialStructuresIds));
+            }
+        }
+
         Objects obj = new Objects(cell[0]*GWS.cellWidth+(GWS.cellWidth/2)+building01.offsetX, cell[1]*GWS.cellHeight+(GWS.cellHeight/2)+ building01.offsetY, building01.dimension, building01.imageUrl, 1, backgroundPanel);         
         restrictedAreas.add(obj.restrictedAreas);
         if((buildingType!=7)){
             triggerableBuilding.add(building01);
         }  
         return building01;
+    }
+
+    private void createSpecialStructure(int[] cell, String elementId){
+        specialStructures.addSpecialStructureToPanel(cell[0]*GWS.cellWidth+(GWS.cellWidth/2), cell[1]*GWS.cellHeight+(GWS.cellHeight/2),elementId,backgroundPanel);
     }
 
     public void addNpcs(){
@@ -581,6 +603,13 @@ public class Chunks {
                         position[1]=l;
 
                         if((((i==0&&j==0)&&completedCell[0])||((i==0&&j==2)&&completedCell[1])||((i==2&&j==0)&&completedCell[2])||((i==2&&j==2)&&completedCell[3]))){
+                            k=-1;
+                            l=-1;
+                            break;
+                        }
+
+                        if(!specialStructuresIds[i][j].equals("null")){
+                            createSpecialStructure(cell, specialStructuresIds[i][j]);
                             k=-1;
                             l=-1;
                             break;

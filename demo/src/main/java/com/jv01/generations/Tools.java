@@ -187,9 +187,16 @@ public class Tools {
                         }
                         break;
                     case 6:
-                        mainGameWindow.runArcade(0); 
-                        mainGameWindow.player.inputsManager.interactKeyPressed = false;         
-                        break;
+                        if(mainGameWindow.player.isEnoughMoney(price,true)){
+                                
+                            save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,11);
+
+                            mainGameWindow.playerOwnerships.addOwnership("personalFarm", mainGameWindow.player.chunk, '{'+String.valueOf(mainGameWindow.player.chunk[0])+','+String.valueOf(mainGameWindow.player.chunk[1])+'}');
+
+                            mainGameWindow.player.inputsManager.interactKeyPressed = false;
+                            mainGameWindow.player.positionX = -100;
+                        }
+                        break;        
                 
                     default:
                         break;

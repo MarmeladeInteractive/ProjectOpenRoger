@@ -1,0 +1,9 @@
+<specialStructuresTypes>
+    <specialStructuresType id="field">
+        <name>field</name>
+        <type>field</type>
+        <description></description>
+        <size>{220,220}</size>
+        <classesName>com.jv01.generations.specialStructures.structures.Fields</classesName>
+    </specialStructuresType>
+</specialStructuresTypes>

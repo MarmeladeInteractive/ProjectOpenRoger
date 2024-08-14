@@ -1,6 +1,10 @@
 package com.jv01.buildings;
 
+import java.lang.annotation.Retention;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Random;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -8,6 +12,9 @@ import org.w3c.dom.NodeList;
 
 import com.jv01.fonctionals.Atlas;
 import com.jv01.fonctionals.Save;
+import com.jv01.generations.Chunks;
+import com.jv01.generations.MainGameWindow;
+import com.jv01.generations.specialStructures.SpecialStructures;
 
 public class Buildings {
     public Save save = new Save();
@@ -25,6 +32,11 @@ public class Buildings {
     public int[] dimension;
     public String buildingKey;
 
+    public SpecialStructures specialStructures;
+
+    public int specialStructuresNumber = 0;
+    public String[] specialStructuresPosibleTypes;
+
     public int offsetX = 0;
     public int offsetY = 0;
 
@@ -34,6 +46,8 @@ public class Buildings {
     public Buildings(String gameName, int id, long[] chunk, int[] cell, String buildingKey){
         this.gameName = gameName;
         this.atlas = new Atlas(gameName);
+
+        this.specialStructures = new SpecialStructures(gameName);
 
         this.id = id;
 
@@ -59,6 +73,9 @@ public class Buildings {
         this.name = save.getChildFromElement(element, "name");
         this.description = save.getChildFromElement(element, "description");
         this.dimension = save.stringToIntArray(save.getChildFromElement(element, "size"));
+
+        this.specialStructuresNumber = Integer.parseInt(save.getChildFromElement(element, "specialStructuresNumber"));
+        this.specialStructuresPosibleTypes = save.stringToStringArray(save.getChildFromElement(element, "specialStructuresPosibleTypes"));
 
         this.imageUrl = save.stringToStringArray(save.getChildFromElement(element, "imagesUrls"))[type];
         this.imageUrl = save.dropSpaceFromString(this.imageUrl);
@@ -125,9 +142,48 @@ public class Buildings {
         offsetY = (int)mapRange(key03,0,16,-20,20);
     }
 
+    public String[][] createSpecialStructures(){
+
+        String[][] specialStructuresIds = {{"null","null","null"},{"null","null","null"},{"null","null","null"}};
+        
+        Random random = new Random();
+        
+        for (int n = 0; n < specialStructuresNumber; n++) {
+            int row = random.nextInt(specialStructuresIds.length);
+            int col = random.nextInt(specialStructuresIds[row].length);
+
+            String type = specialStructuresPosibleTypes[random.nextInt(specialStructuresPosibleTypes.length)];
+            int[] cell = {row,col};
+            specialStructuresIds[row][col] = createSpecialStructure(chunk, cell, type);
+        }
+
+        return specialStructuresIds;
+    }
+
+    public String createSpecialStructure(long[] chunk, int[] cell, String type){
+        specialStructures.specialStructuresType = specialStructures.specialStructuresType.getElementsTypeValues(type);
+
+        try {
+            Class<?> clazz = Class.forName(specialStructures.specialStructuresType.classesName);
+        
+            Constructor<?> constructor = clazz.getConstructor(String.class);
+        
+            Object instance = constructor.newInstance(gameName);
+        
+            Method method = clazz.getMethod("createDefaultStructure", long[].class, int[].class);
+        
+            String specialStructuresId = (String) method.invoke(instance, chunk, cell);
+
+            specialStructures.addSpecialStructure(type, chunk, specialStructuresId);
+            
+            return specialStructuresId;
+        } catch (Exception e) {
+            e.printStackTrace(); 
+            return "null";
+        }
+    }
+
     public double mapRange(double value, double minInput, double maxInput, double minOutput, double maxOutput) {
         return minOutput + ((value - minInput) / (maxInput - minInput)) * (maxOutput - minOutput);
     }
-
-
 }
