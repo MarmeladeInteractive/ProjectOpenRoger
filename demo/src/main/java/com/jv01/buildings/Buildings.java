@@ -4,7 +4,9 @@ import java.lang.annotation.Retention;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -142,18 +144,29 @@ public class Buildings {
         offsetY = (int)mapRange(key03,0,16,-20,20);
     }
 
-    public String[][] createSpecialStructures(){
+    public String[][] createSpecialStructures() {
+        String[][] specialStructuresIds = {{"null", "null", "null"}, {"null", "null", "null"}, {"null", "null", "null"}};
 
-        String[][] specialStructuresIds = {{"null","null","null"},{"null","null","null"},{"null","null","null"}};
-        
-        Random random = new Random();
-        
+        long seed = buildingKey.hashCode();
+        Random random = new Random(seed);
+
+        Set<String> usedPositions = new HashSet<>();
+
         for (int n = 0; n < specialStructuresNumber; n++) {
-            int row = random.nextInt(specialStructuresIds.length);
-            int col = random.nextInt(specialStructuresIds[row].length);
+            int row, col;
+            String positionKey;
+        
+            do {
+                row = random.nextInt(specialStructuresIds.length);
+                col = random.nextInt(specialStructuresIds[row].length);
+                positionKey = row + "," + col;
+            } while (usedPositions.contains(positionKey));
+            
+            usedPositions.add(positionKey);
 
             String type = specialStructuresPosibleTypes[random.nextInt(specialStructuresPosibleTypes.length)];
-            int[] cell = {row,col};
+            
+            int[] cell = {row, col};
             specialStructuresIds[row][col] = createSpecialStructure(chunk, cell, type);
         }
 
