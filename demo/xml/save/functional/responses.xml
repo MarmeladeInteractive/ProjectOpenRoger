@@ -31,6 +31,40 @@
         <res29>Je suis convaincu que votre parti peut faire une différence réelle. Je suis honoré de me joindre à votre lutte pour le progrès.</res29>
         <res30>Votre parti incarne les valeurs qui sont chères à mon cœur. Je suis prêt à m'impliquer activement pour les faire avancer.</res30>
     </response>
+
+    <response id="alreadyInParty">
+        <res1>Je fais déjà partie de votre équipe.</res1>
+        <res2>Je suis déjà dans votre parti.</res2>
+        <res3>Je suis déjà engagé à vos côtés.</res3>
+        <res4>Je suis déjà un membre de votre parti.</res4>
+        <res5>Je suis déjà avec vous.</res5>
+        <res6>Je suis déjà dans votre camp.</res6>
+        <res7>Je fais déjà partie de votre mouvement.</res7>
+        <res8>Je suis déjà un de vos alliés.</res8>
+        <res9>Je suis déjà membre de votre parti.</res9>
+        <res10>Je suis déjà à vos côtés.</res10>
+        <res11>Je suis déjà avec vous dans ce parti.</res11>
+        <res12>Je suis déjà engagé dans votre parti.</res12>
+        <res13>Je suis déjà l'un des vôtres.</res13>
+        <res14>Je fais déjà partie de votre cause.</res14>
+        <res15>Je suis déjà dans votre équipe.</res15>
+        <res16>Je fais déjà partie de votre groupe.</res16>
+        <res17>Je suis déjà sur votre liste.</res17>
+        <res18>Je suis déjà un de vos partisans.</res18>
+        <res19>Je suis déjà inscrit dans votre parti.</res19>
+        <res20>Je suis déjà engagé pour votre cause.</res20>
+        <res21>Je fais déjà partie de votre organisation.</res21>
+        <res22>Je suis déjà membre de votre équipe.</res22>
+        <res23>Je fais déjà partie de votre plan.</res23>
+        <res24>Je suis déjà avec vous pour cette cause.</res24>
+        <res25>Je suis déjà engagé à vos côtés.</res25>
+        <res26>Je fais déjà partie de votre campagne.</res26>
+        <res27>Je suis déjà sur votre projet.</res27>
+        <res28>Je suis déjà un membre de votre équipe.</res28>
+        <res29>Je suis déjà dans votre liste de soutien.</res29>
+        <res30>Je suis déjà actif dans votre parti.</res30>
+    </response>
+
     <response id="denied">
         <res1>Je préfère garder ma liberté de pensée et rester en dehors de tout parti politique pour le moment.</res1>
         <res2>Je respecte votre parti, mais je ne pense pas que vous soyez la meilleure option pour moi en ce moment.</res2>
@@ -290,5 +324,73 @@
         <res29>Je ne veux pas être impoli, mais ce cadeau ne me convient pas du tout.</res29>
         <res30>Non, merci. Je ne vois vraiment pas l'intérêt d'avoir ça.</res30>
     </response>
+
+    <response id="acceptedSMS">
+        <res1>Je suis ravi de rejoindre votre cause.</res1>
+        <res2>Heureux de faire partie de votre équipe.</res2>
+        <res3>Excité de m'engager à vos côtés.</res3>
+        <res4>Fier de rejoindre votre parti.</res4>
+        <res5>Prêt à contribuer à votre vision.</res5>
+        <res6>Votre parti est ma nouvelle maison.</res6>
+        <res7>Ensemble, nous réussirons.</res7>
+        <res8>Je suis honoré de vous rejoindre.</res8>
+        <res9>Heureux de défendre vos valeurs.</res9>
+        <res10>Votre cause est la mienne maintenant.</res10>
+        <res11>Je suis avec vous, à 100%.</res11>
+        <res12>Ravi de m'unir à votre mission.</res12>
+        <res13>Votre vision m'inspire.</res13>
+        <res14>Je suis prêt pour ce combat.</res14>
+        <res15>Honoré de faire équipe avec vous.</res15>
+        <res16>Votre leadership m'a convaincu.</res16>
+        <res17>Impatient de contribuer à votre succès.</res17>
+        <res18>Heureux de faire partie du changement.</res18>
+        <res19>Votre parti est ma nouvelle famille.</res19>
+        <res20>Je m'engage pleinement à vos côtés.</res20>
+        <res21>Fier de marcher avec vous.</res21>
+        <res22>Je suis prêt pour cette aventure.</res22>
+        <res23>Votre parti est mon choix.</res23>
+        <res24>Je suis déterminé à vous soutenir.</res24>
+        <res25>Ravi de m'unir à votre cause.</res25>
+        <res26>Votre vision est la mienne maintenant.</res26>
+        <res27>Je suis prêt à faire la différence avec vous.</res27>
+        <res28>Heureux de vous rejoindre pour ce combat.</res28>
+        <res29>Votre parti incarne mes valeurs.</res29>
+        <res30>Fier d'être des vôtres.</res30>
+    </response>
+
+    <response id="donation">
+        <res1>Voici un don de x€ pour soutenir votre cause.</res1>
+        <res2>Je vous offre x€ pour aider votre parti.</res2>
+        <res3>Acceptez ce don de x€ de ma part.</res3>
+        <res4>Je fais un don de x€ pour votre campagne.</res4>
+        <res5>Voici x€ pour contribuer à votre mission.</res5>
+        <res6>Je vous envoie x€ pour votre projet.</res6>
+        <res7>Je donne x€ pour soutenir votre vision.</res7>
+        <res8>Voici un don de x€ pour vous aider.</res8>
+        <res9>Je vous offre x€ pour avancer ensemble.</res9>
+        <res10>J'apporte x€ pour votre cause.</res10>
+        <res11>Voici x€ pour renforcer votre action.</res11>
+        <res12>Je contribue avec x€ pour votre parti.</res12>
+        <res13>Je vous fais don de x€ pour votre travail.</res13>
+        <res14>Acceptez x€ en soutien à votre cause.</res14>
+        <res15>Je donne x€ pour appuyer votre mission.</res15>
+        <res16>Voici x€ pour appuyer votre combat.</res16>
+        <res17>Je vous envoie x€ pour votre succès.</res17>
+        <res18>Je contribue avec x€ pour vous soutenir.</res18>
+        <res19>J'apporte x€ pour votre réussite.</res19>
+        <res20>Voici un don de x€ pour votre parti.</res20>
+        <res21>Je donne x€ pour renforcer votre cause.</res21>
+        <res22>Voici x€ pour soutenir votre effort.</res22>
+        <res23>Je vous fais un don de x€.</res23>
+        <res24>Je soutiens avec x€ pour votre avenir.</res24>
+        <res25>Voici x€ pour appuyer vos idées.</res25>
+        <res26>Je vous donne x€ pour votre vision.</res26>
+        <res27>Je vous apporte x€ pour votre mission.</res27>
+        <res28>Acceptez ce don de x€ pour avancer.</res28>
+        <res29>Je contribue x€ pour soutenir vos efforts.</res29>
+        <res30>Voici x€ pour vous aider à réussir.</res30>
+    </response>
+
+
 
 </responses>

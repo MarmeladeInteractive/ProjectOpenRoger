@@ -75,7 +75,7 @@ public class Character{
         this.gameName = gameName;
 
         this.identity = new Identity(gameName);
-        
+
         this.characterId = id;
 
         Document doc = save.getDocumentXml(gameName, "characters");
@@ -88,29 +88,34 @@ public class Character{
             name = save.getChildFromElement(element, "name");   
             npcPic = save.getChildFromElement(element, "npcPic"); 
             gender = save.getChildFromElement(element, "gender");
-            /*size = save.stringToIntArray(save.getChildFromElement(element, "size"));   
+
+            size = save.stringToIntArray(save.getChildFromElement(element, "size"));   
             age = Integer.parseInt(save.getChildFromElement(element, "age"));
             health = Integer.parseInt(save.getChildFromElement(element, "health"));
             energy = Integer.parseInt(save.getChildFromElement(element, "energy"));
             belief = Integer.parseInt(save.getChildFromElement(element, "belief"));
             money = Long.parseLong(save.getChildFromElement(element, "money"));
             hygiene = Integer.parseInt(save.getChildFromElement(element, "hygiene"));
-            mood = Integer.parseInt(save.getChildFromElement(element, "mood"));*/
-        }   
+            mood = Integer.parseInt(save.getChildFromElement(element, "mood"));
 
-        /*
-        save.createXmlElement(characterElement,doc,"conservatismScore",String.valueOf(conservatismScore));
-        save.createXmlElement(characterElement,doc,"nationalismScore",String.valueOf(nationalismScore));
-        save.createXmlElement(characterElement,doc,"ecologismScore",String.valueOf(ecologismScore));
-        save.createXmlElement(characterElement,doc,"feminismScore",String.valueOf(feminismScore));
-        save.createXmlElement(characterElement,doc,"anarchismScore",String.valueOf(anarchismScore));
-        save.createXmlElement(characterElement,doc,"populismScore",String.valueOf(populismScore));
-        save.createXmlElement(characterElement,doc,"ideologicalCode",String.valueOf(ideologicalCode));
-        save.createXmlElement(characterElement,doc,"politicalPartyId",String.valueOf(politicalPartyId));
-        save.createXmlElement(characterElement,doc,"chunk","{"+chunk[0]+","+chunk[1]+"}");
-        save.createXmlElement(characterElement,doc,"position","{"+position[0]+","+position[1]+"}");
-        save.createXmlElement(characterElement,doc,"inventory","{}");
-        */
+            conservatismScore = Integer.parseInt(save.getChildFromElement(element, "conservatismScore"));
+            nationalismScore = Integer.parseInt(save.getChildFromElement(element, "nationalismScore"));
+            ecologismScore = Integer.parseInt(save.getChildFromElement(element, "ecologismScore"));
+            feminismScore = Integer.parseInt(save.getChildFromElement(element, "feminismScore"));
+            anarchismScore = Integer.parseInt(save.getChildFromElement(element, "anarchismScore"));
+            populismScore = Integer.parseInt(save.getChildFromElement(element, "populismScore"));
+
+            ideologicalCode = save.getChildFromElement(element, "ideologicalCode");
+            politicalPartyId = save.getChildFromElement(element, "politicalPartyId");
+
+            int chunkInt[] = save.stringToIntArray(save.getChildFromElement(element, "chunk"));
+            chunk[0] = (long)chunkInt[0];
+            chunk[1] = (long)chunkInt[1];
+
+            position = save.stringToIntArray(save.getChildFromElement(element, "position"));
+            
+            String inventory = save.getChildFromElement(element, "inventory");
+        }   
     }
 
     private void createCharacterValues(){
@@ -191,7 +196,7 @@ public class Character{
         save.createXmlElement(characterElement,doc,"energy",String.valueOf(energy));
         save.createXmlElement(characterElement,doc,"belief",String.valueOf(belief));
         save.createXmlElement(characterElement,doc,"money",String.valueOf(money));
-        save.createXmlElement(characterElement,doc,"Hygiene",String.valueOf(hygiene));
+        save.createXmlElement(characterElement,doc,"hygiene",String.valueOf(hygiene));
         save.createXmlElement(characterElement,doc,"mood",String.valueOf(mood));
         save.createXmlElement(characterElement,doc,"conservatismScore",String.valueOf(conservatismScore));
         save.createXmlElement(characterElement,doc,"nationalismScore",String.valueOf(nationalismScore));
@@ -248,5 +253,10 @@ public class Character{
     public void addCaracter(JPanel backgroundPanel, int boxSize){
        // Objects obj = new Objects(size + 50, boxSize-size - 150, new int[] {size,size}, "demo\\img\\achat.png", 1, backgroundPanel);
         
+    }
+
+    public void changeCharacterPartyId(String partyId){
+        politicalPartyId = partyId;
+        save.changeElementChildValue(gameName, "characters", "character", characterId, "politicalPartyId", politicalPartyId);
     }
 }
