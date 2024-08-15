@@ -248,7 +248,21 @@ public class Npcs {
         
         SMS2 = SMS2.replaceAll("x€", donation + "€");
 
-        mainGameWindow.phonePanel.addNewNotification(name, SMS + '\n' + SMS2);
+        int responseType = random.nextInt(3);
+
+        switch (responseType) {
+            case 0:
+                mainGameWindow.phonePanel.addNewNotification(name, SMS);
+                break;
+            case 1:
+                mainGameWindow.phonePanel.addNewNotification(name, SMS2);
+                break;
+            default:
+                mainGameWindow.phonePanel.addNewNotification(name, SMS + '\n' + SMS2);
+                break;
+        }
+
+        
     }
 
     public int getDonationValue(){
