@@ -125,7 +125,7 @@ public class Npcs {
                 }
 
                 if ("accepted".equals(response)) {
-                    joinParti();
+                   joinParti(mainGameWindow);
                 }
             }
         } catch (Exception e) {
@@ -183,6 +183,10 @@ public class Npcs {
             Element questionElement = save.getElementById(docRoger, "question", "join");
             Map<String, List<String>> rogerQuestions = save.getAllChildsFromElement(questionElement);
 
+            if(character.politicalPartyId.equals(String.valueOf(mainGameWindow.player.partyID))){
+                return openChat(mainGameWindow, "alreadyInParty", rogerQuestions, randomNumber);
+            }
+
             if (!sayHello && compatibility <= 70) {
                 return openChat(mainGameWindow, "dontSayHello", rogerQuestions, randomNumber);
             }
@@ -219,8 +223,39 @@ public class Npcs {
         this.offsetY = random.nextInt(20 + 20) - 20;
     }
 
-    public void joinParti(){
+    public void joinParti(MainGameWindow mainGameWindow){
+        character.changeCharacterPartyId(String.valueOf(mainGameWindow.player.partyID));
 
+        String SMS = "";
+        doc = save.getDocumentXml(gameName, "functional/responses");
+        Element responseElement = save.getElementById(doc, "response", "acceptedSMS");
+        Map<String, List<String>> npcSMS = save.getAllChildsFromElement(responseElement);
+
+        int randomNumber = random.nextInt(30) + 1;
+
+        SMS += save.getChildFromMapElements(npcSMS, "res" + randomNumber);
+
+        responseElement = save.getElementById(doc, "response", "donation");
+        npcSMS = save.getAllChildsFromElement(responseElement);
+
+        randomNumber = random.nextInt(30) + 1;
+
+        String SMS2 = save.getChildFromMapElements(npcSMS, "res" + randomNumber);
+
+        int donation = getDonationValue();
+
+        mainGameWindow.player.addMoney(donation);
+        
+        SMS2 = SMS2.replaceAll("x€", donation + "€");
+
+        mainGameWindow.phonePanel.addNewNotification(name, SMS + '\n' + SMS2);
     }
-    
+
+    public int getDonationValue(){
+        if((character.money * 0.01) < 1000){
+            return (int)(character.money * 0.01);
+        }else {
+            return 1000;
+        }
+    }
 }
