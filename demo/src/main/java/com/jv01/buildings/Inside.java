@@ -5,6 +5,9 @@ import com.jv01.fonctionals.SoundManager;
 import com.jv01.generations.Chunks;
 import com.jv01.screens.GameWindowsSize;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +27,7 @@ public class Inside {
     public int type;
     public String imageUrl;
     public boolean isInsideBuilding;
+    public String className;
 
     private SoundManager soundManager;
 
@@ -54,33 +58,7 @@ public class Inside {
 
         addRestrictedBorders();
 
-        switch (type) {
-            case 0:
-                createPartieHouseInside();
-                break;
-            case 1:
-                createEmptyHouseInside();
-                break;
-
-            case 4:
-                createBakeryInside();
-                break;
-
-            case 6:
-                createAbandonedHouseInside();
-                break;
-
-            case 8:
-                createCorpoHouseInside();
-                break;
-
-            case 9:
-                createBarInside();
-                break;
-        
-            default:
-                break;
-        }
+        createInside();
     }
 
     private void getInsideValue(){
@@ -90,6 +68,7 @@ public class Inside {
         this.name = save.getChildFromElement(element, "name");
         this.imageUrl = save.getChildFromElement(element, "bacPic");
         this.doorSoundId = save.getChildFromElement(element, "doorSoundId");
+        this.className = save.getChildFromElement(element, "className");
     }
 
     private void addRestrictedBorders(){
@@ -115,48 +94,28 @@ public class Inside {
         });
     }
 
-    private void createPartieHouseInside(){
-        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        PartieHouse partieHouse = new PartieHouse(gameName,boxSize, backgroundPanel);
-        addRestrictedAreas(partieHouse.restrictedAreas);
-        addTrigerEventsAreas(partieHouse.trigerEvents);
-    }
+    @SuppressWarnings("unchecked")
+    private void createInside(){
+        try {
+            if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
+            Class<?> clazz = Class.forName(className);
+        
+            Constructor<?> constructor = clazz.getConstructor(String.class, int.class, JPanel.class);
+        
+            Object instance = constructor.newInstance(gameName, boxSize, backgroundPanel);
+            
+            Field field = clazz.getField("restrictedAreas");
+            Object value = field.get(instance);
+            addRestrictedAreas((List<int[][]>)value);
 
-    private void createAbandonedHouseInside(){
-        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        AbandonedHouse abandonedHouse = new AbandonedHouse(gameName,boxSize, backgroundPanel);
-        addRestrictedAreas(abandonedHouse.restrictedAreas);
-        addTrigerEventsAreas(abandonedHouse.trigerEvents);
-    }
+            field = clazz.getField("trigerEvents");
+            value = field.get(instance);
+            addTrigerEventsAreas((List<Object[]>)value);
 
-    private void createBakeryInside(){
-        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        Bakery bakery = new Bakery(gameName, backgroundPanel);
-        addRestrictedAreas(bakery.restrictedAreas);
-        addTrigerEventsAreas(bakery.trigerEvents);
+        } catch (Exception e) {
+            e.printStackTrace(); 
+        }
     }
-
-    private void createEmptyHouseInside(){
-        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        EmptyHouse emptyHouse = new EmptyHouse(gameName,boxSize, backgroundPanel);
-        addRestrictedAreas(emptyHouse.restrictedAreas);
-        addTrigerEventsAreas(emptyHouse.trigerEvents);
-    }
-
-    private void createCorpoHouseInside(){
-        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        CorporationHouse corpoHouse = new CorporationHouse(gameName,boxSize, backgroundPanel);
-        addRestrictedAreas(corpoHouse.restrictedAreas);
-        addTrigerEventsAreas(corpoHouse.trigerEvents);
-    }
-
-    private void createBarInside(){
-        if(!isInsideBuilding)soundManager.playSFX(doorSoundId);
-        BarHouse barHouse = new BarHouse(gameName, boxSize, backgroundPanel);
-        addRestrictedAreas(barHouse.restrictedAreas);
-        addTrigerEventsAreas(barHouse.trigerEvents);
-    }
-
 
     private void addRestrictedAreas(List<int[][]> buildingRestrictedAreas){
         for (int[][] rest : buildingRestrictedAreas) {

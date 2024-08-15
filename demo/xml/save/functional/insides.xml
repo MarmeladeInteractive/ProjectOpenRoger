@@ -3,50 +3,72 @@
         <name>Maison du parti</name>
         <bacPic>demo/img/insides/partyHouse01.jpg</bacPic>
         <doorSoundId>null</doorSoundId>
+        <className>com.jv01.buildings.PartieHouse</className>
     </inside>
     <inside id="1">
         <name>Maison vide</name>
         <bacPic>demo/img/insides/emptyProperty01.jpg</bacPic>
         <doorSoundId>null</doorSoundId>
+        <className>com.jv01.buildings.EmptyHouse</className>
     </inside>
     <inside id="2">
         <name>Mairie</name>
         <bacPic>demo/img/insides/cityHall01.jpg</bacPic>
         <doorSoundId>null</doorSoundId>
+        <className></className>
     </inside>
     <inside id="3">
         <name>Imprimerie</name>
         <bacPic>demo/img/insides/printingPress01.jpg</bacPic>
         <doorSoundId>null</doorSoundId>
+        <className></className>
     </inside>
     <inside id="4">
         <name>Boulangerie</name>
         <bacPic>demo/img/insides/bakery01.jpg</bacPic>
         <doorSoundId>null</doorSoundId>
+        <className>com.jv01.buildings.Bakery</className>
     </inside>
     <inside id="5">
         <name>Magasin</name>
         <bacPic>demo/img/insides/store01.jpg</bacPic>
         <doorSoundId>null</doorSoundId>
+        <className></className>
     </inside>
     <inside id="6">
         <name>Maison abandonnee</name>
         <bacPic>demo/img/insides/abandonedHouse01.jpg</bacPic>
         <doorSoundId>door_02</doorSoundId>
+        <className>com.jv01.buildings.AbandonedHouse</className>
     </inside>
     <inside id="7">
         <name>Maison</name>
         <bacPic>demo/img/insides/house01.jpg</bacPic>
         <doorSoundId>null</doorSoundId>
+        <className></className>
     </inside>
     <inside id="8">
         <name>Siege corporation</name>
         <bacPic>demo/img/insides/corpoHouse01.jpg</bacPic>
         <doorSoundId>null</doorSoundId>
+        <className>com.jv01.buildings.CorporationHouse</className>
     </inside>
     <inside id="9">
         <name>BAR</name>
         <bacPic>demo/img/insides/bar01.jpg</bacPic>
         <doorSoundId>door_01</doorSoundId>
+        <className>com.jv01.buildings.BarHouse</className>
+    </inside>
+    <inside id="10">
+        <name>Farm</name>
+        <bacPic>demo/img/insides/abandonedHouse01.jpg</bacPic>
+        <doorSoundId>door_02</doorSoundId>
+        <className>com.jv01.buildings.Farm</className>
+    </inside>
+    <inside id="11">
+        <name>Personal Farm</name>
+        <bacPic>demo/img/insides/abandonedHouse01.jpg</bacPic>
+        <doorSoundId>door_02</doorSoundId>
+        <className>com.jv01.buildings.PersonalFarm</className>
     </inside>
 </insides>

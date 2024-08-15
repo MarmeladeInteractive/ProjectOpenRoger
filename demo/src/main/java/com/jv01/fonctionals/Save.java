@@ -262,6 +262,22 @@ public class Save {
         return array;
     }
 
+    public String[][] stringToStringArray2(String typesString) {
+        typesString = typesString.replaceAll("[{}]", "");
+        String[] typesStringArray = typesString.split(",");
+
+        String[][] result = new String[3][3];
+        int index = 0;
+
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                result[i][j] = typesStringArray[index];
+                index++;
+            }
+        }
+        return result;
+    }
+
     public  String generateRandomString(int length){
         String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         int SEED_LENGTH = length;
@@ -290,17 +306,50 @@ public class Save {
 
     public void changeChunkBuildingType(String gameName, long[] chunk, int newBuildingType){
         String chunkId = String.valueOf(chunk[0])+"_"+String.valueOf(chunk[1]);
-        Document doc = getDocumentXml(gameName, "chunks");
-        Element element = getElementById(doc, "chunk", chunkId);
-        String typesString = getChildFromElement(element,"buildingsTypes");
-        String newTypesString = typesString.substring(0, 1) + String.valueOf(newBuildingType) + typesString.substring(2);
-
+        String newTypesString = '{' + String.valueOf(newBuildingType) + '}';
         changeElementChildValue(gameName,"chunks","chunk",chunkId,"buildingsTypes",newTypesString);
+    }
+    public void changeChunkSpecialStructures(String gameName, long[] chunk, String specialStructures){
+        String chunkId = String.valueOf(chunk[0])+"_"+String.valueOf(chunk[1]);
+        changeElementChildValue(gameName,"chunks","chunk",chunkId,"specialStructuresIds",specialStructures);
     }
 
     public String getGameValue(String gameName, String childName){
         Document doc = getDocumentXml(gameName, "game");
         Element element = getElementById(doc, "game", "game");
         return getChildFromElement(element, childName);
+    }
+
+    public String convertArrayToString(String[][] array) {
+        StringBuilder sb = new StringBuilder();
+    
+        sb.append("{");
+        for (int i = 0; i < array.length; i++) {
+            sb.append("{");
+            for (int j = 0; j < array[i].length; j++) {
+                sb.append(array[i][j]);
+                if (j < array[i].length - 1) {
+                    sb.append(",");
+                }
+            }
+            sb.append("}");
+            if (i < array.length - 1) {
+                sb.append(",");
+            }
+        }
+        sb.append("}");
+    
+        return sb.toString();
+    }
+
+    public boolean areAllFieldsNull(String[][] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                if (!"null".equals(array[i][j])) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }

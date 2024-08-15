@@ -68,6 +68,8 @@ public class GameMap extends JPanel {
         "demo\\img\\buildings\\house01.png",
         "demo\\img\\buildings\\corpo01.png",
         "demo\\img\\buildings\\bar01.png",
+        "demo\\img\\buildings\\farm01.png",
+        "demo\\img\\buildings\\farm01.png",
     };
 
     public KeyListener keyListener;

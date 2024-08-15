@@ -401,4 +401,14 @@ public class Player{
         alertMessage = msg;
         displayAlert = true;
     }
+
+    public void addMoney(long add){
+        getPlayerValues();
+        money += add;
+        saveMoney();
+    }
+    public void removeMoney(long remove){
+        if(remove>0)remove = remove * (-1);
+        addMoney(remove);
+    }
 }

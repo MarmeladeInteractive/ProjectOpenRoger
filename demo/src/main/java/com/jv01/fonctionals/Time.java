@@ -1,8 +1,9 @@
 package com.jv01.fonctionals;
 
 import java.text.SimpleDateFormat;
-
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,7 +14,7 @@ import org.w3c.dom.Element;
 import com.jv01.screens.NewsWindow;
 
 public class Time {
-    private Save save =  new Save();
+    private Save save = new Save();
     private String gameName;
 
     private volatile long timeForOneS;
@@ -25,7 +26,7 @@ public class Time {
 
     private SimpleDateFormat savedFormat;
 
-    private int season = 0; 
+    private int season = 0;
 
     public int nightFilterOpacity = 0;
 
@@ -36,6 +37,14 @@ public class Time {
 
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
+    // Abonnements
+    private List<NewDayListener> newDayListeners = new ArrayList<>();
+    private List<NewWeekListener> newWeekListeners = new ArrayList<>();
+
+    // Variables pour suivre les changements de jour et de semaine
+    private int lastDayOfYear;
+    private int lastWeekOfYear;
+
     public Time(String gameName) {
         this.gameName = gameName;
 
@@ -45,29 +54,34 @@ public class Time {
 
         this.calendar = Calendar.getInstance();
 
-        getLocalSaveGameDate(); 
-        if(!isTime)timeForOneS = 1000;
-        
+        getLocalSaveGameDate();
+        if (!isTime) timeForOneS = 1000;
+
+        lastDayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+        lastWeekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override
             public void run() {
-                if(isTime){advanceTime(60);}
+                if (isTime) {
+                    advanceTime(60);
+                }
             }
         }, 0, timeForOneS, TimeUnit.MILLISECONDS);
 
         updateNightFilterOpacity();
     }
 
-    public void getLocalSaveGameDate(){
-        Document doc = save.getDocumentXml(gameName,"game");
+    public void getLocalSaveGameDate() {
+        Document doc = save.getDocumentXml(gameName, "game");
         Element element = save.getElementById(doc, "time", "time");
 
-        String date = save.getChildFromElement(element,"date");
-        long secondsPerDay = Integer.parseInt(save.getChildFromElement(element,"secondsPerDay"));
+        String date = save.getChildFromElement(element, "date");
+        long secondsPerDay = Integer.parseInt(save.getChildFromElement(element, "secondsPerDay"));
 
-        if(secondsPerDay <= 0)isTime = false;
+        if (secondsPerDay <= 0) isTime = false;
 
-        this.timeForOneS = Math.round((secondsPerDay*1.0 / 86400)*1000*60);
+        this.timeForOneS = Math.round((secondsPerDay * 1.0 / 86400) * 1000 * 60);
 
         String[] date01 = date.split(":");
         int day = Integer.parseInt(date01[0]);
@@ -75,8 +89,8 @@ public class Time {
         int year = Integer.parseInt(date01[2]);
         int h = Integer.parseInt(date01[3]);
         int min = Integer.parseInt(date01[4]);
-        
-        calendar.set(year, mouth-1, day, h, min);
+
+        calendar.set(year, mouth - 1, day, h, min);
         updateSeason();
     }
 
@@ -84,11 +98,13 @@ public class Time {
         calendar.add(Calendar.SECOND, (int) secondes);
         updateSeason();
         updateNightFilterOpacity();
-        getNewsPaper();
+        //getNewsPaper();
+        checkForNewDay();
+        checkForNewWeek();
     }
 
     public void changeDate(int year, int mouth, int day) {
-        calendar.set(year, mouth - 1, day); 
+        calendar.set(year, mouth - 1, day);
         updateSeason();
     }
 
@@ -100,23 +116,23 @@ public class Time {
         return saisons[season];
     }
 
-    public String getHour(){
+    public String getHour() {
         return hourFormat.format(calendar.getTime());
     }
 
-    public void setHour(String hour){
+    public void setHour(String hour) {
         try {
             String[] hourString = hour.split(":");
-            int[] hourInt = new int[]{Integer.parseInt(hourString[0]),Integer.parseInt(hourString[1])};
+            int[] hourInt = new int[]{Integer.parseInt(hourString[0]), Integer.parseInt(hourString[1])};
 
-            if(hourInt[0]>=0 && hourInt[0]<=24 && hourInt[1]>=0 && hourInt[1]<=60){
+            if (hourInt[0] >= 0 && hourInt[0] <= 24 && hourInt[1] >= 0 && hourInt[1] <= 60) {
                 calendar.set(Calendar.HOUR_OF_DAY, hourInt[0]);
                 calendar.set(Calendar.MINUTE, hourInt[1]);
                 updateSeason();
                 updateNightFilterOpacity();
-            }else{
-                
-            } 
+            } else {
+
+            }
         } catch (NumberFormatException e) {
 
         }
@@ -135,46 +151,46 @@ public class Time {
         }
     }
 
-    private void updateNightFilterOpacity(){
+    private void updateNightFilterOpacity() {
         int hour = Integer.parseInt(getHour().split(":")[0]);
         boolean isDay = false;
-        if(hour > 6 && hour < 18){
+        if (hour > 6 && hour < 18) {
             isDay = true;
-        }else{
+        } else {
             isDay = false;
         }
 
         int minOpacity = 0;
         int maxOpacity = 200;
 
-        if(isDay){
+        if (isDay) {
             nightFilterOpacity = minOpacity;
-        }else{
+        } else {
             nightFilterOpacity = maxOpacity;
-        }  
+        }
 
         if (hour > 12 && hour < 24) {
-            nightFilterOpacity = minOpacity + (int)Math.round((maxOpacity - minOpacity) * ((hour-12) / 12.0)); 
+            nightFilterOpacity = minOpacity + (int) Math.round((maxOpacity - minOpacity) * ((hour - 12) / 12.0));
         } else {
-            nightFilterOpacity =  (int)Math.round((maxOpacity - minOpacity) * ((12-hour) / 12.0));
+            nightFilterOpacity = (int) Math.round((maxOpacity - minOpacity) * ((12 - hour) / 12.0));
         }
     }
 
-    private void getNewsPaper(){
+    private void getNewsPaper() {
         int hour = Integer.parseInt(getHour().split(":")[0]);
-        if(hour == 8 && this.newsPaperExist==false){
+        if (hour == 8 && this.newsPaperExist == false) {
             NewsWindow morningNewspaperWindow = new NewsWindow(gameName);
             morningNewspaperWindow.setVisible(true);
             this.newsPaperExist = true;
-        }else if (hour == 8 && this.newsPaperExist==true){
+        } else if (hour == 8 && this.newsPaperExist == true) {
             //
-        }else if (hour != 8 && this.newsPaperExist==true){
+        } else if (hour != 8 && this.newsPaperExist == true) {
             this.newsPaperExist = false;
         }
     }
 
-    public void saveDate(){
-        save.changeElementChildValue(gameName,"game","time","time","date",savedFormat.format(calendar.getTime()));
+    public void saveDate() {
+        save.changeElementChildValue(gameName, "game", "time", "time", "date", savedFormat.format(calendar.getTime()));
     }
 
     public void changeTimeForDay(long newTime) {
@@ -187,7 +203,7 @@ public class Time {
             isTime = true;
             scheduler.shutdown();
             this.timeForOneS = Math.round((newTime * 1.0 / 86400) * 1000 * 60);
-            scheduler = Executors.newScheduledThreadPool(1); 
+            scheduler = Executors.newScheduledThreadPool(1);
             scheduler.scheduleAtFixedRate(new Runnable() {
                 @Override
                 public void run() {
@@ -197,5 +213,60 @@ public class Time {
                 }
             }, 0, timeForOneS, TimeUnit.MILLISECONDS);
         }
+    }
+
+    // Abonnements
+    public void addNewDayListener(NewDayListener listener) {
+        newDayListeners.add(listener);
+    }
+
+    public void removeNewDayListener(NewDayListener listener) {
+        newDayListeners.remove(listener);
+    }
+
+    public void addNewWeekListener(NewWeekListener listener) {
+        newWeekListeners.add(listener);
+    }
+
+    public void removeNewWeekListener(NewWeekListener listener) {
+        newWeekListeners.remove(listener);
+    }
+
+    // Méthodes pour vérifier les changements de jour et de semaine
+    private void checkForNewDay() {
+        int currentDayOfYear = calendar.get(Calendar.DAY_OF_YEAR);
+        if (currentDayOfYear != lastDayOfYear) {
+            lastDayOfYear = currentDayOfYear;
+            notifyNewDayListeners();
+        }
+    }
+
+    private void checkForNewWeek() {
+        int currentWeekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+        if (currentWeekOfYear != lastWeekOfYear) {
+            lastWeekOfYear = currentWeekOfYear;
+            notifyNewWeekListeners();
+        }
+    }
+
+    private void notifyNewDayListeners() {
+        for (NewDayListener listener : newDayListeners) {
+            listener.onNewDay();
+        }
+    }
+
+    private void notifyNewWeekListeners() {
+        for (NewWeekListener listener : newWeekListeners) {
+            listener.onNewWeek();
+        }
+    }
+
+    // Interfaces pour les abonnements
+    public interface NewDayListener {
+        void onNewDay();
+    }
+
+    public interface NewWeekListener {
+        void onNewWeek();
     }
 }

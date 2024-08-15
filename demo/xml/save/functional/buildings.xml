@@ -3,6 +3,8 @@
         <name>Maison du parti</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/partyHouse01.png,
@@ -17,6 +19,8 @@
         <name>Maison vide</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/emptyProperty01.png,
@@ -31,6 +35,8 @@
         <name>Mairie</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/cityHall01.png,
@@ -45,6 +51,8 @@
         <name>Imprimerie</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/printingPress01.png,
@@ -59,6 +67,8 @@
         <name>Boulangerie</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/bakery01.png,
@@ -73,6 +83,8 @@
         <name>Magasin</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/store01.png,
@@ -87,6 +99,8 @@
         <name>Maison abandonnee</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/abandonedHouse01.png,
@@ -101,6 +115,8 @@
         <name>Maison</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/house01.png,
@@ -115,6 +131,8 @@
         <name>Siege corporation</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/corpo01.png,
@@ -129,12 +147,46 @@
         <name>BAR</name>
         <size>{220,220}</size>
         <description></description>
+        <specialStructuresNumber>1</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{field}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/bar01.png,
                 demo/img/buildings/bar02.png,
                 demo/img/buildings/bar03.png,
                 demo/img/buildings/bar04.png,
+            }
+        </imagesUrls>
+    </building>
+
+    <building id="10">
+        <name>Farm</name>
+        <size>{220,220}</size>
+        <description></description>
+        <specialStructuresNumber>3</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{field}</specialStructuresPosibleTypes>
+        <imagesUrls>
+            {
+                demo/img/buildings/farm01.png,
+                demo/img/buildings/farm02.png,
+                demo/img/buildings/farm03.png,
+                demo/img/buildings/farm04.png,
+            }
+        </imagesUrls>
+    </building>
+
+    <building id="11">
+        <name>Personal Farm</name>
+        <specialStructuresNumber>3</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{field}</specialStructuresPosibleTypes>
+        <size>{220,220}</size>
+        <description></description>
+        <imagesUrls>
+            {
+                demo/img/buildings/farm01.png,
+                demo/img/buildings/farm02.png,
+                demo/img/buildings/farm03.png,
+                demo/img/buildings/farm04.png,
             }
         </imagesUrls>
     </building>

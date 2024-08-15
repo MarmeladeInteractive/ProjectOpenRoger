@@ -1,0 +1,5 @@
+<ownerships>
+    <ownerships id="personalFarm">
+        <classesName>com.jv01.buildings.PersonalFarm</classesName>
+    </ownership>
+</ownerships>
