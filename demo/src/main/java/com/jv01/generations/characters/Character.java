@@ -1,4 +1,4 @@
-package com.jv01.generations;
+package com.jv01.generations.characters;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -12,10 +12,12 @@ import org.w3c.dom.NodeList;
 
 import com.github.javafaker.Faker;
 import com.jv01.fonctionals.Save;
+import com.jv01.generations.Ideology;
 
 public class Character{
     public  Faker faker = new Faker();
     public  Save save = new Save();
+    Identity identity;
 
     public  String gameName;
 
@@ -34,7 +36,7 @@ public class Character{
     
     int valueMax = 100;
 
-    int size[] = {100,100};
+    public int size[] = {100,100};
 
     public  String name;
     public  String gender = "male";
@@ -65,11 +67,15 @@ public class Character{
 
     public Character(String gameName){
         this.gameName = gameName;
+        this.identity = new Identity(gameName);
         createCharacterValues();
     }
 
     public Character(String gameName,String id,boolean saveNpc){
         this.gameName = gameName;
+
+        this.identity = new Identity(gameName);
+        
         this.characterId = id;
 
         Document doc = save.getDocumentXml(gameName, "characters");
@@ -108,12 +114,12 @@ public class Character{
     }
 
     private void createCharacterValues(){
-        name = faker.name().fullName();
         if(faker.number().numberBetween(0, 2)==0){
             gender = "female";
         }else {
             gender = "male";
         }
+        name = identity.getFullName(gender);
         age = faker.number().numberBetween(ageMin, ageMax);
         health = faker.number().numberBetween(healthMin, valueMax) - ((age) * (faker.number().numberBetween(0, 10)))/20;
         energy = faker.number().numberBetween(energyMin, valueMax) - ((age) * (faker.number().numberBetween(0, 6)))/20;

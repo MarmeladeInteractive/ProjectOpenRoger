@@ -13,6 +13,7 @@ import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
 import com.jv01.fonctionals.SoundManager;
+import com.jv01.generations.characters.Character;
 
 public class Npcs {
     public Save save = new Save();
