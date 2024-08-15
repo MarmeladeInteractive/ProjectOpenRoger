@@ -147,8 +147,8 @@
         <name>BAR</name>
         <size>{220,220}</size>
         <description></description>
-        <specialStructuresNumber>1</specialStructuresNumber>
-        <specialStructuresPosibleTypes>{field}</specialStructuresPosibleTypes>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
         <imagesUrls>
             {
                 demo/img/buildings/bar01.png,
