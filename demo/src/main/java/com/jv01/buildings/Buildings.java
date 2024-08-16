@@ -144,58 +144,6 @@ public class Buildings {
         offsetY = (int)mapRange(key03,0,16,-20,20);
     }
 
-    public String[][] createSpecialStructures() {
-        String[][] specialStructuresIds = {{"null", "null", "null"}, {"null", "null", "null"}, {"null", "null", "null"}};
-
-        long seed = buildingKey.hashCode();
-        Random random = new Random(seed);
-
-        Set<String> usedPositions = new HashSet<>();
-
-        for (int n = 0; n < specialStructuresNumber; n++) {
-            int row, col;
-            String positionKey;
-        
-            do {
-                row = random.nextInt(specialStructuresIds.length);
-                col = random.nextInt(specialStructuresIds[row].length);
-                positionKey = row + "," + col;
-            } while (usedPositions.contains(positionKey));
-            
-            usedPositions.add(positionKey);
-
-            String type = specialStructuresPosibleTypes[random.nextInt(specialStructuresPosibleTypes.length)];
-            
-            int[] cell = {row, col};
-            specialStructuresIds[row][col] = createSpecialStructure(chunk, cell, type);
-        }
-
-        return specialStructuresIds;
-    }
-
-    public String createSpecialStructure(long[] chunk, int[] cell, String type){
-        specialStructures.specialStructuresType = specialStructures.specialStructuresType.getElementsTypeValues(type);
-
-        try {
-            Class<?> clazz = Class.forName(specialStructures.specialStructuresType.classesName);
-        
-            Constructor<?> constructor = clazz.getConstructor(String.class);
-        
-            Object instance = constructor.newInstance(gameName);
-        
-            Method method = clazz.getMethod("createDefaultStructure", long[].class, int[].class);
-        
-            String specialStructuresId = (String) method.invoke(instance, chunk, cell);
-
-            specialStructures.addSpecialStructure(type, chunk, specialStructuresId);
-            
-            return specialStructuresId;
-        } catch (Exception e) {
-            e.printStackTrace(); 
-            return "null";
-        }
-    }
-
     public double mapRange(double value, double minInput, double maxInput, double minOutput, double maxOutput) {
         return minOutput + ((value - minInput) / (maxInput - minInput)) * (maxOutput - minOutput);
     }

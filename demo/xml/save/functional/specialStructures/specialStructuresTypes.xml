@@ -4,6 +4,11 @@
         <type>field</type>
         <description></description>
         <size>{220,220}</size>
+        <imagesPaths>
+            {
+               demo/img/specialStructures/field.png 
+            }
+        </imagesPaths>
         <classesName>com.jv01.generations.specialStructures.structures.Fields</classesName>
     </specialStructuresType>
 </specialStructuresTypes>
