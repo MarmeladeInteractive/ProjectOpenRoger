@@ -502,7 +502,8 @@ public class Chunks {
         buildingType = building01.id;
 
         if(save.areAllFieldsNull(specialStructuresIds)){
-            String[][] newSpecialStructuresIds = building01.createSpecialStructures();
+            String[][] newSpecialStructuresIds = specialStructures.createSpecialStructures(buildingKey, building01.specialStructuresNumber, building01.specialStructuresPosibleTypes, chunk);
+
             if(!save.areAllFieldsNull(newSpecialStructuresIds)){
                 specialStructuresIds = newSpecialStructuresIds;
                 save.changeChunkSpecialStructures(gameName, chunk, save.convertArrayToString(newSpecialStructuresIds));

@@ -262,6 +262,20 @@ public class Save {
         return array;
     }
 
+    public String[] stringToStringPathArray(String arrayString) {
+        String[] array = stringToStringArray(arrayString);
+        List<String> resultList = new ArrayList<>();
+    
+        for (int i = 0; i < array.length; i++) {
+            String trimmedString = dropSpaceFromString(array[i]);
+            if (!trimmedString.isEmpty()) {
+                resultList.add(trimmedString);
+            }
+        }
+
+        return resultList.toArray(new String[0]);
+    }
+
     public String[][] stringToStringArray2(String typesString) {
         typesString = typesString.replaceAll("[{}]", "");
         String[] typesStringArray = typesString.split(",");

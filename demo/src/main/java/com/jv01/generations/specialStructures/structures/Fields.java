@@ -1,13 +1,18 @@
 package com.jv01.generations.specialStructures.structures;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import java.awt.Color;
+import java.awt.Image;
+import java.util.Random;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.generations.plants.CultivablePlants;
 import com.jv01.generations.specialStructures.SpecialStructuresTypes;
 
 public class Fields {
@@ -18,6 +23,7 @@ public class Fields {
     public Element element;
 
     String elementId;
+    String type;
 
     public Fields(String gameName){
         this.gameName = gameName;
@@ -25,20 +31,23 @@ public class Fields {
 
     private void createFieldElement(long[] chunk, int[] cell){
         elementId = "field_" + save.generateRandomString(10);
-        Element fieldElement = doc.createElement("fields");
+        Element fieldElement = doc.createElement("field");
 
         fieldElement.setAttribute("id", elementId);
         
         save.createXmlElement(fieldElement,doc,"chunk", '{'+String.valueOf(chunk[0])+','+String.valueOf(chunk[1])+'}');
         save.createXmlElement(fieldElement,doc,"cell", '{'+String.valueOf(cell[0])+','+String.valueOf(cell[1])+'}');
-        save.createXmlElement(fieldElement,doc,"type", "default");
+        save.createXmlElement(fieldElement,doc,"type", "wheat");
         save.createXmlElement(fieldElement,doc,"elementId", elementId);
 
         doc.getDocumentElement().appendChild(fieldElement);
     }
 
     public void getFieldElement(String elementId){
+        doc = save.getDocumentXml(gameName, "functional/specialStructures/structures/fields");
+        element = save.getElementById(doc, "field", elementId);
 
+        this.type = save.getChildFromElement(element, "type");         
     }
 
     public String createDefaultStructure(long[] chunk, int[] cell){
@@ -48,21 +57,16 @@ public class Fields {
         return elementId;
     }
 
-    public void addSpecialStructureToPanel(SpecialStructuresTypes specialStructuresType, int x, int y, String elementId, JPanel backgroundPanel){
+    public JPanel getSpecialStructureToPanel(SpecialStructuresTypes specialStructuresType, int x, int y, String elementId) {
         getFieldElement(elementId);
-        
-        JPanel panel = new JPanel();
-
-        panel.setBackground(Color.yellow);
-
-        panel.setVisible(true);
-        panel.setOpaque(true);
-
-        panel.setBounds(x - (specialStructuresType.size[0]/2), y - (specialStructuresType.size[1]/2), specialStructuresType.size[0], specialStructuresType.size[1]);
-
-        backgroundPanel.add(panel);
     
-        backgroundPanel.revalidate();
-        backgroundPanel.repaint();
-    }
+        JPanel cultivablePlantsPanel = new JPanel(null);
+        cultivablePlantsPanel.setBounds(0, 0, specialStructuresType.size[0], specialStructuresType.size[1]);
+        cultivablePlantsPanel.setOpaque(false);
+        
+        CultivablePlants cultivablePlants = new CultivablePlants(gameName);
+        cultivablePlantsPanel = cultivablePlants.addCultivablePlantToPanels(type, specialStructuresType, cultivablePlantsPanel);
+    
+        return cultivablePlantsPanel;
+    }   
 }

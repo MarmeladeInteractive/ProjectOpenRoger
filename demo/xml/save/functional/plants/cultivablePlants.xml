@@ -1,0 +1,14 @@
+<cultivablePlants>
+    <cultivablePlant id="wheat">
+        <name>wheat</name>
+        <imagesPaths>
+            {
+                demo/img/cultivablePlants/wheat/wheat01.png,
+                demo/img/cultivablePlants/wheat/wheat02.png,
+                demo/img/cultivablePlants/wheat/wheat03.png,
+                demo/img/cultivablePlants/wheat/wheat04.png,
+            }
+        </imagesPaths>
+        <sellingPrice>10</sellingPrice>
+    </cultivablePlant>
+</cultivablePlants>
