@@ -27,6 +27,12 @@
         <logoPath>demo/img/selectionWheel/interactions/interactThrow.png</logoPath>
         <description></description>
     </interaction>
+
+    <interaction id="interactPlantWheat">
+        <logoPath>demo/img/selectionWheel/interactions/interactPlantWheat.png</logoPath>
+        <description></description>
+    </interaction>
+
     <interaction id="interactTEST1">
         <logoPath>demo/img/selectionWheel/interactions/interactTEST1.png</logoPath>
         <description></description>

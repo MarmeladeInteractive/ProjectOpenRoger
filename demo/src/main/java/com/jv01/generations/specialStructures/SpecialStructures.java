@@ -3,7 +3,10 @@ package com.jv01.generations.specialStructures;
 import java.awt.Dimension;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.awt.Color;
@@ -14,6 +17,8 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.generations.Chunks;
+import com.jv01.generations.MainGameWindow;
 
 public class SpecialStructures {
     public Save save = new Save();
@@ -26,6 +31,14 @@ public class SpecialStructures {
 
     public String type;
     public String elementId;
+
+    public List<int[][]> restrictedAreas = new ArrayList<>();
+    public List<Object[]> trigerEvents = new ArrayList<>();
+
+    public int x = 0;
+    public int y = 0;
+    
+    public boolean refreshDisplay = false;
 
     public SpecialStructures(String gameName){
         this.gameName = gameName;
@@ -118,10 +131,39 @@ public class SpecialStructures {
         }
     }
 
-    public void addSpecialStructureToPanel(int x, int y, String elementId, JPanel backgroundPanel){
+    public void addSpecialStructureToPanel(int x, int y, String elementId, JPanel backgroundPanel, Chunks chunk){
+        this.x = x;
+        this.y = y;
+
         getElementsValues(elementId);
 
         JPanel backgroundPanelWithImage = specialStructuresType.getSpecialStructuresTypeJPanel();
+
+        if(specialStructuresType.isRestictedArea){
+            restrictedAreas.add(new int[][] { 
+                {
+                    x - (specialStructuresType.size[0]/2), 
+                    y - (specialStructuresType.size[1]/2)
+                }, 
+                {
+                    x + (specialStructuresType.size[0]/2), 
+                    y + (specialStructuresType.size[1]/2)
+                } 
+            });
+        }
+
+        if(specialStructuresType.interactionTypes.length > 0){
+            Object[] struObjects = {
+                new int[]{
+                    x,
+                    y,
+                },
+                "specialStructure",
+                this
+            };
+
+            trigerEvents.add(struObjects);
+        }
 
         JPanel panel = new JPanel(null);
         panel.setBounds(x - (specialStructuresType.size[0] / 2), y - (specialStructuresType.size[1] / 2), specialStructuresType.size[0], specialStructuresType.size[1]);
@@ -163,6 +205,28 @@ public class SpecialStructures {
 
             backgroundPanel.revalidate();
             backgroundPanel.repaint();
+        }
+    }
+
+    public void interact(MainGameWindow mainGameWindow, int[] position) {
+        List<String> options = Arrays.asList(specialStructuresType.interactionTypes);
+        if (!mainGameWindow.selectionWheel.isOpen && !mainGameWindow.interactiveInventory.isInventoryOpen) {
+            mainGameWindow.selectionWheel.openSelectionWheel(position[0], position[1], "specialStructure", options);
+        } else if(mainGameWindow.selectionWheel.isIconSelected){
+            try {
+                Class<?> clazz = Class.forName(specialStructuresType.classesName);
+            
+                Constructor<?> constructor = clazz.getConstructor(String.class);
+            
+                Object instance = constructor.newInstance(gameName);
+            
+                Method method = clazz.getMethod("interact",MainGameWindow.class, SpecialStructures.class, String.class);
+            
+                method.invoke(instance, mainGameWindow, this, mainGameWindow.selectionWheel.iconSelectedId);
+                mainGameWindow.selectionWheel.isIconSelected = false;
+            } catch (Exception e) {
+    
+            }
         }
     }
 }

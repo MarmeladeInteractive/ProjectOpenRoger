@@ -104,9 +104,9 @@
         <imagesUrls>
             {
                 demo/img/buildings/abandonedHouse01.png,
-                demo/img/buildings/abandonedHouse02.png,
-                demo/img/buildings/abandonedHouse03.png,
-                demo/img/buildings/abandonedHouse04.png,
+                demo/img/buildings/abandonedHouse01.png,
+                demo/img/buildings/abandonedHouse01.png,
+                demo/img/buildings/abandonedHouse01.png,
             }
         </imagesUrls>
     </building>

@@ -9,10 +9,14 @@ import org.w3c.dom.Element;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 import com.jv01.fonctionals.Save;
+import com.jv01.generations.MainGameWindow;
 import com.jv01.generations.plants.CultivablePlants;
+import com.jv01.generations.specialStructures.SpecialStructures;
 import com.jv01.generations.specialStructures.SpecialStructuresTypes;
 
 public class Fields {
@@ -69,4 +73,8 @@ public class Fields {
     
         return cultivablePlantsPanel;
     }   
+
+    public void interact(MainGameWindow mainGameWindow, SpecialStructures specialStructure, String interactionType) {
+        System.out.println(interactionType+ " : "+ specialStructure.elementId);
+    }
 }

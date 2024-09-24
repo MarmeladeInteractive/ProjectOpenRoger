@@ -519,7 +519,9 @@ public class Chunks {
     }
 
     private void createSpecialStructure(int[] cell, String elementId){
-        specialStructures.addSpecialStructureToPanel(cell[0]*GWS.cellWidth+(GWS.cellWidth/2), cell[1]*GWS.cellHeight+(GWS.cellHeight/2),elementId,backgroundPanel);
+        specialStructures.addSpecialStructureToPanel(cell[0]*GWS.cellWidth+(GWS.cellWidth/2), cell[1]*GWS.cellHeight+(GWS.cellHeight/2),elementId,backgroundPanel,this);
+        restrictedAreas.addAll(specialStructures.restrictedAreas);
+        trigerEvents.addAll(specialStructures.trigerEvents);
     }
 
     public void addNpcs(){
@@ -577,7 +579,7 @@ public class Chunks {
         npc = new Npcs(gameName);
         npc.createCharacter(id);
         Object[] obj = npc.addNpc(x,y,backgroundPanel);
-        //restrictedAreas.add(npc.restrictedAreas);
+        //specialStructuresType.add(npc.restrictedAreas);
 
         trigerEvents.add(obj);
     }
