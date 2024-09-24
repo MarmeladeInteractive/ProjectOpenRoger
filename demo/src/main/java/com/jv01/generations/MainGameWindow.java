@@ -15,6 +15,7 @@ import com.jv01.generations.Panels.JoystickPanel.JoystickPanel;
 import com.jv01.generations.Panels.Menus.ChatPanel;
 import com.jv01.generations.Panels.Menus.SelectionWheel;
 import com.jv01.generations.Panels.PhonePanel.PhonePanel;
+import com.jv01.generations.specialStructures.SpecialStructures;
 import com.jv01.generations.Panels.InventoryPanel.InteractiveInventory;
 
 import com.jv01.player.Player;
@@ -257,6 +258,7 @@ public class MainGameWindow{
         boolean isArcade = false;
         boolean isNpc = false;
         boolean isBuilding = false;
+        boolean isSpecialStructure = false;
 
         String spam = "";
 
@@ -265,6 +267,9 @@ public class MainGameWindow{
         Dealers dealer = new Dealers(gameName, 0);
         Arcades arcade = new Arcades(gameName, 0, 0);
         Npcs npc = new Npcs(gameName);
+        SpecialStructures specialStructure = new SpecialStructures(gameName);
+
+        int[] trigEventPosition = {0,0};
 
         if(!isInsideBuilding){
             for(Buildings b : chunk.triggerableBuilding){
@@ -302,12 +307,12 @@ public class MainGameWindow{
     
             for(Object[] trigEvent: chunk.trigerEvents){
 
-                int[] position = (int[]) trigEvent[0];
+                trigEventPosition = (int[]) trigEvent[0];
 
                 if(trigEvent[1] == "tool" && !displaySpam){
                     tool = (Tools) trigEvent[2];
 
-                    int distance = getDistanceFromPlayer(position[0], position[1]);
+                    int distance = getDistanceFromPlayer(trigEventPosition[0], trigEventPosition[1]);
 
                     if(distance < (int) trigEvent[3]){
                         displaySpam = true;
@@ -322,7 +327,7 @@ public class MainGameWindow{
                 }else if(trigEvent[1] == "item" && !displaySpam){
                     item = (Items) trigEvent[2];
 
-                    int distance = getDistanceFromPlayer(position[0], position[1]);
+                    int distance = getDistanceFromPlayer(trigEventPosition[0], trigEventPosition[1]);
 
                     if(distance < item.size[0] && item.isExist){
                         displaySpam = true;
@@ -337,7 +342,7 @@ public class MainGameWindow{
                 }else if(trigEvent[1] == "dealer" && !displaySpam){
                     dealer = (Dealers) trigEvent[2];
 
-                    int distance = getDistanceFromPlayer(position[0], position[1]);
+                    int distance = getDistanceFromPlayer(trigEventPosition[0], trigEventPosition[1]);
 
                     if(distance < dealer.size[0]){
                         displaySpam = true;
@@ -353,7 +358,7 @@ public class MainGameWindow{
                 }else if(trigEvent[1] == "arcade" && !displaySpam){
                     arcade = (Arcades) trigEvent[2];
 
-                    int distance = getDistanceFromPlayer(position[0], position[1]);
+                    int distance = getDistanceFromPlayer(trigEventPosition[0], trigEventPosition[1]);
 
                     if(distance < arcade.size[0]){
                         displaySpam = true;
@@ -369,7 +374,7 @@ public class MainGameWindow{
                 }else if(trigEvent[1] == "npc" && !displaySpam){
                     npc = (Npcs) trigEvent[2];
 
-                    int distance = getDistanceFromPlayer(position[0], position[1]);
+                    int distance = getDistanceFromPlayer(trigEventPosition[0], trigEventPosition[1]);
 
                     if(distance < 50){
                         displaySpam = true;
@@ -382,13 +387,29 @@ public class MainGameWindow{
                         //isItem = false;
                         //displaySpam = false;
                     }
+                }else if(trigEvent[1] == "specialStructure" && !displaySpam){
+                    specialStructure = (SpecialStructures) trigEvent[2];
+
+                    int distance = getDistanceFromPlayer(trigEventPosition[0], trigEventPosition[1]);
+
+                    if(distance < 50){
+                        displaySpam = true;
+                        isSpecialStructure = true;
+                        spam = String.valueOf(specialStructure.elementId);
+                        List<String> row = new ArrayList<>(Arrays.asList(spam, "specialStructure"));
+                        listModelInteractive.addElement(row);
+                        break;
+                    }else{
+                        //isItem = false;
+                        //displaySpam = false;
+                    }
                 }
                 //System.out.println("spam");
             }
 
             if(displaySpam){
                 //openMsgLabels(spam);
-                if(!interactiveListPanel.isOpen && !isNpc && !isItem && !isBuilding){
+                if(!interactiveListPanel.isOpen && !isNpc && !isItem && !isBuilding && !isSpecialStructure){
                     interactiveListPanel.openInteractiveList(listModelInteractive);
                 }
 
@@ -408,7 +429,10 @@ public class MainGameWindow{
                     refreshDisplay = arcade.refreshDisplay;
                 }else if(isNpc){
                     npc.interact(this);
-                } 
+                }else if(isSpecialStructure){
+                    specialStructure.interact(this,trigEventPosition);
+                    refreshDisplay = specialStructure.refreshDisplay;
+                }
                    
 
             }else{

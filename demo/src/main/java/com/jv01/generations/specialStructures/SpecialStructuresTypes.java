@@ -2,6 +2,8 @@ package com.jv01.generations.specialStructures;
 
 import java.awt.Dimension;
 import java.awt.Image;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.awt.Color;
 
@@ -31,6 +33,8 @@ public class SpecialStructuresTypes {
     public String classesName;
     public int[] sise;
     public String[] imagesPaths;
+    public String[] interactionTypes;
+    public boolean isRestictedArea;
 
     public SpecialStructuresTypes(String gameName){
         this.gameName = gameName;
@@ -48,6 +52,9 @@ public class SpecialStructuresTypes {
         this.elementType = elementType;
 
         this.imagesPaths = save.stringToStringPathArray(save.getChildFromElement(element, "imagesPaths"));
+        this.interactionTypes = save.stringToStringPathArray(save.getChildFromElement(element, "interactionTypes"));
+
+        this.isRestictedArea = Boolean.parseBoolean(save.getChildFromElement(element, "isRestictedArea"));
 
         return this;
     }

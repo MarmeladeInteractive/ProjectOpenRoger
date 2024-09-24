@@ -9,6 +9,12 @@
                demo/img/specialStructures/field.png 
             }
         </imagesPaths>
+        <isRestictedArea>false</isRestictedArea>
+        <interactionTypes>
+            {
+                
+            }
+        </interactionTypes>
         <classesName>com.jv01.generations.specialStructures.structures.Fields</classesName>
     </specialStructuresType>
 </specialStructuresTypes>
