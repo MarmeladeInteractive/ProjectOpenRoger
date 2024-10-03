@@ -42,6 +42,8 @@ public class Chunks {
 
     public String backPic = "";
 
+    public int buildingType = -1;
+
     public boolean displayOnMap = true;
 
     public String gameName;
@@ -77,6 +79,7 @@ public class Chunks {
         this.chunk = chunk;
         this.seed = seed;
         this.gameName = gameName;
+        this.buildingType = buildingType;
 
         this.npc = new Npcs(gameName);
 
@@ -387,7 +390,7 @@ public class Chunks {
         if(number != 0){
             if(this.load){
                 Buildings build = createBuilding(number, cell01, buildingType);
-                buildingType = build.id;        
+                buildingType = build.id; 
             }
             bCellX[0] = cell01[0];
             bCellY[0] = cell01[1];

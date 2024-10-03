@@ -40,6 +40,8 @@ public class SpecialStructures {
     
     public boolean refreshDisplay = false;
 
+    public JPanel panel;
+
     public SpecialStructures(String gameName){
         this.gameName = gameName;
 
@@ -137,41 +139,44 @@ public class SpecialStructures {
 
         getElementsValues(elementId);
 
-        JPanel backgroundPanelWithImage = specialStructuresType.getSpecialStructuresTypeJPanel();
+        SpecialStructures newSpecialStructure = new SpecialStructures(gameName);
+        newSpecialStructure.getElementsValues(this.elementId);
 
-        if(specialStructuresType.isRestictedArea){
+        JPanel backgroundPanelWithImage = newSpecialStructure.specialStructuresType.getSpecialStructuresTypeJPanel();
+
+        if(newSpecialStructure.specialStructuresType.isRestictedArea){
             restrictedAreas.add(new int[][] { 
                 {
-                    x - (specialStructuresType.size[0]/2), 
-                    y - (specialStructuresType.size[1]/2)
+                    x - (newSpecialStructure.specialStructuresType.size[0]/2), 
+                    y - (newSpecialStructure.specialStructuresType.size[1]/2)
                 }, 
                 {
-                    x + (specialStructuresType.size[0]/2), 
-                    y + (specialStructuresType.size[1]/2)
+                    x + (newSpecialStructure.specialStructuresType.size[0]/2), 
+                    y + (newSpecialStructure.specialStructuresType.size[1]/2)
                 } 
             });
         }
 
-        if(specialStructuresType.interactionTypes.length > 0){
+        if(newSpecialStructure.specialStructuresType.interactionTypes.length > 0){
             Object[] struObjects = {
                 new int[]{
                     x,
                     y,
                 },
                 "specialStructure",
-                this
+                newSpecialStructure
             };
 
             trigerEvents.add(struObjects);
         }
 
-        JPanel panel = new JPanel(null);
-        panel.setBounds(x - (specialStructuresType.size[0] / 2), y - (specialStructuresType.size[1] / 2), specialStructuresType.size[0], specialStructuresType.size[1]);
-        panel.setOpaque(false);
+        newSpecialStructure.panel = new JPanel(null);
+        newSpecialStructure.panel.setBounds(x - (newSpecialStructure.specialStructuresType.size[0] / 2), y - (newSpecialStructure.specialStructuresType.size[1] / 2), newSpecialStructure.specialStructuresType.size[0], newSpecialStructure.specialStructuresType.size[1]);
+        newSpecialStructure.panel.setOpaque(false);
 
-        if(!specialStructuresType.classesName.isEmpty()){
+        if(!newSpecialStructure.specialStructuresType.classesName.isEmpty()){
             try {
-                Class<?> clazz = Class.forName(specialStructuresType.classesName);
+                Class<?> clazz = Class.forName(newSpecialStructure.specialStructuresType.classesName);
             
                 Constructor<?> constructor = clazz.getConstructor(String.class);
             
@@ -179,29 +184,29 @@ public class SpecialStructures {
             
                 Method method = clazz.getMethod("getSpecialStructureToPanel", SpecialStructuresTypes.class, int.class, int.class, String.class);
             
-                JPanel specialStructuresPanel = (JPanel) method.invoke(instance, specialStructuresType, x, y, elementId);
+                JPanel specialStructuresPanel = (JPanel) method.invoke(instance, newSpecialStructure.specialStructuresType, x, y, elementId);
 
-                panel.add(specialStructuresPanel);
-                panel.add(backgroundPanelWithImage);
+                newSpecialStructure.panel.add(specialStructuresPanel);
+                newSpecialStructure.panel.add(backgroundPanelWithImage);
 
-                backgroundPanel.add(panel);
+                backgroundPanel.add(newSpecialStructure.panel);
 
                 backgroundPanel.revalidate();
                 backgroundPanel.repaint();
 
             } catch (Exception e) {
                 //e.printStackTrace(); 
-                panel.add(backgroundPanelWithImage);
+                newSpecialStructure.panel.add(backgroundPanelWithImage);
 
-                backgroundPanel.add(panel);
+                backgroundPanel.add(newSpecialStructure.panel);
 
                 backgroundPanel.revalidate();
                 backgroundPanel.repaint();
             }
         }else {
-            panel.add(backgroundPanelWithImage);
+            newSpecialStructure.panel.add(backgroundPanelWithImage);
 
-            backgroundPanel.add(panel);
+            backgroundPanel.add(newSpecialStructure.panel);
 
             backgroundPanel.revalidate();
             backgroundPanel.repaint();
@@ -209,9 +214,23 @@ public class SpecialStructures {
     }
 
     public void interact(MainGameWindow mainGameWindow, int[] position) {
-        List<String> options = Arrays.asList(specialStructuresType.interactionTypes);
         if (!mainGameWindow.selectionWheel.isOpen && !mainGameWindow.interactiveInventory.isInventoryOpen) {
-            mainGameWindow.selectionWheel.openSelectionWheel(position[0], position[1], "specialStructure", options);
+            try {
+                Class<?> clazz = Class.forName(specialStructuresType.classesName);
+            
+                Constructor<?> constructor = clazz.getConstructor(String.class);
+            
+                Object instance = constructor.newInstance(gameName);
+            
+                Method method = clazz.getMethod("getInteractionsList",MainGameWindow.class, SpecialStructuresTypes.class);
+
+                @SuppressWarnings("unchecked")
+                List<String> options =  (List<String>) method.invoke(instance, mainGameWindow, specialStructuresType);
+
+                if(!options.isEmpty())mainGameWindow.selectionWheel.openSelectionWheel(position[0], position[1], "specialStructure", options);
+            } catch (Exception e) {
+    
+            }
         } else if(mainGameWindow.selectionWheel.isIconSelected){
             try {
                 Class<?> clazz = Class.forName(specialStructuresType.classesName);
@@ -221,7 +240,7 @@ public class SpecialStructures {
                 Object instance = constructor.newInstance(gameName);
             
                 Method method = clazz.getMethod("interact",MainGameWindow.class, SpecialStructures.class, String.class);
-            
+
                 method.invoke(instance, mainGameWindow, this, mainGameWindow.selectionWheel.iconSelectedId);
                 mainGameWindow.selectionWheel.isIconSelected = false;
             } catch (Exception e) {
