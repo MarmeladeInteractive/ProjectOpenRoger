@@ -28,8 +28,12 @@
         <description></description>
     </interaction>
 
-    <interaction id="interactPlantWheat">
-        <logoPath>demo/img/selectionWheel/interactions/interactPlantWheat.png</logoPath>
+    <interaction id="interactPlant_Wheat">
+        <logoPath>demo/img/selectionWheel/interactions/interactPlant_Wheat.png</logoPath>
+        <description></description>
+    </interaction>
+    <interaction id="interactPlant_Corn">
+        <logoPath>demo/img/selectionWheel/interactions/interactPlant_Corn.png</logoPath>
         <description></description>
     </interaction>
 

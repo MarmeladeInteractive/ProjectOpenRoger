@@ -12,7 +12,8 @@
         <isRestictedArea>false</isRestictedArea>
         <interactionTypes>
             {
-                
+                interactPlant_Wheat,
+                interactPlant_Corn
             }
         </interactionTypes>
         <classesName>com.jv01.generations.specialStructures.structures.Fields</classesName>

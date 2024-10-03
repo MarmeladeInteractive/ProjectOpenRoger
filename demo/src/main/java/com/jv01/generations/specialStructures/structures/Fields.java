@@ -26,7 +26,8 @@ public class Fields {
     public Document doc;
     public Element element;
 
-    String elementId;
+    public String elementId;
+
     String type;
 
     public Fields(String gameName){
@@ -61,6 +62,11 @@ public class Fields {
         return elementId;
     }
 
+    public void changeType(String elementId, String newType){
+        System.out.println(newType);
+        save.changeElementChildValue(gameName, "functional/specialStructures/structures/fields", "field", elementId, "type", newType);
+    }
+
     public JPanel getSpecialStructureToPanel(SpecialStructuresTypes specialStructuresType, int x, int y, String elementId) {
         getFieldElement(elementId);
     
@@ -72,9 +78,24 @@ public class Fields {
         cultivablePlantsPanel = cultivablePlants.addCultivablePlantToPanels(type, specialStructuresType, cultivablePlantsPanel);
     
         return cultivablePlantsPanel;
-    }   
+    } 
+    
+    public List<String> getInteractionsList(MainGameWindow mainGameWindow, SpecialStructuresTypes specialStructuresType){
+        for (int bt : mainGameWindow.chunk.bType) {
+            if(bt == 11){
+                return Arrays.asList(specialStructuresType.interactionTypes);
+            }
+        }
+
+        return null;      
+    }
 
     public void interact(MainGameWindow mainGameWindow, SpecialStructures specialStructure, String interactionType) {
-        System.out.println(interactionType+ " : "+ specialStructure.elementId);
+        getFieldElement(specialStructure.elementId);
+        String elemenType = interactionType.split("_")[1].toLowerCase();
+        if(!elemenType.equals(type)){
+            changeType(specialStructure.elementId, elemenType);
+            mainGameWindow.refresh();
+        }
     }
 }

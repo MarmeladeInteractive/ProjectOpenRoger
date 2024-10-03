@@ -501,6 +501,10 @@ public class MainGameWindow{
         frame.repaint();
     }
 
+    public void refresh(){
+        refresh = true;
+    }
+
     private boolean isPointInRestrictedArea(int x, int y) {
         for (int[][] area : chunk.restrictedAreas) {
             int x1 = area[0][0];

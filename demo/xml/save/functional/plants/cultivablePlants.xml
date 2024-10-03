@@ -11,4 +11,16 @@
         </imagesPaths>
         <sellingPrice>10</sellingPrice>
     </cultivablePlant>
+    <cultivablePlant id="corn">
+        <name>corn</name>
+        <imagesPaths>
+            {
+                demo/img/cultivablePlants/corn/corn01.png,
+                demo/img/cultivablePlants/corn/corn02.png,
+                demo/img/cultivablePlants/corn/corn03.png,
+                demo/img/cultivablePlants/corn/corn04.png,
+            }
+        </imagesPaths>
+        <sellingPrice>15</sellingPrice>
+    </cultivablePlant>
 </cultivablePlants>
