@@ -154,8 +154,9 @@ public class Tools {
                     case 3:
                         if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
-                            save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,0);
-                                                      
+                            save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,12);
+                            mainGameWindow.playerOwnerships.addOwnership("rentalHouse", mainGameWindow.player.chunk, '{'+String.valueOf(mainGameWindow.player.chunk[0])+','+String.valueOf(mainGameWindow.player.chunk[1])+'}');
+
                             mainGameWindow.player.inputsManager.interactKeyPressed = false;
                             mainGameWindow.player.positionX = -100;
                         }
@@ -163,8 +164,9 @@ public class Tools {
                     case 4:
                         if(mainGameWindow.player.isEnoughMoney(price,true)){
                             
-                            save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,0);
-                                                      
+                            save.changeChunkBuildingType(mainGameWindow.player.gameName,mainGameWindow.player.chunk,12);
+                            mainGameWindow.playerOwnerships.addOwnership("rentalHouse", mainGameWindow.player.chunk, '{'+String.valueOf(mainGameWindow.player.chunk[0])+','+String.valueOf(mainGameWindow.player.chunk[1])+'}');
+                  
                             mainGameWindow.player.inputsManager.interactKeyPressed = false;
                             mainGameWindow.player.positionX = -100;
                         }

@@ -58,18 +58,19 @@ public class GameMap extends JPanel {
     private int zoomMin = 10;
     
     public String[] buildingsIcons = {
-        "demo\\img\\buildings\\partyHouse01.png",
-        "demo\\img\\buildings\\emptyProperty01.png",
-        "demo\\img\\buildings\\cityHall01.png",
-        "demo\\img\\buildings\\printingPress01.png",
-        "demo\\img\\buildings\\bakery01.png",
-        "demo\\img\\buildings\\store01.png",
-        "demo\\img\\buildings\\abandonedHouse01.png",
-        "demo\\img\\buildings\\house01.png",
-        "demo\\img\\buildings\\corpo01.png",
-        "demo\\img\\buildings\\bar01.png",
-        "demo\\img\\buildings\\farm01.png",
-        "demo\\img\\buildings\\farm01.png",
+        "demo\\img\\map\\partyHouse01.png",
+        "demo\\img\\map\\emptyProperty01.png",
+        "demo\\img\\map\\cityHall01.png",
+        "demo\\img\\map\\printingPress01.png",
+        "demo\\img\\map\\bakery01.png",
+        "demo\\img\\map\\store01.png",
+        "demo\\img\\map\\abandonedHouse01.png",
+        "demo\\img\\map\\house01.png",
+        "demo\\img\\map\\corpo01.png",
+        "demo\\img\\map\\bar01.png",
+        "demo\\img\\map\\farm01.png",
+        "demo\\img\\map\\farm01.png",
+        "demo\\img\\map\\rentalHouse01.png",
     };
 
     public KeyListener keyListener;

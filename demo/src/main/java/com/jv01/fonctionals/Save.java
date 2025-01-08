@@ -320,8 +320,36 @@ public class Save {
 
     public void changeChunkBuildingType(String gameName, long[] chunk, int newBuildingType){
         String chunkId = String.valueOf(chunk[0])+"_"+String.valueOf(chunk[1]);
-        String newTypesString = '{' + String.valueOf(newBuildingType) + '}';
-        changeElementChildValue(gameName,"chunks","chunk",chunkId,"buildingsTypes",newTypesString);
+        Document doc = getDocumentXml(gameName,"chunks");
+        Element element = getElementById(doc, "chunk", chunkId);
+
+        int[] types = stringToIntArray(getChildFromElement(element, "buildingsTypes"));
+
+        StringBuilder sb = new StringBuilder("{");
+
+        if(types.length<=1){
+            sb.append(newBuildingType);
+            sb.append("}");
+        }else{
+            for (int i = 0; i < types.length; i++) {
+                if (types[i] != 7) {
+                    types[i] = newBuildingType; 
+                    break;
+                }
+            }
+   
+            for (int i = 0; i < types.length; i++) {
+                sb.append(types[i]);
+                if (i < types.length - 1) {
+                    sb.append(",");
+                }
+            }
+            sb.append("}");
+        
+        }
+
+       
+        changeElementChildValue(gameName,"chunks","chunk",chunkId,"buildingsTypes",sb.toString());
     }
     public void changeChunkSpecialStructures(String gameName, long[] chunk, String specialStructures){
         String chunkId = String.valueOf(chunk[0])+"_"+String.valueOf(chunk[1]);

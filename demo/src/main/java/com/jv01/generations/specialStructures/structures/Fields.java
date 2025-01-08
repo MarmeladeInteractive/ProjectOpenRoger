@@ -63,7 +63,6 @@ public class Fields {
     }
 
     public void changeType(String elementId, String newType){
-        System.out.println(newType);
         save.changeElementChildValue(gameName, "functional/specialStructures/structures/fields", "field", elementId, "type", newType);
     }
 

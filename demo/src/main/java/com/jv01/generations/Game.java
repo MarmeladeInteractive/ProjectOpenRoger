@@ -192,7 +192,7 @@ public class Game{
         mainGameWindow.showMainGameWindow();
     }
 
-    public void startGame(String gamename, String seed, boolean cheatCodesEnabled){                 
+    public void startGame(String gamename, String seed, boolean cheatCodesEnabled){       
         MainGameWindow mainGameWindow = new MainGameWindow(gamename, seed, cheatCodesEnabled);
         mainGameWindow.showMainGameWindow();
     }
