@@ -1,5 +1,10 @@
 <ownerships>
-    <ownerships id="personalFarm">
+    <ownership id="personalFarm">
         <classesName>com.jv01.buildings.PersonalFarm</classesName>
+        <revenues>10</revenues>
+    </ownership>
+    <ownership id="rentalHouse">
+        <classesName>com.jv01.buildings.RentalHouse</classesName>
+        <revenues>40</revenues>
     </ownership>
 </ownerships>

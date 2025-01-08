@@ -28,6 +28,8 @@ public class RevenueManager implements Time.NewDayListener{
 
         revenues += playerOwnerships.getDailyRevenues();
 
+        if(revenues>0L)mainGameWindow.phonePanel.addNewNotification("Roberto", "You received " + revenues + "€ from your prorerty !");
+
         mainGameWindow.player.addMoney(revenues);
     }
 }

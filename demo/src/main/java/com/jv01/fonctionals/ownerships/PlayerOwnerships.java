@@ -33,6 +33,7 @@ public class PlayerOwnerships {
         
         save.createXmlElement(ownershipElement,doc,"chunk", '{'+String.valueOf(chunk[0])+','+String.valueOf(chunk[1])+'}');
         save.createXmlElement(ownershipElement,doc,"type", type);
+        save.createXmlElement(ownershipElement,doc,"revenues", String.valueOf(ownerships.getOwnershipRevenuesValues(type)));
         save.createXmlElement(ownershipElement,doc,"isDeclared", "false");
 
         doc.getDocumentElement().appendChild(ownershipElement);
@@ -45,6 +46,20 @@ public class PlayerOwnerships {
     }
 
     public long getDailyRevenues(){
-        return 100L;
+        //System.out.println("enterGetDailyRevenues.....");
+
+        this.doc = save.getDocumentXml(gameName,"functional/ownerships/playerOwnerships");
+        Element[] elementMap = save.getElementsByTagName(doc, "playerOwnership");
+
+        long revenues = 0L;
+
+        for (Element element : elementMap) {
+            //System.out.println(save.getChildFromElement(element, "revenues"));
+            revenues += Long.valueOf(save.getChildFromElement(element, "revenues"));
+        }
+
+
+        //System.out.println("......exitGetDailyRevenues");
+        return revenues;
     }
 }

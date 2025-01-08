@@ -190,4 +190,20 @@
             }
         </imagesUrls>
     </building>
+
+    <building id="12">
+        <name>Rental House</name>
+        <specialStructuresNumber>0</specialStructuresNumber>
+        <specialStructuresPosibleTypes>{}</specialStructuresPosibleTypes>
+        <size>{220,220}</size>
+        <description></description>
+        <imagesUrls>
+            {
+                demo/img/buildings/rentalHouse01.png,
+                demo/img/buildings/rentalHouse01.png,
+                demo/img/buildings/rentalHouse01.png,
+                demo/img/buildings/rentalHouse01.png,
+            }
+        </imagesUrls>
+    </building>
 </buildings>

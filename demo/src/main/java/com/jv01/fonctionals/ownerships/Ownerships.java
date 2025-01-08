@@ -24,8 +24,14 @@ public class Ownerships {
         this.gameName = mainGameWindow.gameName;
     }
 
-    public void getOwnershipTypeValues(String type){
+    /*public void getOwnershipTypeValues(String type){
         this.doc = save.getDocumentXml(gameName,"ownerships");
+    }*/
 
+    public int getOwnershipRevenuesValues(String type){
+        this.doc = save.getDocumentXml(gameName,"functional/ownerships/ownerships");
+        this.element = save.getElementById(doc, "ownership", type);
+
+        return Integer.parseInt(save.getChildFromElement(element, "revenues"));
     }
 }

@@ -378,7 +378,7 @@ public class MainMenuScreen {
                 } catch (Exception e1){
                     JOptionPane.showMessageDialog(frame,"Choisisez une sauvegarde","Attention",JOptionPane.CANCEL_OPTION);
                 }              
-
+                boolean isRun = false;
                 if (selectedGame != null) {
                     boolean isOldVersion = false;
                     for(String name : oldVersionGameNamesList){
@@ -387,7 +387,8 @@ public class MainMenuScreen {
                         }
                     }
                     if(oldVersionGameNamesList.size()==0){
-                        loadGame(selectedGame);
+                        if(!isRun)loadGame(selectedGame);
+                        isRun = true;
                     }   
                     if(isOldVersion){
                         int choise = JOptionPane.showConfirmDialog(frame,
@@ -397,12 +398,14 @@ public class MainMenuScreen {
                             "Attention",
                             JOptionPane.YES_NO_OPTION);
                         if(choise == JOptionPane.YES_OPTION){
-                            loadGame(selectedGame);
+                            if(!isRun)loadGame(selectedGame);
+                            isRun = true;
                         }else if(choise == JOptionPane.NO_OPTION){
                             gameNamesJList.clearSelection();
                         }
                     }else{
-                        loadGame(selectedGame);
+                        if(!isRun)loadGame(selectedGame);
+                        isRun = true;
                     }       
                 }
             }
